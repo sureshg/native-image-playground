@@ -15,7 +15,7 @@ plugins {
   id("fr.brouillard.oss.gradle.jgitver") version "0.10.0-rc03"
   id("org.jreleaser") version "0.7.0"
 }
-//val jkk = libs.plugins.kotlin.jvm
+// val jkk = libs.plugins.kotlin.jvm
 group = "dev.suresh"
 
 java {
@@ -31,8 +31,8 @@ java {
 kotlin {
   sourceSets.all {
     languageSettings.apply {
-      apiVersion = "1.5"
-      languageVersion = "1.5"
+      apiVersion = libs.versions.kotlin.api.get()
+      languageVersion = libs.versions.kotlin.api.get()
       progressiveMode = true
       enableLanguageFeature(LanguageFeature.JvmRecordSupport.name)
       optIn("kotlin.RequiresOptIn")
