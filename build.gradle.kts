@@ -1,11 +1,12 @@
 import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   java
   application
   id("com.google.devtools.ksp") version "1.5.31-1.0.0"
-  kotlin("jvm") version "1.5.31"
+  alias(libs.plugins.kotlin.jvm)
   kotlin("plugin.serialization") version "1.5.31"
   id("org.graalvm.buildtools.native") version "0.9.5"
   id("com.github.ben-manes.versions") version "0.39.0"
@@ -14,19 +15,15 @@ plugins {
   id("fr.brouillard.oss.gradle.jgitver") version "0.10.0-rc03"
   id("org.jreleaser") version "0.7.0"
 }
-
+//val jkk = libs.plugins.kotlin.jvm
 group = "dev.suresh"
-
-val javaVersion = 16
-val gjfVersion = "1.11.0"
-val ktlintVersion = "0.42.1"
 
 java {
   withSourcesJar()
   withJavadocJar()
 
   toolchain {
-    languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
     vendor.set(JvmVendorSpec.GRAAL_VM)
   }
 }
@@ -60,7 +57,7 @@ kotlin {
 // Formatting
 spotless {
   java {
-    googleJavaFormat(gjfVersion)
+    googleJavaFormat(libs.versions.gjf.get())
     // Exclude sealed types until it supports.
     targetExclude("**/ResultType.java", "build/generated-sources/**/*.java")
     importOrder()
@@ -77,7 +74,7 @@ spotless {
   )
 
   kotlin {
-    ktlint(ktlintVersion).userData(ktlintConfig)
+    ktlint(libs.versions.ktlint.get()).userData(ktlintConfig)
     targetExclude("$buildDir/**/*.kt", "bin/**/*.kt", "build/generated-sources/**/*.kt")
     endWithNewline()
     indentWithSpaces()
@@ -86,7 +83,7 @@ spotless {
   }
 
   kotlinGradle {
-    ktlint(ktlintVersion).userData(ktlintConfig)
+    ktlint(libs.versions.ktlint.get()).userData(ktlintConfig)
     target("*.gradle.kts")
   }
 
@@ -99,7 +96,6 @@ spotless {
 }
 
 jgitver {
-  useSnapshot = true
   nonQualifierBranches = "main"
 }
 
@@ -109,11 +105,10 @@ redacted {
 }
 
 tasks {
-
   withType<JavaCompile>().configureEach {
     options.apply {
       encoding = "UTF-8"
-      release.set(javaVersion)
+      release.set(libs.versions.java.get().toInt())
       isIncremental = true
       isFork = true
       compilerArgs.addAll(
@@ -126,7 +121,7 @@ tasks {
     usePreciseJavaTracking = true
     kotlinOptions {
       verbose = true
-      jvmTarget = javaVersion.toString()
+      jvmTarget = libs.versions.java.toString()
       javaParameters = true
       incremental = true
       allWarningsAsErrors = false
