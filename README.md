@@ -32,6 +32,11 @@ $ ./gradlew clean build
  * [Graalvm CE Dev Builds](https://github.com/graalvm/graalvm-ce-dev-builds/releases/)
  * [Graalvm CE Docker Image](https://github.com/graalvm/container/pkgs/container/graalvm-ce)
 
+<hr>
+
+  * [Setup Graalvm Action](https://github.com/marketplace/actions/setup-graalvm-action)
+  * [Setup Microsoft Visual C++](https://github.com/marketplace/actions/enable-developer-command-prompt)
+
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-builds/releases
 [graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-16&logo=java&logoColor=d3eff5&style=for-the-badge

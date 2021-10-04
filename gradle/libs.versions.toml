@@ -1,25 +1,60 @@
 [versions]
-java                 = "16"
-gjf                  = "1.11.0"
-ktlint               = "0.42.1"
-kotlin               = "1.5.31"
-kotlin-api           = "1.5"
-kotlinx-coroutines   = "1.5.2"
-kotlinx-cli          = "0.3.2"
-kotlin-ksp           = "1.5.31-1.0.0"
-ktor                 = "1.6.3"
+java                    = "16"
+kotlin                  = "1.5.31"
+gradle                  = "7.2"
+kotlin-api              = "1.5"
+
+benmanes                = "0.39.0"
+google-javaformat       = "1.11.0"
+google-ksp              = "1.5.31-1.0.0"
+graalvm-ce              = "21.2.0"
+graalvm-nativeimage     = "0.9.5"
+jgitver                 = "0.10.0-rc03"
+jreleaser               = "0.7.0"
+kotlinx-coroutines      = "1.5.2"
+kotlinx-cli             = "0.3.2"
+kotlin-ksp              = "1.5.31-1.0.0"
+ksp-redacted            = "0.8.0"
+ktlint                  = "0.42.1"
+ktor                    = "1.6.4"
+logback-classic         = "1.2.6"
+spotless                = "5.16.0"
 
 [libraries]
-ktor-auth               = { module = "io.ktor:ktor-auth"                                , version.ref = "ktor"}
-ktor-serialization      = { module = "io.ktor:ktor-serialization"                       , version.ref = "ktor"}
-ktor-server-core        = { module = "io.ktor:ktor-server-core"                         , version.ref = "ktor" }
-ktor-server-host-common = { module = "io.ktor:ktor-server-host-common"                  , version.ref = "ktor"}
-ktor-server-netty       = { module = "io.ktor:ktor-server-netty"                        , version.ref = "ktor"}
-ktor-server-tests       = { module = "io.ktor:ktor-server-tests"                        , version.ref = "ktor"}
+graalvm-sdk                 = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm-ce"}
+graalvm-svm                 = { module = "org.graalvm.nativeimage:svm"                      , version.ref = "graalvm-ce"}
+graalvm-svmlibffi           = { module = "org.graalvm.nativeimage:svm-libffi"               , version.ref = "graalvm-ce"}
 
+ktor-auth                   = { module = "io.ktor:ktor-auth"                                , version.ref = "ktor"}
+ktor-serialization          = { module = "io.ktor:ktor-serialization"                       , version.ref = "ktor"}
+ktor-server-core            = { module = "io.ktor:ktor-server-core"                         , version.ref = "ktor" }
+ktor-server-host-common     = { module = "io.ktor:ktor-server-host-common"                  , version.ref = "ktor"}
+ktor-server-netty           = { module = "io.ktor:ktor-server-netty"                        , version.ref = "ktor"}
+ktor-server-tests           = { module = "io.ktor:ktor-server-tests"                        , version.ref = "ktor"}
+
+ktor-client-core            = { module = "io.ktor:ktor-client-core"                         , version.ref = "ktor"}
+ktor-client-cio             = { module = "io.ktor:ktor-client-cio"                          , version.ref = "ktor"}
+ktor-client-java            = { module = "io.ktor:ktor-client-java"                         , version.ref = "ktor"}
+ktor-client-jetty           = { module = "io.ktor:ktor-client-jetty"                        , version.ref = "ktor"}
+ktor-client-serialization   = { module = "io.ktor:ktor-client-serialization"                , version.ref = "ktor"}
+ktor-client-websockets      = { module = "io.ktor:ktor-client-websockets"                   , version.ref = "ktor"}
+ktor-client-auth            = { module = "io.ktor:ktor-client-auth"                         , version.ref = "ktor"}
+ktor-client-logging         = { module = "io.ktor:ktor-client-logging"                      , version.ref = "ktor"}
+logback-classic             = { module = "ch.qos.logback:logback-classic"                   , version.ref = "logback-classic"}
 
 [plugins]
-kotlin-jvm              = { id = "org.jetbrains.kotlin.jvm"                              , version.ref = "kotlin" }
-kotlinx-serialization   = { id = "org.jetbrains.kotlin.plugin.serialization"             , version.ref = "kotlin" }
+benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
+google-ksp                  = { id = "com.google.devtools.ksp"                               , version.ref = "google-ksp"}
+graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
+jgitver                     = { id = "fr.brouillard.oss.gradle.jgitver"                      , version.ref = "jgitver" }
+jreleaser                   = { id = "org.jreleaser"                                         , version.ref = "jreleaser" }
+kotlin-jvm                  = { id = "org.jetbrains.kotlin.jvm"                              , version.ref = "kotlin" }
+kotlinx-serialization       = { id = "org.jetbrains.kotlin.plugin.serialization"             , version.ref = "kotlin" }
+ksp-redacted                = { id = "dev.zacsweers.redacted"                                , version.ref = "ksp-redacted" }
+spotless                    = { id = "com.diffplug.spotless"                                 , version.ref = "spotless" }
+
+[bundles]
+ktor-server                 = ["ktor-server-core", "ktor-serialization", "ktor-auth", "ktor-server-host-common", "ktor-server-netty", "logback-classic"]
+ktor-client                 = ["ktor-client-core", "ktor-client-java", "ktor-client-serialization", "ktor-client-logging", "logback-classic"]
 
 

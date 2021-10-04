@@ -5,25 +5,30 @@ import org.jetbrains.kotlin.gradle.tasks.*
 plugins {
   java
   application
-  id("com.google.devtools.ksp") version "1.5.31-1.0.0"
+  alias(libs.plugins.google.ksp)
   alias(libs.plugins.kotlin.jvm)
-  kotlin("plugin.serialization") version "1.5.31"
-  id("org.graalvm.buildtools.native") version "0.9.5"
-  id("com.github.ben-manes.versions") version "0.39.0"
-  id("com.diffplug.spotless") version "5.16.0"
-  id("dev.zacsweers.redacted") version "0.8.0"
-  id("fr.brouillard.oss.gradle.jgitver") version "0.10.0-rc03"
-  id("org.jreleaser") version "0.7.0"
+  alias(libs.plugins.kotlinx.serialization)
+  alias(libs.plugins.graalvm.nativeimage)
+  alias(libs.plugins.benmanes)
+  alias(libs.plugins.spotless)
+  alias(libs.plugins.ksp.redacted)
+  alias(libs.plugins.jgitver)
+  alias(libs.plugins.jreleaser)
 }
-// val jkk = libs.plugins.kotlin.jvm
+
 group = "dev.suresh"
+
+val javaVersion = libs.versions.java.get()
+val kotlinApi = libs.versions.kotlin.api.get()
+val gjfVersion = libs.versions.google.javaformat.get()
+val ktlintVersion = libs.versions.ktlint.get()
 
 java {
   withSourcesJar()
   withJavadocJar()
 
   toolchain {
-    languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
+    languageVersion.set(JavaLanguageVersion.of(javaVersion))
     vendor.set(JvmVendorSpec.GRAAL_VM)
   }
 }
@@ -31,8 +36,8 @@ java {
 kotlin {
   sourceSets.all {
     languageSettings.apply {
-      apiVersion = libs.versions.kotlin.api.get()
-      languageVersion = libs.versions.kotlin.api.get()
+      apiVersion = kotlinApi
+      languageVersion = kotlinApi
       progressiveMode = true
       enableLanguageFeature(LanguageFeature.JvmRecordSupport.name)
       optIn("kotlin.RequiresOptIn")
@@ -48,16 +53,15 @@ kotlin {
 
   jvmToolchain {
     (this as JavaToolchainSpec).apply {
-      languageVersion.set(java.toolchain.languageVersion.get())
+      languageVersion.set(JavaLanguageVersion.of(javaVersion))
       vendor.set(java.toolchain.vendor.get())
     }
   }
 }
 
-// Formatting
 spotless {
   java {
-    googleJavaFormat(libs.versions.gjf.get())
+    googleJavaFormat(gjfVersion)
     // Exclude sealed types until it supports.
     targetExclude("**/ResultType.java", "build/generated-sources/**/*.java")
     importOrder()
@@ -74,7 +78,7 @@ spotless {
   )
 
   kotlin {
-    ktlint(libs.versions.ktlint.get()).userData(ktlintConfig)
+    ktlint(ktlintVersion).userData(ktlintConfig)
     targetExclude("$buildDir/**/*.kt", "bin/**/*.kt", "build/generated-sources/**/*.kt")
     endWithNewline()
     indentWithSpaces()
@@ -83,7 +87,7 @@ spotless {
   }
 
   kotlinGradle {
-    ktlint(libs.versions.ktlint.get()).userData(ktlintConfig)
+    ktlint(ktlintVersion).userData(ktlintConfig)
     target("*.gradle.kts")
   }
 
@@ -92,7 +96,6 @@ spotless {
     trimTrailingWhitespace()
     endWithNewline()
   }
-  // isEnforceCheck = false
 }
 
 jgitver {
@@ -108,7 +111,7 @@ tasks {
   withType<JavaCompile>().configureEach {
     options.apply {
       encoding = "UTF-8"
-      release.set(libs.versions.java.get().toInt())
+      release.set(javaVersion.toInt())
       isIncremental = true
       isFork = true
       compilerArgs.addAll(
@@ -121,7 +124,7 @@ tasks {
     usePreciseJavaTracking = true
     kotlinOptions {
       verbose = true
-      jvmTarget = libs.versions.java.toString()
+      jvmTarget = javaVersion
       javaParameters = true
       incremental = true
       allWarningsAsErrors = false
@@ -143,7 +146,7 @@ tasks {
   }
 
   wrapper {
-    gradleVersion = "7.2"
+    gradleVersion = libs.versions.gradle.get()
     distributionType = Wrapper.DistributionType.BIN
   }
 }
@@ -156,7 +159,6 @@ dependencies {
   implementation(kotlin("stdlib"))
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-
   // implementation("org.graalvm.sdk:graal-sdk:21.2.0")
   // implementation("org.graalvm.nativeimage:svm:21.2.0")
   // implementation("org.graalvm.nativeimage:svm-libffi:21.2.0")
