@@ -5,7 +5,8 @@ import org.jetbrains.kotlin.gradle.tasks.*
 plugins {
   java
   application
-  alias(libs.plugins.google.ksp)
+  `test-suite-base`
+  alias(libs.plugins.ksp)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.graalvm.nativeimage)
@@ -18,19 +19,20 @@ plugins {
 
 group = "dev.suresh"
 
+val moduleName = "dev.suresh.nativeimage"
 val javaVersion = libs.versions.java.get()
 val kotlinApi = libs.versions.kotlin.api.get()
 val gjfVersion = libs.versions.google.javaformat.get()
 val ktlintVersion = libs.versions.ktlint.get()
 
 java {
-  withSourcesJar()
-  withJavadocJar()
-
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(javaVersion))
     vendor.set(JvmVendorSpec.GRAAL_VM)
   }
+
+  withSourcesJar()
+  // withJavadocJar()
 }
 
 kotlin {
@@ -104,7 +106,7 @@ jgitver {
 
 redacted {
   redactedAnnotation.set("Redacted")
-  enabled.set(true)
+  enabled.set(false)
 }
 
 tasks {
@@ -114,8 +116,14 @@ tasks {
       release.set(javaVersion.toInt())
       isIncremental = true
       isFork = true
+      // Compiling module-info in the 'main/java' folder needs to see already compiled Kotlin code
       compilerArgs.addAll(
-        listOf("-Xlint:all", "-parameters")
+        listOf(
+          "-Xlint:all",
+          "-parameters",
+          "--patch-module",
+          "$moduleName=${sourceSets.main.get().output.asPath}"
+        )
       )
     }
   }
@@ -147,7 +155,7 @@ tasks {
 
   wrapper {
     gradleVersion = libs.versions.gradle.get()
-    distributionType = Wrapper.DistributionType.BIN
+    distributionType = Wrapper.DistributionType.ALL
   }
 }
 
@@ -156,10 +164,12 @@ repositories {
 }
 
 dependencies {
-  implementation(kotlin("stdlib"))
-  testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-  // implementation("org.graalvm.sdk:graal-sdk:21.2.0")
-  // implementation("org.graalvm.nativeimage:svm:21.2.0")
-  // implementation("org.graalvm.nativeimage:svm-libffi:21.2.0")
+  implementation(kotlin("stdlib-jdk8"))
+  testImplementation(kotlin("test-junit5"))
+  testImplementation(platform(libs.junit.bom))
+  testImplementation(libs.junit.jupiter)
+
+  // nativeImageCompileOnly(libs.graalvm.sdk)
+  // nativeImageCompileOnly(libs.graalvm.svm)
+  // nativeImageCompileOnly(libs.graalvm.svmlibffi)
 }
