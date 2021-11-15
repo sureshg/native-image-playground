@@ -1,6 +1,6 @@
 [versions]
 java                           = "17"
-kotlin                         = "1.6.0-RC2"
+kotlin                         = "1.6.0"
 kotlin-api                     = "1.6"
 gradle                         = "7.3"
 
