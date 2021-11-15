@@ -159,10 +159,6 @@ tasks {
   }
 }
 
-repositories {
-  mavenCentral()
-}
-
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
   testImplementation(kotlin("test-junit5"))
