@@ -2,18 +2,18 @@
 java                           = "17"
 kotlin                         = "1.6.0"
 kotlin-api                     = "1.6"
-gradle                         = "7.3"
+gradle                         = "7.3.1"
 
 # Gradle Dependencies Versions
 benmanes                       = "0.39.0"
 google-javaformat              = "1.11.0"
 graalvm                        = "21.2.0"
-graalvm-nativeimage            = "0.9.7.1"
+graalvm-nativeimage            = "0.9.8"
 grpc                           = "1.39.0"
 grpc-kotlin                    = "1.2.0"
 jgitver                        = "0.10.0-rc03"
-jreleaser                      = "0.8.0"
-junit                          = "5.8.1"
+jreleaser                      = "0.9.0"
+junit                          = "5.8.2"
 junit-pioneer                  = "1.4.2"
 kotlin-ksp                     = "1.5.31-1.0.0"
 kotlinx-atomicfu               = "0.16.3"
@@ -33,7 +33,7 @@ ktor                           = "1.6.4"
 logback-classic                = "1.2.6"
 protobuf                       = "3.18.1"
 protobuf-plugin                = "0.8.17"
-spotless                       = "6.0.0"
+spotless                       = "6.0.1"
 
 [libraries]
 # Gradle Dependencies
