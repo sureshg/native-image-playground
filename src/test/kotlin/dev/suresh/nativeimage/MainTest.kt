@@ -7,6 +7,6 @@ internal class MainTest {
 
   @Test
   fun main() {
-    assertEquals("1.6.0", KotlinVersion.CURRENT.toString())
+    assertEquals("1.6.10", KotlinVersion.CURRENT.toString())
   }
 }

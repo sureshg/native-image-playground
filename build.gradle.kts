@@ -14,7 +14,6 @@ plugins {
   alias(libs.plugins.spotless)
   alias(libs.plugins.ksp.redacted)
   alias(libs.plugins.jgitver)
-  alias(libs.plugins.jreleaser)
 }
 
 group = "dev.suresh"
