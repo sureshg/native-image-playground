@@ -11,7 +11,7 @@
 
 ```bash
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 21.2.0.r16-grl
+$ sdk i java 21.3.0.r17-grl
 ```
 
 #### Build
@@ -23,6 +23,7 @@ $ ./gradlew clean build
 #### Resources
 
  * [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/)
+ * [GitHub Action for GraalVM](https://github.com/marketplace/actions/github-action-for-graalvm)
  * [Native Image Build Tools](https://graalvm.github.io/native-build-tools/)
  * [Native Image Docs Repo](https://github.com/oracle/graal/tree/master/docs/reference-manual/native-image)
 
@@ -34,12 +35,12 @@ $ ./gradlew clean build
 
 <hr>
 
-  * [Setup Graalvm Action](https://github.com/marketplace/actions/setup-graalvm-action)
-  * [Setup Microsoft Visual C++](https://github.com/marketplace/actions/enable-developer-command-prompt)
+ * [Graalvm Setup](https://graalvm.github.io/native-build-tools/latest/graalvm-setup.html)
+ * [Setup Microsoft Visual C++](https://github.com/marketplace/actions/enable-developer-command-prompt)
 
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-builds/releases
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-16&logo=java&logoColor=d3eff5&style=for-the-badge
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-17&logo=java&logoColor=d3eff5&style=for-the-badge
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge
