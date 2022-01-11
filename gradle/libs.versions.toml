@@ -8,10 +8,12 @@ gradle                         = "7.3.3"
 ajalt-clikt                    = "3.3.0"
 ajalt-mordant                  = "2.0.0-beta4"
 ajalt-colormath                = "3.2.0"
+assertj                        = "3.21.0"
 beryx-textio                   = "3.4.1"
+dikt                           = "1.0.0-alpha8"
 google-auto-service            = "1.0.1"
 google-javaformat              = "1.13.0"
-graalvm                        = "21.2.0"
+graalvm                        = "21.3.0"
 grpc                           = "1.39.0"
 grpc-kotlin                    = "1.2.0"
 jakewharton-picnic             = "0.4.0"
@@ -21,6 +23,7 @@ jgitver                        = "0.10.0-rc03"
 jreleaser                      = "0.9.1"
 junit                          = "5.8.2"
 junit-pioneer                  = "1.4.2"
+jqwik                          = "1.6.0"
 kotlinx-atomicfu               = "0.16.3"
 kotlinx-coroutines             = "1.6.0"
 kotlinx-collections-immutable  = "0.3.5"
@@ -31,9 +34,13 @@ kotlinx-io-jvm                 = "0.1.16"
 kotlinx-serialization          = "1.3.2"
 kotlinx-serialization-yaml     = "0.17.0"
 kotlinx-serialization-csv      = "2.0.0"
+kodein                         = "7.10.0"
+koin                           = "3.1.5"
+kotlininject                   = "0.4.1"
 ksp                            = "1.6.10-1.0.2"
 ksp-auto-service               = "1.0.0"
 ksp-redacted                   = "1.0.0"
+ksp-powerassert                = "0.11.0"
 ktlint                         = "0.43.2"
 ktor                           = "2.0.0-beta-1"
 logback-classic                = "1.2.6"
@@ -41,6 +48,9 @@ protobuf                       = "3.18.1"
 
 # Plugin versions
 benmanes                       = "0.41.0"
+beryx-jlink                    = "2.24.4"
+beryx-runtime                  = "1.12.7"
+beryx-jar                      = "2.0.0"
 champeau-includegit            = "0.1.5"
 champeau-jmh                   = "0.6.6"
 champeau-mrjar                 = "0.1"
@@ -65,6 +75,8 @@ google-auto-annotations     = { module = "com.google.auto.service:auto-service-a
 graalvm-sdk                 = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
 graalvm-svm                 = { module = "org.graalvm.nativeimage:svm"                      , version.ref = "graalvm"}
 graalvm-svmlibffi           = { module = "org.graalvm.nativeimage:svm-libffi"               , version.ref = "graalvm"}
+graalvm-truffle-api         = { module = "org.graalvm.truffle:truffle-api"                  , version.ref = "graalvm"}
+graalvm-js                  = { module = "org.graalvm.js:js"                                , version.ref = "graalvm"}
 
 grpc-protobuf               = { module = "io.grpc:grpc-protobuf"                            , version.ref = "grpc"}
 grpc-kotlin                 = { module = "io.grpc:grpc-kotlin-stub"                         , version.ref = "grpc-kotlin"}
@@ -116,18 +128,31 @@ junit-jupiter-api           = { module = "org.junit.jupiter:junit-jupiter-api"  
 junit-jupiter-engine        = { module = "org.junit.jupiter:junit-jupiter-engine"     , version.ref = "junit"}
 junit-jupiter-params        = { module = "org.junit.jupiter:junit-jupiter-params"     , version.ref = "junit"}
 junit-pioneer               = { module = "org.junit-pioneer:junit-pioneer"            , version.ref = "junit-pioneer"}
+jqwik                       = { module = "net.jqwik:jqwik"                            , version.ref = "jqwik"}
 
 ksp-auto-service            = { module = "dev.zacsweers.autoservice:auto-service-ksp" , version.ref = "ksp-auto-service"}
 
-logback-classic             = { module = "ch.qos.logback:logback-classic"             , version.ref = "logback-classic"}
+koin-core                   = { module = "io.insert-koin:koin-core"                         , version.ref = "koin"}
+koin-ktor                   = { module = "io.insert-koin:koin-ktor"                         , version.ref = "koin"}
+koin-slf4j                  = { module = "io.insert-koin:koin-logger-slf4j"                 , version.ref = "koin"}
+koin-test                   = { module = "io.insert-koin:koin-test"                         , version.ref = "koin"}
+koin-test-junit5            = { module = "io.insert-koin:koin-test-junit5"                  , version.ref = "koin"}
+kodein                      = { module = "org.kodein.di:kodein-di"                          , version.ref = "kodein"}
+kotlininject-kspcompiler    = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp"     , version.ref = "kotlininject"}
+kotlininject-runtime        = { module = "me.tatarka.inject:kotlin-inject-runtime"          , version.ref = "kotlininject"}
 
+logback-classic             = { module = "ch.qos.logback:logback-classic"             , version.ref = "logback-classic"}
 
 [plugins]
 # Gradle  Plugins
 benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
+beryx-jlink                 = { id = "org.beryx.jlink"                                       , version.ref = "beryx-jlink" }
+beryx-runtime               = { id = "org.beryx.runtime"                                     , version.ref = "beryx-runtime" }
+beryx-jar                   = { id = "org.beryx.jar"                                         , version.ref = "beryx-jar" }
 champeau-includegit         = { id = "me.champeau.includegit"                                , version.ref = "champeau-includegit"}
 champeau-jmh                = { id = "me.champeau.jmh"                                       , version.ref = "champeau-jmh"}
 champeau-mrjar              = { id = "me.champeau.mrjar"                                     , version.ref = "champeau-mrjar"}
+dikt                        = { id = "io.github.sergeshustoff.dikt"                          , version.ref = "dikt"}
 graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
 jetbrains-exposed           = { id = "com.jetbrains.exposed.gradle.plugin"                   , version.ref = "jetbrains-exposed"}
 jgitver                     = { id = "fr.brouillard.oss.gradle.jgitver"                      , version.ref = "jgitver" }
@@ -136,6 +161,7 @@ kotlin-jvm                  = { id = "org.jetbrains.kotlin.jvm"                 
 kotlinx-serialization       = { id = "org.jetbrains.kotlin.plugin.serialization"             , version.ref = "kotlin" }
 ksp                         = { id = "com.google.devtools.ksp"                               , version.ref = "ksp"}
 ksp-redacted                = { id = "dev.zacsweers.redacted"                                , version.ref = "ksp-redacted" }
+ksp-powerassert             = { id = "com.bnorm.power.kotlin-power-assert"                   , version.ref = "ksp-powerassert" }
 protobuf                    = { id = "com.google.protobuf"                                   , version.ref = "protobuf-plugin" }
 spotless                    = { id = "com.diffplug.spotless"                                 , version.ref = "spotless" }
 shadow                      = { id = "com.github.johnrengelman.shadow"                       , version.ref = "shadow" }

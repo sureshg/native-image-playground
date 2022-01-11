@@ -15,6 +15,7 @@ plugins {
   alias(libs.plugins.shadow)
   alias(libs.plugins.spotless)
   alias(libs.plugins.ksp.redacted)
+  alias(libs.plugins.ksp.powerassert)
 }
 
 val moduleName = "dev.suresh.nativeimage"
@@ -167,7 +168,6 @@ tasks {
 }
 
 val graal by sourceSets.creating
-
 
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
