@@ -17,7 +17,7 @@ fun main() {
 
   // Load plugins from current directory
   val loader = URLClassLoader.newInstance(arrayOf(URL("file://${System.getProperty("user.dir")}/plugins.jar")))
-  val svcLoader = ServiceLoader.load(Runnable::class.java,loader)
+  val svcLoader = ServiceLoader.load(Runnable::class.java, loader)
   println("Found ${svcLoader.toList().size} plugins!")
 
   runBlocking {
