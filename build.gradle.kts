@@ -107,6 +107,8 @@ spotless {
     trimTrailingWhitespace()
     endWithNewline()
   }
+
+  isEnforceCheck = false
 }
 
 jgitver {

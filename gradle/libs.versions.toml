@@ -2,10 +2,10 @@
 java                           = "17"
 kotlin                         = "1.6.10"
 kotlin-api                     = "1.6"
-gradle                         = "7.3.3"
+gradle                         = "7.4-rc-1"
 
 # Gradle Dependencies Versions
-ajalt-clikt                    = "3.3.0"
+ajalt-clikt                    = "3.4.0"
 ajalt-mordant                  = "2.0.0-beta4"
 ajalt-colormath                = "3.2.0"
 assertj                        = "3.21.0"
