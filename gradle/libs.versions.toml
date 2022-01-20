@@ -11,8 +11,10 @@ ajalt-colormath                = "3.2.0"
 assertj                        = "3.21.0"
 beryx-textio                   = "3.4.1"
 crypto-saltycoffee             = "1.0.4"
+cytodynamics-nucleus           = "0.2.0"
 dikt                           = "1.0.0-alpha8"
 dir-watcher                    = "0.15.0"
+fastutil                       = "8.5.6"
 google-auto-service            = "1.0.1"
 google-javaformat              = "1.13.0"
 google-tink                    = "1.6.1"
@@ -23,6 +25,7 @@ jakewharton-picnic             = "0.4.0"
 jakewharton-crossword          = "0.1.2"
 jetbrains-markdown             = "0.2.4"
 jgitver                        = "0.10.0-rc03"
+jmdns                          = "3.5.7"
 jreleaser                      = "0.9.1"
 junit                          = "5.8.2"
 junit-pioneer                  = "1.4.2"
@@ -60,6 +63,7 @@ champeau-jmh                   = "0.6.6"
 champeau-mrjar                 = "0.1"
 graalvm-nativeimage            = "0.9.9"
 jetbrains-exposed              = "0.2.1"
+licenser                       = "0.6.1"
 protobuf-plugin                = "0.8.17"
 shadow                         = "7.1.2"
 spotless                       = "6.2.0"
@@ -67,14 +71,17 @@ spotless                       = "6.2.0"
 
 [libraries]
 # Gradle Dependencies
-ajalt-clikt             = { module = "com.github.ajalt.clikt:clikt"             , version.ref = "ajalt-clikt"}
-ajalt-mordant           = { module = "com.github.ajalt.mordant:mordant"         , version.ref = "ajalt-mordant"}
-ajalt-colormath         = { module = "com.github.ajalt.colormath:colormath"     , version.ref = "ajalt-colormath"}
-beryx-textio            = { module = "org.beryx:text-io"                        , version.ref = "beryx-textio"}
-crypto-saltycoffee      = { module = "software.pando.crypto:salty-coffee"       , version.ref = "crypto-saltycoffee"}
-directory-watcher       = { module = "io.methvin:directory-watcher"             , version.ref = "dir-watcher"}
-jakewharton-picnic      = { module = "com.jakewharton.picnic:picnic"            , version.ref = "jakewharton-picnic"}
-jakewharton-crossword   = { module = "com.jakewharton.crossword:crossword"      , version.ref = "jakewharton-crossword"}
+ajalt-clikt             = { module = "com.github.ajalt.clikt:clikt"                    , version.ref = "ajalt-clikt"}
+ajalt-mordant           = { module = "com.github.ajalt.mordant:mordant"                , version.ref = "ajalt-mordant"}
+ajalt-colormath         = { module = "com.github.ajalt.colormath:colormath"            , version.ref = "ajalt-colormath"}
+beryx-textio            = { module = "org.beryx:text-io"                               , version.ref = "beryx-textio"}
+crypto-saltycoffee      = { module = "software.pando.crypto:salty-coffee"              , version.ref = "crypto-saltycoffee"}
+cytodynamics-nucleus    = { module = "com.linkedin.cytodynamics:cytodynamics-nucleus"  , version.ref = "cytodynamics-nucleus"}
+directory-watcher       = { module = "io.methvin:directory-watcher"                    , version.ref = "dir-watcher"}
+fastutil                = { module = "it.unimi.dsi:fastutil"                           , version.ref = "fastutil"}
+fastutil-core           = { module = "it.unimi.dsi:fastutil-core"                      , version.ref = "fastutil"}
+jakewharton-picnic      = { module = "com.jakewharton.picnic:picnic"                   , version.ref = "jakewharton-picnic"}
+jakewharton-crossword   = { module = "com.jakewharton.crossword:crossword"             , version.ref = "jakewharton-crossword"}
 
 google-auto-annotations     = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
 google-tink                 =  { module = "com.google.crypto.tink:tink"                     , version.ref = "google-tink"}
@@ -91,6 +98,7 @@ protobuf-javautil           = { module = "com.google.protobuf:protobuf-java-util
 protobuf-kotlin             = { module = "com.google.protobuf:protobuf-kotlin"              , version.ref = "protobuf"}
 
 jetbrains-markdown         = { module = "org.jetbrains:markdown"                             , version.ref = "jetbrains-markdown"}
+jmdns                      = { module = "org.jmdns:jmdns"                                    , version.ref = "jmdns"}
 kotlinx-coroutines-core    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"      , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-jdk8    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"      , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-slf4j   = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j"     , version.ref = "kotlinx-coroutines"}
@@ -170,6 +178,7 @@ kotlinx-serialization       = { id = "org.jetbrains.kotlin.plugin.serialization"
 ksp                         = { id = "com.google.devtools.ksp"                               , version.ref = "ksp"}
 ksp-redacted                = { id = "dev.zacsweers.redacted"                                , version.ref = "ksp-redacted" }
 ksp-powerassert             = { id = "com.bnorm.power.kotlin-power-assert"                   , version.ref = "ksp-powerassert" }
+licenser                    = { id = "org.cadixdev.licenser"                                 , version.ref = "licenser" }
 protobuf                    = { id = "com.google.protobuf"                                   , version.ref = "protobuf-plugin" }
 spotless                    = { id = "com.diffplug.spotless"                                 , version.ref = "spotless" }
 shadow                      = { id = "com.github.johnrengelman.shadow"                       , version.ref = "shadow" }
