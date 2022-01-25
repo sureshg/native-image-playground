@@ -3,7 +3,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# sdk i java 21.3.0.r17-grl
+# sdk i java 22.0.0.2.r17-grl
 # gu install native-image
 pushd ~/code/compose-mpp-playground >/dev/null
 ./gradlew packageUberJarForCurrentOS

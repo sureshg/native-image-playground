@@ -11,7 +11,7 @@
 
 ```bash
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 21.3.0.r17-grl
+$ sdk i java 22.0.0.2.r17-grl
 ```
 
 #### Build
