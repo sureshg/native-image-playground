@@ -12,6 +12,7 @@ assertj                        = "3.21.0"
 beryx-textio                   = "3.4.1"
 crypto-saltycoffee             = "1.0.4"
 cytodynamics-nucleus           = "0.2.0"
+cv-boofcv                      = "0.40.1"
 dikt                           = "1.0.0-alpha8"
 dir-watcher                    = "0.15.0"
 fastutil                       = "8.5.6"
@@ -77,6 +78,7 @@ ajalt-colormath         = { module = "com.github.ajalt.colormath:colormath"     
 beryx-textio            = { module = "org.beryx:text-io"                               , version.ref = "beryx-textio"}
 crypto-saltycoffee      = { module = "software.pando.crypto:salty-coffee"              , version.ref = "crypto-saltycoffee"}
 cytodynamics-nucleus    = { module = "com.linkedin.cytodynamics:cytodynamics-nucleus"  , version.ref = "cytodynamics-nucleus"}
+cv-boofcv-core          = { module = "org.boofcv:boofcv-core"                          , version.ref = "cv-boofcv"}
 directory-watcher       = { module = "io.methvin:directory-watcher"                    , version.ref = "dir-watcher"}
 fastutil                = { module = "it.unimi.dsi:fastutil"                           , version.ref = "fastutil"}
 fastutil-core           = { module = "it.unimi.dsi:fastutil-core"                      , version.ref = "fastutil"}
