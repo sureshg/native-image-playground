@@ -22,6 +22,7 @@ google-tink                    = "1.6.1"
 graalvm                        = "21.3.0"
 grpc                           = "1.39.0"
 grpc-kotlin                    = "1.2.0"
+imageio-twelvemonkeys          = "3.8.1"
 jakewharton-picnic             = "0.4.0"
 jakewharton-crossword          = "0.1.2"
 jetbrains-markdown             = "0.2.4"
@@ -98,6 +99,10 @@ grpc-protobuf               = { module = "io.grpc:grpc-protobuf"                
 grpc-kotlin                 = { module = "io.grpc:grpc-kotlin-stub"                         , version.ref = "grpc-kotlin"}
 protobuf-javautil           = { module = "com.google.protobuf:protobuf-java-util"           , version.ref = "protobuf"}
 protobuf-kotlin             = { module = "com.google.protobuf:protobuf-kotlin"              , version.ref = "protobuf"}
+
+twelvemonkeys-core          = { module = "com.twelvemonkeys.imageio:imageio-core"           , version.ref = "imageio-twelvemonkeys"}
+twelvemonkeys-icns          = { module = "com.twelvemonkeys.imageio:imageio-icns"           , version.ref = "imageio-twelvemonkeys"}
+twelvemonkeys-webp          = { module = "com.twelvemonkeys.imageio:imageio-webp"           , version.ref = "imageio-twelvemonkeys"}
 
 jetbrains-markdown         = { module = "org.jetbrains:markdown"                             , version.ref = "jetbrains-markdown"}
 jmdns                      = { module = "org.jmdns:jmdns"                                    , version.ref = "jmdns"}

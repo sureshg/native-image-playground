@@ -68,7 +68,7 @@ jobs:
 
       - name: ⬇️ Download ${{ matrix.os }} OpenJDK ${{ matrix.jdk }}
         id: download-jdk
-        uses: sormuras/download-jdk@1.1.2
+        uses: sormuras/download-jdk@v1
         with:
           feature: ${{ matrix.jdk }}
 
