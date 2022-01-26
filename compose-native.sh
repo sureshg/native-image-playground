@@ -36,6 +36,7 @@ native-image \
 # --initialize-at-build-time=kotlinx,kotlin,org.slf4j \
 # --initialize-at-run-time=... \
 # --trace-class-initialization=... \
+# --diagnostics-mode \
 # -Dauthor="$USER" \
 # -H:DefaultLocale="en-US" \
 # -H:+AddAllCharsets \
@@ -45,6 +46,7 @@ native-image \
 # -H:IncludeResourceBundles=<string>* \
 # -H:+AddAllFileSystemProviders \
 # -H:+ReportUnsupportedElementsAtRuntime \
+# -H:ReflectionConfigurationFiles=./META-INF/native-image/reflect-config.json \
 # -H:CLibraryPath=".../lib"
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
 
