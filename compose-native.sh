@@ -24,10 +24,10 @@ native-image \
       compose-app
 
 # --static \
+# --libc=musl  \
 # --gc=epsilon \
 # // generate debug info and no optimizations
 # -g -O0 \
-# --libc musl \
 # --install-exit-handlers \
 # --enable-https \
 # --enable-all-security-services \
