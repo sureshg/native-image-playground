@@ -37,6 +37,13 @@ native-image \
 # --initialize-at-run-time=... \
 # --trace-class-initialization=... \
 # -Dauthor="$USER" \
+# -H:DefaultLocale="en-US" \
+# -H:+AddAllCharsets \
+# -H:+IncludeAllLocales  \
+# -H:+IncludeAllTimeZones \
+# -H:IncludeResources=<string>* \
+# -H:IncludeResourceBundles=<string>* \
+# -H:+AddAllFileSystemProviders \
 # -H:+ReportUnsupportedElementsAtRuntime \
 # -H:CLibraryPath=".../lib"
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
