@@ -29,6 +29,7 @@ jetbrains-markdown             = "0.2.4"
 jgitver                        = "0.10.0-rc03"
 jmdns                          = "3.5.7"
 jreleaser                      = "0.9.1"
+jspecify                       = "0.2.0"
 junit                          = "5.8.2"
 junit-pioneer                  = "1.4.2"
 jqwik                          = "1.6.0"
@@ -61,6 +62,7 @@ beryx-jlink                    = "2.24.4"
 beryx-runtime                  = "1.12.7"
 beryx-jar                      = "2.0.0"
 champeau-includegit            = "0.1.5"
+champeau-japicmp               = "0.3.0"
 champeau-jmh                   = "0.6.6"
 champeau-mrjar                 = "0.1"
 graalvm-nativeimage            = "0.9.9"
@@ -106,6 +108,8 @@ twelvemonkeys-webp          = { module = "com.twelvemonkeys.imageio:imageio-webp
 
 jetbrains-markdown         = { module = "org.jetbrains:markdown"                             , version.ref = "jetbrains-markdown"}
 jmdns                      = { module = "org.jmdns:jmdns"                                    , version.ref = "jmdns"}
+jspecify                   = { module = "org.jspecify:jspecify"                              , version.ref = "jspecify"}
+
 kotlinx-coroutines-core    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"      , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-jdk8    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"      , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-slf4j   = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j"     , version.ref = "kotlinx-coroutines"}
@@ -173,6 +177,7 @@ beryx-jlink                 = { id = "org.beryx.jlink"                          
 beryx-runtime               = { id = "org.beryx.runtime"                                     , version.ref = "beryx-runtime" }
 beryx-jar                   = { id = "org.beryx.jar"                                         , version.ref = "beryx-jar" }
 champeau-includegit         = { id = "me.champeau.includegit"                                , version.ref = "champeau-includegit"}
+champeau-japicmp            = { id = "me.champeau.gradle.japicmp"                            , version.ref = "champeau-japicmp"}
 champeau-jmh                = { id = "me.champeau.jmh"                                       , version.ref = "champeau-jmh"}
 champeau-mrjar              = { id = "me.champeau.mrjar"                                     , version.ref = "champeau-mrjar"}
 dikt                        = { id = "io.github.sergeshustoff.dikt"                          , version.ref = "dikt"}

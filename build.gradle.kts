@@ -16,6 +16,7 @@ plugins {
   alias(libs.plugins.spotless)
   alias(libs.plugins.ksp.redacted)
   alias(libs.plugins.ksp.powerassert)
+  alias(libs.plugins.champeau.includegit) apply false
 }
 
 val moduleName = "dev.suresh.nativeimage"
