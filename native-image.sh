@@ -5,6 +5,7 @@ IFS=$'\n\t'
 
 # sdk i java 22.0.0.2.r17-grl
 # gu install native-image
+
 pushd ~/code/compose-mpp-playground >/dev/null
 ./gradlew packageUberJarForCurrentOS
 
