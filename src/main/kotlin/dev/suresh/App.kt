@@ -40,7 +40,6 @@ fun main() {
 
   println(Secret::class.java.getResourceAsStream("/message.txt")?.bufferedReader()?.readText())
 
-
   val t = Terminal(
     hyperlinks = true,
     interactive = true
@@ -60,7 +59,8 @@ fun main() {
   t.println(rgb("#b4eeb4")("This will get downsampled on terminals that don't support truecolor"))
   t.println("${red("red")} ${white("white")} and ${blue("blue")}")
 
-  t.println(table {
+  t.println(
+    table {
       borderStyle = SQUARE_DOUBLE_SECTION_SEPARATOR
       align = RIGHT
       outerBorder = false
@@ -97,9 +97,7 @@ fun main() {
     }
   )
 
-
   t.print(fgBg("---- END -----"))
-
 }
 
 @Redacted

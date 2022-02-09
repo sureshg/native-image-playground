@@ -16,6 +16,7 @@ plugins {
   alias(libs.plugins.spotless)
   alias(libs.plugins.ksp.redacted)
   alias(libs.plugins.ksp.powerassert)
+  alias(libs.plugins.versioncatalog.update)
   alias(libs.plugins.champeau.includegit) apply false
 }
 
@@ -29,6 +30,7 @@ group = "dev.suresh"
 
 application {
   mainClass.set("$group.AppKt")
+  this.mainModule
 }
 
 java {
@@ -108,8 +110,7 @@ spotless {
     trimTrailingWhitespace()
     endWithNewline()
   }
-
-  isEnforceCheck = false
+  // isEnforceCheck = false
 }
 
 jgitver {
@@ -148,10 +149,9 @@ tasks {
       allWarningsAsErrors = false
       freeCompilerArgs += listOf(
         "-Xjsr305=strict",
-        "-Xjvm-default=enable",
+        "-Xjvm-default=all",
         "-Xassertions=jvm",
         "-Xallow-result-return-type",
-        "-Xstrict-java-nullability-assertions",
         "-Xgenerate-strict-metadata-version",
         "-Xemit-jvm-type-annotations",
       )

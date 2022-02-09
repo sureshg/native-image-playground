@@ -1,8 +1,8 @@
 [versions]
 java                           = "17"
-kotlin                         = "1.6.10"
+kotlin                         = "1.6.20-M1"
 kotlin-api                     = "1.6"
-gradle                         = "7.4-rc-1"
+gradle                         = "7.4"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.4.0"
@@ -10,11 +10,18 @@ ajalt-mordant                  = "2.0.0-beta4"
 ajalt-colormath                = "3.2.0"
 assertj                        = "3.21.0"
 beryx-textio                   = "3.4.1"
+bucket4j                       = "7.1.0"
+concurrent-jctools             = "3.3.0"
+crypto-bcprov                  = "1.70"
+crypto-conscrypt               = "2.5.2"
 crypto-saltycoffee             = "1.0.4"
+crypto-tink                    = "1.6.1"
 cytodynamics-nucleus           = "0.2.0"
 cv-boofcv                      = "0.40.1"
+db-scheduler                   = "10.5"
 dikt                           = "1.0.0-alpha8"
 dir-watcher                    = "0.15.0"
+failsafe                       = "3.2.0"
 fastutil                       = "8.5.6"
 google-auto-service            = "1.0.1"
 google-javaformat              = "1.13.0"
@@ -46,18 +53,22 @@ kotlinx-serialization-csv      = "2.0.0"
 kodein                         = "7.10.0"
 koin                           = "3.1.5"
 kotlininject                   = "0.4.1"
-ksp                            = "1.6.10-1.0.2"
+ksp                            = "1.6.20-M1-1.0.2"
 ksp-auto-service               = "1.0.0"
 ksp-redacted                   = "1.0.1"
 ksp-powerassert                = "0.11.0"
 ktlint                         = "0.43.2"
 ktor                           = "2.0.0-beta-1"
-logback-classic                = "1.2.6"
+lwjgl                          = "3.3.0"
+libgdx                         = "1.10.0"
+logback                        = "1.2.6"
 protobuf                       = "3.18.1"
 semver                         = "1.0.0"
+slf4j                          = "1.7.30"
+togglz                         = "3.1.1"
 
 # Plugin versions
-benmanes                       = "0.41.0"
+benmanes                       = "0.42.0"
 beryx-jlink                    = "2.24.4"
 beryx-runtime                  = "1.12.7"
 beryx-jar                      = "2.0.0"
@@ -68,9 +79,11 @@ champeau-mrjar                 = "0.1"
 graalvm-nativeimage            = "0.9.9"
 jetbrains-exposed              = "0.2.1"
 licenser                       = "0.6.1"
+osdetector                     = "1.7.0"
 protobuf-plugin                = "0.8.17"
 shadow                         = "7.1.2"
-spotless                       = "6.2.0"
+spotless                       = "6.2.2"
+versioncatalog-update          = "0.3.0"
 
 
 [libraries]
@@ -79,10 +92,20 @@ ajalt-clikt             = { module = "com.github.ajalt.clikt:clikt"             
 ajalt-mordant           = { module = "com.github.ajalt.mordant:mordant"                , version.ref = "ajalt-mordant"}
 ajalt-colormath         = { module = "com.github.ajalt.colormath:colormath"            , version.ref = "ajalt-colormath"}
 beryx-textio            = { module = "org.beryx:text-io"                               , version.ref = "beryx-textio"}
-crypto-saltycoffee      = { module = "software.pando.crypto:salty-coffee"              , version.ref = "crypto-saltycoffee"}
+bucket4j-core           = { module = "com.github.vladimir-bukhtoyarov:bucket4j-core"   , version.ref = "bucket4j"}
+
+concurrent-jctools      = { module = "org.jctools:jctools-core"                         , version.ref = "concurrent-jctools"}
+crypto-bcprov           = { module = "org.bouncycastle:bcprov-jdk15on"                  , version.ref = "crypto-bcprov"}
+crypto-conscrypt        = { module = "org.conscrypt:conscrypt-openjdk"                  , version.ref = "crypto-conscrypt"}
+crypto-conscrypt-uber   = { module = "org.conscrypt:conscrypt-openjdk-uber"             , version.ref = "crypto-conscrypt"}
+crypto-tink             = { module = "com.google.crypto.tink:tink"                      , version.ref = "crypto-tink"}
+crypto-saltycoffee      = { module = "software.pando.crypto:salty-coffee"               , version.ref = "crypto-saltycoffee"}
+
 cytodynamics-nucleus    = { module = "com.linkedin.cytodynamics:cytodynamics-nucleus"  , version.ref = "cytodynamics-nucleus"}
 cv-boofcv-core          = { module = "org.boofcv:boofcv-core"                          , version.ref = "cv-boofcv"}
+db-scheduler            = { module = "com.github.kagkarlsson:db-scheduler"             , version.ref = "db-scheduler"}
 directory-watcher       = { module = "io.methvin:directory-watcher"                    , version.ref = "dir-watcher"}
+failsafe                = { module = "dev.failsafe:failsafe"                           , version.ref = "failsafe"}
 fastutil                = { module = "it.unimi.dsi:fastutil"                           , version.ref = "fastutil"}
 fastutil-core           = { module = "it.unimi.dsi:fastutil-core"                      , version.ref = "fastutil"}
 jakewharton-picnic      = { module = "com.jakewharton.picnic:picnic"                   , version.ref = "jakewharton-picnic"}
@@ -167,8 +190,13 @@ kodein                      = { module = "org.kodein.di:kodein-di"              
 kotlininject-kspcompiler    = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp"     , version.ref = "kotlininject"}
 kotlininject-runtime        = { module = "me.tatarka.inject:kotlin-inject-runtime"          , version.ref = "kotlininject"}
 
-logback-classic             = { module = "ch.qos.logback:logback-classic"             , version.ref = "logback-classic"}
-semver                      = { module = "io.github.z4kn4fein:semver"                 , version.ref = "semver"}
+game-lwjgl-bom              = { module = "org.lwjgl:lwjgl-bom"                              , version.ref = "lwjgl"}
+game-libgdx                 = { module = "com.badlogicgames.gdx:gdx"                        , version.ref = "libgdx"}
+logback-classic             = { module = "ch.qos.logback:logback-classic"                   , version.ref = "logback"}
+logback-core                = { module = "ch.qos.logback:logback-core"                      , version.ref = "logback"}
+semver                      = { module = "io.github.z4kn4fein:semver"                       , version.ref = "semver"}
+togglz-core                 = { module = "org.togglz:togglz-core"                           , version.ref = "togglz"}
+
 
 [plugins]
 # Gradle  Plugins
@@ -191,9 +219,11 @@ ksp                         = { id = "com.google.devtools.ksp"                  
 ksp-redacted                = { id = "dev.zacsweers.redacted"                                , version.ref = "ksp-redacted" }
 ksp-powerassert             = { id = "com.bnorm.power.kotlin-power-assert"                   , version.ref = "ksp-powerassert" }
 licenser                    = { id = "org.cadixdev.licenser"                                 , version.ref = "licenser" }
+osdetector                  = { id = "com.google.osdetector"                                 , version.ref = "osdetector" }
 protobuf                    = { id = "com.google.protobuf"                                   , version.ref = "protobuf-plugin" }
 spotless                    = { id = "com.diffplug.spotless"                                 , version.ref = "spotless" }
 shadow                      = { id = "com.github.johnrengelman.shadow"                       , version.ref = "shadow" }
+versioncatalog-update       = { id = "nl.littlerobots.version-catalog-update"                , version.ref = "versioncatalog-update" }
 
 [bundles]
 ktor-server                 = ["ktor-server", "ktor-serialization", "ktor-auth", "ktor-server-host-common", "ktor-server-netty", "logback-classic"]
