@@ -30,7 +30,6 @@ group = "dev.suresh"
 
 application {
   mainClass.set("$group.AppKt")
-  this.mainModule
 }
 
 java {
