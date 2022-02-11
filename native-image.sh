@@ -19,6 +19,9 @@ native-image \
       --allow-incomplete-classpath \
       -H:ConfigurationFileDirectories=config \
       -H:+ReportExceptionStackTraces \
+      -H:DashboardDump=dashboard \
+      -H:+DashboardHeap \
+      -H:+DashboardCode \
       -Djava.awt.headless=false \
       -J-Xmx7G \
       -jar desktop/build/compose/jars/jvm-macos-*.jar \
@@ -48,7 +51,9 @@ native-image \
 # -H:+AddAllFileSystemProviders \
 # -H:+ReportUnsupportedElementsAtRuntime \
 # -H:ReflectionConfigurationFiles=./META-INF/native-image/reflect-config.json \
-# -H:CLibraryPath=".../lib"
+# -H:CLibraryPath=".../lib" \
+# -H:+DashboardAll \
+# -H:+DashboardPointsTo
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
 
 echo "Compressing executable ... "

@@ -3,6 +3,7 @@
 [![GitHub Workflow Status][gha_badge]][gha_url]
 [![GraalVM CE][graalvm_img]][graalvm_url]
 [![Kotlin release][kt_img]][kt_url]
+[![GraalVM Dashboard][gl_dashboard_img]][gl_dashboard_url]
 [![Style guide][ktlint_img]][ktlint_url]
 
  [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app and publish the platform binaries using Github action.
@@ -41,6 +42,9 @@ $ ./gradlew clean build
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-builds/releases
 [graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-17&logo=java&logoColor=d3eff5&style=for-the-badge
+
+[gl_dashboard_url]: https://www.graalvm.org/dashboard/
+[gl_dashboard_img]: https://img.shields.io/badge/GraalVM-Dashboard-f39727.svg?style=for-the-badge&logo=clyp&logoColor=40c4ff
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge
