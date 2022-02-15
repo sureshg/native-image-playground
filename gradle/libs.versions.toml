@@ -207,7 +207,7 @@ kodein                      = { module = "org.kodein.di:kodein-di"              
 kotlininject-kspcompiler    = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp"     , version.ref = "kotlininject"}
 kotlininject-runtime        = { module = "me.tatarka.inject:kotlin-inject-runtime"          , version.ref = "kotlininject"}
 
-kmath-core                  = { module = "space.kscience:kmath-core"          , version.ref = "kmath"}
+kmath-core                  = { module = "space.kscience:kmath-core"                        , version.ref = "kmath"}
 
 game-lwjgl-bom              = { module = "org.lwjgl:lwjgl-bom"                              , version.ref = "lwjgl"}
 game-libgdx                 = { module = "com.badlogicgames.gdx:gdx"                        , version.ref = "libgdx"}
