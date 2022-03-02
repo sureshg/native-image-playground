@@ -62,7 +62,7 @@ jobs:
 
     steps:
       - name: 🛎️ Check out the source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -139,7 +139,7 @@ jobs:
 
     steps:
       - name: Check out the source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           submodules: recursive
@@ -190,7 +190,7 @@ jobs:
 
     steps:
       - name: Check out the source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run Java App on OpenJDK ${{ matrix.jdk }} container image
         if: always()
