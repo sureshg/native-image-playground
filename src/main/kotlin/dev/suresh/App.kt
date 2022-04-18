@@ -1,7 +1,6 @@
 package dev.suresh
 
 import com.github.ajalt.mordant.rendering.*
-import com.github.ajalt.mordant.rendering.BorderStyle.Companion.SQUARE_DOUBLE_SECTION_SEPARATOR
 import com.github.ajalt.mordant.rendering.TextAlign.LEFT
 import com.github.ajalt.mordant.rendering.TextAlign.RIGHT
 import com.github.ajalt.mordant.rendering.TextColors.*
@@ -61,7 +60,7 @@ fun main() {
 
   t.println(
     table {
-      borderStyle = SQUARE_DOUBLE_SECTION_SEPARATOR
+      borderType = BorderType.SQUARE_DOUBLE_SECTION_SEPARATOR
       align = RIGHT
       outerBorder = false
       column(0) {

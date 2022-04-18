@@ -17,6 +17,7 @@ plugins {
   alias(libs.plugins.ksp.redacted)
   alias(libs.plugins.ksp.powerassert)
   alias(libs.plugins.versioncatalog.update)
+  alias(libs.plugins.dependency.analysis)
   alias(libs.plugins.champeau.includegit) apply false
 }
 
@@ -151,8 +152,8 @@ tasks {
         "-Xjvm-default=all",
         "-Xassertions=jvm",
         "-Xallow-result-return-type",
-        "-Xgenerate-strict-metadata-version",
         "-Xemit-jvm-type-annotations",
+        // "-Xgenerate-strict-metadata-version",
       )
     }
   }
