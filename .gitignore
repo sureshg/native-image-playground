@@ -14,6 +14,8 @@ reports
 
 # Java
 hs_err_pid*
+classes.lst
+*.jsa
 jre/
 
 # Gradle release
