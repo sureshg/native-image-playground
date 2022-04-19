@@ -1,6 +1,6 @@
 [versions]
 java                           = "17"
-kotlin                         = "1.6.20"
+kotlin                         = "1.6.21"
 kotlin-api                     = "1.7"
 gradle                         = "7.4.2"
 
@@ -29,6 +29,7 @@ google-auto-service            = "1.0.1"
 google-javaformat              = "1.15.0"
 google-tink                    = "1.6.1"
 graalvm                        = "22.0.0.2"
+graalvm-hint                   = "0.18.1"
 grpc                           = "1.39.0"
 grpc-kotlin                    = "1.2.0"
 imageio-twelvemonkeys          = "3.8.1"
@@ -137,6 +138,9 @@ graalvm-svm                 = { module = "org.graalvm.nativeimage:svm"          
 graalvm-svmlibffi           = { module = "org.graalvm.nativeimage:svm-libffi"               , version.ref = "graalvm"}
 graalvm-truffle-api         = { module = "org.graalvm.truffle:truffle-api"                  , version.ref = "graalvm"}
 graalvm-js                  = { module = "org.graalvm.js:js"                                , version.ref = "graalvm"}
+
+graalvm-hint-processor      = { module = "io.goodforgod:graalvm-hint-processor"             , version.ref = "graalvm-hint"}
+graalvm-hint-annotations    = { module = "io.goodforgod:graalvm-hint-annotations"           , version.ref = "graalvm-hint"}
 
 grpc-protobuf               = { module = "io.grpc:grpc-protobuf"                            , version.ref = "grpc"}
 grpc-kotlin                 = { module = "io.grpc:grpc-kotlin-stub"                         , version.ref = "grpc-kotlin"}
@@ -249,6 +253,7 @@ jetbrains-exposed           = { id = "com.jetbrains.exposed.gradle.plugin"      
 jgitver                     = { id = "fr.brouillard.oss.gradle.jgitver"                      , version.ref = "jgitver" }
 jreleaser                   = { id = "org.jreleaser"                                         , version.ref = "jreleaser" }
 kotlin-jvm                  = { id = "org.jetbrains.kotlin.jvm"                              , version.ref = "kotlin" }
+kotlin-kapt                 = { id = "org.jetbrains.kotlin.kapt"                             , version.ref = "kotlin" }
 kotlinx-serialization       = { id = "org.jetbrains.kotlin.plugin.serialization"             , version.ref = "kotlin" }
 ksp                         = { id = "com.google.devtools.ksp"                               , version.ref = "ksp"}
 ksp-redacted                = { id = "dev.zacsweers.redacted"                                , version.ref = "ksp-redacted" }

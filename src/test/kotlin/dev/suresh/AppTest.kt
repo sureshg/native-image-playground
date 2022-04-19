@@ -6,6 +6,6 @@ class AppTest {
 
   @Test
   fun main() {
-    assertEquals("1.6.20", KotlinVersion.CURRENT.toString())
+    assertEquals("1.6.21", KotlinVersion.CURRENT.toString())
   }
 }

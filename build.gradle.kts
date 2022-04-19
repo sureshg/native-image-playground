@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.jgitver)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlin.kapt)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.graalvm.nativeimage)
   alias(libs.plugins.benmanes)
@@ -71,6 +72,9 @@ kotlin {
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
+}
+
+kapt {
 }
 
 spotless {
@@ -186,6 +190,9 @@ dependencies {
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)
+
+  kapt(libs.graalvm.hint.processor)
+  compileOnly(libs.graalvm.hint.annotations)
 
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.kotlinx.coroutines.test)
