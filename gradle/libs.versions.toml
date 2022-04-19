@@ -32,6 +32,7 @@ graalvm                        = "22.0.0.2"
 graalvm-hint                   = "0.18.1"
 grpc                           = "1.39.0"
 grpc-kotlin                    = "1.2.0"
+http-common                    = "0.10.0"
 imageio-twelvemonkeys          = "3.8.1"
 jakewharton-picnic             = "0.4.0"
 jakewharton-crossword          = "0.1.2"
@@ -144,6 +145,8 @@ graalvm-hint-annotations    = { module = "io.goodforgod:graalvm-hint-annotations
 
 grpc-protobuf               = { module = "io.grpc:grpc-protobuf"                            , version.ref = "grpc"}
 grpc-kotlin                 = { module = "io.grpc:grpc-kotlin-stub"                         , version.ref = "grpc-kotlin"}
+
+http-common                 = { module = "io.goodforgod:http-common"                        , version.ref = "http-common"}
 protobuf-javautil           = { module = "com.google.protobuf:protobuf-java-util"           , version.ref = "protobuf"}
 protobuf-kotlin             = { module = "com.google.protobuf:protobuf-kotlin"              , version.ref = "protobuf"}
 
