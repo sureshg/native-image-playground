@@ -27,19 +27,27 @@ native-image \
       -jar desktop/build/compose/jars/jvm-macos-*.jar \
       compose-app
 
+# https://www.graalvm.org/reference-manual/native-image/Options
+# --dry-run \
+# --native-image-info \
 # --static \
 # --libc=musl  \
+# --libc=glibc \
 # --gc=epsilon \
+# // Enable quick build
+# -Ob \
 # // generate debug info and no optimizations
 # -g -O0 \
 # --install-exit-handlers \
 # --enable-https \
+# --enable-http \
 # --enable-all-security-services \
 # --enable-url-protocols=http,https,file,jar \
 # --report-unsupported-elements-at-runtime \
 # --initialize-at-build-time=kotlinx,kotlin,org.slf4j \
 # --initialize-at-run-time=... \
 # --trace-class-initialization=... \
+# --trace-object-instantiation \
 # --diagnostics-mode \
 # -Dauthor="$USER" \
 # -H:DefaultLocale="en-US" \
@@ -54,6 +62,7 @@ native-image \
 # -H:CLibraryPath=".../lib" \
 # -H:+DashboardAll \
 # -H:+DashboardPointsTo
+# -H:CompilerBackend=llvm \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
 
 echo "Compressing executable ... "
