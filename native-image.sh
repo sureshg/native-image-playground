@@ -12,16 +12,15 @@ BIN_NAME=app
 # pushd ~/code/compose-mpp-playground >/dev/null
 # ./gradlew packageUberJarForCurrentOS
 
-echo "Building Graalvm n"
-#kotlinc -version \
-#        -verbose \
-#        -include-runtime \
-#        -java-parameters \
-#        -jvm-target 17 \
-#        -api-version 1.7 \
-#        -language-version 1.7 \
-#        -progressive \
-#        src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
+kotlinc -version \
+        -verbose \
+        -include-runtime \
+        -java-parameters \
+        -jvm-target 17 \
+        -api-version 1.7 \
+        -language-version 1.7 \
+        -progressive \
+        src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
 
 echo "Generating Graalvm config files..."
 # java -agentlib:native-image-agent=config-output-dir=config -jar desktop/build/compose/jars/jvm-macos-*.jar
