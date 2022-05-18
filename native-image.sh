@@ -3,33 +3,46 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+BIN_DIR=build
+BIN_NAME=app
+
 # sdk i java 22.0.0.2.r17-grl
 # gu install native-image
 
-pushd ~/code/compose-mpp-playground >/dev/null
-./gradlew packageUberJarForCurrentOS
+# pushd ~/code/compose-mpp-playground >/dev/null
+# ./gradlew packageUberJarForCurrentOS
+
+echo "Building Graalvm n"
+#kotlinc -version \
+#        -verbose \
+#        -include-runtime \
+#        -java-parameters \
+#        -jvm-target 17 \
+#        -api-version 1.7 \
+#        -language-version 1.7 \
+#        -progressive \
+#        src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
 
 echo "Generating Graalvm config files..."
-java -agentlib:native-image-agent=config-output-dir=config -jar desktop/build/compose/jars/jvm-macos-*.jar
+# java -agentlib:native-image-agent=config-output-dir=config -jar desktop/build/compose/jars/jvm-macos-*.jar
+# java -agentlib:native-image-agent=config-output-dir=build/config -jar build/tmp/app.jar
 
-echo "Creating native image..."
-native-image \
-      --verbose \
+echo "Creating native image ${BIN_DIR}/${BIN_NAME}..."
+native-image "$@" \
       --no-fallback \
-      --allow-incomplete-classpath \
-      -H:ConfigurationFileDirectories=config \
+      --native-image-info \
+      --link-at-build-time \
+      --install-exit-handlers \
+      -H:ConfigurationFileDirectories="${BIN_DIR}/config" \
       -H:+ReportExceptionStackTraces \
-      -H:DashboardDump=dashboard \
-      -H:+DashboardHeap \
-      -H:+DashboardCode \
       -Djava.awt.headless=false \
       -J-Xmx7G \
-      -jar desktop/build/compose/jars/jvm-macos-*.jar \
-      compose-app
+      -jar "${BIN_DIR}/${BIN_NAME}.jar" \
+      "${BIN_DIR}/${BIN_NAME}"
 
 # https://www.graalvm.org/reference-manual/native-image/Options
+# --verbose \
 # --dry-run \
-# --native-image-info \
 # --static \
 # --libc=musl  \
 # --libc=glibc \
@@ -38,7 +51,6 @@ native-image \
 # -Ob \
 # // generate debug info and no optimizations
 # -g -O0 \
-# --install-exit-handlers \
 # --enable-https \
 # --enable-http \
 # --enable-all-security-services \
@@ -60,11 +72,14 @@ native-image \
 # -H:+ReportUnsupportedElementsAtRuntime \
 # -H:ReflectionConfigurationFiles=./META-INF/native-image/reflect-config.json \
 # -H:CLibraryPath=".../lib" \
-# -H:+DashboardAll \
-# -H:+DashboardPointsTo
+# -H:DashboardDump=dashboard \
+# -H:+DashboardHeap \
+# -H:+DashboardCode \
+# // -H:+DashboardAll \
+# // -H:+DashboardPointsTo \
 # -H:CompilerBackend=llvm \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
 
-echo "Compressing executable ... "
-upx compose-app
-popd >/dev/null
+# echo "Compressing executable ... "
+# upx build/kotlin-app
+# popd >/dev/null

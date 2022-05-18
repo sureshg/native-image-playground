@@ -1,4 +1,4 @@
-package dev.suresh
+package dev.suresh.tui
 
 import com.github.ajalt.mordant.rendering.*
 import com.github.ajalt.mordant.rendering.TextAlign.LEFT

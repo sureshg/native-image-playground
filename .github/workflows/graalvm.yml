@@ -1,0 +1,108 @@
+name: GraalVM Native Image
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: "0 0 * * 5"
+  workflow_dispatch:
+
+jobs:
+  native-build:
+    name: GraalVM CE ${{ matrix.version }} JDK${{ matrix.java-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version: [ dev ]
+        java-version: [ '17' ]
+        components: [ 'native-image' ]
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
+    #   include:
+    #     - os: ubuntu-18.04
+    #       version: 'dev'
+    #       java-version: '17'
+    #       components: 'native-image'
+    #     - os: macos-10.15
+    #       version: 'dev'
+    #       java-version: '17'
+    #       components: 'native-image'
+    #     - os: windows-2019
+    #       version: 'dev'
+    #       java-version: '17'
+    #       components: 'native-image'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup GraalVM CE Dev Build
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: ${{ matrix.version }}
+          java-version: ${{ matrix.java-version }}
+          components: ${{ matrix.components }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check environment
+        if: runner.os != 'Windows'
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+
+      - name: Check Windows environment
+        if: runner.os == 'Windows'
+        run: |
+          echo "GRAALVM_HOME: $env:GRAALVM_HOME"
+          echo "JAVA_HOME: $env:JAVA_HOME"
+          java --version
+          native-image --version
+          echo "Microsoft C/C++ Compiler Version"
+          cl.exe
+
+      - name: Build and run App
+        run: |
+          # javac -encoding UTF-8 Main.java
+          ./native-image.sh
+          file build/app
+
+      - name: Upload ${{ matrix.os }} app binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ matrix.os }}
+          path: build/app*
+          if-no-files-found: error
+
+
+  native-build-musl:
+    name: GraalVM CE dev JDK17 + musl static image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup GraalVM CE Dev Build
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'dev'
+          java-version: '17'
+          components: 'native-image'
+          native-image-musl: 'true'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build static app image with musl
+        run: |
+          # javac Main.java
+          ./native-image.sh --static --libc=musl
+          file build/app
+
+      - name: Uploading app static binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-static-linux
+          path: |
+            build/app*
+          if-no-files-found: error
