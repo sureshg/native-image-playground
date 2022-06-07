@@ -12,13 +12,13 @@
 
 ```bash
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 22.0.0.2.r17-grl
+$ sdk i java 22.1.0.r17-grl
 ```
 
 #### Build
 
 ```bash
-$ ./gradlew clean build
+$ ./gradlew build
 ```
 
 #### Resources
@@ -49,9 +49,8 @@ $ ./gradlew clean build
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge
 
-[gha_url]: https://github.com/sureshg/openjdk-playground/actions/workflows/build.yml
-[gha_img]: https://github.com/sureshg/openjdk-playground/actions/workflows/build.yml/badge.svg
-[gha_badge]: https://img.shields.io/github/workflow/status/sureshg/openjdk-playground/Build?color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
+[gha_url]: https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
+[gha_badge]: https://img.shields.io/github/workflow/status/sureshg/native-image-playground/Build?color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
 
 [sty_url]: https://kotlinlang.org/docs/coding-conventions.html
 [sty_img]: https://img.shields.io/badge/style-Kotlin--Official-40c4ff.svg?style=for-the-badge&logo=kotlin&logoColor=40c4ff
