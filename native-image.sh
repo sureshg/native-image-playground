@@ -35,7 +35,7 @@ native-image "$@" \
       -H:ConfigurationFileDirectories="${BIN_DIR}/config" \
       -H:+ReportExceptionStackTraces \
       -Djava.awt.headless=false \
-      -J-Xmx7G \
+      -J-Xmx4G \
       -jar "${BIN_DIR}/${BIN_NAME}.jar" \
       "${BIN_DIR}/${BIN_NAME}"
 

@@ -16,9 +16,9 @@ plugins {
   alias(libs.plugins.shadow)
   alias(libs.plugins.spotless)
   alias(libs.plugins.ksp.redacted)
-  alias(libs.plugins.ksp.powerassert)
   alias(libs.plugins.versioncatalog.update)
   alias(libs.plugins.dependency.analysis)
+  alias(libs.plugins.ksp.powerassert) apply false
   alias(libs.plugins.champeau.includegit) apply false
 }
 
@@ -31,7 +31,7 @@ val ktlintVersion = libs.versions.ktlint.get()
 group = "dev.suresh"
 
 application {
-  mainClass.set("$group.AppKt")
+  mainClass.set("$group.MainKt")
 }
 
 java {
@@ -62,10 +62,8 @@ kotlin {
   }
 
   jvmToolchain {
-    (this as JavaToolchainSpec).apply {
-      languageVersion.set(JavaLanguageVersion.of(javaVersion))
-      vendor.set(java.toolchain.vendor.get())
-    }
+    languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    vendor.set(java.toolchain.vendor.get())
   }
 }
 

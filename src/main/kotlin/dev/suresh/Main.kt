@@ -57,7 +57,6 @@ fun summary() = buildString {
   val dns = InetAddress.getAllByName("google.com").toList()
   dns.forEach { appendLine(it) }
 
-
   appendLine("✧✧✧✧✧ TimeZones ✧✧✧✧✧")
   val tz = ZoneId.getAvailableZoneIds()
   tz.forEach { appendLine(it) }
@@ -132,5 +131,3 @@ fun summary() = buildString {
 private val Int.fmt get() = "%-5d".format(this)
 
 val Long.gibiByte get() = "%.2f GiB".format(this / (1024f * 1024 * 1024))
-
-

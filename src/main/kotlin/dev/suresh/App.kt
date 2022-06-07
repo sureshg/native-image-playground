@@ -1,4 +1,4 @@
-package dev.suresh.tui
+package dev.suresh
 
 import com.github.ajalt.mordant.rendering.*
 import com.github.ajalt.mordant.rendering.TextAlign.LEFT
@@ -30,7 +30,7 @@ fun main() {
   val loader =
     URLClassLoader.newInstance(arrayOf(URL("file://${System.getProperty("user.dir")}/plugins.jar")))
   val svcLoader = ServiceLoader.load(Runnable::class.java, loader)
-  println("Found ${svcLoader.toList().size} plugins!")
+  println("Found ${svcLoader.toList().size} Runnable plugins!")
 
   runBlocking {
     delay(100)

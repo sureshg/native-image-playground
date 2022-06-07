@@ -1,8 +1,5 @@
 name: Build
 
-env:
-  GITHUB_PUBLISH: 'false'
-
 on:
   push:
     branches:
@@ -11,54 +8,47 @@ on:
       - '*'
     paths-ignore:
       - LICENSE
-      - README.md
+      - '*.md'
       - 'docs/**'
       - '.github/config/labels.yml'
-
   pull_request:
     branches:
       - main
-
   schedule:
     - cron: "0 0 * * *"
-
   workflow_dispatch:
 
 defaults:
   run:
     shell: bash
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GITHUB_PUBLISH: 'false'
+  releaseBuild: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
+
 jobs:
 
-  # Gradle Build Action
   build:
     name: 🏗️ Gradle Build
-    timeout-minutes: 15
-    continue-on-error: false
-    # if: github.event_name  == 'pull_request'
 
     permissions:
-      contents: read
+      contents: write
       packages: write
 
-    outputs:
-      version: ${{ steps.gradle-build.outputs.version }}
-      artifact_name: ${{ steps.gradle-build.outputs.uberjar_name }}
-      artifact_path: ${{ steps.gradle-build.outputs.uberjar_path }}
-
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
+      max-parallel: 3
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-        jdk: [ Loom ]
-        include:
-          - os: ubuntu-latest
-            cmd: ./gradlew
-          - os: macos-latest
-            cmd: ./gradlew
-          - os: windows-latest
-            cmd: ./gradlew.bat
+        jdk: [ '17' ]
+
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    continue-on-error: false
 
     steps:
       - name: 🛎️ Check out the source code
@@ -66,145 +56,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: ⬇️ Download ${{ matrix.os }} OpenJDK ${{ matrix.jdk }}
-        id: download-jdk
-        uses: sormuras/download-jdk@v1
-        with:
-          feature: ${{ matrix.jdk }}
-
       - name: ☕ Set up OpenJDK ${{ matrix.jdk }}
         id: setup-java
         uses: actions/setup-java@v3
-        if: always() && steps.download-jdk.outcome == 'success'
         with:
-          distribution: jdkfile
-          java-version: ${{ env.JDK_VERSION }}
-          jdkFile: ${{ env.JDK_FILE }}
+          distribution: 'zulu'
+          java-version: ${{ matrix.jdk }}
           cache: 'gradle'
-          # settings-path: ${{ github.workspace }} # OR $GITHUB_WORKSPACE
 
-      - name: 🧰 Export Gradle Properties
-        if: ${{ false }}
-        id: gradle-properties
+      - name: 🏗️ Gradle Build
+        id: gradle-build
         run: |
-          PROPERTIES="$(./gradlew properties --console=plain -q)"
-          VERSION="$(echo "$PROPERTIES" | grep "^version:" | cut -f2- -d ' ')"
-          NAME="$(echo "$PROPERTIES" | grep "^name:" | cut -f2- -d ' ')"
-          ARTIFACT="${NAME}-${VERSION}.jar"
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=name::$NAME"
-          echo "::set-output name=artifact::$ARTIFACT"
-          echo "Runner Tool Cache: ${RUNNER_TOOL_CACHE}"
-
-      - name: 📦 Publish to GitHub Packages (Linux)
-        id: gradle-publish
-        if: env.GITHUB_PUBLISH == 'true' && runner.os == 'Linux'
-        run: |
-          ./gradlew publish
+          ./gradlew build
         env:
-          GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🏗️ Gradle Run & Build
-        id: gradle-build
-        run: ./gradlew run build dokkaHtml
-
-      - name: 📤 Uploading ${{ matrix.os }} uber jar
+      - name: 📤 Uploading ${{ matrix.os }} jar
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.gradle-build.outputs.uberjar_name }}
+          name: native-image-playground.jar
           path: |
-            ${{ steps.gradle-build.outputs.uberjar_path }}
+            build/libs/*.-all.jar
           if-no-files-found: error
-
-      # Deploy the Dokka site for new tag on Linux
-      - name: 🚀 Deploy html docs to website
-        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: main
-          FOLDER: build/dokka
-          TARGET_FOLDER: docs/apidoc/
-          CLEAN: true
-          commit-message: 'doc: Deployed dokka website'
-
-  # Github Release Action on tag push
-  release:
-    name: 🚰 Release new version.
-    needs: [ build ]
-    if: startsWith(github.ref, 'refs/tags/') && needs.build.result == 'success'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out the source code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          submodules: recursive
-
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v3
-        with:
-          configuration: ".github/config/configuration.json"
-          commitMode: true
-          ignorePreReleases: ${{ !contains(github.ref, '-') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Download all the build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          path: release-artifacts
-
-      - name: Github Release (version = ${{ needs.build.outputs.version }})
-        uses: softprops/action-gh-release@v1
-        with:
-          body: ${{ steps.github_release.outputs.changelog }}
-          prerelease: ${{ contains(github.event.inputs.version, '-rc') || contains(github.event.inputs.version, '-b') || contains(github.event.inputs.version, '-a') }}
-          files: |
-            ${{ github.workspace }}/release-artifacts/**
-          fail_on_unmatched_files: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-  # Run Java Application on OpenJDK docker images
-  container-build:
-    name: 🚢 Java on Container
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: true
-      matrix:
-        jdk: [ "eclipse-temurin:17-alpine", "openjdk:18-slim", "openjdk:18-alpine" ]
-
-    defaults:
-      run:
-        shell: sh
-
-    container:
-      image: ${{ matrix.jdk }}
-
-    steps:
-      - name: Check out the source code
-        uses: actions/checkout@v3
-
-      - name: Run Java App on OpenJDK ${{ matrix.jdk }} container image
-        if: always()
-        run: |
-          java -ea --show-version src/main/java/JavaApp.java
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-
-      - name: Github Action Contexts
-        run: |
-          echo "$JOB_CONTEXT"
-          echo "$STEPS_CONTEXT"
-          echo "$RUNNER_CONTEXT"
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
