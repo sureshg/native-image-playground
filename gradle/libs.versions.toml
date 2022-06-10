@@ -1,8 +1,8 @@
 [versions]
 java                           = "17"
-kotlin                         = "1.7.0-RC2"
+kotlin                         = "1.7.0"
 kotlin-api                     = "1.7"
-gradle                         = "7.5-rc-1"
+gradle                         = "7.5-rc-2"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.4.2"
@@ -21,6 +21,7 @@ cytodynamics-nucleus           = "0.2.0"
 cv-boofcv                      = "0.40.1"
 db-scheduler                   = "10.5"
 db-shedlock                    = "4.33.0"
+db-sherlock                    = "0.4.14"
 dikt                           = "1.0.0-alpha8"
 dir-watcher                    = "0.15.0"
 failsafe                       = "3.2.0"
@@ -59,9 +60,9 @@ kotlinx-serialization-csv      = "2.0.0"
 kodein                         = "7.10.0"
 koin                           = "3.1.5"
 kotlininject                   = "0.4.1"
-ksp                            = "1.7.0-RC2-1.0.5"
+ksp                            = "1.7.0-1.0.6"
 ksp-auto-service               = "1.0.0"
-ksp-redacted                   = "1.0.1-1.7.0-RC2"
+ksp-redacted                   = "1.1.0"
 ksp-powerassert                = "0.11.0"
 ktlint                         = "0.44.0"
 ktor                           = "2.0.2"
@@ -96,7 +97,7 @@ protobuf-plugin                = "0.8.17"
 shadow                         = "7.1.2"
 spotless                       = "6.7.0"
 versioncatalog-update          = "0.4.0"
-dependency-analysis            = "1.4.0"
+dependency-analysis            = "1.5.0"
 
 
 [libraries]
@@ -123,6 +124,7 @@ cv-boofcv-core          = { module = "org.boofcv:boofcv-core"                   
 db-scheduler            = { module = "com.github.kagkarlsson:db-scheduler"             , version.ref = "db-scheduler"}
 db-shedlock-core        = { module = "net.javacrumbs.shedlock:shedlock-core"           , version.ref = "db-shedlock"}
 db-shedlock-jdbc        = { module = "net.javacrumbs.shedlock:shedlock-provider-jdbc"  , version.ref = "db-shedlock"}
+db-sherlock-sql         = { module = "com.coditory.sherlock:sherlock-sql"              , version.ref = "db-sherlock"}
 
 directory-watcher       = { module = "io.methvin:directory-watcher"                    , version.ref = "dir-watcher"}
 failsafe                = { module = "dev.failsafe:failsafe"                           , version.ref = "failsafe"}
