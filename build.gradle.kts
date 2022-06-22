@@ -185,6 +185,11 @@ dependencies {
   implementation(libs.ajalt.mordant)
   implementation(libs.ajalt.colormath)
 
+  // RSocket
+  implementation(libs.ktor.client.cio)
+  implementation(libs.rsocket.ktor.client)
+  implementation(libs.logback.classic)
+
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

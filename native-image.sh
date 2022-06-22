@@ -6,21 +6,21 @@ IFS=$'\n\t'
 BIN_DIR=build
 BIN_NAME=app
 
-# sdk i java 22.0.0.2.r17-grl
-# gu install native-image
+# Make sure GraalVM is installed
+# ./graalvm-ce-dev.sh 17
 
 # pushd ~/code/compose-mpp-playground >/dev/null
 # ./gradlew packageUberJarForCurrentOS
 
 kotlinc -version \
-        -verbose \
-        -include-runtime \
-        -java-parameters \
-        -jvm-target 17 \
-        -api-version 1.7 \
-        -language-version 1.7 \
-        -progressive \
-        src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
+  -verbose \
+  -include-runtime \
+  -java-parameters \
+  -jvm-target 17 \
+  -api-version 1.7 \
+  -language-version 1.7 \
+  -progressive \
+  src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
 
 echo "Generating Graalvm config files..."
 # java -agentlib:native-image-agent=config-output-dir=config -jar desktop/build/compose/jars/jvm-macos-*.jar
@@ -28,16 +28,16 @@ echo "Generating Graalvm config files..."
 
 echo "Creating native image ${BIN_DIR}/${BIN_NAME}..."
 native-image "$@" \
-      --no-fallback \
-      --native-image-info \
-      --link-at-build-time \
-      --install-exit-handlers \
-      -H:ConfigurationFileDirectories="${BIN_DIR}/config" \
-      -H:+ReportExceptionStackTraces \
-      -Djava.awt.headless=false \
-      -J-Xmx4G \
-      -jar "${BIN_DIR}/${BIN_NAME}.jar" \
-      "${BIN_DIR}/${BIN_NAME}"
+  --no-fallback \
+  --native-image-info \
+  --link-at-build-time \
+  --install-exit-handlers \
+  -H:ConfigurationFileDirectories="${BIN_DIR}/config" \
+  -H:+ReportExceptionStackTraces \
+  -Djava.awt.headless=false \
+  -J-Xmx4G \
+  -jar "${BIN_DIR}/${BIN_NAME}.jar" \
+  "${BIN_DIR}/${BIN_NAME}"
 
 # https://www.graalvm.org/reference-manual/native-image/Options
 # --verbose \

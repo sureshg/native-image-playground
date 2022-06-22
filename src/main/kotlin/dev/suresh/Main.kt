@@ -1,13 +1,28 @@
 package dev.suresh
 
 import com.sun.net.httpserver.*
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.websocket.*
+import io.ktor.utils.io.core.*
+import io.rsocket.kotlin.*
+import io.rsocket.kotlin.core.*
+import io.rsocket.kotlin.keepalive.*
+import io.rsocket.kotlin.ktor.client.*
+import io.rsocket.kotlin.payload.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import java.io.*
 import java.net.*
 import java.nio.charset.*
 import java.security.*
 import java.time.*
 import java.util.*
+import java.util.concurrent.Executors
 import javax.net.ssl.*
+import kotlin.io.use
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 fun main() {
   val start = System.currentTimeMillis()
@@ -19,6 +34,8 @@ fun main() {
       it.responseBody.use { os -> os.write(res) }
     }
     createContext("/shutdown") { stop(0) }
+    createContext("/rsocket", ::rSocket)
+    executor = Executors.newCachedThreadPool()
     start()
   }
 
@@ -126,6 +143,69 @@ fun summary() = buildString {
     +-----------------------+
     """.trimIndent()
   )
+}
+
+val rsClient by lazy {
+  HttpClient(CIO) {
+    install(WebSockets) // rsocket requires websockets plugin installed
+    install(RSocketSupport) {
+      // configure rSocket connector (all values have defaults)
+      connector {
+        maxFragmentSize = 1024
+
+        connectionConfig {
+          keepAlive = KeepAlive(
+            interval = 30.seconds,
+            maxLifetime = 2.minutes
+          )
+
+          // payload for setup frame
+          setupPayload {
+            buildPayload {
+              data("""{ "data": "setup" }""")
+            }
+          }
+
+          // mime types
+          payloadMimeType = PayloadMimeType(
+            data = WellKnownMimeType.ApplicationJson,
+            metadata = WellKnownMimeType.MessageRSocketCompositeMetadata
+          )
+        }
+      }
+    }
+  }
+}
+
+fun rSocket(ex: HttpExchange) {
+  println("Starting new rSocket connection!")
+  runBlocking {
+    val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
+
+    // request stream
+    val stream: Flow<Payload> = rSocket.requestStream(
+      buildPayload {
+        data("""{ "data": "Kotlin rSocket!" }""")
+      }
+    )
+
+    val headers = ex.responseHeaders
+    headers["Content-Type"] = "text/event-stream"
+    headers["Cache-Control"] = "no-cache"
+    // Chunked transfer encoding will be set if response length is zero.
+    // headers["Transfer-encoding"] = "chunked"
+    // Streaming binary response
+    // headers["Content-Type"] = "application/octet-stream"
+    ex.sendResponseHeaders(200, 0)
+
+    ex.responseBody.buffered().use { os ->
+      stream.take(25).flowOn(Dispatchers.IO).collect { payload ->
+        os.write(payload.data.readBytes())
+        os.write("\n".encodeToByteArray())
+        os.flush()
+      }
+    }
+  }
 }
 
 private val Int.fmt get() = "%-5d".format(this)

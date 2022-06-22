@@ -62,14 +62,14 @@ fun main() {
     table {
       borderType = BorderType.SQUARE_DOUBLE_SECTION_SEPARATOR
       align = RIGHT
-      outerBorder = false
+      tableBorders = Borders.NONE
       column(0) {
         align = LEFT
-        borders = ALL
+        cellBorders = ALL
         style = magenta
       }
       column(3) {
-        borders = ALL
+        cellBorders = ALL
         style = magenta
       }
       header {
@@ -78,7 +78,7 @@ fun main() {
       }
       body {
         rowStyles(blue, brightBlue)
-        borders = TOM_BOTTOM
+        cellBorders = TOM_BOTTOM
         row("Food", "$400", "$200", "$200")
         row("Data", "$100", "$150", "-$50")
         row("Rent", "$800", "$800", "$0")
