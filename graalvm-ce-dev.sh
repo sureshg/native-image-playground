@@ -67,5 +67,6 @@ popd >/dev/null
 sdk u java graalvm-ce-dev
 
 # Install native-image
-echo "Installing Java on Truffle, native-image and Visualvm..."
-gu install espresso native-image visualvm
+echo "Installing Java on Truffle, native-image and VisualVM..."
+# gu install espresso
+gu install native-image visualvm
