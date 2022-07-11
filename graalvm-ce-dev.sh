@@ -57,14 +57,15 @@ if [ "$os" == "darwin" ]; then
 fi
 
 # Install GraalVM using sdkman
+sdkman_id="graalvm-ce-dev"
 echo "Installing $jdk_dir ..."
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk rm java graalvm-ce-dev
-sdk i java graalvm-ce-dev "$jdk_dir/Contents/Home"
+sdk rm java "$sdkman_id"
+sdk i java "$sdkman_id" "$jdk_dir/Contents/Home"
 popd >/dev/null
 
 # Set GraalVM as default JDK in the current shell
-sdk u java graalvm-ce-dev
+sdk u java "$sdkman_id"
 
 # Install native-image
 echo "Installing Java on Truffle, native-image and VisualVM..."
