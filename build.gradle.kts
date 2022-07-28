@@ -18,17 +18,15 @@ plugins {
   alias(libs.plugins.ksp.redacted)
   alias(libs.plugins.versioncatalog.update)
   alias(libs.plugins.dependency.analysis)
-  alias(libs.plugins.ksp.powerassert) apply false
+  alias(libs.plugins.ksp.powerassert)
   alias(libs.plugins.champeau.includegit) apply false
 }
 
-val moduleName = "dev.suresh.nativeimage"
+group = "dev.suresh"
+
+val moduleName = "$group.nativeimage"
 val javaVersion = libs.versions.java.get()
 val kotlinApi = libs.versions.kotlin.api.get()
-val gjfVersion = libs.versions.google.javaformat.get()
-val ktlintVersion = libs.versions.ktlint.get()
-
-group = "dev.suresh"
 
 application {
   mainClass.set("$group.MainKt")
@@ -50,7 +48,7 @@ kotlin {
       languageVersion = kotlinApi
       progressiveMode = true
       enableLanguageFeature(LanguageFeature.JvmRecordSupport.name)
-      optIn("kotlin.RequiresOptIn")
+      enableLanguageFeature(LanguageFeature.ContextReceivers.name)
       optIn("kotlin.ExperimentalStdlibApi")
       optIn("kotlin.ExperimentalUnsignedTypes")
       optIn("kotlin.io.path.ExperimentalPathApi")
@@ -62,7 +60,7 @@ kotlin {
   }
 
   jvmToolchain {
-    languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    languageVersion.set(java.toolchain.languageVersion.get())
     vendor.set(java.toolchain.vendor.get())
   }
 }
@@ -73,28 +71,29 @@ ksp {
 }
 
 kapt {
+  javacOptions {
+    option("-Xmaxerrs", 200)
+  }
 }
 
 spotless {
   java {
-    googleJavaFormat(gjfVersion)
-    // Exclude sealed types until it supports.
-    targetExclude("**/ResultType.java", "build/generated-sources/**/*.java")
+    googleJavaFormat()
+    targetExclude("build/generated-sources/**/*.java")
     importOrder()
     removeUnusedImports()
     toggleOffOn()
     trimTrailingWhitespace()
   }
 
-  val ktlintConfig = mapOf(
-    "disabled_rules" to "no-wildcard-imports",
-    "insert_final_newline" to "true",
-    "end_of_line" to "lf",
-    "indent_size" to "2",
+  val editorConfig = mapOf(
+    "indent_size" to 2,
+    "indent_style" to "space",
+    "disabled_rules" to "no-wildcard-imports,filename"
   )
 
   kotlin {
-    ktlint(ktlintVersion).userData(ktlintConfig)
+    ktlint().setUseExperimental(true).editorConfigOverride(editorConfig)
     targetExclude("$buildDir/**/*.kt", "bin/**/*.kt", "build/generated-sources/**/*.kt")
     endWithNewline()
     indentWithSpaces()
@@ -103,7 +102,7 @@ spotless {
   }
 
   kotlinGradle {
-    ktlint(ktlintVersion).userData(ktlintConfig)
+    ktlint().setUseExperimental(true).editorConfigOverride(editorConfig)
     target("*.gradle.kts")
   }
 
@@ -130,11 +129,12 @@ tasks {
       release.set(javaVersion.toInt())
       isIncremental = true
       isFork = true
+      debugOptions.debugLevel = "source,lines,vars"
       // Compiling module-info in the 'main/java' folder needs to see already compiled Kotlin code
       compilerArgs.addAll(
         listOf(
           "-Xlint:all",
-          "-parameters",
+          "-parameters"
           // "--patch-module",
           // "$moduleName=${sourceSets.main.get().output.asPath}"
         )
@@ -155,6 +155,7 @@ tasks {
         "-Xassertions=jvm",
         "-Xallow-result-return-type",
         "-Xemit-jvm-type-annotations",
+        "-Xjspecify-annotations=strict"
         // "-Xgenerate-strict-metadata-version",
       )
     }
@@ -162,6 +163,16 @@ tasks {
 
   test {
     useJUnitPlatform()
+  }
+
+  dependencyAnalysis {
+    issues {
+      all {
+        onAny {
+          severity("warn")
+        }
+      }
+    }
   }
 
   wrapper {
@@ -179,17 +190,16 @@ dependencies {
   implementation(enforcedPlatform(libs.ktor.bom))
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
+  implementation(libs.kotlinx.serialization.json.okio)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.collections.immutable)
   implementation(libs.ajalt.clikt)
   implementation(libs.ajalt.mordant)
   implementation(libs.ajalt.colormath)
-
   // RSocket
   implementation(libs.ktor.client.cio)
   implementation(libs.rsocket.ktor.client)
-  implementation(libs.logback.classic)
-
+  runtimeOnly(libs.logback.classic)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

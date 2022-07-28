@@ -2,7 +2,7 @@
 java                           = "17"
 kotlin                         = "1.7.10"
 kotlin-api                     = "1.7"
-gradle                         = "7.5-rc-4"
+gradle                         = "7.5"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.5.0"
@@ -42,19 +42,19 @@ jgitver                        = "0.10.0-rc03"
 jmdns                          = "3.5.7"
 jreleaser                      = "0.9.1"
 jspecify                       = "0.2.0"
-junit                          = "5.9.0-RC1"
+junit                          = "5.9.0"
 junit-pioneer                  = "1.4.2"
 jqwik                          = "1.6.0"
 jSystemThemeDetector           = "3.6"
 kmath                          = "0.2.1"
 kotlinx-atomicfu               = "0.16.3"
-kotlinx-coroutines             = "1.6.3"
+kotlinx-coroutines             = "1.6.4"
 kotlinx-collections-immutable  = "0.3.5"
 kotlinx-cli                    = "0.3.4"
 kotlinx-datetime               = "0.4.0"
 kotlinx-reflect-lite           = "1.0.0"
 kotlinx-io-jvm                 = "0.1.16"
-kotlinx-serialization          = "1.3.3"
+kotlinx-serialization          = "1.4.0-RC"
 kotlinx-serialization-yaml     = "0.17.0"
 kotlinx-serialization-csv      = "2.0.0"
 kodein                         = "7.10.0"
@@ -88,7 +88,7 @@ champeau-includegit            = "0.1.5"
 champeau-japicmp               = "0.3.0"
 champeau-jmh                   = "0.6.6"
 champeau-mrjar                 = "0.1"
-graalvm-nativeimage            = "0.9.12"
+graalvm-nativeimage            = "0.9.13"
 gradlechecksum                 = "1.3.0"
 jetbrains-exposed              = "0.2.1"
 ktlint                         = "0.46.1"
@@ -98,7 +98,7 @@ protobuf-plugin                = "0.8.17"
 shadow                         = "7.1.2"
 spotless                       = "6.8.0"
 versioncatalog-update          = "0.5.1"
-dependency-analysis            = "1.10.0"
+dependency-analysis            = "1.11.0"
 
 
 [libraries]
@@ -174,6 +174,7 @@ kotlinx-cli                       = { module = "org.jetbrains.kotlinx:kotlinx-cl
 kotlinx-collections-immutable     = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm" , version.ref = "kotlinx-collections-immutable"}
 kotlinx-serialization-core        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core"        , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-json        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"        , version.ref = "kotlinx-serialization"}
+kotlinx-serialization-json-okio   = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-okio"   , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-cbor        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cbor"        , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-hocon       = { module = "org.jetbrains.kotlinx:kotlinx-serialization-hocon"       , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-protobuf    = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf"    , version.ref = "kotlinx-serialization"}
