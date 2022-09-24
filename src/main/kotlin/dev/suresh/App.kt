@@ -12,19 +12,17 @@ import com.github.ajalt.mordant.table.Borders.ALL
 import com.github.ajalt.mordant.table.Borders.TOM_BOTTOM
 import com.github.ajalt.mordant.terminal.*
 import dev.zacsweers.redacted.annotations.*
-import kotlinx.coroutines.*
 import java.lang.Runnable
 import java.net.*
 import java.util.*
 import java.util.concurrent.*
+import kotlinx.coroutines.*
 
 fun main() {
   println("Hello ${Secret("testsecret")}")
 
   val plugins = ServiceLoader.load(Callable::class.java)
-  plugins.forEach {
-    println(it.call())
-  }
+  plugins.forEach { println(it.call()) }
 
   // Load plugins from current directory
   val loader =
@@ -39,10 +37,7 @@ fun main() {
 
   println(Secret::class.java.getResourceAsStream("/message.txt")?.bufferedReader()?.readText())
 
-  val t = Terminal(
-    hyperlinks = true,
-    interactive = true
-  )
+  val t = Terminal(hyperlinks = true, interactive = true)
 
   val fgBg = red on green
   t.println(fgBg("---- START -----"))
@@ -99,5 +94,4 @@ fun main() {
   t.print(fgBg("---- END -----"))
 }
 
-@Redacted
-data class Secret(val value: String)
+@Redacted data class Secret(val value: String)

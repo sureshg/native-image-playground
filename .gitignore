@@ -19,8 +19,10 @@ classes.lst
 jre/
 *.build_artifacts.txt
 
+
 # Gradle release
 cx.json
 
-
-
+# Misc
+nohup.out
+/.fleet/settings.json

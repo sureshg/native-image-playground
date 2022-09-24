@@ -1,43 +1,52 @@
 #!/usr/bin/env bash
 
+# ./native-image.sh --verbose --enable-https
+# Make sure the latest GraalVM is installed
+# ./graalvm-ce-dev.sh
+
 set -euo pipefail
 IFS=$'\n\t'
 
-BIN_DIR=build
-BIN_NAME=app
+# kotlinc -version \
+#  -verbose \
+#  -include-runtime \
+#  -java-parameters \
+#  -jvm-target 18 \
+#  -api-version 1.8 \
+#  -language-version 1.8 \
+#  -progressive \
+#  src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
 
-# Make sure GraalVM is installed
-# ./graalvm-ce-dev.sh 17
-
-# pushd ~/code/compose-mpp-playground >/dev/null
-# ./gradlew packageUberJarForCurrentOS
-
-kotlinc -version \
-  -verbose \
-  -include-runtime \
-  -java-parameters \
-  -jvm-target 17 \
-  -api-version 1.7 \
-  -language-version 1.7 \
-  -progressive \
-  src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
+echo "Building the application jar..."
+./gradlew build
 
 echo "Generating Graalvm config files..."
-# java -agentlib:native-image-agent=config-output-dir=config -jar desktop/build/compose/jars/jvm-macos-*.jar
-# java -agentlib:native-image-agent=config-output-dir=build/config -jar build/tmp/app.jar
+APP_JAR=(build/libs/native-image-playground-*-all.jar)
+CONFIG_DIR="$(PWD)/build/config"
+nohup java \
+      --show-version \
+      --enable-preview \
+      -agentlib:native-image-agent=config-output-dir="${CONFIG_DIR}" \
+      -jar "${APP_JAR}" &
+# Wait for the server to startup
+sleep 1
+curl -fsSL http://localhost:9080/test
+curl -fsSL http://localhost:9080/shutdown || echo "Shutdown completed!"
+# Wait for agent to write the config
+sleep 1
 
-echo "Creating native image ${BIN_DIR}/${BIN_NAME}..."
+echo "Creating native image..."
 native-image "$@" \
   --no-fallback \
   --native-image-info \
   --link-at-build-time \
   --install-exit-handlers \
-  -H:ConfigurationFileDirectories="${BIN_DIR}/config" \
+  -H:ConfigurationFileDirectories="${CONFIG_DIR}" \
   -H:+ReportExceptionStackTraces \
   -Djava.awt.headless=false \
   -J-Xmx4G \
-  -jar "${BIN_DIR}/${BIN_NAME}.jar" \
-  "${BIN_DIR}/${BIN_NAME}"
+  -jar "${APP_JAR}" \
+  "build/native-image-playground"
 
 # https://www.graalvm.org/reference-manual/native-image/Options
 # --verbose \

@@ -16,21 +16,21 @@ jobs:
     strategy:
       matrix:
         version: [ dev ]
-        java-version: [ '17' ]
+        java-version: [ '19' ]
         components: [ 'native-image' ]
         os: [ macos-latest, windows-latest, ubuntu-latest ]
     #   include:
     #     - os: ubuntu-18.04
     #       version: 'dev'
-    #       java-version: '17'
+    #       java-version: '19'
     #       components: 'native-image'
     #     - os: macos-10.15
     #       version: 'dev'
-    #       java-version: '17'
+    #       java-version: '19'
     #       components: 'native-image'
     #     - os: windows-2019
     #       version: 'dev'
-    #       java-version: '17'
+    #       java-version: '19'
     #       components: 'native-image'
 
     steps:
@@ -81,7 +81,7 @@ jobs:
 
 
   native-build-musl:
-    name: GraalVM CE dev JDK17 + musl static image
+    name: GraalVM CE dev JDK19 + musl static image
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -91,7 +91,7 @@ jobs:
         uses: graalvm/setup-graalvm@v1
         with:
           version: 'dev'
-          java-version: '17'
+          java-version: '19'
           components: 'native-image'
           native-image-musl: 'true'
           github-token: ${{ secrets.GITHUB_TOKEN }}

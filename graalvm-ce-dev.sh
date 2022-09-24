@@ -3,7 +3,8 @@
 # set -u won't work for sdkman
 set -e
 
-jdk_version=${1:-17}
+jdk_version=${1:-19}
+extn="tar.gz"
 
 # Find OS type
 case "$OSTYPE" in
@@ -12,6 +13,7 @@ darwin*)
   ;;
 msys*)
   os=windows
+  extn="zip"
   ;;
 linux*)
   os=linux
@@ -38,9 +40,13 @@ esac
 
 echo "Using OS: $os-$arch"
 
-download_path=$(curl -sSL --no-buffer "https://github.com/graalvm/graalvm-ce-dev-builds/releases/latest" | grep -m1 -Eioh "/graalvm/graalvm-ce-dev-builds/releases/download/.*/graalvm-ce-java${jdk_version}-($os-$arch)-dev.(tar.gz|zip)")
-download_url="https://github.com/$download_path"
-openjdk_file="${download_url##*/}"
+# download_path=$(curl -sSL --no-buffer "https://github.com/graalvm/graalvm-ce-dev-builds/releases/latest" | grep -m1 -Eioh "/graalvm/graalvm-ce-dev-builds/releases/download/.*/graalvm-ce-java${jdk_version}-($os-$arch)-dev.(tar.gz|zip)")
+graalvm_base_url="https://github.com/graalvm/graalvm-ce-dev-builds/releases"
+graalvm_release=$(curl -Ls -o /dev/null -w %{url_effective} "${graalvm_base_url}/latest")
+graalvm_tag="${graalvm_release##*/}"
+
+openjdk_file="graalvm-ce-java${jdk_version}-$os-$arch-dev.${extn}"
+download_url="${graalvm_base_url}/download/${graalvm_tag}/${openjdk_file}"
 
 # Download the GraalVM
 pushd "$HOME/install/graalvm" >/dev/null

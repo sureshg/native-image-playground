@@ -2,11 +2,7 @@ rootProject.name = "native-image-playground"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-dependencyResolutionManagement {
-  repositories {
-    mavenCentral()
-  }
-}
+dependencyResolutionManagement { repositories { mavenCentral() } }
 
 pluginManagement {
   repositories {

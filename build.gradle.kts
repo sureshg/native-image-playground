@@ -1,7 +1,9 @@
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
+
+import org.gradle.jvm.toolchain.JvmVendorSpec.GRAAL_VM
 import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   java
   application
@@ -9,7 +11,6 @@ plugins {
   alias(libs.plugins.jgitver)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlin.jvm)
-  alias(libs.plugins.kotlin.kapt)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.graalvm.nativeimage)
   alias(libs.plugins.benmanes)
@@ -26,15 +27,16 @@ group = "dev.suresh"
 
 val moduleName = "$group.nativeimage"
 val javaVersion = libs.versions.java.get()
-val kotlinApi = libs.versions.kotlin.api.get()
+val kotlinJvmTarget = libs.versions.kotlin.jvm.target.get()
+val kotlinApiVersion = libs.versions.kotlin.api.version.get()
+val kotlinLangVersion = libs.versions.kotlin.lang.version.get()
 
-application {
-  mainClass.set("$group.MainKt")
-}
+application { mainClass.set("$group.MainKt") }
 
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    vendor.set(GRAAL_VM)
   }
 
   withSourcesJar()
@@ -44,8 +46,8 @@ java {
 kotlin {
   sourceSets.all {
     languageSettings.apply {
-      apiVersion = kotlinApi
-      languageVersion = kotlinApi
+      apiVersion = kotlinApiVersion
+      languageVersion = kotlinLangVersion
       progressiveMode = true
       enableLanguageFeature(LanguageFeature.JvmRecordSupport.name)
       enableLanguageFeature(LanguageFeature.ContextReceivers.name)
@@ -70,57 +72,43 @@ ksp {
   arg("autoserviceKsp.verbose", "true")
 }
 
-kapt {
-  javacOptions {
-    option("-Xmaxerrs", 200)
-  }
-}
-
 spotless {
   java {
     googleJavaFormat()
-    targetExclude("build/generated-sources/**/*.java")
-    importOrder()
-    removeUnusedImports()
-    toggleOffOn()
-    trimTrailingWhitespace()
+    target("**/*.java")
+    targetExclude("**/build/**", "**/.gradle/**")
   }
-
-  val editorConfig = mapOf(
-    "indent_size" to 2,
-    "indent_style" to "space",
-    "disabled_rules" to "no-wildcard-imports,filename"
-  )
+  // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 
   kotlin {
-    ktlint().setUseExperimental(true).editorConfigOverride(editorConfig)
-    targetExclude("$buildDir/**/*.kt", "bin/**/*.kt", "build/generated-sources/**/*.kt")
-    endWithNewline()
-    indentWithSpaces()
+    ktfmt().googleStyle()
+    target("**/*.kt")
     trimTrailingWhitespace()
+    endWithNewline()
+    targetExclude("**/build/**", "**/.gradle/**")
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
   }
 
   kotlinGradle {
-    ktlint().setUseExperimental(true).editorConfigOverride(editorConfig)
-    target("*.gradle.kts")
+    ktfmt()
+    target("**/*.gradle.kts")
+    trimTrailingWhitespace()
+    endWithNewline()
+    targetExclude("**/build/**")
   }
 
   format("misc") {
     target("**/*.md", "**/.gitignore")
     trimTrailingWhitespace()
+    indentWithSpaces(2)
     endWithNewline()
   }
   // isEnforceCheck = false
 }
 
-jgitver {
-  nonQualifierBranches = "main"
-}
+jgitver { nonQualifierBranches = "main" }
 
-redacted {
-  enabled.set(true)
-}
+redacted { enabled.set(true) }
 
 tasks {
   withType<JavaCompile>().configureEach {
@@ -132,48 +120,37 @@ tasks {
       debugOptions.debugLevel = "source,lines,vars"
       // Compiling module-info in the 'main/java' folder needs to see already compiled Kotlin code
       compilerArgs.addAll(
-        listOf(
-          "-Xlint:all",
-          "-parameters"
-          // "--patch-module",
-          // "$moduleName=${sourceSets.main.get().output.asPath}"
-        )
-      )
+          listOf(
+              "-Xlint:all", "-parameters"
+              // "--patch-module",
+              // "$moduleName=${sourceSets.main.get().output.asPath}"
+              ))
     }
   }
 
   withType<KotlinCompile>().configureEach {
     kotlinOptions {
       verbose = true
-      jvmTarget = javaVersion
+      jvmTarget = kotlinJvmTarget
       javaParameters = true
       incremental = false
       allWarningsAsErrors = false
-      freeCompilerArgs += listOf(
-        "-Xjsr305=strict",
-        "-Xjvm-default=all",
-        "-Xassertions=jvm",
-        "-Xallow-result-return-type",
-        "-Xemit-jvm-type-annotations",
-        "-Xjspecify-annotations=strict"
-        // "-Xgenerate-strict-metadata-version",
-      )
+      freeCompilerArgs +=
+          listOf(
+              "-Xjsr305=strict",
+              "-Xjvm-default=all",
+              "-Xassertions=jvm",
+              "-Xallow-result-return-type",
+              "-Xemit-jvm-type-annotations",
+              "-Xjspecify-annotations=strict"
+              // "-Xgenerate-strict-metadata-version",
+              )
     }
   }
 
-  test {
-    useJUnitPlatform()
-  }
+  test { useJUnitPlatform() }
 
-  dependencyAnalysis {
-    issues {
-      all {
-        onAny {
-          severity("warn")
-        }
-      }
-    }
-  }
+  dependencyAnalysis { issues { all { onAny { severity("warn") } } } }
 
   wrapper {
     gradleVersion = libs.versions.gradle.get()
@@ -204,14 +181,13 @@ dependencies {
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)
 
-  kapt(libs.graalvm.hint.processor)
-  compileOnly(libs.graalvm.hint.annotations)
-
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)
 
+  // kapt(libs.graalvm.hint.processor)
+  // compileOnly(libs.graalvm.hint.annotations)
   // nativeImageCompileOnly(libs.graalvm.sdk)
   // nativeImageCompileOnly(libs.graalvm.svm)
   // nativeImageCompileOnly(libs.graalvm.svmlibffi)
