@@ -44,8 +44,8 @@ $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
 * [Graalvm CE Docker Image](https://github.com/graalvm/container/pkgs/container/graalvm-ce)
 
 
-[graalvm_url]: https://github.com/graalvm/graalvm-ce-builds/releases
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-17&logo=oracle&logoColor=d3eff5&style=for-the-badge
+[graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-dev-builds?color=125b6b&label=graalvm-19&logo=oracle&logoColor=d3eff5&style=for-the-badge
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
 [graalvm_reachability_img]: https://img.shields.io/github/v/release/oracle/graalvm-reachability-metadata?color=125b6b&label=graalvm-reachability&logo=oracle&logoColor=d3eff5&style=for-the-badge
