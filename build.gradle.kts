@@ -164,7 +164,7 @@ val graal by sourceSets.creating
 
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
-  implementation(enforcedPlatform(libs.ktor.bom))
+  implementation(platform(libs.ktor.bom))
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.serialization.json.okio)

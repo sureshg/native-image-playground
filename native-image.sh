@@ -12,34 +12,32 @@ echo "Building the application jar..."
 
 echo "Generating Graalvm config files..."
 APP_JAR=(build/libs/native-image-playground-*-all.jar)
-CONFIG_DIR="$(PWD)/build/config"
+CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image"
 
 nohup java \
   --show-version \
   --enable-preview \
-  -agentlib:native-image-agent=config-output-dir="${CONFIG_DIR}" \
+  -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}" \
   -jar "${APP_JAR}" &>"$(PWD)/build/nohup.out" &
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/test
+curl -fsSL http://localhost:9080/rsocket
 curl -fsSL http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
 # Wait for agent to write the config
 sleep 1
 
 echo "Creating native image..."
-# Allowing an incomplete classpath is now the default. Use --link-at-build-time
+# Allowing an incomplete classpath is now the default. Use "--link-at-build-time"
 # to report linking errors at image build time for a class or package.
 native-image "$@" \
   --no-fallback \
   --enable-preview \
   --native-image-info \
-  --link-at-build-time \
   --install-exit-handlers \
   -H:ConfigurationFileDirectories="${CONFIG_DIR}" \
   -H:+ReportExceptionStackTraces \
   -Djava.awt.headless=false \
-  -J--add-modules -JALL-SYSTEM \
-  -J-Xmx4G \
   -jar "${APP_JAR}" \
   "build/native-image-playground"
 
@@ -82,6 +80,8 @@ native-image "$@" \
 # // -H:+DashboardAll \
 # // -H:+DashboardPointsTo \
 # -H:CompilerBackend=llvm \
+# -J-Xmx4G \
+# -J--add-modules -JALL-SYSTEM \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
 
 # echo "Compressing executable ... "

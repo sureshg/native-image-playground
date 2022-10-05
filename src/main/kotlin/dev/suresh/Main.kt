@@ -149,8 +149,6 @@ fun summary() = buildString {
     """.trimIndent(
     )
   )
-
-  // java.text.NumberFormat.getCompactNumberInstance().forNumberFormat.
 }
 
 val rsClient by lazy {
@@ -198,7 +196,7 @@ fun rSocket(ex: HttpExchange) {
     ex.sendResponseHeaders(200, 0)
 
     ex.responseBody.buffered().use { os ->
-      stream.take(25).flowOn(Dispatchers.IO).collect { payload ->
+      stream.take(10).flowOn(Dispatchers.IO).collect { payload ->
         os.write(payload.data.readBytes())
         os.write("\n".encodeToByteArray())
         os.flush()

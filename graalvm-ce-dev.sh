@@ -73,7 +73,6 @@ popd >/dev/null
 # Set GraalVM as default JDK in the current shell
 sdk u java "$sdkman_id"
 
-# Install native-image
-echo "Installing Java on Truffle, native-image and VisualVM..."
+echo "Installing NativeImage and VisualVM..."
 # gu install espresso
 gu install native-image visualvm
