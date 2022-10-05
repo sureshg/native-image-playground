@@ -7,27 +7,18 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# kotlinc -version \
-#  -verbose \
-#  -include-runtime \
-#  -java-parameters \
-#  -jvm-target 18 \
-#  -api-version 1.8 \
-#  -language-version 1.8 \
-#  -progressive \
-#  src/main/kotlin/dev/suresh/Main.kt -d "${BIN_DIR}/${BIN_NAME}.jar"
-
 echo "Building the application jar..."
 ./gradlew build
 
 echo "Generating Graalvm config files..."
 APP_JAR=(build/libs/native-image-playground-*-all.jar)
 CONFIG_DIR="$(PWD)/build/config"
+
 nohup java \
   --show-version \
   --enable-preview \
   -agentlib:native-image-agent=config-output-dir="${CONFIG_DIR}" \
-  -jar "${APP_JAR}" &
+  -jar "${APP_JAR}" &>"$(PWD)/build/nohup.out" &
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/test
@@ -74,6 +65,7 @@ native-image "$@" \
 # --trace-object-instantiation \
 # --diagnostics-mode \
 # -Dauthor="$USER" \
+# -H:+PrintAnalysisCallTree \
 # -H:DefaultLocale="en-US" \
 # -H:+AddAllCharsets \
 # -H:+IncludeAllLocales  \
