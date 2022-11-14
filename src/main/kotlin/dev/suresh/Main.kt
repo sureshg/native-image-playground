@@ -26,13 +26,17 @@ import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-fun main() {
+val vtExec = Executors.newVirtualThreadPerTaskExecutor()
+val viDispatcher = vtExec.asCoroutineDispatcher()
+
+fun main(args: Array<String>) {
+  val debug = args.contains("--debug")
   val start = System.currentTimeMillis()
   val server =
     HttpServer.create(InetSocketAddress(9080), 0).apply {
       createContext("/") {
         println("GET: ${it.requestURI}")
-        val res = summary().encodeToByteArray()
+        val res = summary(debug).encodeToByteArray()
         it.sendResponseHeaders(200, res.size.toLong())
         it.responseBody.use { os -> os.write(res) }
       }
@@ -41,7 +45,7 @@ fun main() {
         exitProcess(0)
       }
       createContext("/rsocket", ::rSocket)
-      executor = Executors.newCachedThreadPool()
+      executor = vtExec
       start()
     }
 
@@ -57,7 +61,7 @@ fun main() {
   )
 }
 
-fun summary() = buildString {
+fun summary(debug: Boolean = false) = buildString {
   val rt = Runtime.getRuntime()
   appendLine("✧✧✧✧✧ Time: ${LocalDateTime.now()} ✧✧✧✧✧")
   appendLine("✧✧✧✧✧ Available Processors: ${rt.availableProcessors()} ✧✧✧✧✧")
@@ -83,27 +87,51 @@ fun summary() = buildString {
 
   appendLine("✧✧✧✧✧ TimeZones ✧✧✧✧✧")
   val tz = ZoneId.getAvailableZoneIds()
-  tz.forEach { appendLine(it) }
+  if (debug) {
+    tz.forEach { appendLine(it) }
+  } else {
+    appendLine("Found ${tz.size} timezones.")
+  }
 
   appendLine("✧✧✧✧✧ Charsets ✧✧✧✧✧")
   val cs = Charset.availableCharsets()
-  cs.forEach { (name, charset) -> appendLine("$name: $charset") }
+  if (debug) {
+    cs.forEach { (name, charset) -> appendLine("$name: $charset") }
+  } else {
+    appendLine("Found ${cs.size} charsets.")
+  }
 
   appendLine("✧✧✧✧✧ System Locales ✧✧✧✧✧")
   val locales = Locale.getAvailableLocales()
-  locales.forEach { appendLine(it) }
+  if (debug) {
+    locales.forEach { appendLine(it) }
+  } else {
+    appendLine("Found ${locales.size} locales.")
+  }
 
   appendLine("✧✧✧✧✧ System Countries ✧✧✧✧✧")
   val countries = Locale.getISOCountries()
-  countries.forEach { appendLine(it) }
+  if (debug) {
+    countries.forEach { appendLine(it) }
+  } else {
+    appendLine("Found ${countries.size} countries.")
+  }
 
   appendLine("✧✧✧✧✧ System Currencies ✧✧✧✧✧")
   val currencies = Currency.getAvailableCurrencies()
-  currencies.forEach { appendLine(it) }
+  if (debug) {
+    currencies.forEach { appendLine(it) }
+  } else {
+    appendLine("Found ${currencies.size} currencies.")
+  }
 
   appendLine("✧✧✧✧✧ System Languages ✧✧✧✧✧")
   val languages = Locale.getISOLanguages()
-  languages.forEach { appendLine(it) }
+  if (debug) {
+    languages.forEach { appendLine(it) }
+  } else {
+    appendLine("Found ${languages.size} languages.")
+  }
 
   appendLine("✧✧✧✧✧ Env Variables ✧✧✧✧✧")
   val env = System.getenv()
@@ -124,6 +152,7 @@ fun summary() = buildString {
         Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
         Socket().use { s ->
           s.soTimeout = 100
+          s.reuseAddress = true
           s.connect(InetSocketAddress("localhost", 12345), 100)
         }
       }
@@ -179,7 +208,7 @@ val rsClient by lazy {
 
 fun rSocket(ex: HttpExchange) {
   println("Starting new rSocket connection!")
-  runBlocking {
+  runBlocking(viDispatcher) {
     val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
 
     // request stream
@@ -196,7 +225,7 @@ fun rSocket(ex: HttpExchange) {
     ex.sendResponseHeaders(200, 0)
 
     ex.responseBody.buffered().use { os ->
-      stream.take(10).flowOn(Dispatchers.IO).collect { payload ->
+      stream.take(10).flowOn(viDispatcher).collect { payload ->
         os.write(payload.data.readBytes())
         os.write("\n".encodeToByteArray())
         os.flush()

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# ./native-image.sh -Ob (For Quick Build)
 # ./native-image.sh --verbose --enable-https
+
 # Make sure the latest GraalVM is installed
 # ./graalvm-ce-dev.sh
 
@@ -14,6 +16,7 @@ echo "Generating Graalvm config files..."
 APP_JAR=(build/libs/native-image-playground-*-all.jar)
 CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image"
 
+# Run the app in background (&) by ignoring SIGHUP signal (nohup)
 nohup java \
   --show-version \
   --enable-preview \
@@ -34,19 +37,20 @@ native-image "$@" \
   --no-fallback \
   --enable-preview \
   --native-image-info \
+  --enable-monitoring \
   --install-exit-handlers \
   -H:ConfigurationFileDirectories="${CONFIG_DIR}" \
   -H:+ReportExceptionStackTraces \
   -Djava.awt.headless=false \
   -jar "${APP_JAR}" \
-  "build/native-image-playground"
+  -o "build/native-image-playground"
 
-# https://www.graalvm.org/reference-manual/native-image/Options
+# https://www.graalvm.org/reference-manual/native-image/overview/BuildOptions/
 # --verbose \
 # --dry-run \
 # --static \
-# --libc=musl  \
-# --libc=glibc \
+# --static --libc=<glib | musl | bionic>
+# -H:+StaticExecutableWithDynamicLibC \
 # --gc=epsilon \
 # // Enable quick build
 # -Ob \

@@ -2,25 +2,46 @@
 
 [![GitHub Workflow Status][gha_badge]][gha_url]
 [![GraalVM CE][graalvm_img]][graalvm_url]
-[![GraalVM Reachability][graalvm_reachability_img]][graalvm_reachability_url]
 [![Kotlin release][kt_img]][kt_url]
-[![GraalVM Dashboard][gl_dashboard_img]][gl_dashboard_url]
 [![Style guide][ktlint_img]][ktlint_url]
+
+[![GraalVM Reachability][graalvm_reachability_img]][graalvm_reachability_url]
+[![Style guide][nativeimage_cs_img]][nativeimage_cs_url]
+[![GraalVM Dashboard][gl_dashboard_img]][gl_dashboard_url]
+
 
 [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app
 and publish the platform binaries using Github action.
 
-#### Install GraalVM CE Dev
+#### Install GraalVM CE
 
 ```bash
+# Install GraalVM CE Dev
+$ bash <(curl -sL https://get.graalvm.org/jdk) \
+     --to "$HOME/install/graalvm" \
+     -c visualvm graalvm-ce-java19-22.3.0
+
+# Remove the MacOS quarantine attribute
+$ sudo xattr -r -d com.apple.quarantine "$HOME/install/graalvm/graalvm-ce-java19-22.3.0/Contents/Home"
+
+# Manage using SDKMAN!
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i graalvm-ce-dev
+$ sdk i java 22.3.0.r19-grlc "$HOME/install/graalvm/graalvm-ce-java19-22.3.0/Contents/Home"
 ```
 
 #### Build
 
 ```bash
-$ ./gradlew build
+# Native Image Quick Build
+$ ./native-image.sh -Ob
+
+# For prod deployments
+$ ./native-image.sh
+
+# Build native image from modular jars
+$ native-image \
+    -p base-module.jar:main-module.jar \
+    -m dev.suresh.Main
 
 # Detect unused and misused dependencies
 $ ./gradlew buildHealth
@@ -43,26 +64,36 @@ $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
 * [Graalvm CE Dev Builds](https://github.com/graalvm/graalvm-ce-dev-builds/releases/)
 * [Graalvm CE Docker Image](https://github.com/graalvm/container/pkgs/container/graalvm-ce)
 
-
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
+
 [graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-dev-builds?color=125b6b&label=graalvm-19&logo=oracle&logoColor=d3eff5&style=for-the-badge
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
+
 [graalvm_reachability_img]: https://img.shields.io/github/v/release/oracle/graalvm-reachability-metadata?color=125b6b&label=graalvm-reachability&logo=oracle&logoColor=d3eff5&style=for-the-badge
 
 [gl_dashboard_url]: https://www.graalvm.org/dashboard/
-[gl_dashboard_img]: https://img.shields.io/badge/GraalVM-Dashboard-f39727.svg?style=for-the-badge&logo=clyp&logoColor=40c4ff
+
+[gl_dashboard_img]: https://img.shields.io/badge/GraalVM-Dashboard-125b6b.svg?style=for-the-badge&logo=clyp&logoColor=d3eff5
+
+[nativeimage_cs_url]: https://www.graalvm.org/uploads/quick-references/Native-Image_v2/CheatSheet_Native_Image_v2_(EU_A4).pdf
+
+[nativeimage_cs_img]: https://img.shields.io/badge/NativeImage-CheatSheet-125b6b.svg?style=for-the-badge&logo=oracle&logoColor=d3eff5
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
+
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge
 
 [gha_url]: https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
+
 [gha_badge]: https://img.shields.io/github/workflow/status/sureshg/native-image-playground/Build?color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
 
 [sty_url]: https://kotlinlang.org/docs/coding-conventions.html
+
 [sty_img]: https://img.shields.io/badge/style-Kotlin--Official-40c4ff.svg?style=for-the-badge&logo=kotlin&logoColor=40c4ff
 
 [ktlint_url]: https://ktlint.github.io/
+
 [ktlint_img]: https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg?logo=kotlin&style=for-the-badge&logoColor=FF4081
 
 [//]: # (⬇️  🖌️  🧭🎨️ 🧭✨ 🌊 ⏳ 📫 📖 🎨 🍫 📐)

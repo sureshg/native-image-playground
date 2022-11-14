@@ -103,7 +103,7 @@ spotless {
     indentWithSpaces(2)
     endWithNewline()
   }
-  // isEnforceCheck = false
+  isEnforceCheck = true
 }
 
 jgitver { nonQualifierBranches = "main" }
@@ -146,6 +146,8 @@ tasks {
               // "-Xgenerate-strict-metadata-version",
               )
     }
+
+    finalizedBy("spotlessApply")
   }
 
   test { useJUnitPlatform() }
@@ -169,7 +171,6 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.serialization.json.okio)
   implementation(libs.kotlinx.datetime)
-  implementation(libs.kotlinx.collections.immutable)
   implementation(libs.ajalt.clikt)
   implementation(libs.ajalt.mordant)
   implementation(libs.ajalt.colormath)
