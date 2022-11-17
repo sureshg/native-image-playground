@@ -166,7 +166,7 @@ tasks {
 val graal by sourceSets.creating
 
 dependencies {
-  implementation(kotlin("stdlib-jdk8"))
+  implementation(kotlin("stdlib"))
   implementation(platform(libs.ktor.bom))
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
