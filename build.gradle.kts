@@ -135,6 +135,7 @@ tasks {
       javaParameters = true
       incremental = false
       allWarningsAsErrors = false
+      useK2 = false
       freeCompilerArgs +=
           listOf(
               "-Xjsr305=strict",

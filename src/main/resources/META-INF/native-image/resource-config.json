@@ -1,5 +1,15 @@
 {
   "resources":{
-  "includes":[]},
+  "includes":[
+    {
+      "pattern":"java.base:\\Qjava/util/currency.data\\E"
+    }, 
+    {
+      "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt70b/nfc.nrm\\E"
+    }, 
+    {
+      "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt70b/nfkc.nrm\\E"
+    }
+  ]},
   "bundles":[]
 }
