@@ -175,8 +175,8 @@ fun summary(debug: Boolean = false) = buildString {
     | Env Vars       : ${env.size.fmt}|
     | Sys Props      : ${props.size.fmt}|
     +-----------------------+
-    """.trimIndent(
-    )
+    """
+      .trimIndent()
   )
 }
 
