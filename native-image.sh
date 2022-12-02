@@ -20,7 +20,7 @@ CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image"
 nohup java \
   --show-version \
   --enable-preview \
-  -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}" \
+  -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}",experimental-class-define-support \
   -jar "${APP_JAR}" &>"$(PWD)/build/nohup.out" &
 # Wait for the server to startup
 sleep 1
