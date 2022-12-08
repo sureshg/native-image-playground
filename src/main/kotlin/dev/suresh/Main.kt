@@ -25,6 +25,7 @@ import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import org.graalvm.nativeimage.ImageInfo
 
 val vtExec = Executors.newVirtualThreadPerTaskExecutor()
 val viDispatcher = vtExec.asCoroutineDispatcher()
@@ -54,8 +55,7 @@ fun main(args: Array<String>) {
   val vmTime = ProcessHandle.current().info().startInstant().get().toEpochMilli()
   // val vmTime = ManagementFactory.getRuntimeMXBean().startTime
 
-  val isNativeMode = System.getProperty("org.graalvm.nativeimage.kind", "jvm") == "executable"
-  val type = if (isNativeMode) "Binary" else "JVM"
+  val type = if (ImageInfo.isExecutable()) "Binary" else "JVM"
   println(
     "Started in ${currTime - vmTime} ms ($type: ${start - vmTime} ms, Server: ${currTime - start} ms)."
   )
@@ -145,20 +145,26 @@ fun summary(debug: Boolean = false) = buildString {
   appendLine("✧✧✧✧✧ I ❤️ Kotlin = ${fmt.formatHex("I ❤️ Kotlin".encodeToByteArray())}")
   appendLine("✧✧✧✧✧ LineSeparator  = ${fmt.formatHex(System.lineSeparator().encodeToByteArray())}")
   appendLine("✧✧✧✧✧ File PathSeparator = ${fmt.formatHex(File.pathSeparator.encodeToByteArray())}")
+  appendLine("✧✧✧✧✧ File Separator = ${fmt.formatHex(File.separator.encodeToByteArray())}")
 
-  appendLine("✧✧✧✧✧ Additional info in exception ✧✧✧✧✧")
-  val ex =
-    runCatching {
-        Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
-        Socket().use { s ->
-          s.soTimeout = 100
-          s.reuseAddress = true
-          s.connect(InetSocketAddress("localhost", 12345), 100)
+  // Somehow, socket connect is hanging on native image.
+  if (ImageInfo.isExecutable().not()) {
+    appendLine("✧✧✧✧✧ Additional info in exception ✧✧✧✧✧")
+    val ex =
+      runCatching {
+          Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
+          Socket().use { s ->
+            s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
+            s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
+            s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
+            s.soTimeout = 100
+            s.connect(InetSocketAddress("localhost", 12345), 100)
+          }
         }
-      }
-      .exceptionOrNull()
-  appendLine(ex?.message)
-  // ex?.message?.contains("localhost:12345")
+        .exceptionOrNull()
+    appendLine(ex?.message)
+    check(ex?.message?.contains("localhost:12345") == true)
+  }
 
   appendLine(
     """
@@ -174,6 +180,7 @@ fun summary(debug: Boolean = false) = buildString {
     | Currencies     : ${currencies.size.fmt}|
     | Env Vars       : ${env.size.fmt}|
     | Sys Props      : ${props.size.fmt}|
+    | Virtual Thread : ${Thread.currentThread().isVirtual} |
     +-----------------------+
     """
       .trimIndent()
@@ -187,13 +194,10 @@ val rsClient by lazy {
       // configure rSocket connector (all values have defaults)
       connector {
         maxFragmentSize = 1024
-
         connectionConfig {
           keepAlive = KeepAlive(interval = 30.seconds, maxLifetime = 2.minutes)
-
           // payload for setup frame
           setupPayload { buildPayload { data("""{ "data": "setup" }""") } }
-
           // mime types
           payloadMimeType =
             PayloadMimeType(
