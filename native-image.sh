@@ -12,16 +12,20 @@ IFS=$'\n\t'
 echo "Building the application jar..."
 ./gradlew build
 
+# pattern="native-image-playground-*-all.jar"
+# files=($(for f in $(find . -name "$pattern" -type f); do echo "$f"; done | sort -k 1 -r))
 echo "Generating Graalvm config files..."
-APP_JAR=(build/libs/native-image-playground-*-all.jar)
+BUILD_DIR=$(pwd)/build
+APP_JAR=(${BUILD_DIR}/libs/native-image-playground-*-all.jar)
 CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image"
+OUT_FILE="${BUILD_DIR}/native-image-playground"
 
 # Run the app in background (&) by ignoring SIGHUP signal (nohup)
 nohup java \
   --show-version \
   --enable-preview \
   -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}",experimental-class-define-support \
-  -jar "${APP_JAR}" &>"$(PWD)/build/nohup.out" &
+  -jar "${APP_JAR}" &>"${BUILD_DIR}/nohup.out" &
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/test
@@ -31,6 +35,7 @@ curl -fsSL http://localhost:9080/shutdown || echo "Native Image build config gen
 sleep 1
 
 echo "Creating native image..."
+rm -f "${OUT_FILE}"
 # Allowing an incomplete classpath is now the default. Use "--link-at-build-time"
 # to report linking errors at image build time for a class or package.
 native-image "$@" \
@@ -43,7 +48,7 @@ native-image "$@" \
   -H:+ReportExceptionStackTraces \
   -Djava.awt.headless=false \
   -jar "${APP_JAR}" \
-  -o "build/native-image-playground"
+  -o "${OUT_FILE}"
 
 # https://www.graalvm.org/reference-manual/native-image/overview/BuildOptions/
 # --verbose \
@@ -89,5 +94,5 @@ native-image "$@" \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
 
 # echo "Compressing executable ... "
-# upx build/kotlin-app
+# upx "${OUT_FILE}"
 # popd >/dev/null
