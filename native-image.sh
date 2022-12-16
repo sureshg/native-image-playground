@@ -55,6 +55,7 @@ native-image "$@" \
 # --dry-run \
 # --static \
 # --static --libc=<glib | musl | bionic>
+# --target=darwin-aarch64
 # -H:+StaticExecutableWithDynamicLibC \
 # --gc=epsilon \
 # // Enable quick build
