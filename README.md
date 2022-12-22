@@ -86,7 +86,7 @@ $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
 
 [gha_url]: https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
 
-[gha_badge]: https://img.shields.io/github/workflow/status/sureshg/native-image-playground/Build?color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
+[gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/native-image-playground/graalvm.yml?branch=main&color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
 
 [sty_url]: https://kotlinlang.org/docs/coding-conventions.html
 

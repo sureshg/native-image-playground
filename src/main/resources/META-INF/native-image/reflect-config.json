@@ -121,6 +121,12 @@
   "fields":[{"name":"streamId"}]
 },
 {
+  "name":"java.io.FilePermission"
+},
+{
+  "name":"java.lang.RuntimePermission"
+},
+{
   "name":"java.lang.String"
 },
 {
@@ -128,16 +134,32 @@
   "fields":[{"name":"threadLocalRandomProbe"}]
 },
 {
+  "name":"java.net.NetPermission"
+},
+{
+  "name":"java.net.SocketPermission"
+},
+{
   "name":"java.net.StandardSocketOptions"
 },
 {
+  "name":"java.net.URLPermission",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
+},
+{
   "name":"java.security.AlgorithmParametersSpi"
+},
+{
+  "name":"java.security.AllPermission"
 },
 {
   "name":"java.security.KeyStoreSpi"
 },
 {
   "name":"java.security.SecureRandomParameters"
+},
+{
+  "name":"java.security.SecurityPermission"
 },
 {
   "name":"java.security.interfaces.ECPrivateKey"
@@ -153,6 +175,9 @@
 },
 {
   "name":"java.util.Date"
+},
+{
+  "name":"java.util.PropertyPermission"
 },
 {
   "name":"java.util.concurrent.ScheduledThreadPoolExecutor",
