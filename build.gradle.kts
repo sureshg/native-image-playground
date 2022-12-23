@@ -152,8 +152,6 @@ tasks {
           "-Xextended-compiler-checks",
           "-Xuse-fir-extended-checkers",
       )
-
-      finalizedBy("spotlessApply")
     }
 
     finalizedBy("spotlessApply")
