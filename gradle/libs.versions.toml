@@ -100,7 +100,7 @@ protobuf-plugin                = "0.8.17"
 shadow                         = "7.1.2"
 spotless                       = "6.12.0"
 versioncatalog-update          = "0.7.0"
-dependency-analysis            = "1.17.0"
+dependency-analysis            = "1.18.0"
 
 
 [libraries]

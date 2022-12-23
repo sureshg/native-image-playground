@@ -2,7 +2,9 @@
 
 import org.gradle.jvm.toolchain.JvmVendorSpec.GRAAL_VM
 import org.jetbrains.kotlin.config.*
-import org.jetbrains.kotlin.gradle.tasks.*
+import org.jetbrains.kotlin.gradle.dsl.*
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   java
@@ -26,16 +28,16 @@ plugins {
 group = "dev.suresh"
 
 val moduleName = "$group.nativeimage"
-val javaVersion = libs.versions.java.get()
-val kotlinJvmTarget = libs.versions.kotlin.jvm.target.get()
-val kotlinApiVersion = libs.versions.kotlin.api.version.get()
-val kotlinLangVersion = libs.versions.kotlin.lang.version.get()
+val javaVersion = libs.versions.java.map { JavaVersion.toVersion(it) }
+val kotlinJvmTarget = libs.versions.kotlin.jvm.target.map { JvmTarget.fromTarget(it) }
+val kotlinApiVersion = libs.versions.kotlin.api.version.map { KotlinVersion.fromVersion(it) }
+val kotlinLangVersion = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
 application { mainClass.set("$group.MainKt") }
 
 java {
   toolchain {
-    languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    languageVersion.set(javaVersion.map { JavaLanguageVersion.of(it.majorVersion) })
     vendor.set(GRAAL_VM)
   }
 
@@ -46,8 +48,8 @@ java {
 kotlin {
   sourceSets.all {
     languageSettings.apply {
-      apiVersion = kotlinApiVersion
-      languageVersion = kotlinLangVersion
+      apiVersion = kotlinApiVersion.get().version
+      languageVersion = kotlinLangVersion.get().version
       progressiveMode = true
       enableLanguageFeature(LanguageFeature.JvmRecordSupport.name)
       enableLanguageFeature(LanguageFeature.ContextReceivers.name)
@@ -59,12 +61,15 @@ kotlin {
       optIn("kotlinx.coroutines.FlowPreview")
       optIn("kotlinx.serialization.ExperimentalSerializationApi")
     }
+    // kotlin.setSrcDirs(listOf("src/kotlin"))
   }
 
   jvmToolchain {
     languageVersion.set(java.toolchain.languageVersion.get())
     vendor.set(java.toolchain.vendor.get())
   }
+
+  kotlinDaemonJvmArgs = listOf("--show-version", "--enable-preview")
 }
 
 ksp {
@@ -114,38 +119,41 @@ tasks {
   withType<JavaCompile>().configureEach {
     options.apply {
       encoding = "UTF-8"
-      release.set(javaVersion.toInt())
+      release.set(javaVersion.map { it.majorVersion.toInt() })
       isIncremental = true
       isFork = true
       debugOptions.debugLevel = "source,lines,vars"
-      // Compiling module-info in the 'main/java' folder needs to see already compiled Kotlin code
       compilerArgs.addAll(
           listOf(
-              "-Xlint:all", "-parameters"
-              // "--patch-module",
-              // "$moduleName=${sourceSets.main.get().output.asPath}"
-              ))
+              "--enable-preview",
+              "-Xlint:all",
+              "-parameters",
+          ))
     }
   }
-
   withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-      verbose = true
-      jvmTarget = kotlinJvmTarget
-      javaParameters = true
-      incremental = false
-      allWarningsAsErrors = false
-      useK2 = false
-      freeCompilerArgs +=
-          listOf(
-              "-Xjsr305=strict",
-              "-Xjvm-default=all",
-              "-Xassertions=jvm",
-              "-Xallow-result-return-type",
-              "-Xemit-jvm-type-annotations",
-              "-Xjspecify-annotations=strict"
-              // "-Xgenerate-strict-metadata-version",
-              )
+    usePreciseJavaTracking = true
+    compilerOptions {
+      verbose.set(true)
+      jvmTarget.set(kotlinJvmTarget)
+      javaParameters.set(true)
+      apiVersion.set(kotlinApiVersion)
+      languageVersion.set(kotlinLangVersion)
+      allWarningsAsErrors.set(false)
+      suppressWarnings.set(false)
+      useK2.set(false)
+      freeCompilerArgs.addAll(
+          "-Xjsr305=strict",
+          "-Xjvm-default=all",
+          "-Xassertions=jvm",
+          "-Xallow-result-return-type",
+          "-Xemit-jvm-type-annotations",
+          "-Xjspecify-annotations=strict",
+          "-Xextended-compiler-checks",
+          "-Xuse-fir-extended-checkers",
+      )
+
+      finalizedBy("spotlessApply")
     }
 
     finalizedBy("spotlessApply")
