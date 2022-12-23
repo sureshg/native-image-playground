@@ -66,7 +66,7 @@ $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
 
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-dev-builds?color=125b6b&label=graalvm-19&logo=oracle&logoColor=d3eff5&style=for-the-badge
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-19&logo=oracle&logoColor=d3eff5&style=for-the-badge
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
 
