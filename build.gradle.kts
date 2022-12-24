@@ -134,14 +134,14 @@ tasks {
   withType<KotlinCompile>().configureEach {
     usePreciseJavaTracking = true
     compilerOptions {
-      verbose.set(true)
       jvmTarget.set(kotlinJvmTarget)
-      javaParameters.set(true)
       apiVersion.set(kotlinApiVersion)
       languageVersion.set(kotlinLangVersion)
+      verbose.set(true)
+      useK2.set(false)
+      javaParameters.set(true)
       allWarningsAsErrors.set(false)
       suppressWarnings.set(false)
-      useK2.set(false)
       freeCompilerArgs.addAll(
           "-Xjsr305=strict",
           "-Xjvm-default=all",
