@@ -7,7 +7,7 @@ kotlin-lang-version            = "1.9"
 gradle                         = "7.6"
 
 # Gradle Dependencies Versions
-ajalt-clikt                    = "3.5.0"
+ajalt-clikt                    = "3.5.1"
 ajalt-mordant                  = "2.0.0-beta10"
 ajalt-colormath                = "3.2.1"
 assertj                        = "3.21.0"
