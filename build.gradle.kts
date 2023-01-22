@@ -183,7 +183,7 @@ dependencies {
   // RSocket
   implementation(libs.ktor.client.cio)
   implementation(libs.rsocket.ktor.client)
-  runtimeOnly(libs.logback.classic)
+  runtimeOnly(libs.slf4j.nop)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

@@ -4,7 +4,7 @@ kotlin                         = "1.8.0"
 kotlin-jvm-target              = "19"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "1.9"
-gradle                         = "8.0-rc-1"
+gradle                         = "8.0-rc-2"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.5.1"
@@ -44,7 +44,7 @@ jgitver                        = "0.10.0-rc03"
 jmdns                          = "3.5.7"
 jreleaser                      = "0.9.1"
 jspecify                       = "0.2.0"
-junit                          = "5.9.1"
+junit                          = "5.9.2"
 junit-pioneer                  = "1.4.2"
 jqwik                          = "1.6.0"
 jSystemThemeDetector           = "3.6"
@@ -76,7 +76,7 @@ os-jfa                         = "1.2.0"
 protobuf                       = "3.18.1"
 rsocket                        = "0.15.4"
 semver                         = "1.0.0"
-slf4j                          = "1.7.30"
+slf4j                          = "2.0.6"
 testcontainers                 = "1.16.3"
 togglz                         = "3.1.1"
 versioncompare                 = "1.5.0"
@@ -98,7 +98,7 @@ licenser                       = "0.6.1"
 osdetector                     = "1.7.0"
 protobuf-plugin                = "0.8.17"
 shadow                         = "7.1.2"
-spotless                       = "6.12.1"
+spotless                       = "6.13.0"
 versioncatalog-update          = "0.7.0"
 dependency-analysis            = "1.18.0"
 
@@ -230,6 +230,7 @@ game-lwjgl-bom              = { module = "org.lwjgl:lwjgl-bom"                  
 game-libgdx                 = { module = "com.badlogicgames.gdx:gdx"                        , version.ref = "libgdx"}
 logback-classic             = { module = "ch.qos.logback:logback-classic"                   , version.ref = "logback"}
 logback-core                = { module = "ch.qos.logback:logback-core"                      , version.ref = "logback"}
+slf4j-nop                   = { module = "org.slf4j:slf4j-nop"                              , version.ref = "slf4j"}
 
 os-appdirs                  = { module = "net.harawata:appdirs"                             , version.ref = "os-appdirs"}
 os-oshi                     = { module = "com.github.oshi:oshi-core"                        , version.ref = "os-oshi"}

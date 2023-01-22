@@ -46,6 +46,7 @@ fun main(args: Array<String>) {
         exitProcess(0)
       }
       createContext("/rsocket", ::rSocket)
+      createContext("/reflect", ::reflect)
       executor = vtExec
       start()
     }
@@ -209,6 +210,8 @@ val rsClient by lazy {
     }
   }
 }
+
+fun reflect(httpExchange: HttpExchange) {}
 
 fun rSocket(ex: HttpExchange) {
   println("Starting new rSocket connection!")

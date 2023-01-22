@@ -9,7 +9,6 @@
 [![Style guide][nativeimage_cs_img]][nativeimage_cs_url]
 [![GraalVM Dashboard][gl_dashboard_img]][gl_dashboard_url]
 
-
 [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app
 and publish the platform binaries using Github action.
 
@@ -37,6 +36,13 @@ $ ./native-image.sh -Ob
 
 # For prod deployments
 $ ./native-image.sh
+
+# Find out the classes/jars using top modules mentioned in the native-image build output
+$ jdeps -q \
+        -R \
+        --ignore-missing-deps \
+        --multi-release=19 \
+        build/libs/native-image-playground-*-main-all.jar
 
 # Build native image from modular jars
 $ native-image \
