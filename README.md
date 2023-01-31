@@ -50,10 +50,16 @@ $ native-image \
     -m dev.suresh.Main
 ```
 
-### Troubleshooting Tools
+### Run & Debugging
 
- - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
+ - List all runtime options
 
+   ```bash
+   $ build/native-image-playground -XX:PrintFlags= 2>&1
+
+   # Eg: Set HeapDump path
+   $ build/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
+   ```
 
  - Object/Shared Lib Details
 
@@ -67,6 +73,9 @@ $ native-image \
     # Show all bundled CA Certs
     strings -a build/native-image-playground | grep -i "cn="
     ```
+
+ - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
+
 
  - Misc Gradle Tasks
 

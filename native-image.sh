@@ -46,6 +46,8 @@ native-image "$@" \
   --install-exit-handlers \
   -H:ConfigurationFileDirectories="${CONFIG_DIR}" \
   -H:+ReportExceptionStackTraces \
+  -H:+StripDebugInfo \
+  -H:ErrorFile=svm_err_b_%t_pid%p.md \
   -Djava.awt.headless=false \
   -jar "${APP_JAR}" \
   -o "${OUT_FILE}"
@@ -90,6 +92,7 @@ native-image "$@" \
 # // -H:+DashboardAll \
 # // -H:+DashboardPointsTo \
 # -H:CompilerBackend=llvm \
+# -H:±GenerateBuildArtifactsFile \
 # -J-Xmx4G \
 # -J--add-modules -JALL-SYSTEM \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
