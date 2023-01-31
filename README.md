@@ -12,23 +12,23 @@
 [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app
 and publish the platform binaries using Github action.
 
-#### Install GraalVM CE
+### Install GraalVM CE
 
 ```bash
 # Install GraalVM CE Dev
 $ bash <(curl -sL https://get.graalvm.org/jdk) \
      --to "$HOME/install/graalvm" \
-     -c visualvm graalvm-ce-java19-22.3.0
+     -c visualvm graalvm-ce-java<xx>
 
 # Remove the MacOS quarantine attribute
-$ sudo xattr -r -d com.apple.quarantine "$HOME/install/graalvm/graalvm-ce-java19-22.3.0/Contents/Home"
+$ sudo xattr -r -d com.apple.quarantine "$HOME/install/graalvm/graalvm-ce-java<xx>/Contents/Home"
 
 # Manage using SDKMAN!
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 22.3.0.r19-grlc "$HOME/install/graalvm/graalvm-ce-java19-22.3.0/Contents/Home"
+$ sdk i java graalvm-ce-java<xx> "$HOME/install/graalvm/graalvm-ce-java<xx>/Contents/Home"
 ```
 
-#### Build
+### Build
 
 ```bash
 # Native Image Quick Build
@@ -48,17 +48,41 @@ $ jdeps -q \
 $ native-image \
     -p base-module.jar:main-module.jar \
     -m dev.suresh.Main
-
-# Detect unused and misused dependencies
-$ ./gradlew buildHealth
-$ cat build/reports/dependency-analysis/build-health-report.txt
-
-$ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
 ```
 
-#### Resources
+### Troubleshooting Tools
+
+ - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
+
+
+ - Object/Shared Lib Details
+
+    ```bash
+    # Show shared libs
+    otool -L build/native-image-playground
+
+    # SVM details
+    strings -a build/native-image-playground | grep -i com.oracle.svm.core.VM
+
+    # Show all bundled CA Certs
+    strings -a build/native-image-playground | grep -i "cn="
+    ```
+
+ - Misc Gradle Tasks
+
+    ```bash
+    # Detect unused and misused dependencies
+    $ ./gradlew buildHealth
+    $ cat build/reports/dependency-analysis/build-health-report.txt
+
+    $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
+    ```
+
+
+### Resources
 
 * [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/)
+* [Libraries and Frameworks Tested with Native Image](https://www.graalvm.org/native-image/libraries-and-frameworks/#libraries-and-frameworks-tested-with-native-image)
 * [GitHub Action for GraalVM](https://github.com/marketplace/actions/github-action-for-graalvm)
 * [Native Image Build Tools](https://graalvm.github.io/native-build-tools/)
 * [Native Image Docs Repo](https://github.com/oracle/graal/tree/master/docs/reference-manual/native-image)
