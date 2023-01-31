@@ -42,7 +42,7 @@ native-image "$@" \
   --no-fallback \
   --enable-preview \
   --native-image-info \
-  --enable-monitoring \
+  --enable-monitoring=all \
   --install-exit-handlers \
   -H:ConfigurationFileDirectories="${CONFIG_DIR}" \
   -H:+ReportExceptionStackTraces \

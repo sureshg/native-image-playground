@@ -7,6 +7,9 @@ updates:
     labels:
       - "gradle"
       - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - sureshg
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
