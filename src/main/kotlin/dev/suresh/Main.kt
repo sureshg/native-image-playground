@@ -17,27 +17,32 @@ import java.security.*
 import java.text.*
 import java.time.*
 import java.util.*
+import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import javax.net.ssl.*
 import kotlin.io.use
+import kotlin.jvm.optionals.getOrDefault
 import kotlin.system.exitProcess
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import org.graalvm.nativeimage.ImageInfo
+import org.graalvm.nativeimage.*
 
+val logger = System.getLogger("Main")
 val vtExec = Executors.newVirtualThreadPerTaskExecutor()
 val viDispatcher = vtExec.asCoroutineDispatcher()
 
 fun main(args: Array<String>) {
+  logger.log(System.Logger.Level.INFO) { "This is from systen logger!" }
+
   val debug = args.contains("--debug")
   val start = System.currentTimeMillis()
   val server =
     HttpServer.create(InetSocketAddress(9080), 0).apply {
       createContext("/") {
         println("GET: ${it.requestURI}")
-        val res = summary(debug).encodeToByteArray()
+        val res = summary(args, debug).encodeToByteArray()
         it.sendResponseHeaders(200, res.size.toLong())
         it.responseBody.use { os -> os.write(res) }
       }
@@ -51,9 +56,10 @@ fun main(args: Array<String>) {
       start()
     }
 
-  val currTime = System.currentTimeMillis()
   println("Http Server started on http://localhost:${server.address.port}...")
-  val vmTime = ProcessHandle.current().info().startInstant().get().toEpochMilli()
+  val vmTime =
+    ProcessHandle.current().info().startInstant().getOrDefault(Instant.now()).toEpochMilli()
+  val currTime = System.currentTimeMillis()
   // val vmTime = ManagementFactory.getRuntimeMXBean().startTime
 
   val type = if (ImageInfo.isExecutable()) "Binary" else "JVM"
@@ -62,13 +68,16 @@ fun main(args: Array<String>) {
   )
 }
 
-fun summary(debug: Boolean = false) = buildString {
+fun summary(args: Array<String>, debug: Boolean = false) = buildString {
   val rt = Runtime.getRuntime()
   appendLine("✧✧✧✧✧ Time: ${LocalDateTime.now()} ✧✧✧✧✧")
   appendLine("✧✧✧✧✧ Available Processors: ${rt.availableProcessors()} ✧✧✧✧✧")
   appendLine(
-    "✧✧✧✧✧ JVM Memory, Total Allocated: ${rt.totalMemory().compactFmt}, Free: ${rt.freeMemory().compactFmt}, Max Configured: ${rt.maxMemory().compactFmt} ✧✧✧✧✧"
+    "✧✧✧✧✧ Heap Memory, Total Allocated: ${rt.totalMemory().compactFmt}, Free: ${rt.freeMemory().compactFmt}, Max Configured: ${rt.maxMemory().compactFmt} ✧✧✧✧✧"
   )
+
+  appendLine("✧✧✧✧✧ Cmd Args ✧✧✧✧✧")
+  appendLine(args.joinToString())
 
   appendLine("✧✧✧✧✧ Processes ✧✧✧✧✧")
   val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()
@@ -211,7 +220,24 @@ val rsClient by lazy {
   }
 }
 
-fun reflect(httpExchange: HttpExchange) {}
+private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
+
+fun reflect(ex: HttpExchange) {
+  val plugins = ServiceLoader.load(Callable::class.java)
+  plugins.forEach { println("ServiceLoader Plugin: ${it.call()}") }
+
+  val res =
+    when (ex.requestURI.path.substringAfterLast("/").lowercase()) {
+        "java" -> "dev.suresh.model.JVersion".newInstance()
+        "kotlin" -> "dev.suresh.model.KtVersion".newInstance()
+        else -> "NativeImage Playground!"
+      }
+      .toString()
+      .encodeToByteArray()
+
+  ex.sendResponseHeaders(200, res.size.toLong())
+  ex.responseBody.use { os -> os.write(res) }
+}
 
 fun rSocket(ex: HttpExchange) {
   println("Starting new rSocket connection!")

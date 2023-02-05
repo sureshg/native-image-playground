@@ -1,4 +1,4 @@
-package dev.suresh.domain
+package dev.suresh.model
 
 data class KtVersion(
   val name: String = "Kotlin",

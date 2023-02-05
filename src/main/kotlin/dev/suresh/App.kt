@@ -1,28 +1,24 @@
 package dev.suresh
 
-import com.github.ajalt.mordant.rendering.*
+import com.github.ajalt.mordant.rendering.BorderType
 import com.github.ajalt.mordant.rendering.TextAlign.LEFT
 import com.github.ajalt.mordant.rendering.TextAlign.RIGHT
 import com.github.ajalt.mordant.rendering.TextColors.*
 import com.github.ajalt.mordant.rendering.TextColors.Companion.rgb
-import com.github.ajalt.mordant.rendering.TextStyles.bold
-import com.github.ajalt.mordant.rendering.TextStyles.underline
-import com.github.ajalt.mordant.table.*
-import com.github.ajalt.mordant.table.Borders.ALL
-import com.github.ajalt.mordant.table.Borders.TOM_BOTTOM
-import com.github.ajalt.mordant.terminal.*
-import dev.zacsweers.redacted.annotations.*
-import java.lang.Runnable
-import java.net.*
+import com.github.ajalt.mordant.rendering.TextStyles.*
+import com.github.ajalt.mordant.table.Borders.*
+import com.github.ajalt.mordant.table.Borders.NONE
+import com.github.ajalt.mordant.table.table
+import com.github.ajalt.mordant.terminal.Terminal
+import dev.zacsweers.redacted.annotations.Redacted
+import java.net.URL
+import java.net.URLClassLoader
 import java.util.*
-import java.util.concurrent.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 fun main() {
   println("Hello ${Secret("testsecret")}")
-
-  val plugins = ServiceLoader.load(Callable::class.java)
-  plugins.forEach { println(it.call()) }
 
   // Load plugins from current directory
   val loader =
@@ -57,7 +53,7 @@ fun main() {
     table {
       borderType = BorderType.SQUARE_DOUBLE_SECTION_SEPARATOR
       align = RIGHT
-      tableBorders = Borders.NONE
+      tableBorders = NONE
       column(0) {
         align = LEFT
         cellBorders = ALL

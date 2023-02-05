@@ -10,21 +10,21 @@ set -euo pipefail
 IFS=$'\n\t'
 
 echo "Building the application jar..."
-./gradlew build
+./gradlew clean build
 
 # pattern="native-image-playground-*-all.jar"
 # files=($(for f in $(find . -name "$pattern" -type f); do echo "$f"; done | sort -k 1 -r))
 echo "Generating Graalvm config files..."
 BUILD_DIR=$(pwd)/build
 APP_JAR=(${BUILD_DIR}/libs/native-image-playground-*-all.jar)
-CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image"
+CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image/playground"
 OUT_FILE="${BUILD_DIR}/native-image-playground"
 
 # Run the app in background (&) by ignoring SIGHUP signal (nohup)
 nohup java \
   --show-version \
   --enable-preview \
-  -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}",experimental-class-define-support \
+  -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}" \
   -jar "${APP_JAR}" &>"${BUILD_DIR}/nohup.out" &
 # Wait for the server to startup
 sleep 1
@@ -39,16 +39,6 @@ rm -f "${OUT_FILE}"
 # Allowing an incomplete classpath is now the default. Use "--link-at-build-time"
 # to report linking errors at image build time for a class or package.
 native-image "$@" \
-  --no-fallback \
-  --enable-preview \
-  --native-image-info \
-  --enable-monitoring=all \
-  --install-exit-handlers \
-  -H:ConfigurationFileDirectories="${CONFIG_DIR}" \
-  -H:+ReportExceptionStackTraces \
-  -H:+StripDebugInfo \
-  -H:ErrorFile=svm_err_b_%t_pid%p.md \
-  -Djava.awt.headless=false \
   -jar "${APP_JAR}" \
   -o "${OUT_FILE}"
 
