@@ -11,8 +11,8 @@ plugins {
   application
   `test-suite-base`
   alias(libs.plugins.jgitver)
-  alias(libs.plugins.ksp)
   alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.ksp)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.graalvm.nativeimage)
   alias(libs.plugins.benmanes)
@@ -85,7 +85,7 @@ spotless {
   // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 
   kotlin {
-    ktfmt().googleStyle()
+    ktfmt(libs.versions.ktfmt.get())
     target("**/*.kt")
     trimTrailingWhitespace()
     endWithNewline()
@@ -94,8 +94,8 @@ spotless {
   }
 
   kotlinGradle {
-    ktfmt()
-    target("**/*.gradle.kts")
+    ktfmt(libs.versions.ktfmt.get())
+    target("**/*.kts")
     trimTrailingWhitespace()
     endWithNewline()
     targetExclude("**/build/**")
@@ -137,7 +137,6 @@ tasks {
       apiVersion.set(kotlinApiVersion)
       languageVersion.set(kotlinLangVersion)
       verbose.set(true)
-      useK2.set(false)
       javaParameters.set(true)
       allWarningsAsErrors.set(false)
       suppressWarnings.set(false)
@@ -148,8 +147,6 @@ tasks {
           "-Xallow-result-return-type",
           "-Xemit-jvm-type-annotations",
           "-Xjspecify-annotations=strict",
-          "-Xextended-compiler-checks",
-          "-Xuse-fir-extended-checkers",
       )
     }
 

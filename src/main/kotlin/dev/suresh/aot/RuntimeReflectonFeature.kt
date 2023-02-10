@@ -6,5 +6,6 @@ import org.graalvm.nativeimage.hosted.*
 class RuntimeReflectonFeature : Feature {
   override fun beforeAnalysis(access: Feature.BeforeAnalysisAccess?) {
     RuntimeReflection.register(JVersion::class.java, KtVersion::class.java)
+    // RuntimeResourceAccess.addResource(this::class.java.module, "message.txt")
   }
 }
