@@ -16,7 +16,8 @@ echo "Building the application jar..."
 # files=($(for f in $(find . -name "$pattern" -type f); do echo "$f"; done | sort -k 1 -r))
 echo "Generating Graalvm config files..."
 BUILD_DIR=$(pwd)/build
-APP_JAR=(${BUILD_DIR}/libs/native-image-playground-*-all.jar)
+# shellcheck disable=SC2012
+APP_JAR=$(ls -t "${BUILD_DIR}"/libs/native-image-playground-*-all.jar | head -1)
 CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image/playground"
 OUT_FILE="${BUILD_DIR}/native-image-playground"
 
@@ -29,18 +30,37 @@ nohup java \
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/test
-curl -fsSL http://localhost:9080/rsocket
-curl -fsSL http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
+# curl -fsSL http://localhost:9080/rsocket
+curl -fsSL -o /dev/null http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
 # Wait for agent to write the config
 sleep 1
 
 echo "Creating native image..."
 rm -f "${OUT_FILE}"
-# Allowing an incomplete classpath is now the default. Use "--link-at-build-time"
-# to report linking errors at image build time for a class or package.
-native-image "$@" \
-  -jar "${APP_JAR}" \
-  -o "${OUT_FILE}"
+
+args=("-jar" "${APP_JAR}"
+  # "-H:+PrintAnalysisCallTree"
+  # "-H:+DashboardAll"
+  # "-H:DashboardDump=reports/dump"
+  # "-H:+DashboardPretty"
+  # "-H:+DashboardJson"
+  # "-H:ReportAnalysisForbiddenType=java.awt.Toolkit:InHeap,Allocated"
+  "-o" "$OUT_FILE")
+
+case "$OSTYPE" in
+linux*)
+  args+=("--static")
+  # args+=("-H:+StaticExecutableWithDynamicLibC")
+  # args+=("--libc=musl"
+  #        "-H:CCompilerOption=-Wl,-z,stack-size=2097152")
+  ;;
+esac
+
+native-image "$@" "${args[@]}"
+
+# echo "Compressing executable ... "
+# upx "${OUT_FILE}"
+# popd >/dev/null
 
 # https://www.graalvm.org/reference-manual/native-image/overview/BuildOptions/
 # --verbose \
@@ -86,7 +106,3 @@ native-image "$@" \
 # -J-Xmx4G \
 # -J--add-modules -JALL-SYSTEM \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles
-
-# echo "Compressing executable ... "
-# upx "${OUT_FILE}"
-# popd >/dev/null

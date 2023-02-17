@@ -73,6 +73,8 @@ popd >/dev/null
 # Set GraalVM as default JDK in the current shell
 sdk u java "$sdkman_id"
 
-echo "Installing NativeImage and VisualVM..."
-# gu install espresso
-gu install native-image visualvm
+if [[ ! -x "$JAVA_HOME/bin/native-image" ]]; then
+  echo "Installing NativeImage ..."
+  gu install native-image
+  # gu install espresso visualvm
+fi
