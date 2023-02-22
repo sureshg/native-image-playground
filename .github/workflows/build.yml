@@ -44,7 +44,7 @@ jobs:
       max-parallel: 3
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-        jdk: [ '19' ]
+        jdk: [ '20-ea' ]
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10

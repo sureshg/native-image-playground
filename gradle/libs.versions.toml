@@ -1,5 +1,5 @@
 [versions]
-java                           = "19"
+java                           = "20"
 kotlin                         = "1.8.20-Beta"
 ksp                            = "1.8.20-Beta-1.0.9"
 kotlin-jvm-target              = "19"
@@ -83,7 +83,7 @@ togglz                         = "3.1.1"
 versioncompare                 = "1.5.0"
 
 # Plugin versions
-benmanes                       = "0.45.0"
+benmanes                       = "0.46.0"
 beryx-jlink                    = "2.24.4"
 beryx-runtime                  = "1.12.7"
 beryx-jar                      = "2.0.0"

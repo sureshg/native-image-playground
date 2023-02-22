@@ -37,11 +37,17 @@ $ ./native-image.sh -Ob
 # For prod deployments
 $ ./native-image.sh
 
+# JIT Mode
+$ ./gradlew build
+$ java --enable-preview \
+       --add-modules=ALL-SYSTEM \
+       -jar build/libs/native-image-playground-*-all.jar
+
 # Find out the classes/jars using top modules mentioned in the native-image build output
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
-        --multi-release=19 \
+        --multi-release=20 \
         build/libs/native-image-playground-*-main-all.jar
 
 # Build native image from modular jars
@@ -52,41 +58,40 @@ $ native-image \
 
 ### Run & Debugging
 
- - List all runtime options
+- List all runtime options
+
+  ```bash
+  $ build/native-image-playground -XX:PrintFlags= 2>&1
+
+  # Eg: Set HeapDump path
+  $ build/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
+  ```
+
+- Object/Shared Lib Details
 
    ```bash
-   $ build/native-image-playground -XX:PrintFlags= 2>&1
+   # Show shared libs
+   otool -L build/native-image-playground
 
-   # Eg: Set HeapDump path
-   $ build/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
+   # SVM details
+   strings -a build/native-image-playground | grep -i com.oracle.svm.core.VM
+
+   # Show all bundled CA Certs
+   strings -a build/native-image-playground | grep -i "cn="
    ```
 
- - Object/Shared Lib Details
-
-    ```bash
-    # Show shared libs
-    otool -L build/native-image-playground
-
-    # SVM details
-    strings -a build/native-image-playground | grep -i com.oracle.svm.core.VM
-
-    # Show all bundled CA Certs
-    strings -a build/native-image-playground | grep -i "cn="
-    ```
-
- - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
+- [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
 
 
- - Misc Gradle Tasks
+- Misc Gradle Tasks
 
-    ```bash
-    # Detect unused and misused dependencies
-    $ ./gradlew buildHealth
-    $ cat build/reports/dependency-analysis/build-health-report.txt
+   ```bash
+   # Detect unused and misused dependencies
+   $ ./gradlew buildHealth
+   $ cat build/reports/dependency-analysis/build-health-report.txt
 
-    $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
-    ```
-
+   $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
+   ```
 
 ### Resources
 
@@ -105,7 +110,7 @@ $ native-image \
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
 
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-19&logo=oracle&logoColor=d3eff5&style=for-the-badge
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-20&logo=oracle&logoColor=d3eff5&style=for-the-badge
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
 

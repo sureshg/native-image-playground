@@ -51,7 +51,6 @@ kotlin {
       apiVersion = kotlinApiVersion.get().version
       languageVersion = kotlinLangVersion.get().version
       progressiveMode = true
-      enableLanguageFeature(LanguageFeature.ContextReceivers.name)
       optIn("kotlin.ExperimentalStdlibApi")
       optIn("kotlin.ExperimentalUnsignedTypes")
       optIn("kotlin.io.path.ExperimentalPathApi")

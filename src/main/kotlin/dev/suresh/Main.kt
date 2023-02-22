@@ -40,6 +40,7 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
+import jdk.incubator.concurrent.ScopedValue
 import kotlin.io.use
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.system.exitProcess
@@ -55,6 +56,7 @@ import org.graalvm.nativeimage.ImageInfo
 val logger = System.getLogger("Main")
 val vtExec = Executors.newVirtualThreadPerTaskExecutor()
 val viDispatcher = vtExec.asCoroutineDispatcher()
+val REQ_URI = ScopedValue.newInstance<String>()
 
 fun main(args: Array<String>) {
   logger.log(INFO) { "This is from system logger!" }
@@ -64,18 +66,26 @@ fun main(args: Array<String>) {
   val server =
       HttpServer.create(InetSocketAddress(9080), 0).apply {
         createContext("/") {
-          println("GET: ${it.requestURI}")
-          val res = summary(args, debug).encodeToByteArray()
-          it.sendResponseHeaders(200, res.size.toLong())
-          it.responseBody.use { os -> os.write(res) }
+          val req = it.requestURI.toString()
+          println("GET: $req")
+          ScopedValue.where(REQ_URI, req) {
+            val res = summary(args, debug).encodeToByteArray()
+            it.sendResponseHeaders(200, res.size.toLong())
+            it.responseBody.use { os -> os.write(res) }
+          }
         }
+
         createContext("/shutdown") {
           stop(0)
           exitProcess(0)
         }
+
         createContext("/rsocket", ::rSocket)
+
         createContext("/reflect", ::reflect)
+
         createContext("/resources", ::resources)
+
         executor = vtExec
         start()
       }
@@ -231,6 +241,7 @@ fun summary(args: Array<String>, debug: Boolean = false) = buildString {
     | Currencies     : ${currencies.size.fmt}|
     | Env Vars       : ${env.size.fmt}|
     | Sys Props      : ${props.size.fmt}|
+    | Req ScopeValue : ${REQ_URI.orElse("n/a")}    |
     | Virtual Thread : ${Thread.currentThread().isVirtual} |
     +-----------------------+
     """

@@ -3,7 +3,7 @@
 # set -u won't work for sdkman
 set -e
 
-jdk_version=${1:-19}
+jdk_version=${1:-20}
 extn="tar.gz"
 
 # Find OS type
@@ -72,9 +72,10 @@ popd >/dev/null
 
 # Set GraalVM as default JDK in the current shell
 sdk u java "$sdkman_id"
+native-image --version
 
-if [[ ! -x "$JAVA_HOME/bin/native-image" ]]; then
-  echo "Installing NativeImage ..."
-  gu install native-image
-  # gu install espresso visualvm
-fi
+#if [[ ! -x "$JAVA_HOME/bin/native-image" ]]; then
+#  echo "Installing NativeImage ..."
+#  gu install native-image
+#  gu install espresso visualvm
+#fi

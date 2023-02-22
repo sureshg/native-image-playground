@@ -21,16 +21,18 @@ APP_JAR=$(ls -t "${BUILD_DIR}"/libs/native-image-playground-*-all.jar | head -1)
 CONFIG_DIR="$(PWD)/src/main/resources/META-INF/native-image/playground"
 OUT_FILE="${BUILD_DIR}/native-image-playground"
 
-# Run the app in background (&) by ignoring SIGHUP signal (nohup)
+# Run the app in background (&) by ignoring SIGHUP signal (nohup).
+# Enable preview and incubating features (by adding all system modules).
 nohup java \
   --show-version \
   --enable-preview \
+  --add-modules=ALL-SYSTEM \
   -agentlib:native-image-agent=config-merge-dir="${CONFIG_DIR}" \
   -jar "${APP_JAR}" &>"${BUILD_DIR}/nohup.out" &
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/test
-# curl -fsSL http://localhost:9080/rsocket
+curl -fsSL http://localhost:9080/rsocket
 curl -fsSL -o /dev/null http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
 # Wait for agent to write the config
 sleep 1
@@ -39,6 +41,7 @@ echo "Creating native image..."
 rm -f "${OUT_FILE}"
 
 args=("-jar" "${APP_JAR}"
+  "-J--add-modules=ALL-SYSTEM"
   # "-H:+PrintAnalysisCallTree"
   # "-H:+DashboardAll"
   # "-H:DashboardDump=reports/dump"
@@ -50,6 +53,7 @@ args=("-jar" "${APP_JAR}"
 case "$OSTYPE" in
 linux*)
   args+=("--static")
+  args+=("-H:+StripDebugInfo")
   # args+=("-H:+StaticExecutableWithDynamicLibC")
   # args+=("--libc=musl"
   #        "-H:CCompilerOption=-Wl,-z,stack-size=2097152")

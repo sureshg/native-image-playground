@@ -23,7 +23,10 @@
 },
 {
   "name":"java.lang.VersionProps",
-  "methods":[{"name":"println","parameterTypes":["boolean"] }]
+  "methods":[
+    {"name":"print","parameterTypes":["boolean"] }, 
+    {"name":"println","parameterTypes":["boolean"] }
+  ]
 },
 {
   "name":"sun.management.VMManagementImpl",
