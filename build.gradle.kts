@@ -192,6 +192,5 @@ dependencies {
   // kapt(libs.graalvm.hint.processor)
   // compileOnly(libs.graalvm.hint.annotations)
   // nativeImageCompileOnly(libs.graalvm.sdk)
-  // nativeImageCompileOnly(libs.graalvm.svm)
-  // nativeImageCompileOnly(libs.graalvm.svmlibffi)
+  // "graalCompileOnly"(libs.graalvm.sdk) // For graal source set
 }

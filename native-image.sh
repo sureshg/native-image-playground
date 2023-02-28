@@ -60,6 +60,9 @@ linux*)
   ;;
 esac
 
+# Disable Java Module system when building native image
+# export USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM=false
+
 native-image "$@" "${args[@]}"
 
 # echo "Compressing executable ... "
