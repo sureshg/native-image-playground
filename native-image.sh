@@ -42,6 +42,7 @@ rm -f "${OUT_FILE}"
 
 args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
+  # "--enable-monitoring=jmxclient,jmxserver"
   # "-H:+PrintAnalysisCallTree"
   # "-H:+DashboardAll"
   # "-H:DashboardDump=reports/dump"

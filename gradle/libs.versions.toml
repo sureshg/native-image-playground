@@ -5,7 +5,7 @@ ksp                            = "1.8.20-Beta-1.0.9"
 kotlin-jvm-target              = "19"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "1.9"
-gradle                         = "8.0.1"
+gradle                         = "8.0.2"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.5.2"

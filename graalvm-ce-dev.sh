@@ -72,6 +72,8 @@ popd >/dev/null
 
 # Set GraalVM as default JDK in the current shell
 sdk u java "$sdkman_id"
+# Install WASM
+gu install wasm
 native-image --version
 
 #if [[ ! -x "$JAVA_HOME/bin/native-image" ]]; then

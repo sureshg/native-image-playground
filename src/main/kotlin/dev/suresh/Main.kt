@@ -25,7 +25,7 @@ import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.net.StandardSocketOptions
-import java.net.URL
+import java.net.URI
 import java.net.URLClassLoader
 import java.nio.charset.Charset
 import java.security.KeyStore
@@ -299,7 +299,7 @@ fun resources(ex: HttpExchange) {
   // Load plugins from current directory
   val loader =
       URLClassLoader.newInstance(
-          arrayOf(URL("file://${System.getProperty("user.dir")}/plugins.jar")),
+          arrayOf(URI("file://${System.getProperty("user.dir")}/plugins.jar").toURL()),
       )
   val svcLoader = ServiceLoader.load(java.lang.Runnable::class.java, loader)
   println("Found ${svcLoader.toList().size} Runnable plugins!")
