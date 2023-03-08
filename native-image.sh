@@ -40,8 +40,12 @@ sleep 1
 echo "Creating native image..."
 rm -f "${OUT_FILE}"
 
+# Pass all env variables to native-image builder
+# env | sed -e 's/=.*//g' | sed -e 's/^/-E/g' > env-vars.txt
+
 args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
+  # "@env-vars.txt"
   # "--enable-monitoring=jmxclient,jmxserver"
   # "-H:+PrintAnalysisCallTree"
   # "-H:+DashboardAll"
