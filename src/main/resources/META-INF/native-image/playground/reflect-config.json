@@ -218,6 +218,8 @@
   "name":"kotlinx.coroutines.CancellableContinuationImpl",
   "fields":[
     {"name":"_decision"}, 
+    {"name":"_decisionAndIndex"}, 
+    {"name":"_parentHandle"}, 
     {"name":"_state"}
   ]
 },
@@ -229,6 +231,7 @@
   "name":"kotlinx.coroutines.EventLoopImplBase",
   "fields":[
     {"name":"_delayed"}, 
+    {"name":"_isCompleted"}, 
     {"name":"_queue"}
   ]
 },
@@ -238,11 +241,36 @@
 },
 {
   "name":"kotlinx.coroutines.JobSupport",
-  "fields":[{"name":"_state"}]
+  "fields":[
+    {"name":"_parentHandle"}, 
+    {"name":"_state"}
+  ]
+},
+{
+  "name":"kotlinx.coroutines.JobSupport$Finishing",
+  "fields":[
+    {"name":"_exceptionsHolder"}, 
+    {"name":"_isCompleting"}, 
+    {"name":"_rootCause"}
+  ]
 },
 {
   "name":"kotlinx.coroutines.channels.AbstractSendChannel",
   "fields":[{"name":"onCloseHandler"}]
+},
+{
+  "name":"kotlinx.coroutines.channels.BufferedChannel",
+  "fields":[
+    {"name":"_closeCause"}, 
+    {"name":"bufferEnd"}, 
+    {"name":"bufferEndSegment"}, 
+    {"name":"closeHandler"}, 
+    {"name":"completedExpandBuffersAndPauseFlag"}, 
+    {"name":"receiveSegment"}, 
+    {"name":"receivers"}, 
+    {"name":"sendSegment"}, 
+    {"name":"sendersAndCloseStatus"}
+  ]
 },
 {
   "name":"kotlinx.coroutines.internal.AtomicOp",
@@ -258,6 +286,10 @@
 {
   "name":"kotlinx.coroutines.internal.DispatchedContinuation",
   "fields":[{"name":"_reusableCancellableContinuation"}]
+},
+{
+  "name":"kotlinx.coroutines.internal.LimitedDispatcher",
+  "fields":[{"name":"runningWorkers"}]
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeLinkedListNode",
@@ -281,6 +313,10 @@
 {
   "name":"kotlinx.coroutines.internal.Segment",
   "fields":[{"name":"cleanedAndPointers"}]
+},
+{
+  "name":"kotlinx.coroutines.internal.ThreadSafeHeap",
+  "fields":[{"name":"_size"}]
 },
 {
   "name":"kotlinx.coroutines.scheduling.CoroutineScheduler",
@@ -309,6 +345,10 @@
     {"name":"_result"}, 
     {"name":"_state"}
   ]
+},
+{
+  "name":"kotlinx.coroutines.selects.SelectImplementation",
+  "fields":[{"name":"state"}]
 },
 {
   "name":"kotlinx.coroutines.selects.SeqNumber",
