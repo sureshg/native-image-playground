@@ -78,7 +78,7 @@ protobuf                       = "3.18.1"
 rsocket                        = "0.15.4"
 semver                         = "1.0.0"
 slf4j                          = "2.0.6"
-testcontainers                 = "1.16.3"
+testcontainers                 = "1.17.6"
 togglz                         = "3.1.1"
 versioncompare                 = "1.5.0"
 
