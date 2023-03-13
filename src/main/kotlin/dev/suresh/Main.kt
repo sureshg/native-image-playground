@@ -85,6 +85,8 @@ fun main(args: Array<String>) {
 
         createContext("/resources", ::resources)
 
+        createContext("/uds", ::unixDomainSockets)
+
         executor = vtExec
         start()
       }
@@ -339,6 +341,8 @@ fun rSocket(ex: HttpExchange) {
     }
   }
 }
+
+fun unixDomainSockets(httpExchange: HttpExchange) {}
 
 private val Int.fmt
   get() = "%-5d".format(this)

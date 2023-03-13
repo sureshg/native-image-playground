@@ -89,7 +89,7 @@ native-image "$@" "${args[@]}"
 # --enable-https \
 # --enable-http \
 # --enable-all-security-services \
-# --enable-url-protocols=http,https,file,jar \
+# --enable-url-protocols=http,https,file,jar,unix \
 # --report-unsupported-elements-at-runtime \
 # --initialize-at-build-time=kotlinx,kotlin,org.slf4j \
 # --initialize-at-run-time=... \
