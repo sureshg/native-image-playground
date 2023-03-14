@@ -84,7 +84,7 @@ versioncompare                 = "1.5.0"
 
 # Plugin versions
 benmanes                       = "0.46.0"
-beryx-jlink                    = "2.24.4"
+beryx-jlink                    = "2.26.0"
 beryx-runtime                  = "1.12.7"
 beryx-jar                      = "2.0.0"
 champeau-includegit            = "0.1.6"
