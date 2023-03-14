@@ -79,7 +79,7 @@ rsocket                        = "0.15.4"
 semver                         = "1.0.0"
 slf4j                          = "2.0.6"
 testcontainers                 = "1.17.6"
-togglz                         = "3.1.1"
+togglz                         = "3.3.3"
 versioncompare                 = "1.5.0"
 
 # Plugin versions
