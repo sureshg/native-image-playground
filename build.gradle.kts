@@ -10,11 +10,11 @@ plugins {
   java
   application
   `test-suite-base`
-  alias(libs.plugins.jgitver)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.graalvm.nativeimage)
+  alias(libs.plugins.semver)
   alias(libs.plugins.benmanes)
   alias(libs.plugins.shadow)
   alias(libs.plugins.spotless)
@@ -108,8 +108,6 @@ spotless {
   }
   isEnforceCheck = true
 }
-
-jgitver { nonQualifierBranches = "main" }
 
 redacted { enabled.set(true) }
 

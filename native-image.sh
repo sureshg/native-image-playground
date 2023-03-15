@@ -45,6 +45,7 @@ rm -f "${OUT_FILE}"
 
 args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
+  # "-march=native"
   # "@env-vars.txt"
   # "--enable-monitoring=jmxclient,jmxserver"
   # "-H:+PrintAnalysisCallTree"

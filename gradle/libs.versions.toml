@@ -41,7 +41,6 @@ imageio-twelvemonkeys          = "3.8.1"
 jakewharton-picnic             = "0.6.0"
 jakewharton-crossword          = "0.1.2"
 jetbrains-markdown             = "0.2.4"
-jgitver                        = "0.10.0-rc03"
 jmdns                          = "3.5.7"
 jreleaser                      = "0.9.1"
 jspecify                       = "0.2.0"
@@ -76,7 +75,7 @@ os-oshi                        = "6.1.2"
 os-jfa                         = "1.2.0"
 protobuf                       = "3.18.1"
 rsocket                        = "0.15.4"
-semver                         = "1.0.0"
+semver                         = "0.5.0-alpha.1"
 slf4j                          = "2.0.6"
 testcontainers                 = "1.17.6"
 togglz                         = "3.3.3"
@@ -99,8 +98,8 @@ licenser                       = "0.6.1"
 osdetector                     = "1.7.3"
 protobuf-plugin                = "0.8.17"
 shadow                         = "8.1.0"
-spotless                       = "6.16.0"
-versioncatalog-update          = "0.7.0"
+spotless                       = "6.17.0"
+versioncatalog-update          = "0.8.0"
 dependency-analysis            = "1.19.0"
 
 
@@ -238,9 +237,6 @@ os-appdirs                  = { module = "net.harawata:appdirs"                 
 os-oshi                     = { module = "com.github.oshi:oshi-core"                        , version.ref = "os-oshi"}
 os-mac-jfa                  = { module = "de.jangassen:jfa"                                 , version.ref = "os-jfa"}
 
-semver                      = { module = "io.github.z4kn4fein:semver"                       , version.ref = "semver"}
-versioncompare              = { module = "io.github.g00fy2:versioncompare"                  , version.ref = "versioncompare"}
-
 testcontainers              = { module = "org.testcontainers:testcontainers"               , version.ref = "testcontainers"}
 testcontainers-bom          = { module = "org.testcontainers:testcontainers-bom"           , version.ref = "testcontainers"}
 testcontainers-postgresql   = { module = "org.testcontainers:postgresql"                   , version.ref = "testcontainers"}
@@ -249,7 +245,7 @@ testcontainers-clickhouse   = { module = "org.testcontainers:clickhouse"        
 testcontainers-junit        = { module = "org.testcontainers:junit-jupiter"                , version.ref = "testcontainers"}
 
 togglz-core                 = { module = "org.togglz:togglz-core"                           , version.ref = "togglz"}
-
+versioncompare              = { module = "io.github.g00fy2:versioncompare"                  , version.ref = "versioncompare"}
 
 [plugins]
 # Gradle  Plugins
@@ -265,7 +261,6 @@ dikt                        = { id = "io.github.sergeshustoff.dikt"             
 graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
 gradle-checksum             = { id = "org.gradle.crypto.checksum"                            , version.ref = "gradlechecksum"}
 jetbrains-exposed           = { id = "com.jetbrains.exposed.gradle.plugin"                   , version.ref = "jetbrains-exposed"}
-jgitver                     = { id = "fr.brouillard.oss.gradle.jgitver"                      , version.ref = "jgitver" }
 jreleaser                   = { id = "org.jreleaser"                                         , version.ref = "jreleaser" }
 kotlin-jvm                  = { id = "org.jetbrains.kotlin.jvm"                              , version.ref = "kotlin" }
 kotlin-kapt                 = { id = "org.jetbrains.kotlin.kapt"                             , version.ref = "kotlin" }
@@ -280,6 +275,7 @@ spotless                    = { id = "com.diffplug.spotless"                    
 shadow                      = { id = "com.github.johnrengelman.shadow"                       , version.ref = "shadow" }
 versioncatalog-update       = { id = "nl.littlerobots.version-catalog-update"                , version.ref = "versioncatalog-update" }
 dependency-analysis         = { id = "com.autonomousapps.dependency-analysis"                , version.ref = "dependency-analysis" }
+semver                      = { id = "com.javiersc.semver"                                   , version.ref = "semver" }
 
 [bundles]
 ktor-server                 = ["ktor-server", "ktor-serialization", "ktor-auth", "ktor-server-host-common", "ktor-server-netty", "logback-classic"]

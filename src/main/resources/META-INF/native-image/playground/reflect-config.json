@@ -49,10 +49,7 @@
 },
 {
   "name":"io.ktor.network.selector.LockFreeMPSCQueueCore",
-  "fields":[
-    {"name":"_next"}, 
-    {"name":"_state"}
-  ]
+  "fields":[{"name":"_next"}, {"name":"_state"}]
 },
 {
   "name":"io.ktor.network.selector.SelectableBase",
@@ -64,34 +61,19 @@
 },
 {
   "name":"io.ktor.utils.io.ByteBufferChannel",
-  "fields":[
-    {"name":"_closed"}, 
-    {"name":"_readOp"}, 
-    {"name":"_state"}, 
-    {"name":"_writeOp"}
-  ]
+  "fields":[{"name":"_closed"}, {"name":"_readOp"}, {"name":"_state"}, {"name":"_writeOp"}]
 },
 {
   "name":"io.ktor.utils.io.core.internal.ChunkBuffer",
-  "fields":[
-    {"name":"nextRef"}, 
-    {"name":"refCount"}
-  ]
+  "fields":[{"name":"nextRef"}, {"name":"refCount"}]
 },
 {
   "name":"io.ktor.utils.io.internal.CancellableReusableContinuation",
-  "fields":[
-    {"name":"jobCancellationHandler"}, 
-    {"name":"state"}
-  ]
+  "fields":[{"name":"jobCancellationHandler"}, {"name":"state"}]
 },
 {
   "name":"io.ktor.utils.io.internal.RingBufferCapacity",
-  "fields":[
-    {"name":"_availableForRead$internal"}, 
-    {"name":"_availableForWrite$internal"}, 
-    {"name":"_pendingToFlush"}
-  ]
+  "fields":[{"name":"_availableForRead$internal"}, {"name":"_availableForWrite$internal"}, {"name":"_pendingToFlush"}]
 },
 {
   "name":"io.ktor.utils.io.pool.DefaultPool",
@@ -99,18 +81,11 @@
 },
 {
   "name":"io.ktor.utils.io.pool.SingleInstancePool",
-  "fields":[
-    {"name":"borrowed"}, 
-    {"name":"disposed"}
-  ]
+  "fields":[{"name":"borrowed"}, {"name":"disposed"}]
 },
 {
   "name":"io.ktor.websocket.DefaultWebSocketSessionImpl",
-  "fields":[
-    {"name":"closed"}, 
-    {"name":"pinger"}, 
-    {"name":"started"}
-  ]
+  "fields":[{"name":"closed"}, {"name":"pinger"}, {"name":"started"}]
 },
 {
   "name":"io.rsocket.kotlin.internal.RequestFlow",
@@ -197,10 +172,7 @@
 },
 {
   "name":"java.util.concurrent.atomic.Striped64",
-  "fields":[
-    {"name":"base"}, 
-    {"name":"cellsBusy"}
-  ]
+  "fields":[{"name":"base"}, {"name":"cellsBusy"}]
 },
 {
   "name":"javax.security.auth.x500.X500Principal",
@@ -216,12 +188,7 @@
 },
 {
   "name":"kotlinx.coroutines.CancellableContinuationImpl",
-  "fields":[
-    {"name":"_decision"}, 
-    {"name":"_decisionAndIndex"}, 
-    {"name":"_parentHandle"}, 
-    {"name":"_state"}
-  ]
+  "fields":[{"name":"_decision"}, {"name":"_decisionAndIndex"}, {"name":"_parentHandle"}, {"name":"_state"}]
 },
 {
   "name":"kotlinx.coroutines.DispatchedCoroutine",
@@ -229,11 +196,7 @@
 },
 {
   "name":"kotlinx.coroutines.EventLoopImplBase",
-  "fields":[
-    {"name":"_delayed"}, 
-    {"name":"_isCompleted"}, 
-    {"name":"_queue"}
-  ]
+  "fields":[{"name":"_delayed"}, {"name":"_isCompleted"}, {"name":"_queue"}]
 },
 {
   "name":"kotlinx.coroutines.InvokeOnCancelling",
@@ -241,18 +204,11 @@
 },
 {
   "name":"kotlinx.coroutines.JobSupport",
-  "fields":[
-    {"name":"_parentHandle"}, 
-    {"name":"_state"}
-  ]
+  "fields":[{"name":"_parentHandle"}, {"name":"_state"}]
 },
 {
   "name":"kotlinx.coroutines.JobSupport$Finishing",
-  "fields":[
-    {"name":"_exceptionsHolder"}, 
-    {"name":"_isCompleting"}, 
-    {"name":"_rootCause"}
-  ]
+  "fields":[{"name":"_exceptionsHolder"}, {"name":"_isCompleting"}, {"name":"_rootCause"}]
 },
 {
   "name":"kotlinx.coroutines.channels.AbstractSendChannel",
@@ -260,17 +216,7 @@
 },
 {
   "name":"kotlinx.coroutines.channels.BufferedChannel",
-  "fields":[
-    {"name":"_closeCause"}, 
-    {"name":"bufferEnd"}, 
-    {"name":"bufferEndSegment"}, 
-    {"name":"closeHandler"}, 
-    {"name":"completedExpandBuffersAndPauseFlag"}, 
-    {"name":"receiveSegment"}, 
-    {"name":"receivers"}, 
-    {"name":"sendSegment"}, 
-    {"name":"sendersAndCloseStatus"}
-  ]
+  "fields":[{"name":"_closeCause"}, {"name":"bufferEnd"}, {"name":"bufferEndSegment"}, {"name":"closeHandler"}, {"name":"completedExpandBuffersAndPauseFlag"}, {"name":"receiveSegment"}, {"name":"receivers"}, {"name":"sendSegment"}, {"name":"sendersAndCloseStatus"}]
 },
 {
   "name":"kotlinx.coroutines.internal.AtomicOp",
@@ -278,10 +224,7 @@
 },
 {
   "name":"kotlinx.coroutines.internal.ConcurrentLinkedListNode",
-  "fields":[
-    {"name":"_next"}, 
-    {"name":"_prev"}
-  ]
+  "fields":[{"name":"_next"}, {"name":"_prev"}]
 },
 {
   "name":"kotlinx.coroutines.internal.DispatchedContinuation",
@@ -293,11 +236,7 @@
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeLinkedListNode",
-  "fields":[
-    {"name":"_next"}, 
-    {"name":"_prev"}, 
-    {"name":"_removedRef"}
-  ]
+  "fields":[{"name":"_next"}, {"name":"_prev"}, {"name":"_removedRef"}]
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeTaskQueue",
@@ -305,10 +244,7 @@
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeTaskQueueCore",
-  "fields":[
-    {"name":"_next"}, 
-    {"name":"_state"}
-  ]
+  "fields":[{"name":"_next"}, {"name":"_state"}]
 },
 {
   "name":"kotlinx.coroutines.internal.Segment",
@@ -320,11 +256,7 @@
 },
 {
   "name":"kotlinx.coroutines.scheduling.CoroutineScheduler",
-  "fields":[
-    {"name":"_isTerminated"}, 
-    {"name":"controlState"}, 
-    {"name":"parkedWorkersStack"}
-  ]
+  "fields":[{"name":"_isTerminated"}, {"name":"controlState"}, {"name":"parkedWorkersStack"}]
 },
 {
   "name":"kotlinx.coroutines.scheduling.CoroutineScheduler$Worker",
@@ -332,19 +264,11 @@
 },
 {
   "name":"kotlinx.coroutines.scheduling.WorkQueue",
-  "fields":[
-    {"name":"blockingTasksInBuffer"}, 
-    {"name":"consumerIndex"}, 
-    {"name":"lastScheduledTask"}, 
-    {"name":"producerIndex"}
-  ]
+  "fields":[{"name":"blockingTasksInBuffer"}, {"name":"consumerIndex"}, {"name":"lastScheduledTask"}, {"name":"producerIndex"}]
 },
 {
   "name":"kotlinx.coroutines.selects.SelectBuilderImpl",
-  "fields":[
-    {"name":"_result"}, 
-    {"name":"_state"}
-  ]
+  "fields":[{"name":"_result"}, {"name":"_state"}]
 },
 {
   "name":"kotlinx.coroutines.selects.SelectImplementation",
@@ -356,13 +280,7 @@
 },
 {
   "name":"kotlinx.coroutines.sync.SemaphoreImpl",
-  "fields":[
-    {"name":"_availablePermits"}, 
-    {"name":"deqIdx"}, 
-    {"name":"enqIdx"}, 
-    {"name":"head"}, 
-    {"name":"tail"}
-  ]
+  "fields":[{"name":"_availablePermits"}, {"name":"deqIdx"}, {"name":"enqIdx"}, {"name":"head"}, {"name":"tail"}]
 },
 {
   "name":"sun.security.pkcs12.PKCS12KeyStore",
@@ -374,11 +292,11 @@
 },
 {
   "name":"sun.security.provider.NativePRNG",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
 },
 {
   "name":"sun.security.provider.NativePRNG$NonBlocking",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
 },
 {
   "name":"sun.security.provider.SHA",
@@ -390,7 +308,7 @@
 },
 {
   "name":"sun.security.provider.SecureRandom",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
 },
 {
   "name":"sun.security.provider.X509Factory",

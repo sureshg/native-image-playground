@@ -24,9 +24,13 @@ import java.lang.management.ManagementFactory
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.Socket
+import java.net.StandardProtocolFamily
 import java.net.StandardSocketOptions
 import java.net.URI
 import java.net.URLClassLoader
+import java.net.UnixDomainSocketAddress
+import java.nio.ByteBuffer
+import java.nio.channels.ServerSocketChannel
 import java.nio.charset.Charset
 import java.security.KeyStore
 import java.security.Security
@@ -40,6 +44,7 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
+import kotlin.io.path.Path
 import kotlin.io.use
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.system.exitProcess
@@ -341,6 +346,30 @@ fun rSocket(ex: HttpExchange) {
     }
   }
 }
+
+val udsServer by
+    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+      val addr =
+          UnixDomainSocketAddress.of(
+              Path(System.getProperty("java.io.tmpdir")).resolve("native-image-server.socket"))
+
+      ServerSocketChannel.open(StandardProtocolFamily.UNIX).use {
+        it.bind(addr)
+        while (true) {
+          val client = it.accept()
+          Thread.startVirtualThread {
+            client.use {
+              val buf = ByteBuffer.allocate(1024)
+              while (client.read(buf) > 0) {
+                buf.flip()
+                client.write(buf)
+                buf.clear()
+              }
+            }
+          }
+        }
+      }
+    }
 
 fun unixDomainSockets(httpExchange: HttpExchange) {}
 
