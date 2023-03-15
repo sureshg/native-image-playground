@@ -3,11 +3,11 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     labels:
       - "gradle"
       - "dependencies"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     reviewers:
       - sureshg
   - package-ecosystem: "github-actions"
