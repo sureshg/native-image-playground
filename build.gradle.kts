@@ -1,9 +1,7 @@
-@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
+@file:Suppress("UnstableApiUsage")
 
 import org.gradle.jvm.toolchain.JvmVendorSpec.GRAAL_VM
-import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.gradle.dsl.*
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -33,12 +31,12 @@ val kotlinJvmTarget = libs.versions.kotlin.jvm.target.map { JvmTarget.fromTarget
 val kotlinApiVersion = libs.versions.kotlin.api.version.map { KotlinVersion.fromVersion(it) }
 val kotlinLangVersion = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
-application { mainClass.set("$group.MainKt") }
+application { mainClass = "$group.MainKt" }
 
 java {
   toolchain {
-    languageVersion.set(javaVersion.map { JavaLanguageVersion.of(it.majorVersion) })
-    vendor.set(GRAAL_VM)
+    languageVersion = javaVersion.map { JavaLanguageVersion.of(it.majorVersion) }
+    vendor = GRAAL_VM
   }
 
   withSourcesJar()
@@ -63,8 +61,8 @@ kotlin {
   }
 
   jvmToolchain {
-    languageVersion.set(java.toolchain.languageVersion.get())
-    vendor.set(java.toolchain.vendor.get())
+    languageVersion = java.toolchain.languageVersion.get()
+    vendor = java.toolchain.vendor.get()
   }
 
   kotlinDaemonJvmArgs = listOf("--show-version", "--enable-preview")
@@ -109,13 +107,13 @@ spotless {
   isEnforceCheck = true
 }
 
-redacted { enabled.set(true) }
+redacted { enabled = true }
 
 tasks {
   withType<JavaCompile>().configureEach {
     options.apply {
       encoding = "UTF-8"
-      release.set(javaVersion.map { it.majorVersion.toInt() })
+      release = javaVersion.map { it.majorVersion.toInt() }
       isIncremental = true
       isFork = true
       debugOptions.debugLevel = "source,lines,vars"
@@ -130,13 +128,13 @@ tasks {
   withType<KotlinCompile>().configureEach {
     usePreciseJavaTracking = true
     compilerOptions {
-      jvmTarget.set(kotlinJvmTarget)
-      apiVersion.set(kotlinApiVersion)
-      languageVersion.set(kotlinLangVersion)
-      verbose.set(true)
-      javaParameters.set(true)
-      allWarningsAsErrors.set(false)
-      suppressWarnings.set(false)
+      jvmTarget = kotlinJvmTarget
+      apiVersion = kotlinApiVersion
+      languageVersion = kotlinLangVersion
+      verbose = true
+      javaParameters = true
+      allWarningsAsErrors = false
+      suppressWarnings = false
       freeCompilerArgs.addAll(
           "-Xjsr305=strict",
           "-Xjvm-default=all",
@@ -152,7 +150,7 @@ tasks {
 
   test { useJUnitPlatform() }
 
-  dependencyAnalysis { issues { all { onAny { severity("warn") } } } }
+  dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
 
   wrapper {
     gradleVersion = libs.versions.gradle.get()

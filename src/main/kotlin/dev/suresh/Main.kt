@@ -59,7 +59,7 @@ import org.graalvm.nativeimage.ImageInfo
 
 val logger = System.getLogger("Main")
 val vtExec = Executors.newVirtualThreadPerTaskExecutor()
-val viDispatcher = vtExec.asCoroutineDispatcher()
+val vtDispatcher = vtExec.asCoroutineDispatcher()
 // val REQ_URI = ScopedValue.newInstance<String>()
 
 fun main(args: Array<String>) {
@@ -321,7 +321,7 @@ fun resources(ex: HttpExchange) {
 
 fun rSocket(ex: HttpExchange) {
   println("Starting new rSocket connection!")
-  runBlocking(viDispatcher) {
+  runBlocking(vtDispatcher) {
     val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
 
     // request stream
@@ -338,7 +338,7 @@ fun rSocket(ex: HttpExchange) {
     ex.sendResponseHeaders(200, 0)
 
     ex.responseBody.buffered().use { os ->
-      stream.take(10).flowOn(viDispatcher).collect { payload ->
+      stream.take(10).flowOn(vtDispatcher).collect { payload ->
         os.write(payload.data.readBytes())
         os.write("\n".encodeToByteArray())
         os.flush()

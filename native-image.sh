@@ -47,13 +47,14 @@ args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
   # "-march=native"
   # "@env-vars.txt"
-  # "--enable-monitoring=jmxclient,jmxserver"
+  # "-H:+TraceSecurityServices"
   # "-H:+PrintAnalysisCallTree"
   # "-H:+DashboardAll"
   # "-H:DashboardDump=reports/dump"
   # "-H:+DashboardPretty"
   # "-H:+DashboardJson"
   # "-H:ReportAnalysisForbiddenType=java.awt.Toolkit:InHeap,Allocated"
+  # "--debug-attach"
   "-o" "$OUT_FILE")
 
 case "$OSTYPE" in
@@ -76,29 +77,23 @@ native-image "$@" "${args[@]}"
 # popd >/dev/null
 
 # https://www.graalvm.org/reference-manual/native-image/overview/BuildOptions/
-# --verbose \
 # --dry-run \
-# --static \
 # --static --libc=<glib | musl | bionic>
 # --target=darwin-aarch64
-# -H:+StaticExecutableWithDynamicLibC \
 # --gc=epsilon \
 # // Enable quick build
 # -Ob \
 # // generate debug info and no optimizations
 # -g -O0 \
 # --enable-https \
-# --enable-http \
-# --enable-all-security-services \
 # --enable-url-protocols=http,https,file,jar,unix \
 # --report-unsupported-elements-at-runtime \
 # --initialize-at-build-time=kotlinx,kotlin,org.slf4j \
 # --initialize-at-run-time=... \
 # --trace-class-initialization=... \
-# --trace-object-instantiation \
+# --trace-object-instantiation= \
 # --diagnostics-mode \
 # -Dauthor="$USER" \
-# -H:+PrintAnalysisCallTree \
 # -H:DefaultLocale="en-US" \
 # -H:+AddAllCharsets \
 # -H:+IncludeAllLocales  \
