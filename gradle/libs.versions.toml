@@ -1,7 +1,7 @@
 [versions]
 java                           = "20"
 kotlin                         = "1.8.20-RC2"
-ksp                            = "1.8.20-RC-1.0.9"
+ksp                            = "1.8.20-RC2-1.0.9"
 kotlin-jvm-target              = "19"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "1.9"
@@ -9,7 +9,7 @@ gradle                         = "8.1-rc-1"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.5.2"
-ajalt-mordant                  = "2.0.0-beta11"
+ajalt-mordant                  = "2.0.0-beta12"
 ajalt-colormath                = "3.2.1"
 assertj                        = "3.21.0"
 beryx-textio                   = "3.4.1"

@@ -155,6 +155,10 @@
   "name":"java.util.PropertyPermission"
 },
 {
+  "name":"java.util.concurrent.ForkJoinTask",
+  "fields":[{"name":"aux"}, {"name":"status"}]
+},
+{
   "name":"java.util.concurrent.ScheduledThreadPoolExecutor",
   "methods":[{"name":"setRemoveOnCancelPolicy","parameterTypes":["boolean"] }]
 },
@@ -178,6 +182,9 @@
   "name":"javax.security.auth.x500.X500Principal",
   "fields":[{"name":"thisX500Name"}],
   "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
+},
+{
+  "name":"jdk.internal.misc.Unsafe"
 },
 {
   "name":"kotlin.internal.jdk8.JDK8PlatformImplementations",
