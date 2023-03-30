@@ -45,6 +45,8 @@ rm -f "${OUT_FILE}"
 
 args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
+  "-R:MaxHeapSize=64m"
+  # "-R:MinHeapSize=4m"
   # "-march=native"
   # "@env-vars.txt"
   # "-H:+TraceSecurityServices"
