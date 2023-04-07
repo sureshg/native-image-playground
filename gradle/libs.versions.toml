@@ -98,7 +98,7 @@ licenser                       = "0.6.1"
 osdetector                     = "1.7.3"
 protobuf-plugin                = "0.9.2"
 shadow                         = "8.1.1"
-spotless                       = "6.17.0"
+spotless                       = "6.18.0"
 versioncatalog-update          = "0.8.0"
 dependency-analysis            = "1.19.0"
 
