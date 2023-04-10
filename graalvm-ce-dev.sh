@@ -40,12 +40,12 @@ esac
 
 echo "Using OS: $os-$arch"
 
-# download_path=$(curl -sSL --no-buffer "https://github.com/graalvm/graalvm-ce-dev-builds/releases/latest" | grep -m1 -Eioh "/graalvm/graalvm-ce-dev-builds/releases/download/.*/graalvm-ce-java${jdk_version}-($os-$arch)-dev.(tar.gz|zip)")
+# download_path=$(curl -sSL --no-buffer "https://github.com/graalvm/graalvm-ce-dev-builds/releases/latest" | grep -m1 -Eioh "/graalvm/graalvm-ce-dev-builds/releases/download/.*/graalvm-community-java${jdk_version}-($os-$arch)-dev.(tar.gz|zip)")
 graalvm_base_url="https://github.com/graalvm/graalvm-ce-dev-builds/releases"
 graalvm_release=$(curl -Ls -o /dev/null -w %{url_effective} "${graalvm_base_url}/latest")
 graalvm_tag="${graalvm_release##*/}"
 
-openjdk_file="graalvm-ce-java${jdk_version}-$os-$arch-dev.${extn}"
+openjdk_file="graalvm-community-java${jdk_version}-$os-$arch-dev.${extn}"
 download_url="${graalvm_base_url}/download/${graalvm_tag}/${openjdk_file}"
 
 # Download the GraalVM
@@ -72,12 +72,9 @@ popd >/dev/null
 
 # Set GraalVM as default JDK in the current shell
 sdk u java "$sdkman_id"
-# Install WASM
-gu install wasm
-native-image --version
 
-#if [[ ! -x "$JAVA_HOME/bin/native-image" ]]; then
-#  echo "Installing NativeImage ..."
-#  gu install native-image
-#  gu install espresso visualvm
-#fi
+echo "Installing Wasm..."
+# gu install wasm visualvm
+gu install wasm
+
+native-image --version

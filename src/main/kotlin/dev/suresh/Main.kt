@@ -44,6 +44,7 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
+import jdk.incubator.concurrent.ScopedValue
 import kotlin.io.path.Path
 import kotlin.io.use
 import kotlin.jvm.optionals.getOrDefault
@@ -60,7 +61,7 @@ import org.graalvm.nativeimage.ImageInfo
 val logger = System.getLogger("Main")
 val vtExec = Executors.newVirtualThreadPerTaskExecutor()
 val vtDispatcher = vtExec.asCoroutineDispatcher()
-// val REQ_URI = ScopedValue.newInstance<String>()
+val REQ_URI = ScopedValue.newInstance<String>()
 
 fun main(args: Array<String>) {
   logger.log(INFO) { "This is from system logger!" }
@@ -72,11 +73,11 @@ fun main(args: Array<String>) {
         createContext("/") {
           val req = it.requestURI.toString()
           println("GET: $req")
-          // ScopedValue.where(REQ_URI, req) {
-          val res = summary(args, debug).encodeToByteArray()
-          it.sendResponseHeaders(200, res.size.toLong())
-          it.responseBody.use { os -> os.write(res) }
-          // }
+          ScopedValue.where(REQ_URI, req) {
+            val res = summary(args, debug).encodeToByteArray()
+            it.sendResponseHeaders(200, res.size.toLong())
+            it.responseBody.use { os -> os.write(res) }
+          }
         }
 
         createContext("/shutdown") {
@@ -248,6 +249,7 @@ fun summary(args: Array<String>, debug: Boolean = false) = buildString {
     | Env Vars       : ${env.size.fmt}|
     | Sys Props      : ${props.size.fmt}|
     | Virtual Thread : ${Thread.currentThread().isVirtual} |
+    | ScopedValue    : ${REQ_URI.orElse("n/a")}    |
     +-----------------------+
     """
           .trimIndent(),

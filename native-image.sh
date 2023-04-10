@@ -32,7 +32,7 @@ nohup java \
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/test
-curl -fsSL http://localhost:9080/rsocket
+# curl -fsSL http://localhost:9080/rsocket
 curl -fsSL -o /dev/null http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
 # Wait for agent to write the config
 sleep 1
@@ -46,8 +46,8 @@ rm -f "${OUT_FILE}"
 args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
   "-R:MaxHeapSize=64m"
+  "-march=native"
   # "-R:MinHeapSize=4m"
-  # "-march=native"
   # "@env-vars.txt"
   # "-H:+TraceSecurityServices"
   # "-H:+PrintAnalysisCallTree"
