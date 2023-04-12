@@ -5,7 +5,7 @@ ksp                            = "1.8.20-1.0.10"
 kotlin-jvm-target              = "19"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "1.9"
-gradle                         = "8.1-rc-4"
+gradle                         = "8.1"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.5.2"
@@ -90,7 +90,7 @@ champeau-includegit            = "0.1.6"
 champeau-japicmp               = "0.3.0"
 champeau-jmh                   = "0.6.6"
 champeau-mrjar                 = "0.1"
-graalvm-nativeimage            = "0.9.20"
+graalvm-nativeimage            = "0.9.21"
 gradlechecksum                 = "1.4.0"
 jetbrains-exposed              = "0.2.1"
 ktlint                         = "0.46.1"
@@ -163,6 +163,7 @@ jetbrains-markdown         = { module = "org.jetbrains:markdown"                
 jmdns                      = { module = "org.jmdns:jmdns"                                    , version.ref = "jmdns"}
 jspecify                   = { module = "org.jspecify:jspecify"                              , version.ref = "jspecify"}
 
+kotlin-bom                 = { module = "org.jetbrains.kotlin:kotlin-bom"                    , version.ref = "kotlin"}
 kotlinx-coroutines-core    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"      , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-jdk8    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"      , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-slf4j   = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j"     , version.ref = "kotlinx-coroutines"}
