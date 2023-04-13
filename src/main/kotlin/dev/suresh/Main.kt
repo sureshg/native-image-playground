@@ -3,6 +3,7 @@ package dev.suresh
 import com.sun.management.OperatingSystemMXBean
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpServer
+import dev.suresh.aot.BuildEnv
 import dev.suresh.model.Creds
 import dev.suresh.model.Secret
 import io.ktor.client.*
@@ -64,7 +65,7 @@ val vtDispatcher = vtExec.asCoroutineDispatcher()
 val REQ_URI = ScopedValue.newInstance<String>()
 
 fun main(args: Array<String>) {
-  logger.log(INFO) { "This is from system logger!" }
+  logger.log(INFO) { "Native Image Built on: ${BuildEnv.TIME_STAMP}" }
 
   val debug = args.contains("--debug")
   val start = System.currentTimeMillis()

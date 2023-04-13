@@ -23,7 +23,7 @@ OUT_FILE="${BUILD_DIR}/native-image-playground"
 
 # Run the app in background (&) by ignoring SIGHUP signal (nohup).
 # Enable preview and incubating features (by adding all system modules).
-nohup java \
+BUILD_TIMESTAMP="$(date +%s)" nohup java \
   --show-version \
   --enable-preview \
   --add-modules=ALL-SYSTEM \
@@ -40,13 +40,17 @@ sleep 1
 echo "Creating native image..."
 rm -f "${OUT_FILE}"
 
-# Pass all env variables to native-image builder
+# Pass all env variables to native-image builder (or use -Ekey[=<val>] option)
 # env | sed -e 's/=.*//g' | sed -e 's/^/-E/g' > env-vars.txt
 
 args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
   "-R:MaxHeapSize=64m"
   "-march=native"
+  "-EBUILD_TIMESTAMP=$(date +%s)"
+  # "--bundle-create"
+  # "--dry-run"
+  # "--bundle-apply="build/native-image-playground.nib"
   # "-R:MinHeapSize=4m"
   # "@env-vars.txt"
   # "-H:+TraceSecurityServices"
@@ -79,7 +83,6 @@ native-image "$@" "${args[@]}"
 # popd >/dev/null
 
 # https://www.graalvm.org/reference-manual/native-image/overview/BuildOptions/
-# --dry-run \
 # --static --libc=<glib | musl | bionic>
 # --target=darwin-aarch64
 # --gc=epsilon \
@@ -109,10 +112,7 @@ native-image "$@" "${args[@]}"
 # -H:DashboardDump=dashboard \
 # -H:+DashboardHeap \
 # -H:+DashboardCode \
-# // -H:+DashboardAll \
-# // -H:+DashboardPointsTo \
 # -H:CompilerBackend=llvm \
 # -H:±GenerateBuildArtifactsFile \
 # -J-Xmx4G \
-# -J--add-modules -JALL-SYSTEM \
 # Resource config options: https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#:~:text=H%3AResourceConfigurationFiles

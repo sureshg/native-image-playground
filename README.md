@@ -37,9 +37,14 @@ $ ./native-image.sh -Ob
 # For prod deployments
 $ ./native-image.sh
 
-# JIT Mode
+# Using Native Image Bundles
+$ ./native-image.sh --bundle-create --dry-run
+$ native-image --bundle-apply="build/native-image-playground.nib"
+$ build/native-image-playground.output/default/native-image-playground
+
+# GraalVM JIT Mode
 $ ./gradlew build
-$ java --enable-preview \
+$ BUILD_TIMESTAMP="$(date +%s)" java --enable-preview \
        --add-modules=ALL-SYSTEM \
        -jar build/libs/native-image-playground-*-all.jar
 
@@ -48,7 +53,7 @@ $ jdeps -q \
         -R \
         --ignore-missing-deps \
         --multi-release=20 \
-        build/libs/native-image-playground-*-main-all.jar
+        build/libs/native-image-playground-*-all.jar
 
 # Build native image from modular jars
 $ native-image \
