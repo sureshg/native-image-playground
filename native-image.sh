@@ -55,6 +55,7 @@ args=("-jar" "${APP_JAR}"
   # "@env-vars.txt"
   # "-H:+TraceSecurityServices"
   # "-H:+PrintAnalysisCallTree"
+  # "-H:+PrintClassInitialization" // List of safe classes to initialize at build time
   # "-H:+DashboardAll"
   # "-H:DashboardDump=reports/dump"
   # "-H:+DashboardPretty"
