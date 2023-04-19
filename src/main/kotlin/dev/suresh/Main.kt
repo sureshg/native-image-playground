@@ -66,6 +66,7 @@ val REQ_URI = ScopedValue.newInstance<String>()
 
 fun main(args: Array<String>) {
   logger.log(INFO) { "Native Image Built on: ${BuildEnv.TIME_STAMP}" }
+  Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
   val debug = args.contains("--debug")
   val start = System.currentTimeMillis()
