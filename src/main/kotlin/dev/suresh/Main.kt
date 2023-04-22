@@ -65,7 +65,7 @@ val vtDispatcher = vtExec.asCoroutineDispatcher()
 val REQ_URI = ScopedValue.newInstance<String>()
 
 fun main(args: Array<String>) {
-  logger.log(INFO) { "Native Image Built on: ${BuildEnv.TIME_STAMP}" }
+  logger.log(INFO) { "Native Image ${BuildEnv.BUILD_NUMBER}, built on: ${BuildEnv.TIME_STAMP}" }
   Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
   val debug = args.contains("--debug")

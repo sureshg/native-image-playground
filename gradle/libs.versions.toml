@@ -5,7 +5,7 @@ ksp                            = "1.8.20-1.0.11"
 kotlin-jvm-target              = "19"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "1.9"
-gradle                         = "8.1"
+gradle                         = "8.1.1"
 
 # Gradle Dependencies Versions
 ajalt-clikt                    = "3.5.2"
@@ -100,7 +100,7 @@ protobuf-plugin                = "0.9.2"
 shadow                         = "8.1.1"
 spotless                       = "6.18.0"
 versioncatalog-update          = "0.8.0"
-dependency-analysis            = "1.19.0"
+dependency-analysis            = "1.20.0"
 
 
 [libraries]

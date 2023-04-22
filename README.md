@@ -44,7 +44,7 @@ $ build/native-image-playground.output/default/native-image-playground
 
 # GraalVM JIT Mode
 $ ./gradlew build
-$ BUILD_TIMESTAMP="$(date +%s)" java --enable-preview \
+$ java --enable-preview \
        --add-modules=ALL-SYSTEM \
        -jar build/libs/native-image-playground-*-all.jar
 

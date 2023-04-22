@@ -23,7 +23,7 @@ OUT_FILE="${BUILD_DIR}/native-image-playground"
 
 # Run the app in background (&) by ignoring SIGHUP signal (nohup).
 # Enable preview and incubating features (by adding all system modules).
-BUILD_TIMESTAMP="$(date +%s)" nohup java \
+nohup java \
   --show-version \
   --enable-preview \
   --add-modules=ALL-SYSTEM \
@@ -47,7 +47,7 @@ args=("-jar" "${APP_JAR}"
   "-J--add-modules=ALL-SYSTEM"
   "-R:MaxHeapSize=64m"
   "-march=native"
-  "-EBUILD_TIMESTAMP=$(date +%s)"
+  "-EBUILD_NUMBER=${BUILD_NUMBER:-1.0.0}"
   # "--bundle-create"
   # "--dry-run"
   # "--bundle-apply="build/native-image-playground.nib"

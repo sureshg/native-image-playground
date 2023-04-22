@@ -1,7 +1,6 @@
 package dev.suresh.aot
 
-import java.time.Instant
-import java.time.ZoneId
+import java.time.ZonedDateTime
 
 /**
  * A config class to hold the build environment variables, which is explicitly initialized at build
@@ -9,8 +8,7 @@ import java.time.ZoneId
  */
 object BuildEnv {
 
-  val TIME_STAMP =
-      Instant.ofEpochSecond(System.getenv("BUILD_TIMESTAMP").toLong())
-          .atZone(ZoneId.systemDefault())
-          .toLocalDateTime()
+  val BUILD_NUMBER = System.getenv().getOrElse("BUILD_NUMBER") { "0.0.0" }
+
+  val TIME_STAMP = ZonedDateTime.now().toLocalDateTime()
 }
