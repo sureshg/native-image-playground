@@ -20,6 +20,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"io.helidon.common.LazyValueImpl",
+  "fields":[{"name":"loaded"}, {"name":"theLock"}]
+},
+{
   "name":"io.ktor.client.HttpClient",
   "fields":[{"name":"closed"}]
 },
@@ -37,11 +41,7 @@
 },
 {
   "name":"io.ktor.network.selector.InterestSuspensionsMap",
-  "allDeclaredFields":true,
-  "allDeclaredMethods":true,
-  "allPublicMethods":true,
-  "allDeclaredConstructors":true,
-  "allPublicConstructors":true
+  "fields":[{"name":"acceptHandlerReference"}, {"name":"connectHandlerReference"}, {"name":"readHandlerReference"}, {"name":"writeHandlerReference"}]
 },
 {
   "name":"io.ktor.network.selector.LockFreeMPSCQueue",
@@ -96,12 +96,6 @@
   "fields":[{"name":"streamId"}]
 },
 {
-  "name":"java.io.FilePermission"
-},
-{
-  "name":"java.lang.RuntimePermission"
-},
-{
   "name":"java.lang.String"
 },
 {
@@ -109,32 +103,16 @@
   "fields":[{"name":"threadLocalRandomProbe"}]
 },
 {
-  "name":"java.net.NetPermission"
-},
-{
-  "name":"java.net.SocketPermission"
-},
-{
   "name":"java.net.StandardSocketOptions"
 },
 {
-  "name":"java.net.URLPermission",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
-},
-{
   "name":"java.security.AlgorithmParametersSpi"
-},
-{
-  "name":"java.security.AllPermission"
 },
 {
   "name":"java.security.KeyStoreSpi"
 },
 {
   "name":"java.security.SecureRandomParameters"
-},
-{
-  "name":"java.security.SecurityPermission"
 },
 {
   "name":"java.security.interfaces.ECPrivateKey"
@@ -152,9 +130,6 @@
   "name":"java.util.Date"
 },
 {
-  "name":"java.util.PropertyPermission"
-},
-{
   "name":"java.util.concurrent.ForkJoinTask",
   "fields":[{"name":"aux"}, {"name":"status"}]
 },
@@ -165,10 +140,6 @@
 {
   "name":"java.util.concurrent.atomic.AtomicBoolean",
   "fields":[{"name":"value"}]
-},
-{
-  "name":"java.util.concurrent.atomic.AtomicMarkableReference",
-  "fields":[{"name":"pair"}]
 },
 {
   "name":"java.util.concurrent.atomic.AtomicReference",
@@ -195,7 +166,7 @@
 },
 {
   "name":"kotlinx.coroutines.CancellableContinuationImpl",
-  "fields":[{"name":"_decision"}, {"name":"_decisionAndIndex"}, {"name":"_parentHandle"}, {"name":"_state"}]
+  "fields":[{"name":"_decisionAndIndex"}, {"name":"_parentHandle"}, {"name":"_state"}]
 },
 {
   "name":"kotlinx.coroutines.DispatchedCoroutine",
@@ -216,10 +187,6 @@
 {
   "name":"kotlinx.coroutines.JobSupport$Finishing",
   "fields":[{"name":"_exceptionsHolder"}, {"name":"_isCompleting"}, {"name":"_rootCause"}]
-},
-{
-  "name":"kotlinx.coroutines.channels.AbstractSendChannel",
-  "fields":[{"name":"onCloseHandler"}]
 },
 {
   "name":"kotlinx.coroutines.channels.BufferedChannel",
@@ -274,16 +241,8 @@
   "fields":[{"name":"blockingTasksInBuffer"}, {"name":"consumerIndex"}, {"name":"lastScheduledTask"}, {"name":"producerIndex"}]
 },
 {
-  "name":"kotlinx.coroutines.selects.SelectBuilderImpl",
-  "fields":[{"name":"_result"}, {"name":"_state"}]
-},
-{
   "name":"kotlinx.coroutines.selects.SelectImplementation",
   "fields":[{"name":"state"}]
-},
-{
-  "name":"kotlinx.coroutines.selects.SeqNumber",
-  "fields":[{"name":"number"}]
 },
 {
   "name":"kotlinx.coroutines.sync.SemaphoreImpl",

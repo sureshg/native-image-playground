@@ -31,8 +31,8 @@ nohup java \
   -jar "${APP_JAR}" &>"${BUILD_DIR}/nohup.out" &
 # Wait for the server to startup
 sleep 1
-curl -fsSL http://localhost:9080/test
-curl -fsSL http://localhost:9080/rsocket
+curl -fsSL http://localhost:9080/
+# curl -fsSL http://localhost:9080/rsocket
 curl -fsSL -o /dev/null http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
 # Wait for agent to write the config
 sleep 1

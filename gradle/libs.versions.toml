@@ -14,7 +14,7 @@ ajalt-colormath                = "3.2.1"
 assertj                        = "3.21.0"
 beryx-textio                   = "3.4.1"
 bucket4j                       = "7.1.0"
-classgraph                     = "4.8.157"
+classgraph                     = "4.8.158"
 concurrent-jctools             = "3.3.0"
 crypto-bcprov                  = "1.70"
 crypto-conscrypt               = "2.5.2"
@@ -36,6 +36,7 @@ graalvm                        = "22.3.2"
 graalvm-hint                   = "0.20.0"
 grpc                           = "1.39.0"
 grpc-kotlin                    = "1.2.0"
+helidon-nima                   = "4.0.0-ALPHA6"
 http-common                    = "0.10.0"
 imageio-twelvemonkeys          = "3.8.1"
 jakewharton-picnic             = "0.6.0"
@@ -44,19 +45,19 @@ jetbrains-markdown             = "0.2.4"
 jmdns                          = "3.5.7"
 jreleaser                      = "0.9.1"
 jspecify                       = "0.2.0"
-junit                          = "5.9.3"
+junit                          = "5.10.0-M1"
 junit-pioneer                  = "1.4.2"
 jqwik                          = "1.6.0"
 jSystemThemeDetector           = "3.6"
 kmath                          = "0.2.1"
 kotlinx-atomicfu               = "0.20.0"
-kotlinx-coroutines             = "1.7.0-RC"
+kotlinx-coroutines             = "1.7.1"
 kotlinx-collections-immutable  = "0.3.5"
 kotlinx-cli                    = "0.3.4"
 kotlinx-datetime               = "0.4.0"
 kotlinx-reflect-lite           = "1.0.0"
 kotlinx-io-jvm                 = "0.1.16"
-kotlinx-serialization          = "1.5.0"
+kotlinx-serialization          = "1.5.1"
 kotlinx-serialization-yaml     = "0.52.0"
 kotlinx-serialization-csv      = "2.0.0"
 kodein                         = "7.10.0"
@@ -65,7 +66,7 @@ ktfmt                          = "0.43"
 kotlininject                   = "0.4.1"
 ksp-auto-service               = "1.0.0"
 ksp-redacted                   = "1.4.0"
-ksp-powerassert                = "0.12.2"
+ksp-powerassert                = "0.13.0"
 ktor                           = "2.3.0"
 lwjgl                          = "3.3.0"
 libgdx                         = "1.10.0"
@@ -90,7 +91,7 @@ champeau-includegit            = "0.1.6"
 champeau-japicmp               = "0.3.0"
 champeau-jmh                   = "0.7.1"
 champeau-mrjar                 = "0.1"
-graalvm-nativeimage            = "0.9.21"
+graalvm-nativeimage            = "0.9.22"
 gradlechecksum                 = "1.4.0"
 jetbrains-exposed              = "0.2.1"
 ktlint                         = "0.46.1"
@@ -150,6 +151,14 @@ graalvm-hint-annotations    = { module = "io.goodforgod:graalvm-hint-annotations
 
 grpc-protobuf               = { module = "io.grpc:grpc-protobuf"                            , version.ref = "grpc"}
 grpc-kotlin                 = { module = "io.grpc:grpc-kotlin-stub"                         , version.ref = "grpc-kotlin"}
+
+helidon-nima-bom            = { module = "io.helidon.nima:helidon-nima-project"                              , version.ref = "helidon-nima"}
+helidon-nima-webserver      = { module = "io.helidon.nima.webserver:helidon-nima-webserver"                  , version.ref = "helidon-nima"}
+helidon-nima-static         = { module = "io.helidon.nima.webserver:helidon-nima-webserver-static-content"   , version.ref = "helidon-nima"}
+helidon-nima-webclient      = { module = "io.helidon.nima.webclient:helidon-nima-webclient"                  , version.ref = "helidon-nima"}
+helidon-nima-service        = { module = "io.helidon.nima.service-common:helidon-nima-service-common"        , version.ref = "helidon-nima"}
+helidon-config-yaml         = { module = "io.helidon.config:helidon-config-yaml"                             , version.ref = "helidon-nima"}
+
 
 http-common                 = { module = "io.goodforgod:http-common"                        , version.ref = "http-common"}
 protobuf-javautil           = { module = "com.google.protobuf:protobuf-java-util"           , version.ref = "protobuf"}

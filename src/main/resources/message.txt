@@ -1,1 +1,1 @@
-Graalvm Native Image Resource message!
+Graalvm Native-Image Resource message!

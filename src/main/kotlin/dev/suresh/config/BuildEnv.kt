@@ -1,4 +1,4 @@
-package dev.suresh.aot
+package dev.suresh.config
 
 import java.time.ZonedDateTime
 

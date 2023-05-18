@@ -3,6 +3,7 @@
 import org.gradle.jvm.toolchain.JvmVendorSpec.GRAAL_VM
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {
   java
@@ -31,7 +32,11 @@ val kotlinJvmTarget = libs.versions.kotlin.jvm.target.map { JvmTarget.fromTarget
 val kotlinApiVersion = libs.versions.kotlin.api.version.map { KotlinVersion.fromVersion(it) }
 val kotlinLangVersion = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
-application { mainClass = "$group.MainKt" }
+application {
+  mainClass = "$group.MainKt"
+  applicationDefaultJvmArgs +=
+      listOf("--show-version", "--enable-preview", "--add-modules=ALL-SYSTEM")
+}
 
 java {
   toolchain {
@@ -109,6 +114,39 @@ spotless {
 
 redacted { enabled = true }
 
+graalvmNative {
+  binaries {
+    named("main") {
+      imageName =
+          "${project.name}-${ System.getProperty("os.name").lowercase()}-${System.getProperty("os.arch").lowercase()}"
+      mainClass = application.mainClass
+      buildArgs =
+          listOf(
+              "--enable-preview",
+              "--native-image-info",
+              "--enable-monitoring=heapdump,jfr,jvmstat",
+              "--install-exit-handlers",
+              "--features=dev.suresh.aot.RuntimeFeature",
+              "-march=native",
+              "-R:MaxHeapSize=64m",
+              "-EBUILD_NUMBER=${project.version}",
+              "-H:+ReportExceptionStackTraces",
+              // "-H:IncludeResources=.*(message\\.txt|\\app.properties)\$",
+          )
+      jvmArgs = listOf("--add-modules=ALL-SYSTEM")
+      systemProperties = mapOf("java.awt.headless" to "false")
+      useFatJar = false
+      sharedLibrary = false
+      verbose = false
+      fallback = false
+      quickBuild = false
+      resources { autodetect() }
+    }
+  }
+  metadataRepository { enabled = true }
+  toolchainDetection = false
+}
+
 tasks {
   withType<JavaCompile>().configureEach {
     options.apply {
@@ -148,6 +186,8 @@ tasks {
     finalizedBy("spotlessApply")
   }
 
+  shadowJar { mergeServiceFiles() }
+
   test { useJUnitPlatform() }
 
   dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
@@ -160,12 +200,45 @@ tasks {
   defaultTasks("clean", "tasks", "--all")
 }
 
-val graal by sourceSets.creating
+/**
+ * Creates a custom source set for GraalVM native image build time dependencies. More details are
+ * [here](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ *
+ * For each source set added to the project, the Java plugins add a few
+ * [dependency configurations](https://docs.gradle.org/current/userguide/java_plugin.html#java_source_set_configurations)
+ * - graalImplementation
+ * - graalCompileOnly
+ * - graalRuntimeOnly
+ * - graalCompileClasspath (CompileOnly + Implementation)
+ * - graalRuntimeClasspath (RuntimeOnly + Implementation)
+ */
+val graal by
+    sourceSets.creating {
+      compileClasspath += sourceSets.main.get().output
+      runtimeClasspath += sourceSets.main.get().output
+    }
+
+configurations {
+  val graalImplementation by existing
+  val graalRuntimeOnly by existing
+
+  // graalImplementation extendsFrom main source set implementation
+  graalImplementation.extendsFrom(implementation)
+  graalRuntimeOnly.extendsFrom(runtimeOnly)
+
+  // Finally, nativeImage classpath extendsFrom graalImplementation
+  // This way all main + graal dependencies are also available at native image build time.
+  nativeImageClasspath.extendsFrom(graalImplementation)
+}
 
 dependencies {
   implementation(platform(libs.kotlin.bom))
   implementation(platform(libs.ktor.bom))
+  implementation(platform(libs.helidon.nima.bom))
   implementation(kotlin("stdlib"))
+  implementation(libs.helidon.nima.webserver)
+  implementation(libs.helidon.nima.static)
+  implementation(libs.helidon.nima.service)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.serialization.json.okio)
@@ -186,8 +259,11 @@ dependencies {
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)
 
+  // Dependencies required for native-image build. Use "graalCompileOnly" for compile only deps.
+  // "graalCompileOnly"(libs.graalvm.sdk)
+  "graalImplementation"(libs.classgraph)
+  nativeImageCompileOnly(graal.output)
+
   // kapt(libs.graalvm.hint.processor)
   // compileOnly(libs.graalvm.hint.annotations)
-  // nativeImageCompileOnly(libs.graalvm.sdk)
-  // "graalCompileOnly"(libs.graalvm.sdk) // For graal source set
 }

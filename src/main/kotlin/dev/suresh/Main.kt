@@ -1,11 +1,17 @@
 package dev.suresh
 
 import com.sun.management.OperatingSystemMXBean
-import com.sun.net.httpserver.HttpExchange
-import com.sun.net.httpserver.HttpServer
-import dev.suresh.aot.BuildEnv
+import dev.suresh.config.BuildEnv
 import dev.suresh.model.Creds
 import dev.suresh.model.Secret
+import io.helidon.common.http.Http
+import io.helidon.common.http.Http.Header
+import io.helidon.common.http.NotFoundException
+import io.helidon.nima.webserver.WebServer
+import io.helidon.nima.webserver.http.HttpRouting
+import io.helidon.nima.webserver.http.ServerRequest
+import io.helidon.nima.webserver.http.ServerResponse
+import io.helidon.nima.webserver.staticcontent.StaticContentService
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
@@ -15,7 +21,6 @@ import io.rsocket.kotlin.core.WellKnownMimeType
 import io.rsocket.kotlin.keepalive.KeepAlive
 import io.rsocket.kotlin.ktor.client.RSocketSupport
 import io.rsocket.kotlin.ktor.client.rSocket
-import io.rsocket.kotlin.payload.Payload
 import io.rsocket.kotlin.payload.PayloadMimeType
 import io.rsocket.kotlin.payload.buildPayload
 import io.rsocket.kotlin.payload.data
@@ -53,66 +58,109 @@ import kotlin.system.exitProcess
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
 import org.graalvm.nativeimage.ImageInfo
 
 val logger = System.getLogger("Main")
-val vtExec = Executors.newVirtualThreadPerTaskExecutor()
-val vtDispatcher = vtExec.asCoroutineDispatcher()
+val vtDispatcher by lazy { Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher() }
 val REQ_URI = ScopedValue.newInstance<String>()
 
+lateinit var cmdArgs: List<String>
+lateinit var webServer: WebServer
+
 fun main(args: Array<String>) {
-  logger.log(INFO) { "Native Image ${BuildEnv.BUILD_NUMBER}, built on: ${BuildEnv.TIME_STAMP}" }
+  val start = System.currentTimeMillis()
+  val type = if (ImageInfo.isExecutable()) "Native Image" else "JVM App"
+  logger.log(INFO) { "$type: ${BuildEnv.BUILD_NUMBER}, built on: ${BuildEnv.TIME_STAMP}" }
   Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
-  val debug = args.contains("--debug")
-  val start = System.currentTimeMillis()
-  val server =
-      HttpServer.create(InetSocketAddress(9080), 0).apply {
-        createContext("/") {
-          val req = it.requestURI.toString()
-          println("GET: $req")
-          ScopedValue.where(REQ_URI, req) {
-            val res = summary(args, debug).encodeToByteArray()
-            it.sendResponseHeaders(200, res.size.toLong())
-            it.responseBody.use { os -> os.write(res) }
-          }
-        }
+  cmdArgs = args.toList()
+  webServer = WebServer.builder().port(9080).routing(::routes).start()
 
-        createContext("/shutdown") {
-          stop(0)
-          exitProcess(0)
-        }
-
-        createContext("/rsocket", ::rSocket)
-
-        createContext("/reflect", ::reflect)
-
-        createContext("/resources", ::resources)
-
-        createContext("/uds", ::unixDomainSockets)
-
-        executor = vtExec
-        start()
-      }
-
-  println("Http Server started on http://localhost:${server.address.port}...")
   val vmTime =
       ProcessHandle.current().info().startInstant().getOrDefault(Instant.now()).toEpochMilli()
   val currTime = System.currentTimeMillis()
   // val vmTime = ManagementFactory.getRuntimeMXBean().startTime
+  // println("Started in ${currTime - vmTime} ms ($type: ${start - vmTime} ms, Server: ${currTime -
+  // start} ms).")
+}
 
-  val type = if (ImageInfo.isExecutable()) "Binary" else "JVM"
-  println(
-      "Started in ${currTime - vmTime} ms ($type: ${start - vmTime} ms, Server: ${currTime - start} ms).",
-  )
+val rsClient by lazy {
+  HttpClient(CIO) {
+    install(WebSockets) // rsocket requires websockets plugin installed
+    install(RSocketSupport) {
+      // configure rSocket connector (all values have defaults)
+      connector {
+        maxFragmentSize = 1024
+        connectionConfig {
+          keepAlive = KeepAlive(interval = 30.seconds, maxLifetime = 2.minutes)
+          // payload for setup frame
+          setupPayload { buildPayload { data("""{ "data": "setup" }""") } }
+          // mime types
+          payloadMimeType =
+              PayloadMimeType(
+                  data = WellKnownMimeType.ApplicationJson,
+                  metadata = WellKnownMimeType.MessageRSocketCompositeMetadata,
+              )
+        }
+      }
+    }
+  }
+}
+
+private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
+
+val SERVER_HEADER = Header.createCached(Header.SERVER, "Nima")
+val UI_REDIRECT = Header.createCached(Header.LOCATION, "/")
+
+fun routes(rules: HttpRouting.Builder) {
+  rules
+      .addFilter { chain, req, res ->
+        println("${req.prologue().method()}: ${req.prologue().uriPath().path()}")
+        res.header(SERVER_HEADER)
+        chain.proceed()
+      }
+      .any("/", ::root)
+      .get("/shutdown", ::shutdown)
+      .get("/rsocket", ::rSocket)
+      .get("/reflect/{type}", ::reflect)
+      .get("/resources", ::resources)
+      .get("/uds", ::unixDomainSockets)
+      .any("/ui", ::redirect)
+      .register(
+          "/img", StaticContentService.builder("static").welcomeFileName("favicon.ico").build())
+      .error(Throwable::class.java, ::error)
+}
+
+fun root(req: ServerRequest, res: ServerResponse) {
+  ScopedValue.where(REQ_URI, req.path().path()) { res.send(summary(cmdArgs)) }
+}
+
+fun error(req: ServerRequest, res: ServerResponse, ex: Throwable) {
+  println("ERROR: ${req.path().path()} - ${ex.message}")
+  when (ex) {
+    is NotFoundException -> res.status(Http.Status.NOT_FOUND_404)
+    else -> res.status(Http.Status.INTERNAL_SERVER_ERROR_500)
+  }
+  res.send()
+}
+
+fun shutdown(req: ServerRequest, res: ServerResponse) {
+  webServer.stop()
+  exitProcess(0)
+}
+
+fun redirect(req: ServerRequest, res: ServerResponse) {
+  res.status(Http.Status.MOVED_PERMANENTLY_301)
+  res.headers().set(UI_REDIRECT)
+  res.send()
 }
 
 /** Get the system summary report */
-fun summary(args: Array<String>, debug: Boolean = false) = buildString {
+fun summary(args: List<String>) = buildString {
+  val debug = args.contains("--debug")
   val rt = Runtime.getRuntime()
   val unit = 1024 * 1024L
   val heapSize = rt.totalMemory()
@@ -141,7 +189,11 @@ fun summary(args: Array<String>, debug: Boolean = false) = buildString {
 
   appendLine("✧✧✧ Processes ✧✧✧")
   val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()
-  ps.forEach { appendLine("${it.pid()} : ${it.info()}") }
+  if (debug) {
+    ps.forEach { appendLine("${it.pid()} : ${it.info()}") }
+  } else {
+    appendLine("Found ${ps.size} processes.")
+  }
 
   appendLine("✧✧✧ Trust stores ✧✧✧")
   val caCerts =
@@ -217,22 +269,23 @@ fun summary(args: Array<String>, debug: Boolean = false) = buildString {
   appendLine("✧✧✧ File PathSeparator = ${fmt.formatHex(File.pathSeparator.encodeToByteArray())}")
   appendLine("✧✧✧ File Separator = ${fmt.formatHex(File.separator.encodeToByteArray())}")
 
-  // Somehow, socket connect is hanging on native image.
-  if (ImageInfo.isExecutable().not()) {
-    appendLine("✧✧✧ Additional info in exception ✧✧✧")
-    val ex =
-        runCatching {
-              Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
-              Socket().use { s ->
-                s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
-                s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
-                s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
-                s.soTimeout = 100
-                s.connect(InetSocketAddress("localhost", 12345), 100)
-              }
+  appendLine("✧✧✧ Additional info in exception ✧✧✧")
+  val ex =
+      runCatching {
+            Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
+            Socket().use { s ->
+              s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
+              s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
+              s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
+              // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
+              s.soTimeout = 100
+              s.connect(InetSocketAddress("localhost", 12345), 100)
             }
-            .exceptionOrNull()
-    appendLine(ex?.message)
+          }
+          .exceptionOrNull()
+  appendLine(ex?.message)
+  // Host info is not available on native image
+  if (ImageInfo.isExecutable().not()) {
     check(ex?.message?.contains("localhost:12345") == true)
   }
 
@@ -258,56 +311,25 @@ fun summary(args: Array<String>, debug: Boolean = false) = buildString {
   )
 }
 
-val rsClient by lazy {
-  HttpClient(CIO) {
-    install(WebSockets) // rsocket requires websockets plugin installed
-    install(RSocketSupport) {
-      // configure rSocket connector (all values have defaults)
-      connector {
-        maxFragmentSize = 1024
-        connectionConfig {
-          keepAlive = KeepAlive(interval = 30.seconds, maxLifetime = 2.minutes)
-          // payload for setup frame
-          setupPayload { buildPayload { data("""{ "data": "setup" }""") } }
-          // mime types
-          payloadMimeType =
-              PayloadMimeType(
-                  data = WellKnownMimeType.ApplicationJson,
-                  metadata = WellKnownMimeType.MessageRSocketCompositeMetadata,
-              )
-        }
-      }
-    }
-  }
-}
-
-private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
-
 /** Test reflection and [ServiceLoader] plugins. */
-fun reflect(ex: HttpExchange) {
+fun reflect(req: ServerRequest, res: ServerResponse) {
   val plugins = ServiceLoader.load(Callable::class.java)
   plugins.forEach { println("ServiceLoader Plugin: ${it.call()}") }
 
   println("Redacted: ${Secret("abc")}, ${Creds("user", "pass")}")
-
-  val path = ex.requestURI.path.substringAfterLast("/").lowercase()
-  val res =
-      when (path) {
-            "java" -> "dev.suresh.model.JVersion".newInstance()
-            "kotlin" -> "dev.suresh.model.KtVersion".newInstance()
-            else -> "NativeImage Playground!"
-          }
-          .toString()
-          .encodeToByteArray()
-
-  ex.sendResponseHeaders(200, res.size.toLong())
-  ex.responseBody.use { os -> os.write(res) }
+  val type = req.path().pathParameters().value("type").trim()
+  val data =
+      when (type) {
+        "java" -> "dev.suresh.model.JVersion".newInstance()
+        "kotlin" -> "dev.suresh.model.KtVersion".newInstance()
+        else -> "NativeImage Playground!"
+      }.toString()
+  res.send(data)
 }
 
 /** Embed resources in binary. */
-fun resources(ex: HttpExchange) {
-
-  // Load plugins from current directory
+fun resources(req: ServerRequest, res: ServerResponse) {
+  // Load plugins from the current directory
   val loader =
       URLClassLoader.newInstance(
           arrayOf(URI("file://${System.getProperty("user.dir")}/plugins.jar").toURL()),
@@ -315,41 +337,30 @@ fun resources(ex: HttpExchange) {
   val svcLoader = ServiceLoader.load(java.lang.Runnable::class.java, loader)
   println("Found ${svcLoader.toList().size} Runnable plugins!")
 
-  val res =
+  val resources =
       Secret::class.java.getResourceAsStream("/message.txt")?.readBytes()
           ?: "Resource not found!".encodeToByteArray()
-
-  ex.sendResponseHeaders(200, res.size.toLong())
-  ex.responseBody.use { os -> os.write(res) }
+  res.send(resources)
 }
 
-fun rSocket(ex: HttpExchange) {
-  println("Starting new rSocket connection!")
-  runBlocking(vtDispatcher) {
-    val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
-
-    // request stream
-    val stream: Flow<Payload> =
-        rSocket.requestStream(buildPayload { data("""{ "data": "Kotlin rSocket!" }""") })
-
-    val headers = ex.responseHeaders
-    headers["Content-Type"] = "text/event-stream"
-    headers["Cache-Control"] = "no-cache"
-    // Chunked transfer encoding will be set if response length is zero.
-    // headers["Transfer-encoding"] = "chunked"
-    // Streaming binary response
-    // headers["Content-Type"] = "application/octet-stream"
-    ex.sendResponseHeaders(200, 0)
-
-    ex.responseBody.buffered().use { os ->
-      stream.take(10).flowOn(vtDispatcher).collect { payload ->
-        os.write(payload.data.readBytes())
-        os.write("\n".encodeToByteArray())
-        os.flush()
+fun rSocket(req: ServerRequest, res: ServerResponse) =
+    runBlocking(vtDispatcher) {
+      println("Starting new rSocket connection!")
+      val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
+      val stream = rSocket.requestStream(buildPayload { data("""{ "data": "Kotlin rSocket!" }""") })
+      res.header(Header.CONTENT_TYPE, "text/event-stream")
+      res.header(Header.CACHE_CONTROL, "no-cache")
+      // Chunked transfer encoding will be set if the response length is zero.
+      // res.header(Header.TRANSFER_ENCODING,"chunked")
+      // Streaming binary response - res.header(Header.CONTENT_TYPE,"application/octet-stream")
+      res.outputStream().buffered().use { bos ->
+        stream.take(10).flowOn(vtDispatcher).collect { payload ->
+          bos.write(payload.data.readBytes())
+          bos.write("\n".encodeToByteArray())
+          bos.flush()
+        }
       }
     }
-  }
-}
 
 val udsServer by
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
@@ -375,7 +386,9 @@ val udsServer by
       }
     }
 
-fun unixDomainSockets(httpExchange: HttpExchange) {}
+fun unixDomainSockets(req: ServerRequest, res: ServerResponse) {
+  res.send("wip")
+}
 
 private val Int.fmt
   get() = "%-5d".format(this)
