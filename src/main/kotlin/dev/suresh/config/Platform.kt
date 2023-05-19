@@ -15,7 +15,11 @@ object Platform {
     Unknown("unknown")
   }
 
-  data class Target(val os: OS, val arch: Arch, val version: String) {
+  data class Target(
+      val os: OS,
+      val version: String,
+      val arch: Arch,
+  ) {
     val id
       get() = "${os.id}-${arch.isa}"
   }
@@ -23,7 +27,7 @@ object Platform {
   val currentOS by lazy {
     val os = System.getProperty("os.name")
     when {
-      os.contains("Mac", ignoreCase = true) -> OS.MacOS
+      os.startsWith("Mac", ignoreCase = true) -> OS.MacOS
       os.startsWith("Win", ignoreCase = true) -> OS.Windows
       os.startsWith("Linux", ignoreCase = true) -> OS.Linux
       else -> error("Unsupported OS: $os")
@@ -31,17 +35,17 @@ object Platform {
   }
 
   val currentArch by lazy {
-    val osArch = System.getProperty("os.arch")
-    when (osArch) {
+    when (val osArch = System.getProperty("os.arch")) {
       "x86_64",
       "amd64" -> Arch.X64
-      "aarch64" -> Arch.Arm64
+      "aarch64",
+      "arm64" -> Arch.Arm64
       else -> error("Unsupported OS arch: $osArch")
     }
   }
 
   val currentTarget by lazy {
-    Target(os = currentOS, arch = currentArch, version = System.getProperty("os.version"))
+    Target(os = currentOS, version = System.getProperty("os.version"), arch = currentArch)
   }
 
   val isWin

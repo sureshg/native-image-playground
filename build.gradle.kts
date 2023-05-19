@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.JvmVendorSpec.GRAAL_VM
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -117,9 +118,18 @@ redacted { enabled = true }
 graalvmNative {
   binaries {
     named("main") {
-      imageName =
-          "${project.name}-${ System.getProperty("os.name").lowercase()}-${System.getProperty("os.arch").lowercase()}"
+      imageName = project.name
       mainClass = application.mainClass
+      useFatJar = false
+      sharedLibrary = false
+      verbose = false
+      fallback = false
+      quickBuild = false
+      val extBuildArgs =
+          when (OperatingSystem.current().isLinux) {
+            true -> listOf("-H:+StripDebugInfo", "-H:+StaticExecutableWithDynamicLibC")
+            else -> emptyList()
+          }
       buildArgs =
           listOf(
               "--enable-preview",
@@ -129,17 +139,13 @@ graalvmNative {
               "--features=dev.suresh.aot.RuntimeFeature",
               "-march=native",
               "-R:MaxHeapSize=64m",
-              "-EBUILD_NUMBER=${project.version}",
               "-H:+ReportExceptionStackTraces",
+              "-EBUILD_NUMBER=${project.version}",
               // "-H:IncludeResources=.*(message\\.txt|\\app.properties)\$",
-          )
+          ) + extBuildArgs
       jvmArgs = listOf("--add-modules=ALL-SYSTEM")
       systemProperties = mapOf("java.awt.headless" to "false")
-      useFatJar = false
-      sharedLibrary = false
-      verbose = false
-      fallback = false
-      quickBuild = false
+
       resources { autodetect() }
     }
   }
