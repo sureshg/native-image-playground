@@ -33,17 +33,12 @@ val kotlinJvmTarget = libs.versions.kotlin.jvm.target.map { JvmTarget.fromTarget
 val kotlinApiVersion = libs.versions.kotlin.api.version.map { KotlinVersion.fromVersion(it) }
 val kotlinLangVersion = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
-// Check if debug property is enabled
-val debugEnabled by lazy {
-  val debug: String? by project
-  debug.toBoolean()
-}
-
-// Check if quickBuild property is enabled
-val quickBuildEnabled by lazy {
-  val quick: String? by project
-  quick.toBoolean()
-}
+// Check if debug is enabled
+val debugEnabled = project.hasProperty("debug")
+// Check if quickBuild is enabled
+val quickBuildEnabled = project.hasProperty("quick")
+// Check if native bundle is enabled
+val nativeBundleEnabled = project.hasProperty("bundle")
 
 application {
   mainClass = "$group.MainKt"
@@ -134,9 +129,9 @@ graalvmNative {
       mainClass = application.mainClass
       useFatJar = false
       sharedLibrary = false
-      verbose = false
       fallback = false
-      quickBuild = false
+      verbose = debugEnabled
+      quickBuild = quickBuildEnabled
       buildArgs = buildList {
         add("--enable-preview")
         add("--native-image-info")
@@ -154,12 +149,13 @@ graalvmNative {
           add("-H:+StripDebugInfo")
         }
 
-        if (quickBuildEnabled) {
-          add("-Ob")
-        }
-
         if (debugEnabled) {
           add("-H:+TraceNativeToolUsage")
+        }
+
+        if (nativeBundleEnabled) {
+          add("--bundle-create")
+          add("--dry-run")
         }
       }
       jvmArgs = listOf("--add-modules=ALL-SYSTEM")

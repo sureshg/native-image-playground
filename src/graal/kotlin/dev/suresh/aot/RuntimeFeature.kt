@@ -11,9 +11,10 @@ class RuntimeFeature : Feature {
     RuntimeReflection.register(JVersion::class.java, KtVersion::class.java)
     RuntimeClassInitialization.initializeAtBuildTime(BuildEnv::class.java)
     val module = javaClass.classLoader.unnamedModule
-    println("Registering all static resources...")
+    println("Registering static resources...")
     ClassGraph().acceptPaths("/static").scan().use {
-      it.allResources.paths.forEach { resource ->
+      it.allResources.paths.forEachIndexed { idx, resource ->
+        println("${idx+1}: $resource")
         RuntimeResourceAccess.addResource(module, resource)
       }
     }

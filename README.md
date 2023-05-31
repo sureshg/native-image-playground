@@ -10,7 +10,7 @@
 [![GraalVM Dashboard][gl_dashboard_img]][gl_dashboard_url]
 
 [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app
-and publish the platform binaries using Github action.
+and publish the platform binaries using GitHub action.
 
 ### Install GraalVM CE
 
@@ -31,16 +31,23 @@ $ sdk i java graalvm-ce-java<xx> "$HOME/install/graalvm/graalvm-ce-java<xx>/Cont
 ### Build
 
 ```bash
-# Native Image Quick Build
-$ ./native-image.sh -Ob
 
-# For prod deployments
-$ ./native-image.sh
+# Build the native image
+$ ./gradlew nativeCompile
+
+# Run native image tests
+$ ./gradlew nativeTest
+
+# Native Image Quick Build
+$ ./gradlew nativeCompile -Pquick
 
 # Using Native Image Bundles
-$ ./native-image.sh --bundle-create --dry-run
-$ native-image --bundle-apply="build/native-image-playground.nib"
+$ ./gradlew nativeCompile -Pbundle
+$ native-image --bundle-apply="build/native/nativeCompile/native-image-playground.nib"
 $ build/native-image-playground.output/default/native-image-playground
+
+# Build by disabling the build cache
+$ ./gradlew clean nativeCompile --rerun-tasks --no-build-cache
 
 # GraalVM JIT Mode
 $ ./gradlew build
@@ -49,6 +56,7 @@ $ java --enable-preview \
        -jar build/libs/native-image-playground-*-all.jar
 
 # Find out the classes/jars using top modules mentioned in the native-image build output
+$ ./gradlew build
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
@@ -66,23 +74,23 @@ $ native-image \
 - List all runtime options
 
   ```bash
-  $ build/native-image-playground -XX:PrintFlags= 2>&1
+  $ build/native/nativeCompile/native-image-playground -XX:PrintFlags= 2>&1
 
   # Eg: Set HeapDump path
-  $ build/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
+  $ build/native/nativeCompile/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
   ```
 
 - Object/Shared Lib Details
 
    ```bash
    # Show shared libs
-   otool -L build/native-image-playground
+   $ otool -L build/native/nativeCompile/native-image-playground
 
    # SVM details
-   strings -a build/native-image-playground | grep -i com.oracle.svm.core.VM
+   $ strings -a build/native/nativeCompile/native-image-playground | grep -i com.oracle.svm.core.VM
 
    # Show all bundled CA Certs
-   strings -a build/native-image-playground | grep -i "cn="
+   $ strings -a build/native/nativeCompile/native-image-playground | grep -i "cn="
    ```
 
 - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
