@@ -32,7 +32,7 @@ nohup java \
 # Wait for the server to startup
 sleep 1
 curl -fsSL http://localhost:9080/
-# curl -fsSL http://localhost:9080/rsocket
+curl -fsSL http://localhost:9080/rsocket
 curl -fsSL -o /dev/null http://localhost:9080/shutdown || echo "Native Image build config generation completed!"
 # Wait for agent to write the config
 sleep 1
@@ -48,12 +48,8 @@ args=("-jar" "${APP_JAR}"
   "-R:MaxHeapSize=64m"
   "-march=native"
   "-EBUILD_NUMBER=${BUILD_NUMBER:-1.0.0}"
-  # "--bundle-create"
-  # "--dry-run"
-  # "--bundle-apply="build/native-image-playground.nib"
   # "-R:MinHeapSize=4m"
   # "@env-vars.txt"
-  # "-H:+TraceSecurityServices"
   # "-H:+PrintAnalysisCallTree"
   # "-H:+PrintClassInitialization" // List of safe classes to initialize at build time
   # "-H:+DashboardAll"

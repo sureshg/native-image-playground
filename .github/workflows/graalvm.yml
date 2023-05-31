@@ -2,99 +2,103 @@ name: GraalVM Native Image
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    tags:
+      - '*'
+    paths-ignore:
+      - LICENSE
+      - '*.md'
+      - 'docs/**'
+      - '.github/config/labels.yml'
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
   schedule:
-    - cron: "0 0 * * 5"
+    - cron: "0 0 * * *"
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  releaseBuild: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
 
 jobs:
   native-build:
     name: GraalVM CE ${{ matrix.version }} JDK${{ matrix.java-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
+      max-parallel: 3
       matrix:
         version: [ dev ]
-        java-version: [ '20' ]
-        components: [ 'native-image' ]
+        java-version: [ 'dev' ]
         os: [ macos-latest, windows-latest, ubuntu-latest ]
-    #   include:
-    #     - os: ubuntu-18.04
-    #       version: 'dev'
-    #       java-version: '20'
-    #       components: 'native-image'
-    #     - os: macos-10.15
-    #       version: 'dev'
-    #       java-version: '20'
-    #       components: 'native-image'
-    #     - os: windows-2019
-    #       version: 'dev'
-    #       java-version: '20'
-    #       components: 'native-image'
 
     steps:
-      - name: Check out repository
+      - name: 🛎️ Check out repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Setup GraalVM CE Dev Build
+      - name: ☕ Setup GraalVM CE Dev Build
         uses: graalvm/setup-graalvm@v1
         with:
           version: ${{ matrix.version }}
           java-version: ${{ matrix.java-version }}
-          components: ${{ matrix.components }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'gradle'
+          set-java-home: 'true'
+          native-image-job-reports: 'true'
 
-      - name: Check environment
+      - name: 🏗️ Native Image Build & Test
         run: |
-          echo "GRAALVM_HOME: $GRAALVM_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          java --version
-          native-image --version
+          ./gradlew nativeCompile
+          file build/native/nativeCompile/${{ github.event.repository.name }}
 
-      - name: Build and run App
-        run: |
-          # javac -encoding UTF-8 Main.java
-          ./native-image.sh
-          file build/app
-        shell: bash
-
-      - name: Upload ${{ matrix.os }} app binary
+      - name: 📤 Upload ${{ matrix.os }} native image
         uses: actions/upload-artifact@v3
         with:
-          name: app-${{ matrix.os }}
-          path: build/app*
+          name: ${{ github.event.repository.name }}-${{ matrix.os }}
+          path: |
+            build/native/nativeCompile/${{ github.event.repository.name }}*
           if-no-files-found: error
 
 
   native-build-musl:
-    name: GraalVM CE dev JDK20 + musl static image
+    name: GraalVM CE Dev + musl static image
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: 🛎️ Check out repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Setup GraalVM CE Dev Build
+      - name: ☕ Setup GraalVM CE Dev Build
         uses: graalvm/setup-graalvm@v1
         with:
           version: 'dev'
-          java-version: '20'
-          components: 'native-image'
-          native-image-musl: 'true'
+          java-version: 'dev'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'gradle'
+          native-image-musl: 'true'
+          set-java-home: 'true'
+          native-image-job-reports: 'true'
 
-      - name: Build static app image with musl
+      - name: 🏗️ Build static image with musl libc
         run: |
-          # javac Main.java
-          ./native-image.sh --static --libc=musl
-          file build/app
+          ./gradlew nativeCompile -Pmusl
+          file build/native/nativeCompile/${{ github.event.repository.name }}
 
-      - name: Uploading app static binary
+      - name: 📤 Upload static binary
         uses: actions/upload-artifact@v3
         with:
-          name: app-static-linux
+          name: ${{ github.event.repository.name }}-static-linux
           path: |
-            build/app*
+            build/native/nativeCompile/${{ github.event.repository.name }}*
           if-no-files-found: error

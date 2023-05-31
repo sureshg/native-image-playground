@@ -39,6 +39,8 @@ val debugEnabled = project.hasProperty("debug")
 val quickBuildEnabled = project.hasProperty("quick")
 // Check if native bundle is enabled
 val nativeBundleEnabled = project.hasProperty("bundle")
+// Check if musl libc is enabled
+val muslEnabled = project.hasProperty("musl")
 
 application {
   mainClass = "$group.MainKt"
@@ -136,21 +138,33 @@ graalvmNative {
         add("--enable-preview")
         add("--native-image-info")
         add("--enable-monitoring=heapdump,jfr,jvmstat")
+        add("--enable-https")
         add("--install-exit-handlers")
         add("--features=dev.suresh.aot.RuntimeFeature")
         add("-march=native")
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")
+        // add("--enable-url-protocols=http,https,jar,unix")
         // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
 
         if (OperatingSystem.current().isLinux) {
-          add("-H:+StaticExecutableWithDynamicLibC")
+          when {
+            muslEnabled -> {
+              add("--static")
+              add("--libc=musl")
+            }
+            else -> {
+              add("-H:+StaticExecutableWithDynamicLibC")
+            }
+          }
           add("-H:+StripDebugInfo")
         }
 
         if (debugEnabled) {
           add("-H:+TraceNativeToolUsage")
+          add("-H:+TraceSecurityServices")
+          add("--trace-class-initialization=kotlin.annotation.AnnotationRetention")
         }
 
         if (nativeBundleEnabled) {
@@ -237,8 +251,7 @@ tasks {
  * - graalCompileClasspath (CompileOnly + Implementation)
  * - graalRuntimeClasspath (RuntimeOnly + Implementation)
  *
- * [Configure Custom
- * SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ * [Configure Custom SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
     sourceSets.creating {
