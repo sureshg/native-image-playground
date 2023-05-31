@@ -33,6 +33,18 @@ val kotlinJvmTarget = libs.versions.kotlin.jvm.target.map { JvmTarget.fromTarget
 val kotlinApiVersion = libs.versions.kotlin.api.version.map { KotlinVersion.fromVersion(it) }
 val kotlinLangVersion = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
+// Check if debug property is enabled
+val debugEnabled by lazy {
+  val debug: String? by project
+  debug.toBoolean()
+}
+
+// Check if quickBuild property is enabled
+val quickBuildEnabled by lazy {
+  val quick: String? by project
+  quick.toBoolean()
+}
+
 application {
   mainClass = "$group.MainKt"
   applicationDefaultJvmArgs +=
@@ -46,7 +58,7 @@ java {
   }
 
   withSourcesJar()
-  // withJavadocJar()
+  withJavadocJar()
 }
 
 kotlin {
@@ -125,27 +137,33 @@ graalvmNative {
       verbose = false
       fallback = false
       quickBuild = false
-      val extBuildArgs =
-          when (OperatingSystem.current().isLinux) {
-            true -> listOf("-H:+StripDebugInfo", "-H:+StaticExecutableWithDynamicLibC")
-            else -> emptyList()
-          }
-      buildArgs =
-          listOf(
-              "--enable-preview",
-              "--native-image-info",
-              "--enable-monitoring=heapdump,jfr,jvmstat",
-              "--install-exit-handlers",
-              "--features=dev.suresh.aot.RuntimeFeature",
-              "-march=native",
-              "-R:MaxHeapSize=64m",
-              "-H:+ReportExceptionStackTraces",
-              "-EBUILD_NUMBER=${project.version}",
-              // "-H:IncludeResources=.*(message\\.txt|\\app.properties)\$",
-          ) + extBuildArgs
+      buildArgs = buildList {
+        add("--enable-preview")
+        add("--native-image-info")
+        add("--enable-monitoring=heapdump,jfr,jvmstat")
+        add("--install-exit-handlers")
+        add("--features=dev.suresh.aot.RuntimeFeature")
+        add("-march=native")
+        add("-R:MaxHeapSize=64m")
+        add("-H:+ReportExceptionStackTraces")
+        add("-EBUILD_NUMBER=${project.version}")
+        // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
+
+        if (OperatingSystem.current().isLinux) {
+          add("-H:+StaticExecutableWithDynamicLibC")
+          add("-H:+StripDebugInfo")
+        }
+
+        if (quickBuildEnabled) {
+          add("-Ob")
+        }
+
+        if (debugEnabled) {
+          add("-H:+TraceNativeToolUsage")
+        }
+      }
       jvmArgs = listOf("--add-modules=ALL-SYSTEM")
       systemProperties = mapOf("java.awt.headless" to "false")
-
       resources { autodetect() }
     }
   }
@@ -207,8 +225,13 @@ tasks {
 }
 
 /**
- * Creates a custom source set for GraalVM native image build time dependencies. More details are
- * [here](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ * Creates a custom sourceset(`graal`) for GraalVM native image build time configurations. The
+ * following configurations will
+ * - Creates a `graal` source set.
+ * - Add `main` output to `graal` compile and runtime classpath.
+ * - Add `main` dependencies to `graal` compile and runtime classpath.
+ * - Add `graal` dependencies (graalImplementation) to native-image classpath.
+ * - Add `graal` output to native-image classpath.
  *
  * For each source set added to the project, the Java plugins add a few
  * [dependency configurations](https://docs.gradle.org/current/userguide/java_plugin.html#java_source_set_configurations)
@@ -217,6 +240,9 @@ tasks {
  * - graalRuntimeOnly
  * - graalCompileClasspath (CompileOnly + Implementation)
  * - graalRuntimeClasspath (RuntimeOnly + Implementation)
+ *
+ * [Configure Custom
+ * SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
     sourceSets.creating {
