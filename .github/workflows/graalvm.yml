@@ -30,7 +30,7 @@ env:
 
 jobs:
   native-build:
-    name: GraalVM CE ${{ matrix.version }} JDK${{ matrix.java-version }} on ${{ matrix.os }}
+    name: GraalVM CE latest ${{ matrix.java-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -54,7 +54,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'gradle'
           set-java-home: 'true'
-          native-image-job-reports: 'true'
+          native-image-job-reports: 'false'
 
       - name: 🏗️ Native Image Build & Test
         run: |
@@ -64,7 +64,7 @@ jobs:
       - name: 📤 Upload ${{ matrix.os }} native image
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-${{ matrix.os }}
+          name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ runner.arch }}
           path: |
             build/native/nativeCompile/${{ github.event.repository.name }}*
           if-no-files-found: error
@@ -88,7 +88,7 @@ jobs:
           cache: 'gradle'
           native-image-musl: 'true'
           set-java-home: 'true'
-          native-image-job-reports: 'true'
+          native-image-job-reports: 'false'
 
       - name: 🏗️ Build static image with musl libc
         run: |
@@ -98,7 +98,7 @@ jobs:
       - name: 📤 Upload static binary
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-static-linux
+          name: ${{ github.event.repository.name }}-static--${{ runner.os }}-${{ runner.arch }}
           path: |
             build/native/nativeCompile/${{ github.event.repository.name }}*
           if-no-files-found: error

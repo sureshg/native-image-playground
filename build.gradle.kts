@@ -141,7 +141,6 @@ graalvmNative {
         add("--enable-https")
         add("--install-exit-handlers")
         add("--features=dev.suresh.aot.RuntimeFeature")
-        add("-march=native")
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")
@@ -159,6 +158,12 @@ graalvmNative {
             }
           }
           add("-H:+StripDebugInfo")
+        }
+
+        // Use the compatibility mode when build image on GitHub Actions.
+        when (System.getenv("GITHUB_ACTIONS").toBoolean()) {
+          true -> add("-march=compatibility")
+          else -> add("-march=native")
         }
 
         if (debugEnabled) {
@@ -251,7 +256,8 @@ tasks {
  * - graalCompileClasspath (CompileOnly + Implementation)
  * - graalRuntimeClasspath (RuntimeOnly + Implementation)
  *
- * [Configure Custom SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ * [Configure Custom
+ * SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
     sourceSets.creating {
