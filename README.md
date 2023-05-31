@@ -71,6 +71,40 @@ $ native-image \
 
 ### Run & Debugging
 
+- Using Distroless
+
+   ```bash
+  # Download the native images and extract it
+  # https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
+  $ chmod +x native-image-playground
+
+  # Image built on GithubAction (Linux X64) and running on MacOS ARM64
+  $ docker run \
+          -it \
+          --rm \
+          --platform=linux/amd64 \
+          --pull always \
+          --publish 9080:9080 \
+          --name native-image-playground \
+          --mount type=bind,source=$(pwd),destination=/app,readonly \
+          --entrypoint=/app/native-image-playground \
+          gcr.io/distroless/base
+
+  # Running static image compiled using musl libc
+  $ docker run \
+          -it \
+          --rm \
+          --pull always \
+          --publish 9080:9080 \
+          --name native-image-playground \
+          --mount type=bind,source=$(pwd),destination=/app,readonly \
+          --entrypoint=/app/native-image-playground \
+          gcr.io/distroless/static
+
+  # To kill the container
+  $ docker kill native-image-playground
+  ```
+
 - List all runtime options
 
   ```bash
