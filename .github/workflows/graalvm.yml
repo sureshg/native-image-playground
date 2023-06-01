@@ -59,14 +59,14 @@ jobs:
       - name: 🏗️ Native Image Build & Test
         run: |
           ./gradlew nativeCompile
-          file build/native/nativeCompile/${{ github.event.repository.name }}
+          ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload ${{ matrix.os }} native image
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ runner.arch }}
+          # name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ runner.arch }}
           path: |
-            build/native/nativeCompile/${{ github.event.repository.name }}*
+            build/${{ github.event.repository.name }}*.tar.gz
           if-no-files-found: error
 
 
@@ -93,12 +93,11 @@ jobs:
       - name: 🏗️ Build static image with musl libc
         run: |
           ./gradlew nativeCompile -Pmusl
-          file build/native/nativeCompile/${{ github.event.repository.name }}
+          ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload static binary
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-static--${{ runner.os }}-${{ runner.arch }}
           path: |
-            build/native/nativeCompile/${{ github.event.repository.name }}*
+            build/${{ github.event.repository.name }}*.tar.gz
           if-no-files-found: error

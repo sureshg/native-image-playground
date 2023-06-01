@@ -2,7 +2,8 @@
 
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.JvmVendorSpec.GRAAL_VM
-import org.jetbrains.kotlin.gradle.dsl.*
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
@@ -231,7 +232,9 @@ tasks {
   // GZip the binary after native image build.
   val archiveTgz by
       creating(Tar::class) {
-        archiveFileName = "${project.name}-${project.version}.tar.gz"
+        val nativePrefix = OperatingSystem.current().nativePrefix
+        val arch = System.getProperty("os.arch")
+        archiveFileName = "${project.name}-${project.version}-${nativePrefix}-${arch}.tar.gz"
         compression = Compression.GZIP
         destinationDirectory = project.layout.buildDirectory
         from(nativeCompile.map { it.outputFile })
@@ -271,7 +274,8 @@ tasks {
  * - graalCompileClasspath (CompileOnly + Implementation)
  * - graalRuntimeClasspath (RuntimeOnly + Implementation)
  *
- * [Configure Custom SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ * [Configure
+ * Custom-SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
     sourceSets.creating {
