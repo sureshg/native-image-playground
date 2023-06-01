@@ -16,12 +16,12 @@ plugins {
   alias(libs.plugins.graalvm.nativeimage)
   alias(libs.plugins.semver)
   alias(libs.plugins.benmanes)
-  alias(libs.plugins.shadow)
   alias(libs.plugins.spotless)
   alias(libs.plugins.ksp.redacted)
   alias(libs.plugins.versioncatalog.update)
   alias(libs.plugins.dependency.analysis)
   alias(libs.plugins.ksp.powerassert)
+  alias(libs.plugins.shadow) apply false
   alias(libs.plugins.champeau.includegit) apply false
 }
 
@@ -144,6 +144,7 @@ graalvmNative {
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")
+        add("-ECOMMIT_HASH=${ semver.commits.get().first().hash}")
         // add("--enable-url-protocols=http,https,jar,unix")
         // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
 
@@ -225,11 +226,25 @@ tasks {
     finalizedBy("spotlessApply")
   }
 
-  shadowJar { mergeServiceFiles() }
-
   test { useJUnitPlatform() }
 
+  // GZip the binary after native image build.
+  val archiveTgz by
+      creating(Tar::class) {
+        archiveFileName = "${project.name}-${project.version}.tar.gz"
+        compression = Compression.GZIP
+        destinationDirectory = project.layout.buildDirectory
+        from(nativeCompile.map { it.outputFile })
+        doLast {
+          logger.lifecycle("Native Image Archive: ${archiveFile.get().asFile.absolutePath}")
+        }
+      }
+
+  nativeCompile { finalizedBy(archiveTgz) }
+
   dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
+
+  // shadowJar { mergeServiceFiles() }
 
   wrapper {
     gradleVersion = libs.versions.gradle.get()
@@ -256,8 +271,7 @@ tasks {
  * - graalCompileClasspath (CompileOnly + Implementation)
  * - graalRuntimeClasspath (RuntimeOnly + Implementation)
  *
- * [Configure Custom
- * SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ * [Configure Custom SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
     sourceSets.creating {

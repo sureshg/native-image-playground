@@ -31,7 +31,6 @@ $ sdk i java graalvm-ce-java<xx> "$HOME/install/graalvm/graalvm-ce-java<xx>/Cont
 ### Build
 
 ```bash
-
 # Build the native image
 $ ./gradlew nativeCompile
 
@@ -78,7 +77,7 @@ $ native-image \
   # https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
   $ chmod +x native-image-playground
 
-  # Image built on GithubAction (Linux X64) and running on MacOS ARM64
+  # Running "mostly static native image" built on GithubAction (Linux amd64)
   $ docker run \
           -it \
           --rm \

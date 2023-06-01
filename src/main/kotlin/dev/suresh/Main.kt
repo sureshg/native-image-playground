@@ -73,7 +73,15 @@ lateinit var webServer: WebServer
 fun main(args: Array<String>) {
   val start = System.currentTimeMillis()
   val type = if (ImageInfo.isExecutable()) "Native Image" else "JVM App"
-  logger.log(INFO) { "$type: ${BuildEnv.BUILD_NUMBER}, built on: ${BuildEnv.TIME_STAMP}" }
+  logger.log(INFO) {
+    """
+    | Build info,
+    | $type version : ${BuildEnv.BUILD_NUMBER}
+    | Commit Hash   : ${BuildEnv.COMMIT_HASH}
+    | Built on      : ${BuildEnv.TIME_STAMP}
+    """
+        .trimMargin()
+  }
   Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
   cmdArgs = args.toList()

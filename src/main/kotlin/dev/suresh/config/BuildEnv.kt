@@ -10,5 +10,7 @@ object BuildEnv {
 
   val BUILD_NUMBER = System.getenv().getOrElse("BUILD_NUMBER") { "0.0.0" }
 
+  val COMMIT_HASH = System.getenv().getOrElse("COMMIT_HASH") { "" }
+
   val TIME_STAMP = ZonedDateTime.now().toLocalDateTime()
 }
