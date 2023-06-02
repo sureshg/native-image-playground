@@ -40,7 +40,7 @@ $ ./gradlew nativeTest
 # Native Image Quick Build
 $ ./gradlew nativeCompile -Pquick
 
-# Using Native Image Bundles
+# Build Native Image Bundles
 $ ./gradlew nativeCompile -Pbundle
 $ native-image --bundle-apply="build/native/nativeCompile/native-image-playground.nib"
 $ build/native-image-playground.output/default/native-image-playground
@@ -49,13 +49,13 @@ $ build/native-image-playground.output/default/native-image-playground
 $ ./gradlew clean nativeCompile --rerun-tasks --no-build-cache
 
 # GraalVM JIT Mode
+# ----------------
 $ ./gradlew build
 $ java --enable-preview \
        --add-modules=ALL-SYSTEM \
        -jar build/libs/native-image-playground-*-all.jar
 
 # Find out the classes/jars using top modules mentioned in the native-image build output
-$ ./gradlew build
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
@@ -73,8 +73,7 @@ $ native-image \
 - Using Distroless
 
    ```bash
-  # Download the native images and extract it
-  # https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
+  # Download https://github.com/sureshg/native-image-playground/releases/latest and extract it
   $ chmod +x native-image-playground
 
   # Running "mostly static native image" built on GithubAction (Linux amd64)
