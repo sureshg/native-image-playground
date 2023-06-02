@@ -1,14 +1,11 @@
-@file:Suppress("UnstableApiUsage")
-
 pluginManagement {
+  includeBuild("gradle/build-logic")
   repositories {
-    mavenCentral()
     gradlePluginPortal()
+    mavenCentral()
   }
 }
 
-dependencyResolutionManagement { repositories { mavenCentral() } }
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+plugins { id("settings.repos") }
 
 rootProject.name = "native-image-playground"

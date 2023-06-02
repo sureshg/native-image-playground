@@ -1,89 +1,65 @@
 [versions]
 java                           = "20"
 kotlin                         = "1.9.0-Beta"
-ksp                            = "1.9.0-Beta-1.0.11"
-kotlin-jvm-target              = "20"
+kotlin-ksp                     = "1.9.0-Beta-1.0.11"
+kotlin-jvmtarget               = "20"
+kotlin-dsl-jvmtarget           = "17"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "2.0"
 gradle                         = "8.2-rc-1"
+java-vendor                    = "GraalVM Community"
+java-jvmArguments              = "--enable-preview"
+java-addModules                = "jdk.incubator.concurrent,jdk.incubator.vector"
+
+# Additional metadata
+group                          = "dev.suresh"
+app-mainclass                  = "dev.suresh.MainKt"
+app-module                     = "dev.suresh.nativeimage"
+githubProject                  = "https://github.com/sureshg/native-image-playground"
 
 # Gradle Dependencies Versions
+kotlinx-kover                  = "0.7.0"
+zip-prefixer                   = "0.3.1"
 ajalt-clikt                    = "3.5.2"
 ajalt-mordant                  = "2.0.0-beta13"
 ajalt-colormath                = "3.2.1"
-assertj                        = "3.21.0"
-beryx-textio                   = "3.4.1"
-bucket4j                       = "7.1.0"
-classgraph                     = "4.8.160"
-concurrent-jctools             = "3.3.0"
-crypto-bcprov                  = "1.70"
-crypto-conscrypt               = "2.5.2"
-crypto-saltycoffee             = "1.1.1"
-crypto-tink                    = "1.6.1"
-cytodynamics-nucleus           = "0.2.0"
-cv-boofcv                      = "0.43"
-db-scheduler                   = "10.5"
-db-shedlock                    = "4.33.0"
-db-sherlock                    = "0.4.14"
-dikt                           = "1.0.0-alpha8"
-dir-watcher                    = "0.15.0"
-failsafe                       = "3.3.0"
-fastutil                       = "8.5.6"
-google-auto-service            = "1.1.0"
-google-javaformat              = "1.17.0"
-google-tink                    = "1.6.1"
-graalvm                        = "22.3.2"
-graalvm-hint                   = "0.20.0"
-grpc                           = "1.39.0"
-grpc-kotlin                    = "1.2.0"
+dokka                          = "1.8.10"
 helidon-nima                   = "4.0.0-ALPHA6"
-http-common                    = "0.10.0"
-imageio-twelvemonkeys          = "3.8.1"
-jakewharton-picnic             = "0.6.0"
-jakewharton-crossword          = "0.1.2"
-jetbrains-markdown             = "0.2.4"
-jmdns                          = "3.5.7"
-jreleaser                      = "0.9.1"
-jspecify                       = "0.2.0"
+jgit                           = "6.2.0.202206071550-r"
+jte                            = "2.3.2"
 junit                          = "5.10.0-M1"
-junit-pioneer                  = "1.4.2"
-jqwik                          = "1.6.0"
-jSystemThemeDetector           = "3.6"
-kmath                          = "0.2.1"
 kotlinx-atomicfu               = "0.20.2"
 kotlinx-coroutines             = "1.7.1"
-kotlinx-collections-immutable  = "0.3.5"
-kotlinx-cli                    = "0.3.4"
 kotlinx-datetime               = "0.4.0"
-kotlinx-reflect-lite           = "1.0.0"
-kotlinx-io-jvm                 = "0.1.16"
 kotlinx-serialization          = "1.5.1"
-kotlinx-serialization-yaml     = "0.52.0"
-kotlinx-serialization-csv      = "2.0.0"
-kodein                         = "7.10.0"
-koin                           = "3.4.0"
-ktfmt                          = "0.43"
-kotlininject                   = "0.4.1"
+ktor                           = "2.3.1"
+kotlinRetry                    = "1.0.9"
+koin                           = "3.1.5"
+kotest                         = "5.6.2"
 ksp-auto-service               = "1.0.0"
 ksp-redacted                   = "1.4.0"
 ksp-powerassert                = "0.13.0"
-ktor                           = "2.3.1"
-lwjgl                          = "3.3.0"
-libgdx                         = "1.10.0"
-logback                        = "1.4.6"
-os-appdirs                     = "1.2.1"
-os-oshi                        = "6.1.2"
-os-jfa                         = "1.2.0"
-protobuf                       = "3.22.2"
-rsocket                        = "0.15.4"
-semver                         = "0.5.0-alpha.2"
 slf4j                          = "2.0.7"
-testcontainers                 = "1.18.3"
-togglz                         = "3.3.3"
-versioncompare                 = "1.5.0"
+ktfmt                          = "0.44"
+google-javaformat              = "1.17.0"
+google-auto-service            = "1.1.0"
+google-tink                    = "1.8.0"
+graalvm                        = "22.3.2"
+rsocket                        = "0.15.4"
+classgraph                     = "4.8.160"
 
 # Plugin versions
 benmanes                       = "0.46.0"
+foojay-resolver                = "0.5.0"
+gradle-enterprise              = "3.13.3"
+nexus-publish                  = "1.3.0"
+shadow                         = "8.1.1"
+spotless                       = "6.19.0"
+semver-plugin                  = "0.5.0-alpha.2"
+taskinfo                       = "2.1.0"
+dependency-analysis            = "1.20.0"
+best-practices-plugin          = "0.9"
+graalvm-nativeimage            = "0.9.22"
 beryx-jlink                    = "2.24.4"
 beryx-runtime                  = "1.12.7"
 beryx-jar                      = "2.0.0"
@@ -91,108 +67,54 @@ champeau-includegit            = "0.1.6"
 champeau-japicmp               = "0.3.0"
 champeau-jmh                   = "0.7.1"
 champeau-mrjar                 = "0.1"
-graalvm-nativeimage            = "0.9.22"
 gradlechecksum                 = "1.4.0"
 jetbrains-exposed              = "0.2.1"
-ktlint                         = "0.46.1"
 licenser                       = "0.6.1"
 osdetector                     = "1.7.3"
 protobuf-plugin                = "0.9.2"
-shadow                         = "8.1.1"
-spotless                       = "6.19.0"
 versioncatalog-update          = "0.8.0"
-dependency-analysis            = "1.20.0"
 
 
 [libraries]
+# External plugins for precompiled script plugins
+build-kotlin                    = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
+build-kotlin-noarg              = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
+build-kotlinx-serialization     = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
+build-kotlinx-atomicfu          = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
+build-dokka                     = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
+build-kotlin-ksp                = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
+build-ksp-redacted              = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "ksp-redacted"}
+build-benmanesversions          = { module = "com.github.ben-manes:gradle-versions-plugin"                    , version.ref = "benmanes"}
+build-gradle-enterprise         = { module = "com.gradle.enterprise:com.gradle.enterprise.gradle.plugin"      , version.ref = "gradle-enterprise" }
+build-jte-plugin                = { module = "gg.jte:jte-gradle-plugin"                                       , version.ref = "jte"}
+build-nexus-plugin              = { module = "io.github.gradle-nexus:publish-plugin"                          , version.ref = "nexus-publish"}
+build-spotless-plugin           = { module = "com.diffplug.spotless:spotless-plugin-gradle"                   , version.ref = "spotless"}
+build-shadow-plugin             = { module = "com.github.johnrengelman:shadow"                                , version.ref = "shadow"}
+build-taskinfo                  = { module = "org.barfuin.gradle.taskinfo:gradle-taskinfo"                    , version.ref = "taskinfo" }
+build-dependencyanalysis        = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"           , version.ref = "dependency-analysis" }
+build-bestpractices-plugin      = { module = "com.autonomousapps:plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
+build-semver-plugin             = { module = "com.javiersc.semver:semver-gradle-plugin"                       , version.ref = "semver-plugin" }
+build-zip-prefixer              = { module = "net.e175.klaus:zip-prefixer"                                    , version.ref = "zip-prefixer" }
+build-foojay-resolver           = { module = "org.gradle.toolchains:foojay-resolver"                          , version.ref = "foojay-resolver" }
+build-kotlinx-kover             = { module = "org.jetbrains.kotlinx:kover-gradle-plugin"                      , version.ref = "kotlinx-kover" }
+build-nativeimage-plugin        = { module = "org.graalvm.buildtools:native-gradle-plugin"                    , version.ref = "graalvm-nativeimage"}
+
 # Gradle Dependencies
-ajalt-clikt             = { module = "com.github.ajalt.clikt:clikt"                    , version.ref = "ajalt-clikt"}
-ajalt-mordant           = { module = "com.github.ajalt.mordant:mordant"                , version.ref = "ajalt-mordant"}
-ajalt-colormath         = { module = "com.github.ajalt.colormath:colormath"            , version.ref = "ajalt-colormath"}
-beryx-textio            = { module = "org.beryx:text-io"                               , version.ref = "beryx-textio"}
-bucket4j-core           = { module = "com.github.vladimir-bukhtoyarov:bucket4j-core"   , version.ref = "bucket4j"}
+kotlin-bom                    = { module = "org.jetbrains.kotlin:kotlin-bom"                    , version.ref = "kotlin"}
+kotlin-stdlib                 = { module = "org.jetbrains.kotlin:kotlin-stdlib"                 , version.ref = "kotlin"}
+kotlin-stdlib-jdk8            = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"            , version.ref = "kotlin"}
+kotlin-reflect                = { module = "org.jetbrains.kotlin:kotlin-reflect"                , version.ref = "kotlin"}
+kotlin-test                   = { module = "org.jetbrains.kotlin:kotlin-test"                   , version.ref = "kotlin"}
+kotlinx-coroutines-core       = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"      , version.ref = "kotlinx-coroutines"}
+kotlinx-coroutines-test       = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test"      , version.ref = "kotlinx-coroutines"}
+kotlinx-serialization-core    = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core"   , version.ref = "kotlinx-serialization"}
+kotlinx-serialization-json    = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"   , version.ref = "kotlinx-serialization"}
+kotlinx-datetime              = { module = "org.jetbrains.kotlinx:kotlinx-datetime"             , version.ref = "kotlinx-datetime"}
+kotlinx-atomicfu              = { module = "org.jetbrains.kotlinx:atomicfu"                     , version.ref = "kotlinx-atomicfu"}
 
-compose-theme-detect    = { module = "com.github.Dansoftowner:jSystemThemeDetector"     , version.ref = "jSystemThemeDetector"}
-
-classgraph              = { module = "io.github.classgraph:classgraph"                  , version.ref = "classgraph"}
-concurrent-jctools      = { module = "org.jctools:jctools-core"                         , version.ref = "concurrent-jctools"}
-crypto-bcprov           = { module = "org.bouncycastle:bcprov-jdk15on"                  , version.ref = "crypto-bcprov"}
-crypto-conscrypt        = { module = "org.conscrypt:conscrypt-openjdk"                  , version.ref = "crypto-conscrypt"}
-crypto-conscrypt-uber   = { module = "org.conscrypt:conscrypt-openjdk-uber"             , version.ref = "crypto-conscrypt"}
-crypto-tink             = { module = "com.google.crypto.tink:tink"                      , version.ref = "crypto-tink"}
-crypto-saltycoffee      = { module = "software.pando.crypto:salty-coffee"               , version.ref = "crypto-saltycoffee"}
-
-cytodynamics-nucleus    = { module = "com.linkedin.cytodynamics:cytodynamics-nucleus"  , version.ref = "cytodynamics-nucleus"}
-cv-boofcv-core          = { module = "org.boofcv:boofcv-core"                          , version.ref = "cv-boofcv"}
-
-db-scheduler            = { module = "com.github.kagkarlsson:db-scheduler"             , version.ref = "db-scheduler"}
-db-shedlock-core        = { module = "net.javacrumbs.shedlock:shedlock-core"           , version.ref = "db-shedlock"}
-db-shedlock-jdbc        = { module = "net.javacrumbs.shedlock:shedlock-provider-jdbc"  , version.ref = "db-shedlock"}
-db-sherlock-sql         = { module = "com.coditory.sherlock:sherlock-sql"              , version.ref = "db-sherlock"}
-
-directory-watcher       = { module = "io.methvin:directory-watcher"                    , version.ref = "dir-watcher"}
-failsafe                = { module = "dev.failsafe:failsafe"                           , version.ref = "failsafe"}
-fastutil                = { module = "it.unimi.dsi:fastutil"                           , version.ref = "fastutil"}
-fastutil-core           = { module = "it.unimi.dsi:fastutil-core"                      , version.ref = "fastutil"}
-jakewharton-picnic      = { module = "com.jakewharton.picnic:picnic"                   , version.ref = "jakewharton-picnic"}
-jakewharton-crossword   = { module = "com.jakewharton.crossword:crossword"             , version.ref = "jakewharton-crossword"}
-
-google-auto-annotations     = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
-google-tink                 =  { module = "com.google.crypto.tink:tink"                     , version.ref = "google-tink"}
-
-graalvm-sdk                 = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
-graalvm-svm                 = { module = "org.graalvm.nativeimage:svm"                      , version.ref = "graalvm"}
-graalvm-svmlibffi           = { module = "org.graalvm.nativeimage:svm-libffi"               , version.ref = "graalvm"}
-graalvm-truffle-api         = { module = "org.graalvm.truffle:truffle-api"                  , version.ref = "graalvm"}
-graalvm-js                  = { module = "org.graalvm.js:js"                                , version.ref = "graalvm"}
-
-graalvm-hint-processor      = { module = "io.goodforgod:graalvm-hint-processor"             , version.ref = "graalvm-hint"}
-graalvm-hint-annotations    = { module = "io.goodforgod:graalvm-hint-annotations"           , version.ref = "graalvm-hint"}
-
-grpc-protobuf               = { module = "io.grpc:grpc-protobuf"                            , version.ref = "grpc"}
-grpc-kotlin                 = { module = "io.grpc:grpc-kotlin-stub"                         , version.ref = "grpc-kotlin"}
-
-helidon-nima-bom            = { module = "io.helidon.nima:helidon-nima-project"                              , version.ref = "helidon-nima"}
-helidon-nima-webserver      = { module = "io.helidon.nima.webserver:helidon-nima-webserver"                  , version.ref = "helidon-nima"}
-helidon-nima-static         = { module = "io.helidon.nima.webserver:helidon-nima-webserver-static-content"   , version.ref = "helidon-nima"}
-helidon-nima-webclient      = { module = "io.helidon.nima.webclient:helidon-nima-webclient"                  , version.ref = "helidon-nima"}
-helidon-nima-service        = { module = "io.helidon.nima.service-common:helidon-nima-service-common"        , version.ref = "helidon-nima"}
-helidon-config-yaml         = { module = "io.helidon.config:helidon-config-yaml"                             , version.ref = "helidon-nima"}
-
-
-http-common                 = { module = "io.goodforgod:http-common"                        , version.ref = "http-common"}
-protobuf-javautil           = { module = "com.google.protobuf:protobuf-java-util"           , version.ref = "protobuf"}
-protobuf-kotlin             = { module = "com.google.protobuf:protobuf-kotlin"              , version.ref = "protobuf"}
-
-twelvemonkeys-core          = { module = "com.twelvemonkeys.imageio:imageio-core"           , version.ref = "imageio-twelvemonkeys"}
-twelvemonkeys-icns          = { module = "com.twelvemonkeys.imageio:imageio-icns"           , version.ref = "imageio-twelvemonkeys"}
-twelvemonkeys-webp          = { module = "com.twelvemonkeys.imageio:imageio-webp"           , version.ref = "imageio-twelvemonkeys"}
-
-jetbrains-markdown         = { module = "org.jetbrains:markdown"                             , version.ref = "jetbrains-markdown"}
-jmdns                      = { module = "org.jmdns:jmdns"                                    , version.ref = "jmdns"}
-jspecify                   = { module = "org.jspecify:jspecify"                              , version.ref = "jspecify"}
-
-kotlin-bom                 = { module = "org.jetbrains.kotlin:kotlin-bom"                    , version.ref = "kotlin"}
-kotlinx-coroutines-core    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"      , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-jdk8    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"      , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-slf4j   = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j"     , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-test    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test"      , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-debug   = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-debug"     , version.ref = "kotlinx-coroutines"}
-kotlinx-datetime                  = { module = "org.jetbrains.kotlinx:kotlinx-datetime"                  , version.ref = "kotlinx-datetime"}
-kotlinx-atomicfu                  = { module = "org.jetbrains.kotlinx:atomicfu"                          , version.ref = "kotlinx-atomicfu"}
-kotlinx-reflect-lite              = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"              , version.ref = "kotlinx-reflect-lite"}
-kotlinx-io-jvm                    = { module = "org.jetbrains.kotlinx:kotlinx-io-jvm"                    , version.ref = "kotlinx-io-jvm"}
-kotlinx-cli                       = { module = "org.jetbrains.kotlinx:kotlinx-cli"                       , version.ref = "kotlinx-cli"}
-kotlinx-collections-immutable     = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm" , version.ref = "kotlinx-collections-immutable"}
-kotlinx-serialization-core        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core"        , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-json        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"        , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-json-okio   = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-okio"   , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-cbor        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cbor"        , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-hocon       = { module = "org.jetbrains.kotlinx:kotlinx-serialization-hocon"       , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-protobuf    = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf"    , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-properties  = { module = "org.jetbrains.kotlinx:kotlinx-serialization-properties"  , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-yaml        = { module = "com.charleskorn.kaml:kaml"                               , version.ref = "kotlinx-serialization-yaml"}
-kotlinx-serialization-csv         = { module = "de.brudaswen.kotlinx.serialization:kotlinx-serialization-csv" , version.ref = "kotlinx-serialization-csv"}
+kotlinRetry                = { module = "com.michael-bull.kotlin-retry:kotlin-retry"       , version.ref = "kotlinRetry" }
+kotest-core                = { module = "io.kotest:kotest-assertions-core"                 , version.ref = "kotest"}
+kotest-junit5              = { module = "io.kotest:kotest-runner-junit5"                   , version.ref = "kotest"}
 
 ktor-bom                    = { module = "io.ktor:ktor-bom"                                 , version.ref = "ktor"}
 ktor-server                 = { module = "io.ktor:ktor-server-core"                         , version.ref = "ktor"}
@@ -202,10 +124,10 @@ ktor-server-host-common     = { module = "io.ktor:ktor-server-host-common"      
 ktor-server-netty           = { module = "io.ktor:ktor-server-netty"                        , version.ref = "ktor"}
 ktor-server-tests           = { module = "io.ktor:ktor-server-tests"                        , version.ref = "ktor"}
 
-ktor-client                 = { module = "io.ktor:ktor-client-core"                         , version.ref = "ktor"}
+ktor-client-core            = { module = "io.ktor:ktor-client-core"                         , version.ref = "ktor"}
 ktor-client-cio             = { module = "io.ktor:ktor-client-cio"                          , version.ref = "ktor"}
 ktor-client-java            = { module = "io.ktor:ktor-client-java"                         , version.ref = "ktor"}
-ktor-client-okhttp          = { module = "io.ktor:ktor-client-okhttp"                         , version.ref = "ktor"}
+ktor-client-okhttp          = { module = "io.ktor:ktor-client-okhttp"                       , version.ref = "ktor"}
 ktor-client-jetty           = { module = "io.ktor:ktor-client-jetty"                        , version.ref = "ktor"}
 ktor-client-serialization   = { module = "io.ktor:ktor-client-serialization"                , version.ref = "ktor"}
 ktor-client-websockets      = { module = "io.ktor:ktor-client-websockets"                   , version.ref = "ktor"}
@@ -215,47 +137,41 @@ ktor-client-logging         = { module = "io.ktor:ktor-client-logging"          
 rsocket-ktor-client         = { module = "io.rsocket.kotlin:rsocket-ktor-client"            , version.ref = "rsocket"}
 rsocket-ktor-server         = { module = "io.rsocket.kotlin:rsocket-ktor-server"            , version.ref = "rsocket"}
 
+jgit                        = { module = "org.eclipse.jgit:org.eclipse.jgit"          , version.ref = "jgit" }
+jte                         = { module = "gg.jte:jte"                                 , version.ref = "jte" }
+jte-runtime                 = { module = "gg.jte:jte-runtime"                         , version.ref = "jte" }
+jte-kotlin                  = { module = "gg.jte:jte-kotlin"                          , version.ref = "jte" }
 junit-bom                   = { module = "org.junit:junit-bom"                        , version.ref = "junit"}
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter"            , version.ref = "junit"}
 junit-jupiter-api           = { module = "org.junit.jupiter:junit-jupiter-api"        , version.ref = "junit"}
 junit-jupiter-engine        = { module = "org.junit.jupiter:junit-jupiter-engine"     , version.ref = "junit"}
 junit-jupiter-params        = { module = "org.junit.jupiter:junit-jupiter-params"     , version.ref = "junit"}
-junit-platform-launcher     = { module = "org.junit.platform:junit-platform-launcher" , version     = "1.9.2"}
-junit-pioneer               = { module = "org.junit-pioneer:junit-pioneer"            , version.ref = "junit-pioneer"}
-jqwik                       = { module = "net.jqwik:jqwik"                            , version.ref = "jqwik"}
 
-ksp-auto-service            = { module = "dev.zacsweers.autoservice:auto-service-ksp" , version.ref = "ksp-auto-service"}
-
+graalvm-sdk                 = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
+google-auto-annotations     = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
+google-tink                 = { module = "com.google.crypto.tink:tink"                      , version.ref = "google-tink"}
+ksp-auto-service            = { module = "dev.zacsweers.autoservice:auto-service-ksp"       , version.ref = "ksp-auto-service"}
 koin-core                   = { module = "io.insert-koin:koin-core"                         , version.ref = "koin"}
 koin-ktor                   = { module = "io.insert-koin:koin-ktor"                         , version.ref = "koin"}
 koin-slf4j                  = { module = "io.insert-koin:koin-logger-slf4j"                 , version.ref = "koin"}
 koin-test                   = { module = "io.insert-koin:koin-test"                         , version.ref = "koin"}
 koin-test-junit5            = { module = "io.insert-koin:koin-test-junit5"                  , version.ref = "koin"}
-kodein                      = { module = "org.kodein.di:kodein-di"                          , version.ref = "kodein"}
-kotlininject-kspcompiler    = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp"     , version.ref = "kotlininject"}
-kotlininject-runtime        = { module = "me.tatarka.inject:kotlin-inject-runtime"          , version.ref = "kotlininject"}
 
-kmath-core                  = { module = "space.kscience:kmath-core"                        , version.ref = "kmath"}
+helidon-nima-bom            = { module = "io.helidon.nima:helidon-nima-project"                              , version.ref = "helidon-nima"}
+helidon-nima-webserver      = { module = "io.helidon.nima.webserver:helidon-nima-webserver"                  , version.ref = "helidon-nima"}
+helidon-nima-static         = { module = "io.helidon.nima.webserver:helidon-nima-webserver-static-content"   , version.ref = "helidon-nima"}
+helidon-nima-webclient      = { module = "io.helidon.nima.webclient:helidon-nima-webclient"                  , version.ref = "helidon-nima"}
+helidon-nima-service        = { module = "io.helidon.nima.service-common:helidon-nima-service-common"        , version.ref = "helidon-nima"}
+helidon-config-yaml         = { module = "io.helidon.config:helidon-config-yaml"                             , version.ref = "helidon-nima"}
 
-game-lwjgl-bom              = { module = "org.lwjgl:lwjgl-bom"                              , version.ref = "lwjgl"}
-game-libgdx                 = { module = "com.badlogicgames.gdx:gdx"                        , version.ref = "libgdx"}
-logback-classic             = { module = "ch.qos.logback:logback-classic"                   , version.ref = "logback"}
-logback-core                = { module = "ch.qos.logback:logback-core"                      , version.ref = "logback"}
-slf4j-nop                   = { module = "org.slf4j:slf4j-nop"                              , version.ref = "slf4j"}
+ajalt-clikt                 = { module = "com.github.ajalt.clikt:clikt"                    , version.ref = "ajalt-clikt"}
+ajalt-mordant               = { module = "com.github.ajalt.mordant:mordant"                , version.ref = "ajalt-mordant"}
+ajalt-colormath             = { module = "com.github.ajalt.colormath:colormath"            , version.ref = "ajalt-colormath"}
 
-os-appdirs                  = { module = "net.harawata:appdirs"                             , version.ref = "os-appdirs"}
-os-oshi                     = { module = "com.github.oshi:oshi-core"                        , version.ref = "os-oshi"}
-os-mac-jfa                  = { module = "de.jangassen:jfa"                                 , version.ref = "os-jfa"}
-
-testcontainers              = { module = "org.testcontainers:testcontainers"               , version.ref = "testcontainers"}
-testcontainers-bom          = { module = "org.testcontainers:testcontainers-bom"           , version.ref = "testcontainers"}
-testcontainers-postgresql   = { module = "org.testcontainers:postgresql"                   , version.ref = "testcontainers"}
-testcontainers-cassandra    = { module = "org.testcontainers:cassandra"                    , version.ref = "testcontainers"}
-testcontainers-clickhouse   = { module = "org.testcontainers:clickhouse"                   , version.ref = "testcontainers"}
-testcontainers-junit        = { module = "org.testcontainers:junit-jupiter"                , version.ref = "testcontainers"}
-
-togglz-core                 = { module = "org.togglz:togglz-core"                           , version.ref = "togglz"}
-versioncompare              = { module = "io.github.g00fy2:versioncompare"                  , version.ref = "versioncompare"}
+classgraph                  = { module = "io.github.classgraph:classgraph"                    , version.ref = "classgraph"}
+slf4j-api                   = { module = "org.slf4j:slf4j-api"                                , version.ref = "slf4j"}
+slf4j-simple                = { module = "org.slf4j:slf4j-simple"                             , version.ref = "slf4j"}
+slf4j-nop                   = { module = "org.slf4j:slf4j-nop"                                , version.ref = "slf4j"}
 
 [plugins]
 # Gradle  Plugins
@@ -263,19 +179,18 @@ benmanes                    = { id = "com.github.ben-manes.versions"            
 beryx-jlink                 = { id = "org.beryx.jlink"                                       , version.ref = "beryx-jlink" }
 beryx-runtime               = { id = "org.beryx.runtime"                                     , version.ref = "beryx-runtime" }
 beryx-jar                   = { id = "org.beryx.jar"                                         , version.ref = "beryx-jar" }
+jte                         = { id = "gg.jte.gradle"                                         , version.ref = "jte" }
+bestpractices               = { id = "com.autonomousapps.plugin-best-practices-plugin"       , version.ref = "best-practices-plugin" }
 champeau-includegit         = { id = "me.champeau.includegit"                                , version.ref = "champeau-includegit"}
 champeau-japicmp            = { id = "me.champeau.gradle.japicmp"                            , version.ref = "champeau-japicmp"}
 champeau-jmh                = { id = "me.champeau.jmh"                                       , version.ref = "champeau-jmh"}
 champeau-mrjar              = { id = "me.champeau.mrjar"                                     , version.ref = "champeau-mrjar"}
-dikt                        = { id = "io.github.sergeshustoff.dikt"                          , version.ref = "dikt"}
 graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
 gradle-checksum             = { id = "org.gradle.crypto.checksum"                            , version.ref = "gradlechecksum"}
-jetbrains-exposed           = { id = "com.jetbrains.exposed.gradle.plugin"                   , version.ref = "jetbrains-exposed"}
-jreleaser                   = { id = "org.jreleaser"                                         , version.ref = "jreleaser" }
 kotlin-jvm                  = { id = "org.jetbrains.kotlin.jvm"                              , version.ref = "kotlin" }
 kotlin-kapt                 = { id = "org.jetbrains.kotlin.kapt"                             , version.ref = "kotlin" }
 kotlinx-serialization       = { id = "org.jetbrains.kotlin.plugin.serialization"             , version.ref = "kotlin" }
-ksp                         = { id = "com.google.devtools.ksp"                               , version.ref = "ksp"}
+ksp                         = { id = "com.google.devtools.ksp"                               , version.ref = "kotlin-ksp"}
 ksp-redacted                = { id = "dev.zacsweers.redacted"                                , version.ref = "ksp-redacted" }
 ksp-powerassert             = { id = "com.bnorm.power.kotlin-power-assert"                   , version.ref = "ksp-powerassert" }
 licenser                    = { id = "org.cadixdev.licenser"                                 , version.ref = "licenser" }
@@ -285,10 +200,3 @@ spotless                    = { id = "com.diffplug.spotless"                    
 shadow                      = { id = "com.github.johnrengelman.shadow"                       , version.ref = "shadow" }
 versioncatalog-update       = { id = "nl.littlerobots.version-catalog-update"                , version.ref = "versioncatalog-update" }
 dependency-analysis         = { id = "com.autonomousapps.dependency-analysis"                , version.ref = "dependency-analysis" }
-semver                      = { id = "com.javiersc.semver"                                   , version.ref = "semver" }
-
-[bundles]
-ktor-server                 = ["ktor-server", "ktor-serialization", "ktor-auth", "ktor-server-host-common", "ktor-server-netty", "logback-classic"]
-ktor-client                 = ["ktor-client", "ktor-client-java", "ktor-client-serialization", "ktor-client-logging", "logback-classic"]
-
-

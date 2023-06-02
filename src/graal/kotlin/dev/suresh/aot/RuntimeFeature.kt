@@ -19,6 +19,7 @@ class RuntimeFeature : Feature {
       }
     }
   }
+
   override fun afterImageWrite(access: Feature.AfterImageWriteAccess) {
     // access.imagePath.toFile()
   }

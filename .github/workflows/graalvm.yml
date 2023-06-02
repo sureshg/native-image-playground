@@ -18,12 +18,16 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: read
+defaults:
+  run:
+    shell: bash
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 env:
   releaseBuild: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
@@ -39,6 +43,9 @@ jobs:
         version: [ dev ]
         java-version: [ 'dev' ]
         os: [ macos-latest, windows-latest, ubuntu-latest ]
+
+    outputs:
+      native_image_name: ${{ steps.native-build.outputs.native_image_name }}
 
     steps:
       - name: 🛎️ Check out repository
@@ -57,6 +64,7 @@ jobs:
           native-image-job-reports: 'false'
 
       - name: 🏗️ Native Image Build & Test
+        id: native-build
         run: |
           ./gradlew nativeCompile
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
@@ -64,15 +72,20 @@ jobs:
       - name: 📤 Upload ${{ matrix.os }} native image
         uses: actions/upload-artifact@v3
         with:
-          # name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ runner.arch }}
+          name: ${{ steps.native-build.outputs.native_image_name }}
           path: |
-            build/${{ github.event.repository.name }}*.tar.gz
+            # build/${{ github.event.repository.name }}*.tar.gz
+            build/${{ steps.native-build.outputs.native_image_name }}
           if-no-files-found: error
 
 
   native-build-musl:
     name: GraalVM CE Dev + musl static image
     runs-on: ubuntu-latest
+
+    outputs:
+      native_image_name: ${{ steps.native-build.outputs.native_image_name }}
+
     steps:
       - name: 🛎️ Check out repository
         uses: actions/checkout@v3
@@ -91,6 +104,7 @@ jobs:
           native-image-job-reports: 'false'
 
       - name: 🏗️ Build static image with musl libc
+        id: native-build
         run: |
           ./gradlew nativeCompile -Pmusl
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
@@ -98,6 +112,7 @@ jobs:
       - name: 📤 Upload static binary
         uses: actions/upload-artifact@v3
         with:
+          name: ${{ steps.native-build.outputs.native_image_name }}
           path: |
-            build/${{ github.event.repository.name }}*.tar.gz
+            build/${{ steps.native-build.outputs.native_image_name }}
           if-no-files-found: error
