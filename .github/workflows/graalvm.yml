@@ -74,7 +74,6 @@ jobs:
         with:
           name: ${{ steps.native-build.outputs.native_image_name }}
           path: |
-            # build/${{ github.event.repository.name }}*.tar.gz
             build/${{ steps.native-build.outputs.native_image_name }}
           if-no-files-found: error
 

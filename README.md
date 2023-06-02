@@ -149,7 +149,7 @@ $ native-image \
 
 <hr>
 
-* [GraalVM CE Version Roadmap](https://www.graalvm.org/release-notes/version-roadmap/)
+* [GraalVM CE Version Roadmap](https://www.graalvm.org/release-notes/release-calendar/)
 * [Graalvm CE Builds](https://github.com/graalvm/graalvm-ce-builds/releases/)
 * [Graalvm CE Dev Builds](https://github.com/graalvm/graalvm-ce-dev-builds/releases/)
 * [Graalvm CE Docker Image](https://github.com/graalvm/container/pkgs/container/graalvm-ce)
