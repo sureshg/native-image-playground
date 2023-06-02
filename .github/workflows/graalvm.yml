@@ -45,6 +45,7 @@ jobs:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
 
     outputs:
+      version: ${{ steps.native-build.outputs.version }}
       native_image_name: ${{ steps.native-build.outputs.native_image_name }}
 
     steps:
@@ -115,3 +116,42 @@ jobs:
           path: |
             build/${{ steps.native-build.outputs.native_image_name }}
           if-no-files-found: error
+
+  release:
+    name: 🚰 Release new version.
+    needs: [ native-build, native-build-musl ]
+    if: startsWith(github.ref, 'refs/tags/') && needs.native-build.result == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️Check out the source code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: ⚙️Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          configuration: ".github/config/configuration.json"
+          commitMode: true
+          ignorePreReleases: ${{ !contains(github.ref, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⏬Download all the build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: release-artifacts
+
+      - name: ✨Github Release (version = ${{ needs.native-build.outputs.version }})
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.github_release.outputs.changelog }}
+          files: |
+            ${{ github.workspace }}/release-artifacts/**
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

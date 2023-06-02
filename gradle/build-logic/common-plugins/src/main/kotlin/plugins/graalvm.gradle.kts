@@ -3,6 +3,8 @@ package plugins
 import GithubAction
 import Platform
 import com.javiersc.semver.project.gradle.plugin.SemverExtension
+import dev.suresh.gradle.byteDisplaySize
+import dev.suresh.gradle.jvmArguments
 import dev.suresh.gradle.libs
 import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
@@ -21,8 +23,11 @@ val muslEnabled = project.hasProperty("musl")
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs +=
-      listOf("--show-version", "--enable-preview", "--add-modules=ALL-SYSTEM")
+  applicationDefaultJvmArgs += buildList {
+    addAll(jvmArguments)
+    add("--show-version")
+    add("--add-modules=ALL-SYSTEM")
+  }
 }
 
 val semverExtn = extensions.getByType<SemverExtension>()
@@ -107,7 +112,7 @@ graalvmNative {
  * - graalCompileClasspath (CompileOnly + Implementation)
  * - graalRuntimeClasspath (RuntimeOnly + Implementation)
  *
- * [Configure Custom-SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
+ * [Configure-Custom-SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
     sourceSets.creating {
@@ -136,10 +141,15 @@ tasks {
         destinationDirectory = project.layout.buildDirectory
         from(nativeCompile.map { it.outputFile })
         doLast {
-          // Set the output for the Github Action
-          GithubAction.setOutput("native_image_name", archiveFileName)
-          GithubAction.setOutput("native_image_path", archiveFile.get().asFile.absolutePath)
-          logger.lifecycle("Native Image Archive: ${archiveFile.get().asFile.absolutePath}")
+          // Set the output for the GitHub native-build action.
+          with(GithubAction) {
+            setOutput("version", project.version)
+            setOutput("native_image_name", archiveFileName.get())
+            setOutput("native_image_path", archiveFile.get().asFile.absolutePath)
+          }
+          val binFile = archiveFile.get().asFile
+          logger.lifecycle(
+              "Native Image Archive: ${binFile.absolutePath} (${binFile.length().byteDisplaySize()})")
         }
       }
 

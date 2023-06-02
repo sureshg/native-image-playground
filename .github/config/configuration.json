@@ -27,7 +27,8 @@
     {
       "title": "## 🖍️ Documentation",
       "labels": [
-        "doc"
+        "doc",
+        "docs"
       ]
     },
     {
@@ -36,6 +37,13 @@
         "deps",
         "dependencies",
         "chore(deps)"
+      ]
+    },
+    {
+      "title": "## 💬 Other",
+      "labels": [
+        "other",
+        "misc"
       ]
     }
   ],
