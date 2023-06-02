@@ -27,7 +27,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   releaseBuild: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
