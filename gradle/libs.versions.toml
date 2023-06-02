@@ -18,7 +18,7 @@ app-module                     = "dev.suresh.nativeimage"
 githubProject                  = "https://github.com/sureshg/native-image-playground"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.7.0"
+kotlinx-kover                  = "0.7.1"
 zip-prefixer                   = "0.3.1"
 ajalt-clikt                    = "3.5.2"
 ajalt-mordant                  = "2.0.0-beta13"
