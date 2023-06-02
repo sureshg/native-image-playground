@@ -3,9 +3,7 @@ package plugins
 import GithubAction
 import Platform
 import com.javiersc.semver.project.gradle.plugin.SemverExtension
-import dev.suresh.gradle.byteDisplaySize
-import dev.suresh.gradle.jvmArguments
-import dev.suresh.gradle.libs
+import dev.suresh.gradle.*
 import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {
@@ -26,7 +24,7 @@ application {
   applicationDefaultJvmArgs += buildList {
     addAll(jvmArguments)
     add("--show-version")
-    add("--add-modules=ALL-SYSTEM")
+    add("--add-modules=$addModules")
   }
 }
 
@@ -62,9 +60,7 @@ graalvmNative {
               add("--static")
               add("--libc=musl")
             }
-            else -> {
-              add("-H:+StaticExecutableWithDynamicLibC")
-            }
+            else -> add("-H:+StaticExecutableWithDynamicLibC")
           }
           add("-H:+StripDebugInfo")
         }
@@ -86,7 +82,7 @@ graalvmNative {
           add("--dry-run")
         }
       }
-      jvmArgs = listOf("--add-modules=ALL-SYSTEM")
+      jvmArgs = listOf("--add-modules=$addModules")
       systemProperties = mapOf("java.awt.headless" to "false")
       resources { autodetect() }
     }
@@ -178,10 +174,6 @@ fun archiveName() = buildString {
 }
 
 dependencies {
-  // Auto-service
-  ksp(libs.ksp.auto.service)
-  implementation(libs.google.auto.annotations)
-
   // Dependencies required for native-image build. Use "graalCompileOnly" for compile only deps.
   // "graalCompileOnly"(libs.graalvm.sdk)
   "graalImplementation"(libs.classgraph)
