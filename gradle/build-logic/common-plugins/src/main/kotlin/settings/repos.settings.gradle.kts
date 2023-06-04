@@ -48,7 +48,7 @@ gradleEnterprise {
       publishAlways()
       isUploadInBackground = false
       tag("GITHUB_ACTION")
-      // buildScanPublished { addJobSummary() }
+      buildScanPublished { addJobSummary() }
     }
   }
 }
