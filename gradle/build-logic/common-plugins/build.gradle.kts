@@ -81,7 +81,6 @@ dependencies {
   implementation(libs.build.ksp.redacted)
   implementation(libs.build.gradle.enterprise)
   implementation(libs.build.nexus.plugin)
-  implementation(libs.build.nexus.plugin)
   implementation(libs.build.spotless.plugin)
   implementation(libs.build.shadow.plugin)
   implementation(libs.build.semver.plugin)
