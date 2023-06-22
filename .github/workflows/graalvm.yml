@@ -85,7 +85,7 @@ jobs:
         with:
           name: ${{ steps.native-build.outputs.native_image_dashboard }}
           path: |
-            build/${{ steps.native-build.outputs.native_image_dashboard }}.bgv
+            build/${{ steps.native-build.outputs.native_image_dashboard }}
           if-no-files-found: error
 
 

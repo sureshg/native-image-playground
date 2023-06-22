@@ -163,7 +163,7 @@ tasks {
             setOutput("version", project.version)
             setOutput("native_image_name", archiveFileName.get())
             setOutput("native_image_path", archiveFile.get().asFile.absolutePath)
-            setOutput("native_image_dashboard", niDashBoardDump)
+            setOutput("native_image_dashboard", "$niDashBoardDump.bgv")
           }
 
           val binFile = archiveFile.get().asFile
