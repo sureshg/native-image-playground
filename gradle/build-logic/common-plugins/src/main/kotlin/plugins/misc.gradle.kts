@@ -1,12 +1,12 @@
 package plugins
 
-import dev.suresh.gradle.libs
+import common.libs
 import org.gradle.kotlin.dsl.*
 
 plugins {
   java
   wrapper
-  // id("common")
+  // id("plugins.common")
   // id("gg.jte.gradle")
   id("com.diffplug.spotless")
   id("com.github.ben-manes.versions")
@@ -35,7 +35,7 @@ spotless {
     target("**/*.kt")
     trimTrailingWhitespace()
     endWithNewline()
-    targetExclude("**/build/**", "**/.gradle/**")
+    targetExclude("**/build/**", "**/.gradle/**", "**/gradle/build-logic/**/KotlinExtns.kt")
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
   }
 

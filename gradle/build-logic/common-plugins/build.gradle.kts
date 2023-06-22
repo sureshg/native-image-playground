@@ -17,7 +17,10 @@ val dslJavaVersion = libs.versions.kotlin.dsl.jvmtarget
 
 tasks {
   withType<KotlinCompile>().configureEach {
-    compilerOptions { jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget) }
+    compilerOptions {
+      jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
+      freeCompilerArgs.addAll("-Xcontext-receivers")
+    }
   }
 }
 
@@ -28,6 +31,12 @@ kotlin {
       optIn("kotlin.ExperimentalStdlibApi")
       optIn("kotlin.io.path.ExperimentalPathApi")
       optIn("kotlin.time.ExperimentalTime")
+      optIn("org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi")
+      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalKotlinJsDsl")
+      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl")
+      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl")
+      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
+      optIn("org.jetbrains.compose.ExperimentalComposeLibrary")
     }
   }
 }
@@ -46,9 +55,9 @@ gradlePlugin {
     // Uncomment the id to change plugin id for this pre-compiled plugin
     named("plugins.common") {
       // id = "dev.suresh.gradle.plugins.common"
-      displayName = "Common plugin"
+      displayName = "Common build-logic plugin"
       description = "Common pre-compiled script plugin"
-      tags = listOf("Common Plugin")
+      tags = listOf("Common Plugin", "build-logic")
     }
 
     // val settingsPlugin by creating {}
@@ -60,6 +69,9 @@ jte {
   contentType = gg.jte.ContentType.Plain
   sourceDirectory = sourceSets.main.get().resources.srcDirs.firstOrNull()?.toPath()
   generate()
+  // jteExtension("gg.jte.models.generator.ModelExtension")
+  // jteExtension("gg.jte.nativeimage.NativeResourcesExtension")
+  // binaryStaticContent = true
 }
 
 dependencies {
@@ -69,6 +81,7 @@ dependencies {
   implementation(libs.ajalt.mordant)
   implementation(libs.jte.runtime)
   implementation(libs.build.zip.prefixer)
+  // jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
 
   implementation(libs.build.kotlin)

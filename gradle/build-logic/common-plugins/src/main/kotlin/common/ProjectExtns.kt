@@ -1,4 +1,4 @@
-package dev.suresh.gradle
+package common
 
 import java.nio.file.Path
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -26,6 +26,9 @@ internal val Project.catalogs
 /** Quote for -Xlog file */
 val Project.xQuote
   get() = if (OperatingSystem.current().isWindows) """\"""" else """""""
+
+val Project.commonProjectName
+  get() = "common"
 
 val Project.isPlatformProject
   get() = plugins.hasPlugin("java-platform")

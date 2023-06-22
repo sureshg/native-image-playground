@@ -49,7 +49,6 @@ $ build/native-image-playground.output/default/native-image-playground
 $ ./gradlew clean nativeCompile --rerun-tasks --no-build-cache
 
 # GraalVM JIT Mode
-# ----------------
 $ ./gradlew build
 $ java --enable-preview \
        --add-modules=ALL-SYSTEM \

@@ -1,7 +1,7 @@
 package settings
 
-import GithubAction
 import com.gradle.scan.plugin.PublishedBuildScan
+import common.GithubAction
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 
@@ -20,6 +20,10 @@ pluginManagement {
       }
     }
   }
+
+  plugins {
+    // id("org.jetbrains.compose").version(extra["compose.version"] as String)
+  }
 }
 
 // Apply the plugins to all projects
@@ -35,8 +39,25 @@ plugins {
 // Centralizing repositories declaration
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
-  repositories { mavenCentral() }
-  repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+  repositories {
+    mavenCentral()
+
+    // Fix for https://youtrack.jetbrains.com/issue/KT-56300
+    ivy("https://nodejs.org/dist/") {
+      name = "Node.js Distributions"
+      patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
+      metadataSources { artifact() }
+      content { includeModule("org.nodejs", "node") }
+    }
+
+    ivy("https://github.com/yarnpkg/yarn/releases/download/") {
+      name = "Yarn Distributions"
+      patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+      metadataSources { artifact() }
+      content { includeModule("com.yarnpkg", "yarn") }
+    }
+  }
+  repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }
 
 gradleEnterprise {

@@ -40,13 +40,14 @@ jobs:
       fail-fast: false
       max-parallel: 3
       matrix:
-        version: [ dev ]
         java-version: [ 'dev' ]
+        distribution: [ 'graalvm-community' ]
         os: [ macos-latest, windows-latest, ubuntu-latest ]
 
     outputs:
       version: ${{ steps.native-build.outputs.version }}
       native_image_name: ${{ steps.native-build.outputs.native_image_name }}
+      native_image_dashboard: ${{ steps.native-build.outputs.native_image_dashboard }}
 
     steps:
       - name: 🛎️ Check out repository
@@ -57,8 +58,8 @@ jobs:
       - name: ☕ Setup GraalVM CE Dev Build
         uses: graalvm/setup-graalvm@v1
         with:
-          version: ${{ matrix.version }}
           java-version: ${{ matrix.java-version }}
+          distribution: ${{ matrix.distribution }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'gradle'
           set-java-home: 'true'
@@ -67,7 +68,7 @@ jobs:
       - name: 🏗️ Native Image Build & Test
         id: native-build
         run: |
-          ./gradlew nativeCompile
+          ./gradlew nativeCompile -Pquick -Preports
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload ${{ matrix.os }} native image
@@ -78,13 +79,24 @@ jobs:
             build/${{ steps.native-build.outputs.native_image_name }}
           if-no-files-found: error
 
+      - name: 📈 Upload ${{ matrix.os }} native image dashboard
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.native-build.outputs.native_image_dashboard }}
+          path: |
+            build/${{ steps.native-build.outputs.native_image_dashboard }}.bgv
+          if-no-files-found: error
+
 
   native-build-musl:
     name: GraalVM CE Dev + musl static image
     runs-on: ubuntu-latest
 
     outputs:
+      version: ${{ steps.native-build.outputs.version }}
       native_image_name: ${{ steps.native-build.outputs.native_image_name }}
+      native_image_dashboard: ${{ steps.native-build.outputs.native_image_dashboard }}
 
     steps:
       - name: 🛎️ Check out repository
@@ -95,8 +107,8 @@ jobs:
       - name: ☕ Setup GraalVM CE Dev Build
         uses: graalvm/setup-graalvm@v1
         with:
-          version: 'dev'
           java-version: 'dev'
+          distribution: 'graalvm-community'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'gradle'
           native-image-musl: 'true'
@@ -106,7 +118,7 @@ jobs:
       - name: 🏗️ Build static image with musl libc
         id: native-build
         run: |
-          ./gradlew nativeCompile -Pmusl
+          ./gradlew nativeCompile -Pquick -Pmusl -Preports
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload static binary

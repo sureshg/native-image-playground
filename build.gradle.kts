@@ -1,4 +1,4 @@
-plugins { id("plugins.graalvm") }
+plugins { plugins.graalvm }
 
 dependencies {
   implementation(platform(libs.ktor.bom))

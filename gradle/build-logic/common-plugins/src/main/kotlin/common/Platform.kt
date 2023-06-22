@@ -1,4 +1,4 @@
-package dev.suresh.config
+package common
 
 object Platform {
 
@@ -59,6 +59,12 @@ object Platform {
 
   val isUnix
     get() = isMac || isLinux
+
+  val isAarch64
+    get() = currentArch == Arch.Arm64
+
+  val isAmd64
+    get() = currentArch == Arch.X64
 
   val isCygwin
     get() = isWin && System.getenv("PWD") != null && System.getenv("PWD").startsWith("/")
