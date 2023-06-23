@@ -34,7 +34,7 @@ env:
 
 jobs:
   native-build:
-    name: GraalVM CE latest ${{ matrix.java-version }} on ${{ matrix.os }}
+    name: ${{ matrix.distribution }} ${{ matrix.java-version }} latest on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -90,7 +90,7 @@ jobs:
 
 
   native-build-musl:
-    name: GraalVM CE Dev + musl static image
+    name: GraalVM Community Dev + musl static image
     runs-on: ubuntu-latest
 
     outputs:
