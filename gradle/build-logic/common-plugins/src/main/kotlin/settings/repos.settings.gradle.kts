@@ -34,6 +34,8 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver")
   // Use semver on all projects
   id("com.javiersc.semver")
+  // Include another pre-compiled settings plugin
+  id("settings.include")
 }
 
 // Centralizing repositories declaration
@@ -64,7 +66,11 @@ gradleEnterprise {
   buildScan {
     termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfServiceAgree = "yes"
-    capture.isTaskInputFiles = true
+
+    capture { isTaskInputFiles = true }
+
+    obfuscation { ipAddresses { addresses -> addresses.map { _ -> "0.0.0.0" } } }
+
     if (GithubAction.isEnabled) {
       publishAlways()
       isUploadInBackground = false

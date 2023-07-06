@@ -59,32 +59,45 @@ kotlinMultiplatform.apply {
   js(IR) {
     useEsModules()
     binaries.executable()
-    browser {
-      commonWebpackConfig {
-        // outputFileName = "app.js"
-        cssSupport { enabled.set(true) }
-      }
 
-      testTask {
-        enabled = true
-        testLogging.showStandardStreams = true
-        useKarma { useChromeHeadless() }
-      }
+    browser {
+      commonWebpackConfig(
+          Action {
+            // outputFileName = "app.js"
+            cssSupport { enabled.set(true) }
+          })
+
+      testTask(
+          Action {
+            enabled = true
+            testLogging.showStandardStreams = true
+            useKarma { useChromeHeadless() }
+          })
 
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
   }
 
   // Disable wasm by default as some of the common dependencies are not compatible with wasm.
-  if (project.hasProperty("wasm")) {
+  if (project.hasProperty("experimental")) {
+
     wasm {
       binaries.executable()
       browser {
-        commonWebpackConfig {
-          devServer =
-              (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-                  open = mapOf("app" to mapOf("name" to "google chrome")))
-        }
+        commonWebpackConfig(
+            Action {
+              devServer =
+                  (devServer ?: KotlinWebpackConfig.DevServer()).copy(
+                      open = mapOf("app" to mapOf("name" to "google chrome")))
+            })
+      }
+    }
+
+    // Use custom allocator for native targets
+    macosX64("native") {
+      binaries.executable()
+      compilations.configureEach {
+        compilerOptions.configure { freeCompilerArgs.add("-Xallocator=custom") }
       }
     }
   }
@@ -105,9 +118,15 @@ kotlinMultiplatform.apply {
         implementation(libs.kotlinx.coroutines.core)
         implementation(libs.kotlinx.datetime)
         implementation(libs.kotlinx.serialization.json)
+        implementation(libs.kotlinx.io.bytestring)
+        implementation(libs.kotlinx.collections.immutable)
+        implementation(libs.kotlinx.io.core)
         implementation(libs.ktor.client.core)
         implementation(libs.ktor.client.logging)
         implementation(libs.ktor.client.serialization)
+        implementation(libs.ajalt.colormath)
+        implementation(libs.benasher44.uuid)
+        implementation(libs.intellij.markdown)
       }
     }
 
@@ -124,6 +143,7 @@ kotlinMultiplatform.apply {
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         project.dependencies.add("kspJvm", libs.ksp.auto.service)
         implementation(libs.google.auto.annotations)
+        implementation(libs.slf4j.api)
       }
     }
 
@@ -202,7 +222,7 @@ tasks {
   }
 }
 
-artifacts { add("commonJsResources", tasks.named("jsProcessResources")) }
+artifacts { add(commonJsResources.name, tasks.named("jsProcessResources")) }
 
 dependencies {
   // add("kspJvm", project(":ksp-processor"))

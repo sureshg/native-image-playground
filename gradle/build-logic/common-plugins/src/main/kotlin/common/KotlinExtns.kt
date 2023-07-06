@@ -2,16 +2,20 @@ package common
 
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ExternalDependency
 import org.gradle.api.attributes.Attribute
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.*
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.assign
+import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
+import java.nio.file.Path
 
 /** Java version properties. */
 val Project.javaVersion
@@ -54,6 +58,13 @@ val Project.isKotlinJvmProject
 
 val Project.isKotlinJsProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
+
+/**
+ * Returns the dependency artifact for the given Gradle plugin.
+ */
+fun Provider<PluginDependency>.toDep() = map {
+  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}"
+}
 
 // https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
 val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
@@ -111,6 +122,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   freeCompilerArgs.addAll(
     "-Xcontext-receivers",
     "-Xallow-result-return-type",
+    // "-P",
+    // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
   )
 }
 
@@ -186,6 +199,7 @@ fun Test.configureJavaTest() {
 
 context(Project)
 fun KotlinJsOptions.configureKotlinJs() {
+  // useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")
@@ -194,4 +208,36 @@ fun KotlinJsOptions.configureKotlinJs() {
 context(Project)
 fun KotlinNpmInstallTask.configureKotlinNpm() {
   //args.add("--ignore-engines")
+}
+
+/** Returns the path of the dependency jar in runtime classpath. */
+context(Project)
+val ExternalDependency.dependencyPath get() = configurations
+  .named("runtimeClasspath")
+  .get()
+  .resolvedConfiguration
+  .resolvedArtifacts
+  .find { it.moduleVersion.id.module == module }
+  ?.file
+  ?.path
+  ?: error("Could not find $name in runtime classpath")
+
+/** Returns the application `run` command. */
+context(Project)
+fun Path.appRunCmd(args: List<String>): String {
+  val path = layout.projectDirectory.asFile.toPath().relativize(this)
+  val newLine = System.lineSeparator()
+  val lineCont = """\""" // Bash line continuation
+  val indent = "\t"
+  return args.joinToString(
+    prefix = """
+             |To Run the app,
+             |${'$'} java -jar $lineCont $newLine
+             """.trimMargin(),
+    postfix = "$newLine$indent$path",
+    separator = newLine,
+  ) {
+    // Escape the globstar
+    "$indent$it $lineCont".replace("*", """\*""")
+  }
 }

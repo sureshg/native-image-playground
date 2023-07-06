@@ -15,6 +15,8 @@ plugins {
   application
   `test-suite-base`
   id("com.github.johnrengelman.shadow")
+  id("org.jetbrains.dokka")
+  id("org.jetbrains.kotlinx.kover")
 }
 
 if (hasCleanTask) {
@@ -42,7 +44,7 @@ idea {
 }
 
 // shadow plugin requires mainClass to be set
-application { mainClass = "dev.suresh.MainKt" }
+application { mainClass = libs.versions.app.mainclass }
 
 java {
   withSourcesJar()
@@ -95,10 +97,11 @@ tasks {
       logger.quiet(
           """
           |Application modules for OpenJDK-${java.toolchain.languageVersion.get()} are,
-          |${modules.split(",")
-              .mapIndexed {i, module -> " ${(i+1).toString().padStart(2)}) $module" }
+          |${modules
+              .split(",")
+              .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
               .joinToString(System.lineSeparator())
-             }
+          }
           """
               .trimMargin())
     }
@@ -166,5 +169,35 @@ tasks {
   jdeprscan {
     val shadowJar by existing(Jar::class)
     jarFile = shadowJar.flatMap { it.archiveFile }
+  }
+
+  val githubActionOutput by registering {
+    description = "Set Github workflow action output for this build"
+    group = LifecycleBasePlugin.BUILD_TASK_NAME
+    doLast {
+      with(GithubAction) {
+        setOutput("name", project.name)
+        setOutput("group", project.group)
+        setOutput("version", project.version)
+        setOutput("artifact_name", "${project.name}-${project.version}")
+      }
+    }
+  }
+
+  register("ciBuild") {
+    description = "Build with all the reports!"
+    dependsOn(
+        tasks.build, ":web:build", ":backend:build", "koverHtmlReport", "dokkaHtmlMultiModule")
+    named("koverHtmlReport").map { it.mustRunAfter(tasks.build) }
+    named("dokkaHtmlMultiModule").map { it.mustRunAfter(tasks.build) }
+  }
+
+  // Set GitHub workflow action output for this build
+  build { finalizedBy(githubActionOutput) }
+
+  // Task to print the project version
+  register("v") {
+    description = "Print the ${project.name} version!"
+    doLast { println(project.version.toString()) }
   }
 }
