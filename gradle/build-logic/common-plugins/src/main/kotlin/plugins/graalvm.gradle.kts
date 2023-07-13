@@ -103,7 +103,7 @@ graalvmNative {
         // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
       }
 
-      jvmArgs = listOf("--add-modules=$addModules", "-Xmx4G")
+      jvmArgs = listOf("--add-modules=$addModules")
       systemProperties = mapOf("java.awt.headless" to "false")
       resources { autodetect() }
     }
