@@ -85,7 +85,7 @@ fun main(args: Array<String>) {
   Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
   cmdArgs = args.toList()
-  webServer = WebServer.builder().port(9080).routing(::routes).start()
+  webServer = WebServer.builder().port(9080).routing(::routes).build().start()
 
   val vmTime =
       ProcessHandle.current().info().startInstant().getOrDefault(Instant.now()).toEpochMilli()
