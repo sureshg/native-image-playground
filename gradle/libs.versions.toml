@@ -21,7 +21,7 @@ publish-org-url                = "https://suresh.dev"
 publish-scm-url                = "https://github.com/sureshg/native-image-playground"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.7.2"
+kotlinx-kover                  = "0.7.3"
 kotlinx-io                     = "0.2.0"
 kotlinx-atomicfu               = "0.21.0"
 kotlinx-coroutines             = "1.7.3"
