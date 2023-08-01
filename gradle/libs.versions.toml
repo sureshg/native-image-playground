@@ -81,7 +81,7 @@ gradlechecksum                 = "1.4.0"
 jetbrains-exposed              = "0.2.1"
 licenser                       = "0.6.1"
 osdetector                     = "1.7.3"
-protobuf-plugin                = "0.9.2"
+protobuf-plugin                = "0.9.4"
 versioncatalog-update          = "0.8.0"
 
 
