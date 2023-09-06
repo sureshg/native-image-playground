@@ -154,34 +154,34 @@ $ native-image \
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
 
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-20&logo=oracle&logoColor=d3eff5&style=for-the-badge
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-21&logo=oracle&logoColor=d3eff5
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
 
-[graalvm_reachability_img]: https://img.shields.io/github/v/release/oracle/graalvm-reachability-metadata?color=125b6b&label=graalvm-reachability&logo=oracle&logoColor=d3eff5&style=for-the-badge
+[graalvm_reachability_img]: https://img.shields.io/github/v/release/oracle/graalvm-reachability-metadata?color=125b6b&label=graalvm-reachability&logo=oracle&logoColor=d3eff5
 
 [gl_dashboard_url]: https://www.graalvm.org/dashboard/
 
-[gl_dashboard_img]: https://img.shields.io/badge/GraalVM-Dashboard-125b6b.svg?style=for-the-badge&logo=clyp&logoColor=d3eff5
+[gl_dashboard_img]: https://img.shields.io/badge/GraalVM-Dashboard-125b6b.svg?logo=clyp&logoColor=d3eff5
 
 [nativeimage_cs_url]: https://www.graalvm.org/uploads/quick-references/Native-Image_v2/CheatSheet_Native_Image_v2_(EU_A4).pdf
 
-[nativeimage_cs_img]: https://img.shields.io/badge/NativeImage-CheatSheet-125b6b.svg?style=for-the-badge&logo=oracle&logoColor=d3eff5
+[nativeimage_cs_img]: https://img.shields.io/badge/NativeImage-CheatSheet-125b6b.svg?logo=oracle&logoColor=d3eff5
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 
-[kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge
+[kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff
 
 [gha_url]: https://github.com/sureshg/native-image-playground/actions/workflows/graalvm.yml
 
-[gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/native-image-playground/graalvm.yml?branch=main&color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
+[gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/native-image-playground/graalvm.yml?branch=main&color=green&label=Build&logo=Github-Actions&logoColor=green
 
 [sty_url]: https://kotlinlang.org/docs/coding-conventions.html
 
-[sty_img]: https://img.shields.io/badge/style-Kotlin--Official-40c4ff.svg?style=for-the-badge&logo=kotlin&logoColor=40c4ff
+[sty_img]: https://img.shields.io/badge/style-Kotlin--Official-40c4ff.svg?logo=kotlin&logoColor=40c4ff
 
 [ktlint_url]: https://ktlint.github.io/
 
-[ktlint_img]: https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg?logo=kotlin&style=for-the-badge&logoColor=FF4081
+[ktlint_img]: https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg?logo=kotlin&logoColor=FF4081
 
 [//]: # (⬇️  🖌️  🧭🎨️ 🧭✨ 🌊 ⏳ 📫 📖 🎨 🍫 📐)
