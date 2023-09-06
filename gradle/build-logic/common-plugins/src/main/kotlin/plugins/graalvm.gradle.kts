@@ -50,6 +50,7 @@ graalvmNative {
         add("--features=dev.suresh.aot.RuntimeFeature")
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
+        add("-H:+UnlockExperimentalVMOptions")
         add("-EBUILD_NUMBER=${project.version}")
         add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
         // add("-H:+AddAllCharsets")

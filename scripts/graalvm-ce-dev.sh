@@ -3,7 +3,7 @@
 # set -u won't work for sdkman
 set -e
 
-jdk_version=${1:-20}
+jdk_version=${1:-21}
 extn="tar.gz"
 
 # Find OS type
@@ -72,9 +72,4 @@ popd >/dev/null
 
 # Set GraalVM as default JDK in the current shell
 sdk u java "$sdkman_id"
-
-echo "Installing Wasm..."
-# gu install wasm visualvm
-gu install wasm
-
 native-image --version

@@ -50,7 +50,6 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
-import jdk.incubator.concurrent.ScopedValue
 import kotlin.io.path.Path
 import kotlin.io.use
 import kotlin.jvm.optionals.getOrDefault
@@ -143,7 +142,7 @@ fun routes(rules: HttpRouting.Builder) {
 }
 
 fun root(req: ServerRequest, res: ServerResponse) {
-  ScopedValue.where(REQ_URI, req.path().path()) { res.send(summary(cmdArgs)) }
+  ScopedValue.runWhere(REQ_URI, req.path().path()) { res.send(summary(cmdArgs)) }
 }
 
 fun error(req: ServerRequest, res: ServerResponse, ex: Throwable) {
