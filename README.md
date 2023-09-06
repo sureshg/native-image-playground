@@ -4,28 +4,20 @@
 [![GraalVM CE][graalvm_img]][graalvm_url]
 [![Kotlin release][kt_img]][kt_url]
 [![Style guide][ktlint_img]][ktlint_url]
-
 [![GraalVM Reachability][graalvm_reachability_img]][graalvm_reachability_url]
-[![Style guide][nativeimage_cs_img]][nativeimage_cs_url]
-[![GraalVM Dashboard][gl_dashboard_img]][gl_dashboard_url]
 
 [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app
 and publish the platform binaries using GitHub action.
 
-### Install GraalVM CE
+### Install GraalVM CE Dev
 
 ```bash
 # Install GraalVM CE Dev
-$ bash <(curl -sL https://get.graalvm.org/jdk) \
-     --to "$HOME/install/graalvm" \
-     -c visualvm graalvm-ce-java<xx>
+$ ./scripts/graalvm-ce-dev.sh
 
-# Remove the MacOS quarantine attribute
-$ sudo xattr -r -d com.apple.quarantine "$HOME/install/graalvm/graalvm-ce-java<xx>/Contents/Home"
-
-# Manage using SDKMAN!
+# Install GraalVM CE
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java graalvm-ce-java<xx> "$HOME/install/graalvm/graalvm-ce-java<xx>/Contents/Home"
+$ sdk i java 20.0.2-graal
 ```
 
 ### Build
@@ -58,7 +50,7 @@ $ java --enable-preview \
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
-        --multi-release=20 \
+        --multi-release=21 \
         build/libs/native-image-playground-*-all.jar
 
 # Build native image from modular jars
@@ -154,7 +146,7 @@ $ native-image \
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
 
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-21&logo=oracle&logoColor=d3eff5
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-ce-dev&logo=oracle&logoColor=d3eff5
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
 
