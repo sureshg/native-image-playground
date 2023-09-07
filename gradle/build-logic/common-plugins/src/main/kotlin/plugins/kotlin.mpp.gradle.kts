@@ -64,7 +64,7 @@ kotlinMultiplatform.apply {
       commonWebpackConfig(
           Action {
             // outputFileName = "app.js"
-            cssSupport { enabled.set(true) }
+            cssSupport { enabled = true }
           })
 
       testTask(

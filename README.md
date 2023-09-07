@@ -26,8 +26,13 @@ $ sdk i java 20.0.2-graal
 # Build the native image
 $ ./gradlew nativeCompile
 
+# Use trace agent for metadata generation
+$ ./gradlew -Pagent run
+$ ./gradlew metadataCopy
+
 # Run native image tests
 $ ./gradlew nativeTest
+$ ./gradlew -Pagent nativeTest
 
 # Native Image Quick Build
 $ ./gradlew nativeCompile -Pquick

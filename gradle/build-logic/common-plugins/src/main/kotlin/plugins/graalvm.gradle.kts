@@ -41,6 +41,7 @@ graalvmNative {
       fallback = false
       verbose = debugEnabled
       quickBuild = quickBuildEnabled
+      richOutput = true
       buildArgs = buildList {
         add("--enable-preview")
         add("--native-image-info")
@@ -50,9 +51,9 @@ graalvmNative {
         add("--features=dev.suresh.aot.RuntimeFeature")
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
-        add("-H:+UnlockExperimentalVMOptions")
         add("-EBUILD_NUMBER=${project.version}")
         add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
+        // add("-H:+UnlockExperimentalVMOptions")
         // add("-H:+AddAllCharsets")
         // add("-H:+IncludeAllLocales")
         // add("-H:+IncludeAllTimeZones")
@@ -104,11 +105,23 @@ graalvmNative {
         // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
       }
 
+      // resources { autodetect() }
       jvmArgs = listOf("--add-modules=$addModules")
       systemProperties = mapOf("java.awt.headless" to "false")
-      resources { autodetect() }
+      javaLauncher = javaToolchains.launcherFor { configureJvmToolchain() }
     }
   }
+
+  agent {
+    defaultMode = "standard"
+    enabled = true
+    metadataCopy {
+      inputTaskNames.add("run") // Tasks previously executed with the agent attached (test).
+      outputDirectories.add("src/main/resources/META-INF/native-image/playground")
+      mergeWithExisting = true
+    }
+  }
+
   metadataRepository { enabled = true }
   toolchainDetection = false
 }
