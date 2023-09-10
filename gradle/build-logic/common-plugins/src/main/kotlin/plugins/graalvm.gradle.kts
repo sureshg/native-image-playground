@@ -105,7 +105,13 @@ graalvmNative {
         // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
       }
 
-      // resources { autodetect() }
+      resources {
+        autodetection {
+          enabled = true
+          restrictToProjectDependencies = true
+        }
+      }
+
       jvmArgs = listOf("--add-modules=$addModules")
       systemProperties = mapOf("java.awt.headless" to "false")
       javaLauncher = javaToolchains.launcherFor { configureJvmToolchain() }
@@ -117,7 +123,7 @@ graalvmNative {
     enabled = true
     metadataCopy {
       inputTaskNames.add("run") // Tasks previously executed with the agent attached (test).
-      outputDirectories.add("src/main/resources/META-INF/native-image/playground")
+      outputDirectories.add("src/main/resources/META-INF/native-image")
       mergeWithExisting = true
     }
   }

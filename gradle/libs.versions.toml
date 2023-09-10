@@ -1,6 +1,6 @@
 [versions]
 java                           = "21"
-kotlin                         = "1.9.10"
+kotlin                         = "1.9.20-Beta"
 kotlin-ksp                     = "1.9.10-1.0.13"
 kotlin-jvmtarget               = "20"
 kotlin-dsl-jvmtarget           = "17"
@@ -36,7 +36,7 @@ ajalt-clikt                    = "4.2.0"
 ajalt-mordant                  = "2.1.0"
 ajalt-colormath                = "3.3.2"
 dokka                          = "1.9.0"
-helidon-nima                   = "4.0.0-M1"
+helidon                        = "4.0.0-M2"
 jgit                           = "6.6.0.202305301015-r"
 jte                            = "3.1.0"
 junit                          = "5.10.0"
@@ -174,12 +174,12 @@ koin-slf4j                  = { module = "io.insert-koin:koin-logger-slf4j"     
 koin-test                   = { module = "io.insert-koin:koin-test"                         , version.ref = "koin"}
 koin-test-junit5            = { module = "io.insert-koin:koin-test-junit5"                  , version.ref = "koin"}
 
-helidon-nima-bom            = { module = "io.helidon.nima:helidon-nima-project"                              , version.ref = "helidon-nima"}
-helidon-nima-webserver      = { module = "io.helidon.nima.webserver:helidon-nima-webserver"                  , version.ref = "helidon-nima"}
-helidon-nima-static         = { module = "io.helidon.nima.webserver:helidon-nima-webserver-static-content"   , version.ref = "helidon-nima"}
-helidon-nima-webclient      = { module = "io.helidon.nima.webclient:helidon-nima-webclient"                  , version.ref = "helidon-nima"}
-helidon-nima-service        = { module = "io.helidon.nima.service-common:helidon-nima-service-common"        , version.ref = "helidon-nima"}
-helidon-config-yaml         = { module = "io.helidon.config:helidon-config-yaml"                             , version.ref = "helidon-nima"}
+helidon-bom                 = { module = "io.helidon:helidon-bom"                                       , version.ref = "helidon"}
+helidon-webserver           = { module = "io.helidon.webserver:helidon-webserver"                       , version.ref = "helidon"}
+helidon-service             = { module = "io.helidon.webserver:helidon-webserver-service-common"        , version.ref = "helidon"}
+helidon-static              = { module = "io.helidon.webserver:helidon-webserver-static-content"        , version.ref = "helidon"}
+helidon-webclient           = { module = "io.helidon.webclient:helidon-webclient"                       , version.ref = "helidon"}
+helidon-config-yaml         = { module = "io.helidon.config:helidon-config-yaml"                        , version.ref = "helidon"}
 
 ajalt-clikt                 = { module = "com.github.ajalt.clikt:clikt"                    , version.ref = "ajalt-clikt"}
 ajalt-mordant               = { module = "com.github.ajalt.mordant:mordant"                , version.ref = "ajalt-mordant"}

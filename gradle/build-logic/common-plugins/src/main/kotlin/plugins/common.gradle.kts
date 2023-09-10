@@ -153,7 +153,7 @@ tasks {
 
         filteringCharset = "UTF-8"
         from(project.projectDir.resolve("src/main/templates"))
-        into(project.buildDir.resolve("generated-sources/templates/kotlin/main"))
+        into(project.layout.buildDirectory.dir("generated-sources/templates/kotlin/main"))
         exclude { it.name.startsWith("jte") }
         expand(props)
 

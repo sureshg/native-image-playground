@@ -27,7 +27,6 @@ tasks {
 kotlin {
   sourceSets.all {
     languageSettings.apply {
-      progressiveMode = true
       optIn("kotlin.ExperimentalStdlibApi")
       optIn("kotlin.io.path.ExperimentalPathApi")
       optIn("kotlin.time.ExperimentalTime")

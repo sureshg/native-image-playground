@@ -26,7 +26,7 @@ apply(plugin = "org.jetbrains.kotlin.multiplatform")
 val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
 
 kotlinMultiplatform.apply {
-  targetHierarchy.default()
+  applyDefaultHierarchyTemplate()
 
   jvmToolchain { configureJvmToolchain() }
 
@@ -81,7 +81,7 @@ kotlinMultiplatform.apply {
   // Disable wasm by default as some of the common dependencies are not compatible with wasm.
   if (project.hasProperty("experimental")) {
 
-    wasm {
+    wasmJs {
       binaries.executable()
       browser {
         commonWebpackConfig(

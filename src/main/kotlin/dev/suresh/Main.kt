@@ -4,14 +4,13 @@ import com.sun.management.OperatingSystemMXBean
 import dev.suresh.config.BuildEnv
 import dev.suresh.model.Creds
 import dev.suresh.model.Secret
-import io.helidon.common.http.Http
-import io.helidon.common.http.Http.Header
-import io.helidon.common.http.NotFoundException
-import io.helidon.nima.webserver.WebServer
-import io.helidon.nima.webserver.http.HttpRouting
-import io.helidon.nima.webserver.http.ServerRequest
-import io.helidon.nima.webserver.http.ServerResponse
-import io.helidon.nima.webserver.staticcontent.StaticContentService
+import io.helidon.http.Http.*
+import io.helidon.http.NotFoundException
+import io.helidon.webserver.WebServer
+import io.helidon.webserver.http.HttpRouting
+import io.helidon.webserver.http.ServerRequest
+import io.helidon.webserver.http.ServerResponse
+import io.helidon.webserver.staticcontent.StaticContentService
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
@@ -119,8 +118,8 @@ val rsClient by lazy {
 
 private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
 
-val SERVER_HEADER = Header.createCached(Header.SERVER, "Nima")
-val UI_REDIRECT = Header.createCached(Header.LOCATION, "/")
+val SERVER_HEADER = Headers.createCached(HeaderNames.SERVER, "Nima")
+val UI_REDIRECT = Headers.createCached(HeaderNames.LOCATION, "/")
 
 fun routes(rules: HttpRouting.Builder) {
   rules
@@ -148,8 +147,8 @@ fun root(req: ServerRequest, res: ServerResponse) {
 fun error(req: ServerRequest, res: ServerResponse, ex: Throwable) {
   println("ERROR: ${req.path().path()} - ${ex.message}")
   when (ex) {
-    is NotFoundException -> res.status(Http.Status.NOT_FOUND_404)
-    else -> res.status(Http.Status.INTERNAL_SERVER_ERROR_500)
+    is NotFoundException -> res.status(Status.NOT_FOUND_404)
+    else -> res.status(Status.INTERNAL_SERVER_ERROR_500)
   }
   res.send()
 }
@@ -160,7 +159,7 @@ fun shutdown(req: ServerRequest, res: ServerResponse) {
 }
 
 fun redirect(req: ServerRequest, res: ServerResponse) {
-  res.status(Http.Status.MOVED_PERMANENTLY_301)
+  res.status(Status.MOVED_PERMANENTLY_301)
   res.headers().set(UI_REDIRECT)
   res.send()
 }
@@ -295,27 +294,28 @@ fun summary(args: List<String>) = buildString {
   appendLine(ex?.message)
   // Host info is not available on native image
   if (ImageInfo.isExecutable().not()) {
-    check(ex?.message?.contains("localhost:12345") == true)
+    println(ex?.message)
+    check(ex?.message?.contains("localhost/127.0.0.1:12345") == true)
   }
 
   appendLine(
       """
-    +---------Summary-------+
-    | Processes      : ${ps.size.fmt}|
-    | Dns Addresses  : ${dns.size.fmt}|
-    | Trust Stores   : ${caCerts.size.fmt}|
-    | TimeZones      : ${tz.size.fmt}|
-    | CharSets       : ${cs.size.fmt}|
-    | Locales        : ${locales.size.fmt}|
-    | Countries      : ${countries.size.fmt}|
-    | Languages      : ${languages.size.fmt}|
-    | Currencies     : ${currencies.size.fmt}|
-    | Env Vars       : ${env.size.fmt}|
-    | Sys Props      : ${props.size.fmt}|
-    | Virtual Thread : ${Thread.currentThread().isVirtual} |
-    | ScopedValue    : ${REQ_URI.orElse("n/a")}    |
-    +-----------------------+
-    """
+      +---------Summary-------+
+      | Processes      : ${ps.size.fmt}|
+      | Dns Addresses  : ${dns.size.fmt}|
+      | Trust Stores   : ${caCerts.size.fmt}|
+      | TimeZones      : ${tz.size.fmt}|
+      | CharSets       : ${cs.size.fmt}|
+      | Locales        : ${locales.size.fmt}|
+      | Countries      : ${countries.size.fmt}|
+      | Languages      : ${languages.size.fmt}|
+      | Currencies     : ${currencies.size.fmt}|
+      | Env Vars       : ${env.size.fmt}|
+      | Sys Props      : ${props.size.fmt}|
+      | Virtual Thread : ${Thread.currentThread().isVirtual} |
+      | ScopedValue    : ${REQ_URI.orElse("n/a")}    |
+      +-----------------------+
+       """
           .trimIndent(),
   )
 }
@@ -326,7 +326,7 @@ fun reflect(req: ServerRequest, res: ServerResponse) {
   plugins.forEach { println("ServiceLoader Plugin: ${it.call()}") }
 
   println("Redacted: ${Secret("abc")}, ${Creds("user", "pass")}")
-  val type = req.path().pathParameters().value("type").trim()
+  val type = req.path().pathParameters()["type"].trim()
   val data =
       when (type) {
         "java" -> "dev.suresh.model.JVersion".newInstance()
@@ -357,8 +357,8 @@ fun rSocket(req: ServerRequest, res: ServerResponse) =
       println("Starting new rSocket connection!")
       val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
       val stream = rSocket.requestStream(buildPayload { data("""{ "data": "Kotlin rSocket!" }""") })
-      res.header(Header.CONTENT_TYPE, "text/event-stream")
-      res.header(Header.CACHE_CONTROL, "no-cache")
+      res.header(Headers.CONTENT_TYPE_EVENT_STREAM)
+      res.header(Headers.CACHE_NO_CACHE)
       // Chunked transfer encoding will be set if the response length is zero.
       // res.header(Header.TRANSFER_ENCODING,"chunked")
       // Streaming binary response - res.header(Header.CONTENT_TYPE,"application/octet-stream")

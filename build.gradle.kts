@@ -2,10 +2,10 @@ plugins { plugins.graalvm }
 
 dependencies {
   implementation(platform(libs.ktor.bom))
-  implementation(platform(libs.helidon.nima.bom))
-  implementation(libs.helidon.nima.webserver)
-  implementation(libs.helidon.nima.static)
-  implementation(libs.helidon.nima.service)
+  implementation(platform(libs.helidon.bom))
+  implementation(libs.helidon.webserver)
+  implementation(libs.helidon.static)
+  implementation(libs.helidon.service)
   implementation(libs.ajalt.clikt)
   implementation(libs.ajalt.mordant)
   implementation(libs.ajalt.colormath)
