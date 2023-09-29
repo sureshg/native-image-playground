@@ -4,8 +4,10 @@ import com.sun.management.OperatingSystemMXBean
 import dev.suresh.config.BuildEnv
 import dev.suresh.model.Creds
 import dev.suresh.model.Secret
-import io.helidon.http.Http.*
+import io.helidon.http.HeaderNames
+import io.helidon.http.HeaderValues
 import io.helidon.http.NotFoundException
+import io.helidon.http.Status
 import io.helidon.webserver.WebServer
 import io.helidon.webserver.http.HttpRouting
 import io.helidon.webserver.http.ServerRequest
@@ -14,6 +16,7 @@ import io.helidon.webserver.staticcontent.StaticContentService
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
+import io.ktor.http.*
 import io.ktor.utils.io.core.*
 import io.rsocket.kotlin.RSocket
 import io.rsocket.kotlin.core.WellKnownMimeType
@@ -118,8 +121,8 @@ val rsClient by lazy {
 
 private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
 
-val SERVER_HEADER = Headers.createCached(HeaderNames.SERVER, "Nima")
-val UI_REDIRECT = Headers.createCached(HeaderNames.LOCATION, "/")
+val SERVER_HEADER = HeaderValues.createCached(HeaderNames.SERVER, "Nima")
+val UI_REDIRECT = HeaderValues.createCached(HeaderNames.LOCATION, "/")
 
 fun routes(rules: HttpRouting.Builder) {
   rules
@@ -357,8 +360,8 @@ fun rSocket(req: ServerRequest, res: ServerResponse) =
       println("Starting new rSocket connection!")
       val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
       val stream = rSocket.requestStream(buildPayload { data("""{ "data": "Kotlin rSocket!" }""") })
-      res.header(Headers.CONTENT_TYPE_EVENT_STREAM)
-      res.header(Headers.CACHE_NO_CACHE)
+      res.header(HeaderValues.CONTENT_TYPE_EVENT_STREAM)
+      res.header(HeaderValues.CACHE_NO_CACHE)
       // Chunked transfer encoding will be set if the response length is zero.
       // res.header(Header.TRANSFER_ENCODING,"chunked")
       // Streaming binary response - res.header(Header.CONTENT_TYPE,"application/octet-stream")
