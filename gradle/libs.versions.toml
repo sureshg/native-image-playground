@@ -1,6 +1,6 @@
 [versions]
 java                           = "21"
-kotlin                         = "1.9.20-Beta2"
+kotlin                         = "1.9.20-RC"
 kotlin-ksp                     = "1.9.20-Beta2-1.0.13"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "17"
@@ -21,7 +21,7 @@ publish-org-url                = "https://suresh.dev"
 publish-scm-url                = "https://github.com/sureshg/native-image-playground"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.7.3"
+kotlinx-kover                  = "0.7.4"
 kotlinx-io                     = "0.2.1"
 kotlinx-atomicfu               = "0.22.0"
 kotlinx-coroutines             = "1.7.3"
