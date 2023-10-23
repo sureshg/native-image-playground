@@ -20,6 +20,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"dev.suresh.model.KtVersion",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"io.helidon.common.LazyValueImpl",
   "fields":[{"name":"loaded"}, {"name":"theLock"}]
 },
