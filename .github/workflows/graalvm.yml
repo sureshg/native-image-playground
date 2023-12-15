@@ -72,7 +72,7 @@ jobs:
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload ${{ matrix.os }} native image
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.native-build.outputs.native_image_name }}
           path: |
@@ -81,7 +81,7 @@ jobs:
 
       - name: 📈 Upload ${{ matrix.os }} native image dashboard
         if: runner.os == 'Linux'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.native-build.outputs.native_image_dashboard }}
           path: |
@@ -122,7 +122,7 @@ jobs:
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload static binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.native-build.outputs.native_image_name }}
           path: |
