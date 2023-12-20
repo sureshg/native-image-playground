@@ -53,11 +53,28 @@
   }, {
     "pattern":"\\Qstatic/favicon-256.png\\E"
   }, {
+    "pattern":"\\Qstatic/favicon.ico/favicon.ico\\E"
+  }, {
+    "pattern":"\\Qstatic/favicon.ico\\E"
+  }, {
     "pattern":"java.base:\\Qjava/util/currency.data\\E"
   }, {
     "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt72b/nfc.nrm\\E"
   }, {
     "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt72b/nfkc.nrm\\E"
+  }, {
+    "pattern":"java.logging:\\Qsun/util/logging/resources/logging_en.properties\\E"
+  }, {
+    "pattern":"java.logging:\\Qsun/util/logging/resources/logging_en_US.properties\\E"
   }]},
-  "bundles":[]
+  "bundles":[{
+    "name":"sun.text.resources.cldr.FormatData",
+    "locales":["en", "en-US", "und"]
+  }, {
+    "name":"sun.util.resources.cldr.CalendarData",
+    "locales":["und"]
+  }, {
+    "name":"sun.util.resources.cldr.TimeZoneNames",
+    "locales":["en", "en-US", "und"]
+  }]
 }

@@ -20,12 +20,31 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"dev.suresh.model.JVersion",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"dev.suresh.model.KtVersion",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"dev.suresh.service.JavaPlugin"
+},
+{
+  "name":"dev.suresh.service.KotlinPlugin"
+},
+{
   "name":"io.helidon.common.LazyValueImpl",
   "fields":[{"name":"loaded"}, {"name":"theLock"}]
+},
+{
+  "name":"io.helidon.webserver.cors.CorsFeatureProvider"
+},
+{
+  "name":"io.helidon.webserver.http1.Http1ConnectionProvider"
+},
+{
+  "name":"io.helidon.webserver.http1.Http1ProtocolConfigProvider"
 },
 {
   "name":"io.ktor.client.HttpClient",
@@ -100,6 +119,10 @@
   "fields":[{"name":"streamId"}]
 },
 {
+  "name":"java.lang.ClassLoader",
+  "fields":[{"name":"classLoaderValueMap"}]
+},
+{
   "name":"java.lang.String"
 },
 {
@@ -166,87 +189,90 @@
 },
 {
   "name":"kotlinx.coroutines.CancellableContinuationImpl",
-  "fields":[{"name":"_decisionAndIndex"}, {"name":"_parentHandle"}, {"name":"_state"}]
+  "fields":[{"name":"_decisionAndIndex$volatile"}, {"name":"_parentHandle$volatile"}, {"name":"_state$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.DispatchedCoroutine",
-  "fields":[{"name":"_decision"}]
+  "fields":[{"name":"_decision$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.EventLoopImplBase",
-  "fields":[{"name":"_delayed"}, {"name":"_isCompleted"}, {"name":"_queue"}]
+  "fields":[{"name":"_delayed$volatile"}, {"name":"_isCompleted$volatile"}, {"name":"_queue$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.InvokeOnCancelling",
-  "fields":[{"name":"_invoked"}]
+  "fields":[{"name":"_invoked$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.JobSupport",
-  "fields":[{"name":"_parentHandle"}, {"name":"_state"}]
+  "fields":[{"name":"_parentHandle$volatile"}, {"name":"_state$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.JobSupport$Finishing",
-  "fields":[{"name":"_exceptionsHolder"}, {"name":"_isCompleting"}, {"name":"_rootCause"}]
+  "fields":[{"name":"_exceptionsHolder$volatile"}, {"name":"_isCompleting$volatile"}, {"name":"_rootCause$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.channels.BufferedChannel",
-  "fields":[{"name":"_closeCause"}, {"name":"bufferEnd"}, {"name":"bufferEndSegment"}, {"name":"closeHandler"}, {"name":"completedExpandBuffersAndPauseFlag"}, {"name":"receiveSegment"}, {"name":"receivers"}, {"name":"sendSegment"}, {"name":"sendersAndCloseStatus"}]
+  "fields":[{"name":"_closeCause$volatile"}, {"name":"bufferEnd$volatile"}, {"name":"bufferEndSegment$volatile"}, {"name":"closeHandler$volatile"}, {"name":"completedExpandBuffersAndPauseFlag$volatile"}, {"name":"receiveSegment$volatile"}, {"name":"receivers$volatile"}, {"name":"sendSegment$volatile"}, {"name":"sendersAndCloseStatus$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.AtomicOp",
-  "fields":[{"name":"_consensus"}]
+  "fields":[{"name":"_consensus$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.ConcurrentLinkedListNode",
-  "fields":[{"name":"_next"}, {"name":"_prev"}]
+  "fields":[{"name":"_next$volatile"}, {"name":"_prev$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.DispatchedContinuation",
-  "fields":[{"name":"_reusableCancellableContinuation"}]
+  "fields":[{"name":"_reusableCancellableContinuation$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.LimitedDispatcher",
-  "fields":[{"name":"runningWorkers"}]
+  "fields":[{"name":"runningWorkers$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeLinkedListNode",
-  "fields":[{"name":"_next"}, {"name":"_prev"}, {"name":"_removedRef"}]
+  "fields":[{"name":"_next$volatile"}, {"name":"_prev$volatile"}, {"name":"_removedRef$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeTaskQueue",
-  "fields":[{"name":"_cur"}]
+  "fields":[{"name":"_cur$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.LockFreeTaskQueueCore",
-  "fields":[{"name":"_next"}, {"name":"_state"}]
+  "fields":[{"name":"_next$volatile"}, {"name":"_state$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.Segment",
-  "fields":[{"name":"cleanedAndPointers"}]
+  "fields":[{"name":"cleanedAndPointers$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.internal.ThreadSafeHeap",
-  "fields":[{"name":"_size"}]
+  "fields":[{"name":"_size$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.scheduling.CoroutineScheduler",
-  "fields":[{"name":"_isTerminated"}, {"name":"controlState"}, {"name":"parkedWorkersStack"}]
+  "fields":[{"name":"_isTerminated$volatile"}, {"name":"controlState$volatile"}, {"name":"parkedWorkersStack$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.scheduling.CoroutineScheduler$Worker",
-  "fields":[{"name":"workerCtl"}]
+  "fields":[{"name":"workerCtl$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.scheduling.WorkQueue",
-  "fields":[{"name":"blockingTasksInBuffer"}, {"name":"consumerIndex"}, {"name":"lastScheduledTask"}, {"name":"producerIndex"}]
+  "fields":[{"name":"blockingTasksInBuffer$volatile"}, {"name":"consumerIndex$volatile"}, {"name":"lastScheduledTask$volatile"}, {"name":"producerIndex$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.selects.SelectImplementation",
-  "fields":[{"name":"state"}]
+  "fields":[{"name":"state$volatile"}]
 },
 {
   "name":"kotlinx.coroutines.sync.SemaphoreImpl",
-  "fields":[{"name":"_availablePermits"}, {"name":"deqIdx"}, {"name":"enqIdx"}, {"name":"head"}, {"name":"tail"}]
+  "fields":[{"name":"_availablePermits$volatile"}, {"name":"deqIdx$volatile"}, {"name":"enqIdx$volatile"}, {"name":"head$volatile"}, {"name":"tail$volatile"}]
+},
+{
+  "name":"org.slf4j.nop.NOPServiceProvider"
 },
 {
   "name":"sun.security.pkcs12.PKCS12KeyStore",

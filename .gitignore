@@ -19,6 +19,8 @@ classes.lst
 jre/
 *.build_artifacts.txt
 
+# Kotlin
+**/.kotlin
 
 # Gradle release
 cx.json

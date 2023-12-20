@@ -40,7 +40,7 @@ ksp {
   arg("autoserviceKsp.verbose", "true")
 }
 
-redacted { enabled = true }
+redacted { enabled = false }
 
 kover {
   // useJacoco()
