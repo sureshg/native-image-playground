@@ -56,7 +56,7 @@ graalvm                        = "23.1.1"
 rsocket                        = "0.15.4"
 classgraph                     = "4.8.165"
 benasher44-uuid                = "0.8.2"
-intellij-markdown              = "0.4.1"
+intellij-markdown              = "0.6.1"
 
 # Plugin versions
 benmanes                       = "0.50.0"
