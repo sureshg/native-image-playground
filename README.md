@@ -17,7 +17,7 @@ $ ./scripts/graalvm-ce-dev.sh
 
 # Install GraalVM CE
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 20.0.2-graal
+$ sdk i java 21.0.2-graalce
 ```
 
 ### Build
