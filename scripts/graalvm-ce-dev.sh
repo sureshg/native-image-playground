@@ -3,7 +3,7 @@
 # set -u won't work for sdkman
 set -e
 
-jdk_version=${1:-21}
+jdk_version=${1:-23}
 extn="tar.gz"
 
 # Find OS type
