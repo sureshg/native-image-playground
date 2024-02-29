@@ -46,13 +46,6 @@ kover {
   // useJacoco()
 }
 
-koverReport {
-  defaults {
-    filters { excludes {} }
-    html { title = "${project.name} code coverage report" }
-  }
-}
-
 tasks {
   // Configure "compileJava" and "compileTestJava" tasks.
   withType<JavaCompile>().configureEach { configureJavac() }

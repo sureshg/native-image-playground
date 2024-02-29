@@ -173,13 +173,6 @@ kover {
   // useJacoco()
 }
 
-koverReport {
-  defaults {
-    filters { excludes {} }
-    html { title = "${project.name} code coverage report" }
-  }
-}
-
 // https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
 val commonJsResources by
     configurations.creating {
