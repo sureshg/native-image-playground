@@ -64,7 +64,7 @@ case "$OSTYPE" in
 linux*)
   args+=("--static")
   args+=("-H:+StripDebugInfo")
-  # args+=("-H:+StaticExecutableWithDynamicLibC")
+  # args+=("--static-nolibc")
   # args+=("--libc=musl"
   #        "-H:CCompilerOption=-Wl,-z,stack-size=2097152")
   ;;
