@@ -44,8 +44,10 @@ graalvmNative {
       richOutput = true
       buildArgs = buildList {
         add("--enable-preview")
+        add("--enable-native-access=ALL-UNNAMED")
         add("--native-image-info")
-        add("--enable-monitoring=heapdump,jfr,jvmstat")
+        add("--color=auto")
+        add("--enable-monitoring=heapdump,jfr,jvmstat,threaddump,nmt")
         add("--enable-https")
         add("--install-exit-handlers")
         add("--features=dev.suresh.aot.RuntimeFeature")
@@ -68,10 +70,7 @@ graalvmNative {
               add("--libc=musl")
               // add("-H:CCompilerOption=-Wl,-z,stack-size=2097152")
             }
-            else -> {
-              // add("--static-nolibc")
-              add("-H:+StaticExecutableWithDynamicLibC")
-            }
+            else -> add("--static-nolibc")
           }
           add("-H:+StripDebugInfo")
         }
