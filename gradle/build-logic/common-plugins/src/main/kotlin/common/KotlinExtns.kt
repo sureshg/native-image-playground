@@ -15,7 +15,6 @@ import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
-import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 
 /** Java version properties. */
 val Project.javaVersion
@@ -166,11 +165,6 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
 }
 
 context(Project)
-fun KotlinJvmTest.configureKotlinTest() {
-  configureJavaTest()
-}
-
-context(Project)
 fun Test.configureJavaTest() {
   useJUnitPlatform()
   jvmArgs(jvmArguments)
@@ -192,8 +186,8 @@ fun Test.configureJavaTest() {
 }
 
 context(Project)
-fun KotlinJsOptions.configureKotlinJs() {
-  // useEsClasses = true
+fun KotlinJsCompilerOptions.configureKotlinJs() {
+  useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")

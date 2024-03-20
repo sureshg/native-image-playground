@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
 import tasks.BuildConfig
 
@@ -27,33 +26,25 @@ val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
 
 kotlinMultiplatform.apply {
   applyDefaultHierarchyTemplate()
-
   jvmToolchain { configureJvmToolchain() }
 
   targets.all {
-    // Configure all compilations of all targets
-    compilations.all { compilerOptions.configure { configureKotlinCommon() } }
+    compilations.all {
+      compileTaskProvider.configure { compilerOptions { configureKotlinCommon() } }
+    }
   }
 
   jvm {
     withJava()
     compilations.all {
       compileJavaTaskProvider?.configure { configureJavac() }
-      compilerOptions.configure { configureKotlinJvm() }
+      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
     }
 
+    // ./gradlew jvmRun
+    mainRun { mainClass = libs.versions.app.mainclass.get() }
     // val test by testRuns.existing
-    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
-    attributes.attribute(mppTargetAttr, "jvm")
-  }
-
-  jvm("desktop") {
-    compilations.all {
-      compileJavaTaskProvider?.configure { configureJavac() }
-      compilerOptions.configure { configureKotlinJvm() }
-    }
-    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
-    attributes.attribute(mppTargetAttr, "desktop")
+    testRuns.configureEach { executionTask.configure { configureJavaTest() } }
   }
 
   js(IR) {
@@ -75,30 +66,6 @@ kotlinMultiplatform.apply {
           })
 
       // distribution { outputDirectory = file("$projectDir/docs") }
-    }
-  }
-
-  // Disable wasm by default as some of the common dependencies are not compatible with wasm.
-  if (project.hasProperty("experimental")) {
-
-    wasmJs {
-      binaries.executable()
-      browser {
-        commonWebpackConfig(
-            Action {
-              devServer =
-                  (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-                      open = mapOf("app" to mapOf("name" to "google chrome")))
-            })
-      }
-    }
-
-    // Use custom allocator for native targets
-    macosX64("native") {
-      binaries.executable()
-      compilations.configureEach {
-        compilerOptions.configure { freeCompilerArgs.add("-Xallocator=custom") }
-      }
     }
   }
 
@@ -186,7 +153,6 @@ tasks {
     // Register buildConfig task only for common module
     val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
     kotlinMultiplatform.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
-    maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
   // configure jvm target for ksp
@@ -195,7 +161,7 @@ tasks {
     jvmTargetValidationMode = JvmTargetValidationMode.WARNING
   }
 
-  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
+  withType<KotlinJsCompile>().configureEach { compilerOptions { configureKotlinJs() } }
 
   withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
 
