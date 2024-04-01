@@ -55,7 +55,7 @@ google-tink                    = "1.11.0"
 graalvm                        = "23.1.2"
 rsocket                        = "0.15.4"
 classgraph                     = "4.8.168"
-benasher44-uuid                = "0.8.2"
+benasher44-uuid                = "0.8.4"
 intellij-markdown              = "0.6.1"
 
 # Plugin versions
