@@ -23,4 +23,9 @@ class RuntimeFeature : Feature {
   override fun afterImageWrite(access: Feature.AfterImageWriteAccess) {
     // access.imagePath.toFile()
   }
+
+  override fun duringSetup(access: Feature.DuringSetupAccess?) {
+    // RuntimeForeignAccess.registerForUpcall(FunctionDescriptor.of(ValueLayout.JAVA_INT,
+    // ValueLayout.ADDRESS))
+  }
 }
