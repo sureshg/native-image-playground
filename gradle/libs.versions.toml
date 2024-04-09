@@ -1,6 +1,6 @@
 [versions]
 java                           = "23"
-kotlin                         = "2.0.0-Beta5"
+kotlin                         = "2.0.0-RC1"
 kotlin-ksp                     = "2.0.0-Beta5-1.0.20"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
@@ -61,7 +61,7 @@ intellij-markdown              = "0.6.1"
 # Plugin versions
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
-gradle-develocity              = "3.17"
+gradle-develocity              = "3.17.1"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.1.1"
 spotless                       = "6.25.0"
