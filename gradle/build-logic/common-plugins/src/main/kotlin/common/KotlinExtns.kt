@@ -139,6 +139,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       "-Xemit-jvm-type-annotations",
       "-Xjspecify-annotations=strict",
       "-Xextended-compiler-checks",
+      "-Xskip-prerelease-check"
       // "-Xjdk-release=$javaVersion",
       // "-Xadd-modules=ALL-MODULE-PATH",
       // "-Xmodule-path=",
@@ -146,7 +147,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       // "-Xjavac-arguments=\"--add-exports java.base/sun.nio.ch=ALL-UNNAMED\"",
       // "-Xexplicit-api={strict|warning|disable}",
       // "-Xgenerate-strict-metadata-version",
-  )
+      )
 }
 
 context(Project)
