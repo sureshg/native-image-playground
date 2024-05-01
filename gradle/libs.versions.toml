@@ -22,7 +22,7 @@ publish-scm-url                = "https://github.com/sureshg/native-image-playgr
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.8.0-Beta2"
-kotlinx-io                     = "0.3.2"
+kotlinx-io                     = "0.3.3"
 kotlinx-atomicfu               = "0.24.0"
 kotlinx-coroutines             = "1.8.1-Beta"
 kotlinx-datetime               = "0.6.0-RC.2"
