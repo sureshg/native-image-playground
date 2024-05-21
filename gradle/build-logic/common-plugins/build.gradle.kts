@@ -75,7 +75,7 @@ dependencies {
   implementation(platform(libs.kotlin.bom))
   implementation(kotlin("stdlib"))
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
-  implementation(libs.ajalt.mordant)
+  implementation(libs.ajalt.mordant.coroutines)
   implementation(libs.jte.runtime)
   implementation(libs.build.zip.prefixer)
   // jteGenerate(libs.jte.models)
