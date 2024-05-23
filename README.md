@@ -27,7 +27,9 @@ $ sdk i java 21.0.2-graalce
 $ ./gradlew nativeCompile
 
 # Use trace agent for metadata generation
-$ ./gradlew -Pagent run
+$ ./gradlew -Pagent run [--rerun-tasks]
+# Gracefully shutdown the server instead of killing Gradle run.
+$ curl http://localhost:9080/shutdown
 $ ./gradlew metadataCopy
 
 # Run native image tests
