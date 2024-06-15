@@ -79,7 +79,7 @@ fun MavenPublication.configurePom() {
   pom {
     name = provider { "${project.group}:${project.name}" }
     description = provider { project.description }
-    inceptionYear = "2023"
+    inceptionYear = "2024"
     url = githubUrl
 
     developers {

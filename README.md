@@ -4,7 +4,6 @@
 [![GraalVM CE][graalvm_img]][graalvm_url]
 [![Kotlin release][kt_img]][kt_url]
 [![Style guide][ktlint_img]][ktlint_url]
-[![GraalVM Reachability][graalvm_reachability_img]][graalvm_reachability_url]
 
 [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) of a kotlin/java app
 and publish the platform binaries using GitHub action.
@@ -17,7 +16,7 @@ $ ./scripts/graalvm-ce-dev.sh
 
 # Install GraalVM CE
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 21.0.2-graalce
+$ sdk i java 22.0.1-graalce
 ```
 
 ### Build
@@ -57,7 +56,7 @@ $ java --enable-preview \
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
-        --multi-release=23 \
+        --multi-release=24 \
         build/libs/native-image-playground-*-all.jar
 
 # Build native image from modular jars
@@ -153,7 +152,7 @@ $ native-image \
 
 [graalvm_url]: https://github.com/graalvm/graalvm-ce-dev-builds/releases/
 
-[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-builds?color=125b6b&label=graalvm-ce-dev&logo=oracle&logoColor=d3eff5
+[graalvm_img]: https://img.shields.io/github/v/release/graalvm/graalvm-ce-dev-builds?color=125b6b&label=graalvm-ce-dev&logo=oracle&logoColor=d3eff5
 
 [graalvm_reachability_url]: https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
 
