@@ -1,6 +1,6 @@
 [versions]
 java                           = "24"
-kotlin                         = "2.0.0"
+kotlin                         = "2.0.20-Beta1"
 kotlin-ksp                     = "2.0.0-1.0.22"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
@@ -54,7 +54,7 @@ google-auto-service            = "1.1.1"
 google-tink                    = "1.13.0"
 graalvm                        = "24.0.1"
 rsocket                        = "0.16.0"
-classgraph                     = "4.8.173"
+classgraph                     = "4.8.174"
 benasher44-uuid                = "0.8.4"
 intellij-markdown              = "0.7.3"
 
