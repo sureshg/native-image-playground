@@ -66,7 +66,7 @@ fi
 sdkman_id="graalvm-ce-dev"
 echo "Installing $jdk_dir ..."
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk rm java "$sdkman_id"
+sdk rm java "$sdkman_id" || true
 sdk i java "$sdkman_id" "$jdk_dir/Contents/Home"
 popd >/dev/null
 
