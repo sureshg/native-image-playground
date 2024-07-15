@@ -31,7 +31,6 @@ kotlin {
       optIn("kotlin.io.path.ExperimentalPathApi")
       optIn("kotlin.time.ExperimentalTime")
       optIn("org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi")
-      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
     }

@@ -9,7 +9,7 @@ plugins {
   id("com.google.devtools.ksp")
   kotlin("jvm")
   kotlin("plugin.serialization")
-  id("kotlinx-atomicfu")
+  id("org.jetbrains.kotlinx.atomicfu")
   id("dev.zacsweers.redacted")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
