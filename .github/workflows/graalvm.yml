@@ -68,7 +68,7 @@ jobs:
       - name: 🏗️ Native Image Build & Test
         id: native-build
         run: |
-          ./gradlew nativeCompile -Pquick -Preports
+          ./gradlew nativeCompile -Pquick
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload ${{ matrix.os }} native image
@@ -86,7 +86,7 @@ jobs:
           name: ${{ steps.native-build.outputs.native_image_dashboard }}
           path: |
             build/${{ steps.native-build.outputs.native_image_dashboard }}
-          if-no-files-found: error
+          if-no-files-found: ignore
 
 
   native-build-musl:
@@ -118,7 +118,7 @@ jobs:
       - name: 🏗️ Build static image with musl libc
         id: native-build
         run: |
-          ./gradlew nativeCompile -Pquick -Pmusl -Preports
+          ./gradlew nativeCompile -Pquick -Pmusl
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
       - name: 📤 Upload static binary

@@ -606,6 +606,12 @@
       "glob": "static/favicon-256.png/favicon.ico"
     },
     {
+      "glob": "static/favicon.ico"
+    },
+    {
+      "glob": "static/favicon.ico/favicon.ico"
+    },
+    {
       "module": "java.base",
       "glob": "java/util/currency.data"
     },
@@ -618,7 +624,6 @@
       "glob": "sun/util/logging/resources/logging_en_US.properties"
     }
   ],
-  
   "bundles": [],
   "jni": [
     {
