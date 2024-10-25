@@ -68,6 +68,7 @@ jobs:
       - name: 🏗️ Native Image Build & Test
         id: native-build
         run: |
+          ./gradlew -q javaToolchains
           ./gradlew nativeCompile -Pquick
           ls -ltrh build/${{ github.event.repository.name }}*.tar.gz
 
