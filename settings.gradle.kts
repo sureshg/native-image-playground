@@ -1,24 +1,21 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
   repositories {
     gradlePluginPortal()
     mavenCentral()
   }
-
-  val testVersion = extra["test.version"].toString()
-  resolutionStrategy {
-    eachPlugin {
-      if (requested.id.id.startsWith("dev.suresh.plugin")) {
-        useModule("dev.suresh.build:plugins:$testVersion")
-      }
-    }
-  }
 }
 
 dependencyResolutionManagement {
+  repositoriesMode = RepositoriesMode.PREFER_SETTINGS
   versionCatalogs { register("applibs") { from(files("gradle/libs.versions.toml")) } }
 }
 
-plugins { id("dev.suresh.plugin.repos") }
+plugins {
+  val testVersion = extra["test.version"].toString()
+  id("dev.suresh.plugin.repos") version testVersion
+}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
