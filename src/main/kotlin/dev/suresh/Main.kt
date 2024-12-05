@@ -143,7 +143,7 @@ fun routes(rules: HttpRouting.Builder) {
 }
 
 fun root(req: ServerRequest, res: ServerResponse) {
-  ScopedValue.runWhere(REQ_URI, req.path().path()) { res.send(summary(cmdArgs)) }
+  ScopedValue.where(REQ_URI, req.path().path()).run { res.send(summary(cmdArgs)) }
 }
 
 fun error(req: ServerRequest, res: ServerResponse, ex: Throwable) {
