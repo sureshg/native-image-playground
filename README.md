@@ -16,7 +16,7 @@ $ ./scripts/graalvm-ce-dev.sh
 
 # Install GraalVM CE
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 22.0.1-graalce
+$ sdk i java 25.0.1-graalce
 ```
 
 ### Build
@@ -56,7 +56,7 @@ $ java --enable-preview \
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
-        --multi-release=24 \
+        --multi-release=25 \
         build/libs/native-image-playground-*-all.jar
 
 # Build native image from modular jars
