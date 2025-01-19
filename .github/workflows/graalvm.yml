@@ -42,7 +42,7 @@ jobs:
       matrix:
         java-version: [ 'dev' ]
         distribution: [ 'graalvm-community' ]
-        os: [ macos-latest, windows-latest, ubuntu-latest, macos-13 ]
+        os: [ ubuntu-latest, ubuntu-24.04-arm, macos-latest, macos-13, windows-latest ]
 
     outputs:
       version: ${{ steps.native-build.outputs.version }}
