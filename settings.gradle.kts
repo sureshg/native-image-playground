@@ -10,9 +10,12 @@ pluginManagement {
 dependencyResolutionManagement {
   versionCatalogs {
     // Version catalog for build plugins
-    register("blibs") { from(files("gradle/libs.versions.toml")) }
+    register("blibs") {
+      from(files("gradle/libs.versions.toml"))
+      // from("dev.suresh.build:catalog:+")
+      // version("java", "...")
+    }
   }
-  repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }
 
 plugins {
