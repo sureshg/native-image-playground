@@ -1,9 +1,9 @@
 import common.jvmArguments
 
 plugins {
-  dev.suresh.plugin.root
-  dev.suresh.plugin.kotlin.jvm
-  dev.suresh.plugin.graalvm
+  id("dev.suresh.plugin.root")
+  id("dev.suresh.plugin.kotlin.jvm")
+  id("dev.suresh.plugin.graalvm")
   application
 }
 
