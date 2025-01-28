@@ -1,7 +1,13 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
-  val buildPluginVer: String by settings
+  val buildPluginVer =
+      file(rootDir)
+          .resolve("gradle/libs.versions.toml")
+          .readLines()
+          .first { it.contains("bc-plugins") }
+          .split("\"")[1]
+          .trim()
 
   resolutionStrategy {
     eachPlugin {
