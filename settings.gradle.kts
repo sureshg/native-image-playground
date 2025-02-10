@@ -2,7 +2,7 @@
 
 pluginManagement {
   val buildPluginVer =
-      file(rootDir)
+      settingsDir
           .resolve("gradle/libs.versions.toml")
           .readLines()
           .first { it.contains("bc-plugins") }
