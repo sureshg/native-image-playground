@@ -20,14 +20,15 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "1.5.0"
+bc-plugins                     = "1.6.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
 kotlinx-io                     = "0.6.0"
 kotlinx-atomicfu               = "0.27.0"
 kotlinx-coroutines             = "1.10.1"
-kotlinx-datetime               = "0.6.1"
+kotlinx-datetime               = "0.6.2"
+kotlinx-datetime-zoneinfo      = "2025a-spi.0.6.2"
 kotlinx-serialization          = "1.8.0"
 kotlinx-rpc                    = "0.5.0"
 kotlinx-collections-immutable  = "0.3.8"
@@ -37,7 +38,7 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.2.2"
+kotlin-wrappers                = "2025.2.4"
 kotlin-redacted                = "1.12.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -173,7 +174,7 @@ langchain4j                    = "1.0.0-beta1"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.3.0"
 mcp4k                          = "0.3.4"
-dflib                          = "1.2.0"
+dflib                          = "2.0.0-M1"
 ldaptive                       = "2.4.0"
 chicory                        = "1.0.0"
 log4k                          = "0.30.0"
@@ -330,6 +331,7 @@ kotlinx-serialization-json           = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-serialization-json-io        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-io"             , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-hocon          = { module = "org.jetbrains.kotlinx:kotlinx-serialization-hocon"               , version.ref = "kotlinx-serialization"}
 kotlinx-datetime                     = { module = "org.jetbrains.kotlinx:kotlinx-datetime"                          , version.ref = "kotlinx-datetime"}
+kotlinx-datetime-zoneinfo            = { module = "org.jetbrains.kotlinx:kotlinx-datetime-zoneinfo"                 , version.ref = "kotlinx-datetime-zoneinfo"}
 kotlinx-io-bytestring                = { module = "org.jetbrains.kotlinx:kotlinx-io-bytestring"                     , version.ref = "kotlinx-io"}
 kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                           , version.ref = "kotlinx-io"}
 kotlinx-io-filesystem                = { module = "org.jetbrains.kotlinx:kotlinx-io-filesystem"                     , version.ref = "kotlinx-io"}
