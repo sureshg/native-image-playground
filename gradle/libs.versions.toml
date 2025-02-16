@@ -1,7 +1,7 @@
 [versions]
 java                           = "25"
 kotlin                         = "2.1.20-Beta2"
-kotlin-ksp                     = "2.1.20-Beta2-1.0.29"
+kotlin-ksp                     = "2.1.20-Beta2-1.0.30"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.1"
@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "1.9.0"
+bc-plugins                     = "1.10.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -68,7 +68,7 @@ sslcontext-kickstart           = "9.0.0"
 ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
-ajalt-mordant                  = "3.0.1"
+ajalt-mordant                  = "3.0.2"
 ajalt-clikt                    = "5.0.3"
 ajalt-colormath                = "3.6.1"
 classgraph                     = "4.8.179"
@@ -86,7 +86,7 @@ koin                           = "4.1.0-Beta5"
 koin-annotations               = "2.0.0-RC1"
 kotest                         = "6.0.0.M2"
 mockk                          = "1.13.16"
-mokkery                        = "2.6.1"
+mokkery                        = "2.7.0"
 wiremock                       = "3.12.0"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.0.0-alpha.14"
@@ -177,6 +177,7 @@ mcp4k                          = "0.3.4"
 dflib                          = "2.0.0-M2"
 ldaptive                       = "2.4.0"
 chicory                        = "1.0.0"
+weh-bindings                   = "0.2"
 log4k                          = "0.30.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.1"
@@ -194,7 +195,7 @@ compose-hotreload              = "1.0.0"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
-mosaic                         = "0.15.0"
+mosaic                         = "0.16.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.11.0"
@@ -657,9 +658,16 @@ rwmutex                              = { module = "com.mayakapps.rwmutex:rwmutex
 
 # Wasm
 chicory                              = { module = "com.dylibso.chicory:runtime"                                             , version.ref = "chicory" }
+chicory-bom                          = { module = "com.dylibso.chicory:bom"                                                 , version.ref = "chicory" }
 chicory-aot                          = { module = "com.dylibso.chicory:aot-experimental"                                    , version.ref = "chicory" }
 chicory-hostmodule-annproc           = { module = "com.dylibso.chicory:host-module-annotations-experimental"                , version.ref = "chicory" }
+chicory-wasi                         = { module = "com.dylibso.chicory:wasi"                                                , version.ref = "chicory" }
+chicory-simd                         = { module = "com.dylibso.chicory:simd-experimental"                                   , version.ref = "chicory" }
 chasm                                = { module = "io.github.charlietap.chasm:chasm"                                        , version.ref = "chasm" }
+weh-chasm-wasip1                     = { module = "at.released.weh:bindings-chasm-wasip1"                                   , version.ref = "weh-bindings" }
+weh-chasm-emscripten                 = { module = "at.released.weh:bindings-chasm-emscripten"                               , version.ref = "weh-bindings" }
+weh-chicory-wasip1                   = { module = "at.released.weh:bindings-chicory-wasip1"                                 , version.ref = "weh-bindings" }
+weh-chicory-emscripten               = { module = "at.released.weh:bindings-chicory-emscripten"                             , version.ref = "weh-bindings" }
 
 # AI/ML
 langchain4j                          = { module = "dev.langchain4j:langchain4j"                                             , version.ref = "langchain4j" }
