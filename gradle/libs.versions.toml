@@ -182,7 +182,7 @@ weh-bindings                   = "0.3"
 log4k                          = "0.30.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.2"
-helidon                        = "4.1.6"
+helidon                        = "4.1.7"
 
 # Compose
 jetbrains-compose              = "1.8.0-alpha03"
