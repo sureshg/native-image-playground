@@ -24,7 +24,7 @@ bc-plugins                     = "1.13.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
-kotlinx-io                     = "0.6.0"
+kotlinx-io                     = "0.7.0"
 kotlinx-atomicfu               = "0.27.0"
 kotlinx-coroutines             = "1.10.1"
 kotlinx-datetime               = "0.6.2"
@@ -38,17 +38,17 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.2.12"
+kotlin-wrappers                = "2025.3.3"
 kotlin-redacted                = "1.12.1"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
-kotlinx-dataframe              = "0.16.0-dev-5838"
+kotlinx-dataframe              = "0.16.0-dev-5981"
 kotlinx-kandy                  = "0.8.0"
 kotlin-statistics              = "0.4.0-RC1"
 evas                           = "1.2.0"
 kopy                           = "0.14.0+2.1.10"
 poko                           = "0.18.2"
-mappie                         = "1.0.0"
+mappie                         = "1.1.1"
 akkurate                       = "0.11.0"
 kaml                           = "0.72.0"
 snakeyaml-engine-kmp           = "3.1.1"
@@ -87,7 +87,7 @@ koin-annotations               = "2.0.0"
 kotest                         = "6.0.0.M2"
 mockk                          = "1.13.17"
 mokkery                        = "2.7.0"
-wiremock                       = "3.12.0"
+wiremock                       = "3.12.1"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.0.0-alpha.14"
 slf4j                          = "2.1.0-alpha1"
@@ -108,7 +108,7 @@ jctools                        = "4.0.5"
 kotlin-codepoints              = "0.9.0"
 kotlin-logging                 = "7.0.4"
 kotlin-bignum                  = "0.3.10"
-kotlin-diff                    = "0.7.0"
+kotlin-diff                    = "1.0.0"
 kotlin-retry                   = "2.0.1"
 kotlinx-jsonpath               = "3.0.2"
 kotlin-cryptography            = "0.4.0"
@@ -128,13 +128,13 @@ parsus                         = "0.6.1"
 ksoup                          = "0.2.2"
 java-keyring                   = "1.0.4"
 java-keychain                  = "1.1.0"
-webjars-xterm                  = "5.3.0"
+webjars-xterm                  = "5.1.0"
 arrow-suspendapp               = "0.5.0"
-exposed                        = "0.59.0"
+exposed                        = "0.60.0"
 postgresql                     = "42.7.5"
 hikariCP                       = "6.2.1"
 h2                             = "2.3.232"
-micrometer                     = "1.14.4"
+micrometer                     = "1.14.3"
 swagger-ui                     = "5.17.14"
 hoplite                        = "2.9.0"
 config4k                       = "0.7.0"
@@ -149,14 +149,14 @@ apache-commons-imaging         = "1.0-alpha5"
 testcontainers                 = "1.20.5"
 sourceBuddy                    = "2.5.0"
 tcp-javanioproxy               = "1.6"
-kubernetes-client              = "23.0.0-legacy"
+kubernetes-client              = "23.0.0"
 reflect-typeparamresolver      = "1.0.2"
 reflect-typetools              = "0.6.3"
 async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "2.0.2"
-airlift-security               = "309"
+airlift-security               = "312"
 directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -165,7 +165,7 @@ jfree-svg                      = "5.0.6"
 xchart                         = "3.8.8"
 batik                          = "1.18"
 twelvemonkeys                  = "3.12.0"
-okapibarcode                   = "0.5.0"
+okapibarcode                   = "0.4.1"
 chasm                          = "0.9.53"
 cel                            = "0.9.1"
 kfswatch                       = "1.3.0"
@@ -182,7 +182,7 @@ weh-bindings                   = "0.3"
 log4k                          = "0.30.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.2"
-helidon                        = "4.1.7"
+helidon                        = "4.2.0"
 
 # Compose
 jetbrains-compose              = "1.8.0-alpha03"
@@ -243,6 +243,9 @@ tomlj                          = "1.1.1"
 animalsniffer                  = "2.0.0"
 badass-runtime                 = "1.13.1-patch-1"
 badass-jlink                   = "3.1.0"
+maven-plugin-api               = "3.9.9"
+maven-plugin-annotations       = "3.15.1"
+gradlex-maven-plugin           = "1.0.3"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -316,6 +319,7 @@ build-bytesize                       = { module = "me.saket.bytesize:bytesize"  
 build-badass-jlink                   = { module = "com.dua3.gradle.jlink:com.dua3.gradle.jlink.gradle.plugin"       , version.ref = "badass-jlink" }
 build-badass-runtime                 = { module = "com.dua3.gradle.runtime:com.dua3.gradle.runtime.gradle.plugin"   , version.ref = "badass-runtime" }
 
+
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
 kotlin-stdlib                        = { module = "org.jetbrains.kotlin:kotlin-stdlib"                              , version.ref = "kotlin"}
@@ -340,6 +344,7 @@ kotlinx-datetime-zoneinfo            = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-io-bytestring                = { module = "org.jetbrains.kotlinx:kotlinx-io-bytestring"                     , version.ref = "kotlinx-io"}
 kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                           , version.ref = "kotlinx-io"}
 kotlinx-io-filesystem                = { module = "org.jetbrains.kotlinx:kotlinx-io-filesystem"                     , version.ref = "kotlinx-io"}
+kotlinx-io-okio                      = { module = "org.jetbrains.kotlinx:kotlinx-io-okio"                           , version.ref = "kotlinx-io"}
 kotlinx-lincheck                     = { module = "org.jetbrains.kotlinx:lincheck"                                  , version.ref = "kotlinx-lincheck"}
 kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"                      , version.ref = "kotlinx-reflect-lite"}
 kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"             , version.ref = "kotlinx-collections-immutable"}
@@ -685,6 +690,10 @@ ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"
 # Misc
 ldaptive                             = { module = "org.ldaptive:ldaptive"                                                   , version.ref = "ldaptive" }
 
+# Maven Plugin
+maven-plugin-api                     = { module = "org.apache.maven:maven-plugin-api"                                       , version.ref = "maven-plugin-api" }
+maven-plugin-annotations             = { module = "rg.apache.maven.plugin-tools:maven-plugin-annotations"           , version.ref = "maven-plugin-annotations" }
+
 helidon-bom                          = { module = "io.helidon:helidon-bom"                                                  , version.ref = "helidon"}
 helidon-webserver                    = { module = "io.helidon.webserver:helidon-webserver"                                  , version.ref = "helidon"}
 helidon-service                      = { module = "io.helidon.webserver:helidon-webserver-service-common"                   , version.ref = "helidon"}
@@ -770,6 +779,7 @@ build-vercraft                       = { id = "com.akuleshov7.vercraft.plugin-gr
 kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugin"                             , version.ref = "kmbed" }
 badass-jlink                         = { id = "com.dua3.gradle.jlink"                                          , version.ref = "badass-jlink" }
 badass-runtime                       = { id = "com.dua3.gradle.runtime"                                        , version.ref = "badass-runtime" }
+gradlex-maven-plugin                 = { id = "org.gradlex.maven-plugin-development"                           , version.ref = "gradlex-maven-plugin" }
 
 # Common build and settings plugin
 project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }
