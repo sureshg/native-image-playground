@@ -34,7 +34,7 @@ env:
 
 jobs:
   native-build:
-    name: ${{ matrix.build-type }} ${{ matrix.distribution }} ${{ matrix.java-version }} on ${{ matrix.os }}
+    name: ${{ matrix.os }}-${{ matrix.build-type }} ${{ matrix.distribution }}:${{ matrix.java-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

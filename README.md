@@ -14,16 +14,15 @@ and publish the platform binaries using GitHub action.
 # Install GraalVM CE Dev
 $ ./scripts/graalvm-ce-dev.sh
 
-# Install GraalVM CE
-$ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 25.0.1-graalce
+# or Install GraalVM CE
+$ sdk i java 25-graalce
 ```
 
 ### Build
 
 ```bash
 # Build the native image
-$ ./gradlew nativeCompile
+$ ./gradlew nativeCompile [-Pquick]
 
 # Use trace agent for metadata generation
 $ ./gradlew -Pagent run [--rerun-tasks]
@@ -34,17 +33,6 @@ $ ./gradlew metadataCopy
 # Run native image tests
 $ ./gradlew nativeTest
 $ ./gradlew -Pagent nativeTest
-
-# Native Image Quick Build
-$ ./gradlew nativeCompile -Pquick
-
-# Build Native Image Bundles
-$ ./gradlew nativeCompile -Pbundle
-$ native-image --bundle-apply="build/native/nativeCompile/native-image-playground.nib"
-$ build/native-image-playground.output/default/native-image-playground
-
-# Build by disabling the build cache
-$ ./gradlew clean nativeCompile --rerun-tasks --no-build-cache
 
 # GraalVM JIT Mode
 $ ./gradlew build
@@ -104,16 +92,18 @@ $ native-image \
 
   ```bash
   $ build/native/nativeCompile/native-image-playground -XX:PrintFlags= 2>&1
-
-  # Eg: Set HeapDump path
+  # Set HeapDump path
   $ build/native/nativeCompile/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
   ```
 
 - Object/Shared Lib Details
 
    ```bash
-   # Show shared libs
+   # Show shared libs (MacOS)
    $ otool -L build/native/nativeCompile/native-image-playground
+   # Show shared libs (Linux)
+   $ ldd build/native/nativeCompile/native-image-playground
+   $ objdump -p build/native/nativeCompile/native-image-playground | grep NEEDED
 
    # SVM details
    $ strings -a build/native/nativeCompile/native-image-playground | grep -i com.oracle.svm.core.VM
@@ -123,17 +113,6 @@ $ native-image \
    ```
 
 - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
-
-
-- Misc Gradle Tasks
-
-   ```bash
-   # Detect unused and misused dependencies
-   $ ./gradlew buildHealth
-   $ cat build/reports/dependency-analysis/build-health-report.txt
-
-   $ ./gradlew reason --id org.jetbrains.kotlin:kotlin-stdlib
-   ```
 
 ### Resources
 
