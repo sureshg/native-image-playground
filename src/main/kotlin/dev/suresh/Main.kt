@@ -12,7 +12,7 @@ import io.helidon.webserver.WebServer
 import io.helidon.webserver.http.HttpRouting
 import io.helidon.webserver.http.ServerRequest
 import io.helidon.webserver.http.ServerResponse
-import io.helidon.webserver.staticcontent.StaticContentService
+import io.helidon.webserver.staticcontent.*
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
@@ -137,8 +137,7 @@ fun routes(rules: HttpRouting.Builder) {
       .get("/resources", ::resources)
       .get("/uds", ::unixDomainSockets)
       .any("/ui", ::redirect)
-      .register(
-          "/img", StaticContentService.builder("static").welcomeFileName("favicon.ico").build())
+      .register("/img", StaticContentFeature.createService(ClasspathHandlerConfig.create("static")))
       .error(Throwable::class.java, ::error)
 }
 
@@ -294,7 +293,7 @@ fun summary(args: List<String>) = buildString {
           }
           .exceptionOrNull()
   appendLine(ex?.message)
-  // Host info is not available on native image
+  // Host info is not available on native-image
   if (ImageInfo.isExecutable().not()) {
     println(ex?.message)
     check(ex?.message?.contains("localhost/127.0.0.1:12345") == true)
