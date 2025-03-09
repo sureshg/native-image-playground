@@ -1,5 +1,5 @@
 [versions]
-java                           = "23"
+java                           = "25"
 kotlin                         = "2.1.20-RC2"
 kotlin-ksp                     = "2.1.20-RC2-1.0.31"
 kotlin-jvmtarget               = "21"
@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "1.15.0"
+bc-plugins                     = "1.16.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
