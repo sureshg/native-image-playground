@@ -1,7 +1,22 @@
 {
   "reflection": [
     {
-      "type": "dev.suresh.model.JVersion",
+      "type": "[Lio.ktor.network.selector.SelectInterest;"
+    },
+    {
+      "type": "android.os.Build$VERSION"
+    },
+    {
+      "type": "com.sun.crypto.provider.GaloisCounterMode$AESGCM",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.HmacCore$HmacSHA256",
       "methods": [
         {
           "name": "<init>",
@@ -36,6 +51,107 @@
       ]
     },
     {
+      "type": "io.helidon.common.concurrency.limits.AimdLimitProvider"
+    },
+    {
+      "type": "io.helidon.common.concurrency.limits.FixedLimitProvider"
+    },
+    {
+      "type": "io.helidon.common.concurrency.limits.spi.LimitProvider"
+    },
+    {
+      "type": "io.helidon.common.mapper.DefaultMapperProvider__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.common.mapper.MappersFactory__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.common.mapper.MappersImpl__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.common.mapper.spi.MapperProvider"
+    },
+    {
+      "type": "io.helidon.config.ConfigProvider__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.config.MetaConfigFactory__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.config.PropertiesConfigParser"
+    },
+    {
+      "type": "io.helidon.config.spi.ConfigFilter"
+    },
+    {
+      "type": "io.helidon.config.spi.ConfigParser"
+    },
+    {
+      "type": "io.helidon.service.registry.EventManagerImpl__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.service.registry.InterceptionMetadata__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.service.registry.PerRequestScopeHandler__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.service.registry.Scopes__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.service.registry.ServiceRegistry__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
       "type": "io.helidon.webserver.cors.CorsFeatureProvider"
     },
     {
@@ -45,10 +161,21 @@
       "type": "io.helidon.webserver.http1.Http1ProtocolConfigProvider"
     },
     {
+      "type": "io.helidon.webserver.staticcontent.StaticContentFeatureProvider"
+    },
+    {
       "type": "io.ktor.client.HttpClient",
       "fields": [
         {
           "name": "closed"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.client.call.HttpClientCall",
+      "fields": [
+        {
+          "name": "received"
         }
       ]
     },
@@ -61,10 +188,35 @@
       ]
     },
     {
+      "type": "io.ktor.client.engine.cio.Endpoint",
+      "fields": [
+        {
+          "name": "connections"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.network.selector.InterestSuspensionsMap",
+      "fields": [
+        {
+          "name": "acceptHandlerReference"
+        },
+        {
+          "name": "connectHandlerReference"
+        },
+        {
+          "name": "readHandlerReference"
+        },
+        {
+          "name": "writeHandlerReference"
+        }
+      ]
+    },
+    {
       "type": "io.ktor.network.selector.LockFreeMPSCQueue",
       "fields": [
         {
-          "name": "_cur"
+          "name": "curRef"
         }
       ]
     },
@@ -72,10 +224,35 @@
       "type": "io.ktor.network.selector.LockFreeMPSCQueueCore",
       "fields": [
         {
-          "name": "_next"
+          "name": "nextRef"
         },
         {
-          "name": "_state"
+          "name": "stateRef"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.network.selector.SelectableBase",
+      "fields": [
+        {
+          "name": "_interestedOps"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.network.sockets.SocketBase",
+      "fields": [
+        {
+          "name": "actualCloseFlag"
+        },
+        {
+          "name": "closeFlag"
+        },
+        {
+          "name": "readerJob"
+        },
+        {
+          "name": "writerJob"
         }
       ]
     },
@@ -88,6 +265,63 @@
       ]
     },
     {
+      "type": "io.ktor.utils.io.ByteChannel",
+      "fields": [
+        {
+          "name": "_closedCause"
+        },
+        {
+          "name": "suspensionSlot"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.utils.io.pool.DefaultPool",
+      "fields": [
+        {
+          "name": "top"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.websocket.DefaultWebSocketSessionImpl",
+      "fields": [
+        {
+          "name": "closed"
+        },
+        {
+          "name": "pinger"
+        },
+        {
+          "name": "started"
+        }
+      ]
+    },
+    {
+      "type": "io.rsocket.kotlin.connection.KeepAliveHandler",
+      "fields": [
+        {
+          "name": "lastMark$volatile"
+        }
+      ]
+    },
+    {
+      "type": "io.rsocket.kotlin.connection.StreamIdGenerator",
+      "fields": [
+        {
+          "name": "streamId$volatile"
+        }
+      ]
+    },
+    {
+      "type": "io.rsocket.kotlin.internal.PayloadFlow",
+      "fields": [
+        {
+          "name": "consumed$volatile"
+        }
+      ]
+    },
+    {
       "type": "java.lang.ClassLoader",
       "fields": [
         {
@@ -96,12 +330,7 @@
       ]
     },
     {
-      "type": "java.lang.Thread",
-      "fields": [
-        {
-          "name": "threadLocalRandomProbe"
-        }
-      ]
+      "type": "java.net.StandardSocketOptions"
     },
     {
       "type": "java.security.AlgorithmParametersSpi"
@@ -110,34 +339,16 @@
       "type": "java.security.KeyStoreSpi"
     },
     {
-      "type": "java.util.concurrent.ForkJoinTask",
-      "fields": [
-        {
-          "name": "aux"
-        },
-        {
-          "name": "status"
-        }
-      ]
+      "type": "java.security.interfaces.ECPrivateKey"
     },
     {
-      "type": "java.util.concurrent.atomic.AtomicBoolean",
-      "fields": [
-        {
-          "name": "value"
-        }
-      ]
+      "type": "java.security.interfaces.ECPublicKey"
     },
     {
-      "type": "java.util.concurrent.atomic.Striped64",
-      "fields": [
-        {
-          "name": "base"
-        },
-        {
-          "name": "cellsBusy"
-        }
-      ]
+      "type": "java.security.interfaces.RSAPrivateKey"
+    },
+    {
+      "type": "java.security.interfaces.RSAPublicKey"
     },
     {
       "type": "jdk.internal.misc.Unsafe"
@@ -156,6 +367,14 @@
         },
         {
           "name": "_state$volatile"
+        }
+      ]
+    },
+    {
+      "type": "kotlinx.coroutines.CancelledContinuation",
+      "fields": [
+        {
+          "name": "_resumed$volatile"
         }
       ]
     },
@@ -182,6 +401,14 @@
       ]
     },
     {
+      "type": "kotlinx.coroutines.InvokeOnCancelling",
+      "fields": [
+        {
+          "name": "_invoked$volatile"
+        }
+      ]
+    },
+    {
       "type": "kotlinx.coroutines.JobSupport",
       "fields": [
         {
@@ -203,6 +430,38 @@
         },
         {
           "name": "_rootCause$volatile"
+        }
+      ]
+    },
+    {
+      "type": "kotlinx.coroutines.channels.BufferedChannel",
+      "fields": [
+        {
+          "name": "_closeCause$volatile"
+        },
+        {
+          "name": "bufferEnd$volatile"
+        },
+        {
+          "name": "bufferEndSegment$volatile"
+        },
+        {
+          "name": "closeHandler$volatile"
+        },
+        {
+          "name": "completedExpandBuffersAndPauseFlag$volatile"
+        },
+        {
+          "name": "receiveSegment$volatile"
+        },
+        {
+          "name": "receivers$volatile"
+        },
+        {
+          "name": "sendSegment$volatile"
+        },
+        {
+          "name": "sendersAndCloseStatus$volatile"
         }
       ]
     },
@@ -275,6 +534,14 @@
       ]
     },
     {
+      "type": "kotlinx.coroutines.internal.ThreadSafeHeap",
+      "fields": [
+        {
+          "name": "_size$volatile"
+        }
+      ]
+    },
+    {
       "type": "kotlinx.coroutines.scheduling.CoroutineScheduler",
       "fields": [
         {
@@ -314,6 +581,14 @@
       ]
     },
     {
+      "type": "kotlinx.coroutines.selects.SelectImplementation",
+      "fields": [
+        {
+          "name": "state$volatile"
+        }
+      ]
+    },
+    {
       "type": "kotlinx.coroutines.sync.SemaphoreAndMutexImpl",
       "fields": [
         {
@@ -330,6 +605,14 @@
         },
         {
           "name": "tail$volatile"
+        }
+      ]
+    },
+    {
+      "type": "kotlinx.io.RefCountingCopyTracker",
+      "fields": [
+        {
+          "name": "copyCount"
         }
       ]
     },
@@ -355,6 +638,55 @@
       ]
     },
     {
+      "type": "sun.security.provider.NativePRNG",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.security.SecureRandomParameters"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.NativePRNG$NonBlocking",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.security.SecureRandomParameters"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SHA2$SHA256",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.provider.SecureRandom",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "sun.security.provider.X509Factory",
       "methods": [
         {
@@ -364,7 +696,25 @@
       ]
     },
     {
+      "type": "sun.security.provider.certpath.PKIXCertPathValidator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "sun.security.rsa.RSAKeyFactory$Legacy",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.security.rsa.RSASignature$SHA256withRSA",
       "methods": [
         {
           "name": "<init>",
@@ -537,13 +887,31 @@
       "glob": "META-INF/helidon/serial-config.properties"
     },
     {
+      "glob": "META-INF/helidon/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/service.loader"
+    },
+    {
+      "glob": "META-INF/services/io.helidon.common.concurrency.limits.spi.LimitProvider"
+    },
+    {
       "glob": "META-INF/services/io.helidon.common.mapper.spi.MapperProvider"
     },
     {
       "glob": "META-INF/services/io.helidon.common.media.type.spi.MediaTypeDetector"
     },
     {
+      "glob": "META-INF/services/io.helidon.common.resumable.ResumableSupport"
+    },
+    {
       "glob": "META-INF/services/io.helidon.common.tls.spi.TlsManagerProvider"
+    },
+    {
+      "glob": "META-INF/services/io.helidon.config.spi.ConfigFilter"
+    },
+    {
+      "glob": "META-INF/services/io.helidon.config.spi.ConfigParser"
     },
     {
       "glob": "META-INF/services/io.helidon.http.encoding.spi.ContentEncodingProvider"
@@ -573,10 +941,10 @@
       "glob": "META-INF/services/java.lang.Runnable"
     },
     {
-      "glob": "META-INF/services/java.lang.System$LoggerFinder"
+      "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
     },
     {
-      "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
+      "glob": "META-INF/services/java.net.spi.URLStreamHandlerProvider"
     },
     {
       "glob": "META-INF/services/java.nio.channels.spi.SelectorProvider"
@@ -600,20 +968,19 @@
       "glob": "message.txt"
     },
     {
-      "glob": "static/favicon-256.png"
-    },
-    {
-      "glob": "static/favicon-256.png/favicon.ico"
-    },
-    {
-      "glob": "static/favicon.ico"
-    },
-    {
-      "glob": "static/favicon.ico/favicon.ico"
+      "glob": "static"
     },
     {
       "module": "java.base",
       "glob": "java/util/currency.data"
+    },
+    {
+      "module": "java.base",
+      "glob": "jdk/internal/icu/impl/data/icudt76b/nfc.nrm"
+    },
+    {
+      "module": "java.base",
+      "glob": "jdk/internal/icu/impl/data/icudt76b/nfkc.nrm"
     },
     {
       "module": "java.logging",
@@ -627,110 +994,12 @@
   "bundles": [],
   "jni": [
     {
-      "type": "dev.suresh.MainKt",
-      "methods": [
-        {
-          "name": "main",
-          "parameterTypes": [
-            "java.lang.String[]"
-          ]
-        }
-      ]
-    },
-    {
       "type": "java.lang.Boolean",
       "methods": [
         {
           "name": "getBoolean",
           "parameterTypes": [
             "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.Class",
-      "methods": [
-        {
-          "name": "getCanonicalName",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "java.lang.String",
-      "methods": [
-        {
-          "name": "lastIndexOf",
-          "parameterTypes": [
-            "int"
-          ]
-        },
-        {
-          "name": "substring",
-          "parameterTypes": [
-            "int"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.System",
-      "methods": [
-        {
-          "name": "getProperty",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
-        },
-        {
-          "name": "setProperty",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.VersionProps",
-      "methods": [
-        {
-          "name": "print",
-          "parameterTypes": [
-            "boolean"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "sun.launcher.LauncherHelper",
-      "fields": [
-        {
-          "name": "isStaticMain"
-        },
-        {
-          "name": "noArgMain"
-        }
-      ],
-      "methods": [
-        {
-          "name": "checkAndLoadMain",
-          "parameterTypes": [
-            "boolean",
-            "int",
-            "java.lang.String"
-          ]
-        },
-        {
-          "name": "getApplicationClass",
-          "parameterTypes": []
-        },
-        {
-          "name": "makePlatformString",
-          "parameterTypes": [
-            "boolean",
-            "byte[]"
           ]
         }
       ]

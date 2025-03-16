@@ -96,21 +96,22 @@ $ native-image \
   $ build/native/nativeCompile/native-image-playground -XX:HeapDumpPath=$HOME/heapdump.hprof
   ```
 
-- Object/Shared Lib Details
+  - Object/Shared Lib Details
 
-   ```bash
-   # Show shared libs (MacOS)
-   $ otool -L build/native/nativeCompile/native-image-playground
-   # Show shared libs (Linux)
-   $ ldd build/native/nativeCompile/native-image-playground
-   $ objdump -p build/native/nativeCompile/native-image-playground | grep NEEDED
+     ```bash
+     # Show shared libs (MacOS)
+     $ otool -L build/native/nativeCompile/native-image-playground
 
-   # SVM details
-   $ strings -a build/native/nativeCompile/native-image-playground | grep -i com.oracle.svm.core.VM
+     # Show shared libs (Linux)
+     $ ldd build/native/nativeCompile/native-image-playground
+     $ objdump -p build/native/nativeCompile/native-image-playground | grep NEEDED
+     $ libtree -v build/native/nativeCompile/native-image-playground
 
-   # Show all bundled CA Certs
-   $ strings -a build/native/nativeCompile/native-image-playground | grep -i "cn="
-   ```
+     # SVM details
+     $ strings -a build/native/nativeCompile/native-image-playground | grep -i com.oracle.svm.core.VM
+     # Show all bundled CA Certs
+     $ strings -a build/native/nativeCompile/native-image-playground | grep -i "cn="
+     ```
 
 - [Mach-O Format Viewer](https://github.com/horsicq/XMachOViewer)
 
