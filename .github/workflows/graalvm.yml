@@ -42,11 +42,11 @@ jobs:
         java-version: [ '24' ]
         distribution: [ 'graalvm-community' ]
         os: [
-          ubuntu-latest,    # Linux on AMD64
-          ubuntu-24.04-arm, # Linux on ARM64
-          macos-latest,     # MacOS on ARM64
-          macos-13,         # MacOS on AMD64
-          windows-latest    # Windows on x64
+          ubuntu-latest,    # Linux on amd64
+          ubuntu-24.04-arm, # Linux on aarch64
+          macos-latest,     # macOS on aarch64
+          macos-13,         # macOS on amd64
+          windows-latest    # Windows on amd64
         ]
         build-type: [ libc, musl ]
         include:
