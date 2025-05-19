@@ -1,5 +1,5 @@
 [versions]
-java                           = "25"
+java                           = "24"
 kotlin                         = "2.2.0-RC"
 kotlin-ksp                     = "2.2.0-RC-2.0.1"
 kotlin-jvmtarget               = "21"
