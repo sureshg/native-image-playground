@@ -1,4 +1,4 @@
-import common.jvmArguments
+import common.*
 
 plugins {
   id("dev.suresh.plugin.root")
@@ -9,7 +9,7 @@ plugins {
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += jvmArguments()
+  applicationDefaultJvmArgs += runJvmArgs
 }
 
 dependencies {
