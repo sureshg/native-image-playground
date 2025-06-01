@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java-version: [ '24' ]
+        java-version: [ 'dev' ]
         distribution: [ 'graalvm-community' ]
         os: [
           ubuntu-latest,    # Linux on amd64
