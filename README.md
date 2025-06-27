@@ -44,7 +44,7 @@ $ java --enable-preview \
 $ jdeps -q \
         -R \
         --ignore-missing-deps \
-        --multi-release=25 \
+        --multi-release=26 \
         build/libs/native-image-playground-*-all.jar
 
 # Build native image from modular jars
