@@ -201,7 +201,7 @@ quickjs4j                      = "0.0.4"
 log4k                          = "0.50.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
-helidon                        = "4.2.4"
+helidon                        = "4.2.6"
 
 # Compose
 jetbrains-compose              = "1.9.0-alpha03"
