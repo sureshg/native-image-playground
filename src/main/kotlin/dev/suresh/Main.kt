@@ -185,7 +185,8 @@ fun summary(args: List<String>) = buildString {
   appendLine("✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}")
   appendLine("✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}")
   appendLine(
-      "✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}")
+      "✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}"
+  )
   appendLine("✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB")
   appendLine("✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB")
   appendLine("✧✧✧ [JVM-MEM] Current Heap Size (Committed) : ${heapSize / unit} MiB")
@@ -376,7 +377,8 @@ val udsServer by
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
       val addr =
           UnixDomainSocketAddress.of(
-              Path(System.getProperty("java.io.tmpdir")).resolve("native-image-server.socket"))
+              Path(System.getProperty("java.io.tmpdir")).resolve("native-image-server.socket")
+          )
 
       ServerSocketChannel.open(StandardProtocolFamily.UNIX).use {
         it.bind(addr)

@@ -120,6 +120,15 @@
       ]
     },
     {
+      "type": "dev.suresh.model.JVersion",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "dev.suresh.model.KtVersion",
       "methods": [
         {
@@ -161,10 +170,23 @@
       "type": "io.helidon.common.concurrency.limits.FixedLimitProvider"
     },
     {
-      "type": "io.helidon.common.concurrency.limits.spi.LimitProvider"
+      "type": "io.helidon.common.config.ConfigFactory__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
     },
     {
       "type": "io.helidon.common.mapper.DefaultMapperProvider__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.common.mapper.DefaultResolverService__ServiceDescriptor",
       "fields": [
         {
           "name": "INSTANCE"
@@ -199,6 +221,17 @@
       ]
     },
     {
+      "type": "io.helidon.config.ConfigurationValueFactory__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.config.EnumMapperProvider"
+    },
+    {
       "type": "io.helidon.config.MetaConfigFactory__ServiceDescriptor",
       "fields": [
         {
@@ -214,6 +247,30 @@
     },
     {
       "type": "io.helidon.config.spi.ConfigParser"
+    },
+    {
+      "type": "io.helidon.http.Headers__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.http.HttpPrologue__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.http.ServerRequestHeaders__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
     },
     {
       "type": "io.helidon.service.registry.EventManagerImpl__ServiceDescriptor",
@@ -256,7 +313,63 @@
       ]
     },
     {
+      "type": "io.helidon.webserver.LoomServer__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.webserver.RequestScopeFeatureProvider__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.webserver.WebServerService__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.webserver.WebServerStarterService__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
       "type": "io.helidon.webserver.cors.CorsFeatureProvider"
+    },
+    {
+      "type": "io.helidon.webserver.http.HttpEntryPointsImpl__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.webserver.http.ServerRequest__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.webserver.http.ServerResponse__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
     },
     {
       "type": "io.helidon.webserver.http1.Http1ConnectionProvider"
@@ -268,149 +381,49 @@
       "type": "io.helidon.webserver.staticcontent.StaticContentFeatureProvider"
     },
     {
-      "type": "io.ktor.client.HttpClient",
-      "fields": [
-        {
-          "name": "closed"
-        }
-      ]
+      "type": "io.ktor.client.HttpClient"
     },
     {
-      "type": "io.ktor.client.call.HttpClientCall",
-      "fields": [
-        {
-          "name": "received"
-        }
-      ]
+      "type": "io.ktor.client.call.HttpClientCall"
     },
     {
-      "type": "io.ktor.client.engine.HttpClientEngineBase",
-      "fields": [
-        {
-          "name": "closed"
-        }
-      ]
+      "type": "io.ktor.client.engine.HttpClientEngineBase"
     },
     {
-      "type": "io.ktor.client.engine.cio.Endpoint",
-      "fields": [
-        {
-          "name": "connections"
-        }
-      ]
+      "type": "io.ktor.client.engine.cio.Endpoint"
     },
     {
-      "type": "io.ktor.network.selector.InterestSuspensionsMap",
-      "fields": [
-        {
-          "name": "acceptHandlerReference"
-        },
-        {
-          "name": "connectHandlerReference"
-        },
-        {
-          "name": "readHandlerReference"
-        },
-        {
-          "name": "writeHandlerReference"
-        }
-      ]
+      "type": "io.ktor.network.selector.InterestSuspensionsMap"
     },
     {
-      "type": "io.ktor.network.selector.LockFreeMPSCQueue",
-      "fields": [
-        {
-          "name": "curRef"
-        }
-      ]
+      "type": "io.ktor.network.selector.LockFreeMPSCQueue"
     },
     {
-      "type": "io.ktor.network.selector.LockFreeMPSCQueueCore",
-      "fields": [
-        {
-          "name": "nextRef"
-        },
-        {
-          "name": "stateRef"
-        }
-      ]
+      "type": "io.ktor.network.selector.LockFreeMPSCQueueCore"
     },
     {
       "type": "io.ktor.network.selector.SelectInterest[]"
     },
     {
-      "type": "io.ktor.network.selector.SelectableBase",
-      "fields": [
-        {
-          "name": "_interestedOps"
-        }
-      ]
+      "type": "io.ktor.network.selector.SelectableBase"
     },
     {
-      "type": "io.ktor.network.sockets.SocketBase",
-      "fields": [
-        {
-          "name": "actualCloseFlag"
-        },
-        {
-          "name": "closeFlag"
-        },
-        {
-          "name": "readerJob"
-        },
-        {
-          "name": "writerJob"
-        }
-      ]
+      "type": "io.ktor.network.sockets.SocketBase"
     },
     {
-      "type": "io.ktor.util.collections.CopyOnWriteHashMap",
-      "fields": [
-        {
-          "name": "current"
-        }
-      ]
+      "type": "io.ktor.util.collections.CopyOnWriteHashMap"
     },
     {
-      "type": "io.ktor.utils.io.ByteChannel",
-      "fields": [
-        {
-          "name": "_closedCause"
-        },
-        {
-          "name": "suspensionSlot"
-        }
-      ]
+      "type": "io.ktor.utils.io.ByteChannel"
     },
     {
-      "type": "io.ktor.utils.io.pool.DefaultPool",
-      "fields": [
-        {
-          "name": "top"
-        }
-      ]
+      "type": "io.ktor.utils.io.pool.DefaultPool"
     },
     {
-      "type": "io.ktor.websocket.DefaultWebSocketSessionImpl",
-      "fields": [
-        {
-          "name": "closed"
-        },
-        {
-          "name": "pinger"
-        },
-        {
-          "name": "started"
-        }
-      ]
+      "type": "io.ktor.websocket.DefaultWebSocketSessionImpl"
     },
     {
-      "type": "io.rsocket.kotlin.connection.KeepAliveHandler",
-      "fields": [
-        {
-          "name": "lastMark$volatile"
-        }
-      ]
+      "type": "io.rsocket.kotlin.connection.KeepAliveHandler"
     },
     {
       "type": "io.rsocket.kotlin.connection.SequentialConnection$launchRequest$1",
@@ -421,12 +434,7 @@
       ]
     },
     {
-      "type": "io.rsocket.kotlin.connection.StreamIdGenerator",
-      "fields": [
-        {
-          "name": "streamId$volatile"
-        }
-      ]
+      "type": "io.rsocket.kotlin.connection.StreamIdGenerator"
     },
     {
       "type": "io.rsocket.kotlin.internal.PayloadChannel$nextRequestN$1",
@@ -437,12 +445,7 @@
       ]
     },
     {
-      "type": "io.rsocket.kotlin.internal.PayloadFlow",
-      "fields": [
-        {
-          "name": "consumed$volatile"
-        }
-      ]
+      "type": "io.rsocket.kotlin.internal.PayloadFlow"
     },
     {
       "type": "io.rsocket.kotlin.operation.RequesterRequestStreamOperation$execute$1",
@@ -519,8 +522,7 @@
       ]
     },
     {
-      "type": "java.lang.Exception",
-      "allDeclaredFields": true
+      "type": "java.lang.Exception"
     },
     {
       "type": "java.lang.Float",
@@ -531,8 +533,7 @@
       ]
     },
     {
-      "type": "java.lang.IllegalStateException",
-      "allDeclaredFields": true
+      "type": "java.lang.IllegalStateException"
     },
     {
       "type": "java.lang.Integer",
@@ -560,12 +561,10 @@
       ]
     },
     {
-      "type": "java.lang.Object",
-      "allDeclaredFields": true
+      "type": "java.lang.Object"
     },
     {
-      "type": "java.lang.RuntimeException",
-      "allDeclaredFields": true
+      "type": "java.lang.RuntimeException"
     },
     {
       "type": "java.lang.Short",
@@ -581,11 +580,6 @@
     {
       "type": "java.lang.String",
       "jniAccessible": true,
-      "fields": [
-        {
-          "name": "TYPE"
-        }
-      ],
       "methods": [
         {
           "name": "lastIndexOf",
@@ -624,8 +618,7 @@
       ]
     },
     {
-      "type": "java.lang.Throwable",
-      "allDeclaredFields": true
+      "type": "java.lang.Throwable"
     },
     {
       "type": "java.lang.VersionProps",
@@ -744,7 +737,6 @@
     },
     {
       "type": "java.util.concurrent.CancellationException",
-      "allDeclaredFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -756,18 +748,6 @@
     },
     {
       "type": "java.util.concurrent.ScheduledThreadPoolExecutor"
-    },
-    {
-      "type": "java.util.logging.LogManager",
-      "methods": [
-        {
-          "name": "getLoggingMXBean",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "java.util.logging.LoggingMXBean"
     },
     {
       "type": "javax.management.MBeanOperationInfo"
@@ -842,12 +822,7 @@
       "type": "jdk.management.jfr.SettingDescriptorInfo"
     },
     {
-      "type": "kotlin.SafePublicationLazyImpl",
-      "fields": [
-        {
-          "name": "_value"
-        }
-      ]
+      "type": "kotlin.SafePublicationLazyImpl"
     },
     {
       "type": "kotlin.coroutines.jvm.internal.BaseContinuationImpl"
@@ -856,113 +831,28 @@
       "type": "kotlin.reflect.jvm.internal.ReflectionFactoryImpl"
     },
     {
-      "type": "kotlinx.coroutines.CancellableContinuationImpl",
-      "fields": [
-        {
-          "name": "_decisionAndIndex$volatile"
-        },
-        {
-          "name": "_parentHandle$volatile"
-        },
-        {
-          "name": "_state$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.CancellableContinuationImpl"
     },
     {
-      "type": "kotlinx.coroutines.CancelledContinuation",
-      "fields": [
-        {
-          "name": "_resumed$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.CancelledContinuation"
     },
     {
-      "type": "kotlinx.coroutines.CompletedExceptionally",
-      "fields": [
-        {
-          "name": "_handled$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.CompletedExceptionally"
     },
     {
-      "type": "kotlinx.coroutines.EventLoopImplBase",
-      "fields": [
-        {
-          "name": "_delayed$volatile"
-        },
-        {
-          "name": "_isCompleted$volatile"
-        },
-        {
-          "name": "_queue$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.EventLoopImplBase"
     },
     {
-      "type": "kotlinx.coroutines.InvokeOnCancelling",
-      "fields": [
-        {
-          "name": "_invoked$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.InvokeOnCancelling"
     },
     {
-      "type": "kotlinx.coroutines.JobSupport",
-      "fields": [
-        {
-          "name": "_parentHandle$volatile"
-        },
-        {
-          "name": "_state$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.JobSupport"
     },
     {
-      "type": "kotlinx.coroutines.JobSupport$Finishing",
-      "fields": [
-        {
-          "name": "_exceptionsHolder$volatile"
-        },
-        {
-          "name": "_isCompleting$volatile"
-        },
-        {
-          "name": "_rootCause$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.JobSupport$Finishing"
     },
     {
-      "type": "kotlinx.coroutines.channels.BufferedChannel",
-      "fields": [
-        {
-          "name": "_closeCause$volatile"
-        },
-        {
-          "name": "bufferEnd$volatile"
-        },
-        {
-          "name": "bufferEndSegment$volatile"
-        },
-        {
-          "name": "closeHandler$volatile"
-        },
-        {
-          "name": "completedExpandBuffersAndPauseFlag$volatile"
-        },
-        {
-          "name": "receiveSegment$volatile"
-        },
-        {
-          "name": "receivers$volatile"
-        },
-        {
-          "name": "sendSegment$volatile"
-        },
-        {
-          "name": "sendersAndCloseStatus$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.channels.BufferedChannel"
     },
     {
       "type": "kotlinx.coroutines.channels.BufferedChannel$receiveCatching$1",
@@ -981,158 +871,49 @@
       ]
     },
     {
-      "type": "kotlinx.coroutines.internal.ConcurrentLinkedListNode",
-      "fields": [
-        {
-          "name": "_next$volatile"
-        },
-        {
-          "name": "_prev$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.ConcurrentLinkedListNode"
     },
     {
-      "type": "kotlinx.coroutines.internal.DispatchedContinuation",
-      "fields": [
-        {
-          "name": "_reusableCancellableContinuation$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.DispatchedContinuation"
     },
     {
-      "type": "kotlinx.coroutines.internal.LimitedDispatcher",
-      "fields": [
-        {
-          "name": "runningWorkers$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.LimitedDispatcher"
     },
     {
-      "type": "kotlinx.coroutines.internal.LockFreeLinkedListNode",
-      "fields": [
-        {
-          "name": "_next$volatile"
-        },
-        {
-          "name": "_prev$volatile"
-        },
-        {
-          "name": "_removedRef$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.LockFreeLinkedListNode"
     },
     {
-      "type": "kotlinx.coroutines.internal.LockFreeTaskQueue",
-      "fields": [
-        {
-          "name": "_cur$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.LockFreeTaskQueue"
     },
     {
-      "type": "kotlinx.coroutines.internal.LockFreeTaskQueueCore",
-      "fields": [
-        {
-          "name": "_next$volatile"
-        },
-        {
-          "name": "_state$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.LockFreeTaskQueueCore"
     },
     {
-      "type": "kotlinx.coroutines.internal.Segment",
-      "fields": [
-        {
-          "name": "cleanedAndPointers$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.Segment"
     },
     {
       "type": "kotlinx.coroutines.internal.StackTraceRecoveryKt"
     },
     {
-      "type": "kotlinx.coroutines.internal.ThreadSafeHeap",
-      "fields": [
-        {
-          "name": "_size$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.internal.ThreadSafeHeap"
     },
     {
-      "type": "kotlinx.coroutines.scheduling.CoroutineScheduler",
-      "fields": [
-        {
-          "name": "_isTerminated$volatile"
-        },
-        {
-          "name": "controlState$volatile"
-        },
-        {
-          "name": "parkedWorkersStack$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.scheduling.CoroutineScheduler"
     },
     {
-      "type": "kotlinx.coroutines.scheduling.CoroutineScheduler$Worker",
-      "fields": [
-        {
-          "name": "workerCtl$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.scheduling.CoroutineScheduler$Worker"
     },
     {
-      "type": "kotlinx.coroutines.scheduling.WorkQueue",
-      "fields": [
-        {
-          "name": "blockingTasksInBuffer$volatile"
-        },
-        {
-          "name": "consumerIndex$volatile"
-        },
-        {
-          "name": "lastScheduledTask$volatile"
-        },
-        {
-          "name": "producerIndex$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.scheduling.WorkQueue"
     },
     {
-      "type": "kotlinx.coroutines.selects.SelectImplementation",
-      "fields": [
-        {
-          "name": "state$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.selects.SelectImplementation"
     },
     {
-      "type": "kotlinx.coroutines.sync.SemaphoreAndMutexImpl",
-      "fields": [
-        {
-          "name": "_availablePermits$volatile"
-        },
-        {
-          "name": "deqIdx$volatile"
-        },
-        {
-          "name": "enqIdx$volatile"
-        },
-        {
-          "name": "head$volatile"
-        },
-        {
-          "name": "tail$volatile"
-        }
-      ]
+      "type": "kotlinx.coroutines.sync.SemaphoreAndMutexImpl"
     },
     {
-      "type": "kotlinx.io.RefCountingCopyTracker",
-      "fields": [
-        {
-          "name": "copyCount"
-        }
-      ]
+      "type": "kotlinx.io.RefCountingCopyTracker"
     },
     {
       "type": "long[]"
@@ -1300,17 +1081,6 @@
       ]
     },
     {
-      "type": "sun.security.provider.NativePRNG",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.security.SecureRandomParameters"
-          ]
-        }
-      ]
-    },
-    {
       "type": "sun.security.provider.NativePRNG$NonBlocking",
       "methods": [
         {
@@ -1466,18 +1236,6 @@
       ]
     },
     {
-      "type": "sun.security.x509.IssuerAlternativeNameExtension",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.Boolean",
-            "java.lang.Object"
-          ]
-        }
-      ]
-    },
-    {
       "type": "sun.security.x509.KeyUsageExtension",
       "methods": [
         {
@@ -1536,11 +1294,26 @@
           ]
         }
       ]
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData"
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData_en"
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData_en_US"
+    },
+    {
+      "type": "sun.util.resources.cldr.CalendarData"
     }
   ],
   "resources": [
     {
       "glob": "META-INF/helidon/feature-metadata.properties"
+    },
+    {
+      "glob": "META-INF/helidon/feature-registry.json"
     },
     {
       "glob": "META-INF/helidon/media-types.properties"
@@ -1571,6 +1344,9 @@
     },
     {
       "glob": "META-INF/services/io.helidon.config.spi.ConfigFilter"
+    },
+    {
+      "glob": "META-INF/services/io.helidon.config.spi.ConfigMapperProvider"
     },
     {
       "glob": "META-INF/services/io.helidon.config.spi.ConfigParser"
