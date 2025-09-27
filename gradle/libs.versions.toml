@@ -20,11 +20,11 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.9.1"
+bc-plugins                     = "2.9.2"
 kotlinx-kover                  = "0.9.2"
 kotlin-dokka                   = "2.1.0-Beta"
 kotlinx-io                     = "0.8.0"
-kotlinx-atomicfu               = "0.29.0"
+kotlinx-atomicfu               = "0.30.0-beta"
 kotlinx-coroutines             = "1.10.2"
 kotlinx-datetime               = "0.7.1"
 kotlinx-datetime-zoneinfo      = "2025b-spi.0.7.1"
@@ -38,9 +38,9 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.2"
-kotlin-wrappers                = "2025.9.8"
+kotlin-wrappers                = "2025.9.10"
 kotlin-redacted                = "1.15.0"
-kotlin-serviceloader           = "0.0.20"
+kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "1.0.0-Beta3"
 kotlinx-kandy                  = "0.9.0-dev-86"
@@ -57,8 +57,8 @@ kopy                           = "0.19.0+2.2.20"
 poko                           = "0.20.0"
 mappie                         = "2.2.20-1.5.0"
 akkurate                       = "0.11.0"
-kaml                           = "0.96.0"
-snakeyaml-engine-kmp           = "3.2.0"
+kaml                           = "0.97.0"
+snakeyaml-engine-kmp           = "3.2.1"
 konsist                        = "0.17.3"
 decoroutinator                 = "2.5.7"
 spring-boot                    = "4.0.0-M3"
@@ -69,11 +69,11 @@ ktor-cohort                    = "2.8.0"
 fusionauth-http                = "0.4.0-RC.4"
 otel                           = "1.54.1"
 otel-alpha                     = "1.54.1-alpha"
-otel-instr                     = "2.20.0"
-otel-instr-alpha               = "2.20.0-alpha"
+otel-instr                     = "2.20.1"
+otel-instr-alpha               = "2.20.1-alpha"
 otel-semconv                   = "1.37.0"
-otel-contrib                   = "1.49.0-alpha"
-otel-kotlin                    = "0.5.1"
+otel-contrib                   = "1.50.0-alpha"
+otel-kotlin                    = "0.6.0"
 bc                             = "1.82"
 okio                           = "3.16.0"
 ayza                           = "10.0.0"
@@ -128,7 +128,6 @@ kotlin-diff                    = "1.1.0"
 kotlin-retry                   = "2.0.2"
 kotlinx-jsonpath               = "3.0.2"
 kotlin-cryptography            = "0.5.0"
-koja                           = "0.4.3"
 json-sugar                     = "0.7.2"
 json-schema-validator          = "0.5.2"
 pwall-json-schema              = "0.57"
@@ -139,7 +138,6 @@ urlencoder                     = "1.6.0"
 bytesize                       = "2.0.0"
 cash-turbine                   = "1.2.1"
 cardiologist                   = "0.8.0"
-kmp-store5                     = "5.1.0-alpha06"
 kmp-settings                   = "1.3.0"
 kmp-appdirs                    = "2.0.0"
 parsus                         = "0.6.1"
@@ -149,7 +147,7 @@ java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.3.0"
 arrow-suspendapp               = "2.2.0-beta.3"
 hikariCP                       = "7.0.2"
-h2                             = "2.3.232"
+h2                             = "2.4.240"
 micrometer                     = "1.16.0-M3"
 swagger-ui                     = "5.17.14"
 hoplite                        = "3.0.0.RC1"
@@ -185,15 +183,15 @@ okapibarcode                   = "0.5.2"
 chasm                          = "1.1.0"
 cel                            = "0.11.0"
 kfswatch                       = "1.3.1"
-kmp-process                    = "0.3.2"
+kmp-process                    = "0.4.0"
 kmbed                          = "1.8.4"
-langchain4j                    = "1.5.0"
-langchain4j-jlama              = "1.5.0-beta11"
+langchain4j                    = "1.6.0"
+langchain4j-jlama              = "1.6.0-beta12"
 langchain4j-kotlin             = "0.3.0"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.7.2"
-koog                           = "0.4.2"
-mcp4k                          = "0.4.4"
+koog                           = "0.4.3-dev-25092025-feat-856"
+mcp4k                          = "0.4.5"
 dflib                          = "2.0.0-M4"
 ldaptive                       = "2.4.2"
 chicory                        = "1.5.1"
@@ -205,7 +203,9 @@ log4k                          = "1.1.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
 cidre                          = "0.2.0"
-helidon                        = "4.3.0-M3"
+voices                         = "0.0.3"
+onnx                           = "1.23.0"
+helidon                        = "4.3.0-M4"
 
 # Compose
 jetbrains-compose              = "1.10.0-alpha01"
@@ -232,16 +232,16 @@ npm-jsjoda-tz                  = "2.22.0"
 swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/themes/3.x/theme-flattop.css"
 
 # Plugin versions
-benmanes                       = "0.52.0"
-caupain                        = "1.6.0"
+benmanes                       = "0.53.0"
+caupain                        = "1.6.1"
 foojay-resolver                = "1.0.0"
 gradle-develocity              = "4.2"
 nmcp                           = "1.1.0"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.34.0"
 gradle-publish                 = "2.0.0"
-shadow                         = "9.1.0"
-spotless                       = "7.2.1"
+shadow                         = "9.2.2"
+spotless                       = "8.0.0"
 semver-plugin                  = "0.9.0"
 gratatouille                   = "0.1.2"
 vercraft                       = "0.6.0"
@@ -251,7 +251,7 @@ sigstore                       = "2.0.0-rc1"
 reproducible-builds            = "1.0"
 autonomousapps-depanalysis     = "3.0.4"
 autonomousapps-bestpractices   = "0.10"
-graalvm-nativeimage            = "0.11.0"
+graalvm-nativeimage            = "0.11.1"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 wire-plugin                    = "5.4.0"
@@ -488,7 +488,6 @@ kotlin-codepoints                    = { module = "de.cketti.unicode:kotlin-code
 kotlin-codepoints-deluxe             = { module = "de.cketti.unicode:kotlin-codepoints-deluxe"                 , version.ref = "kotlin-codepoints"}
 kotlin-diff                          = { module = "io.github.petertrr:kotlin-multiplatform-diff"               , version.ref = "kotlin-diff"}
 cash-turbine                         = { module = "app.cash.turbine:turbine"                                   , version.ref = "cash-turbine" }
-store5                               = { module = "org.mobilenativefoundation.store:store5"                    , version.ref = "kmp-store5" }
 parsus                               = { module = "me.alllex.parsus:parsus"                                    , version.ref = "parsus" }
 cache4k                              = { module = "io.github.reactivecircus.cache4k:cache4k"                   , version.ref = "cache4k" }
 ksoup-kotlinx                        = { module = "com.fleeksoft.ksoup:ksoup-kotlinx"                          , version.ref = "ksoup" }
@@ -685,7 +684,15 @@ jlama-native                         = { module = "com.github.tjake:jlama-native
 dflib                                = { module = "org.dflib:dflib"                                                         , version.ref = "dflib" }
 mcp-kotlin                           = { module = "io.modelcontextprotocol:kotlin-sdk"                                      , version.ref = "mcp-kotlin"}
 koog-agents                          = { module = "ai.koog:koog-agents"                                                     , version.ref = "koog"}
+koog-tools                           = { module = "ai.koog:agents-tools"                                                    , version.ref = "koog" }
+koog-executor-openai                 = { module = "ai.koog:prompt-executor-openai-client"                                   , version.ref = "koog" }
+koog-features-eventhandler           = { module = "ai.koog:agents-features-event-handler"                                   , version.ref = "koog" }
 koog-ktor                            = { module = "ai.koog:koog-ktor"                                                       , version.ref = "koog"}
+voices-chorus                        = { module = "org.pitest.voices:chorus"                                                , version.ref = "voices" }
+voices-en-uk                         = { module = "org.pitest.voices:en_uk"                                                 , version.ref = "voices" }
+voices-en-us                         = { module = "org.pitest.voices:en_us"                                                 , version.ref = "voices" }
+onnxruntime                          = { module = "com.microsoft.onnxruntime:onnxruntime"                                   , version.ref = "onnx" }
+onnxruntime-gpu                      = { module = "com.microsoft.onnxruntime:onnxruntime_gpu"                               , version.ref = "onnx" }
 
 # Social
 ozone-bluesky                        = { module = "sh.christian.ozone:bluesky"                                              , version.ref = "bluesky-ozone"}
@@ -724,7 +731,7 @@ dataviz                              = ["kotlinx-dataframe-csv",
                                         "kotlinx-kandy",
                                         "kotlinx-kandy-geo"]
 json-extra                           = ["kotlinx-jsonpath","json-schema-validator"]
-keystore                             = ["ayza","directory-keystore"]
+keystore                             = ["ayza"]
 otel                                 = ["otel-instr-annotations",
                                         "otel-semconv",
                                         "otel-instr-ktor",
@@ -799,7 +806,6 @@ gradlex-maven-plugin                 = { id = "org.gradlex.maven-plugin-developm
 typesafe-conventions                 = { id = "dev.panuszewski.typesafe-conventions"                           , version.ref = "typesafe-conventions" }
 wasm2class                           = { id = "at.released.wasm2class.plugin"                                  , version.ref = "wasm2class" }
 mcp4k                                = { id = "sh.ondr.mcp4k"                                                  , version.ref = "mcp4k"}
-koja                                 = { id = "sh.ondr.koja"                                                   , version.ref = "koja"}
 tasktree                             = { id = "com.dorongold.task-tree"                                        , version.ref = "tasktree" }
 foojay-resolver                      = { id = "org.gradle.toolchains.foojay-resolver"                          , version.ref = "foojay-resolver" }
 gratatouille                         = { id = "com.gradleup.gratatouille"                                      , version.ref = "gratatouille" }
