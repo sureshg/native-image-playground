@@ -203,7 +203,7 @@ log4k                          = "1.1.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
 cidre                          = "0.2.0"
-voices                         = "0.0.3"
+voices                         = "0.0.4"
 onnx                           = "1.23.0"
 helidon                        = "4.3.0-M4"
 
