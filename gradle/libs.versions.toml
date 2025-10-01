@@ -205,7 +205,7 @@ bluesky-ozone                  = "0.3.3"
 cidre                          = "0.2.0"
 voices                         = "0.0.3"
 onnx                           = "1.23.0"
-helidon                        = "4.3.0-M4"
+helidon                        = "4.3.0"
 
 # Compose
 jetbrains-compose              = "1.10.0-alpha01"
