@@ -15,7 +15,7 @@ and publish the platform binaries using GitHub action.
 $ ./scripts/graalvm-ce-dev.sh
 
 # or Install latest GraalVM CE
-$ sdk i java 24-graalce
+$ sdk i java 25-graalce
 ```
 
 ### Build

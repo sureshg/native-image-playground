@@ -1310,10 +1310,64 @@
   ],
   "resources": [
     {
+      "glob": "META-INF/MANIFEST.MF"
+    },
+    {
+      "glob": "META-INF/helidon/config-metadata.json"
+    },
+    {
       "glob": "META-INF/helidon/feature-metadata.properties"
     },
     {
       "glob": "META-INF/helidon/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.common.config/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.common.mapper/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.common.mapper/service.loader"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.config/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.config/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.config/service.loader"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.http.encoding/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.http.media/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.http/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.service.registry/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.service.registry/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.webserver.cors/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.webserver.staticcontent/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.webserver/feature-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.webserver/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/manifest"
     },
     {
       "glob": "META-INF/helidon/media-types.properties"
