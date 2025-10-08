@@ -1,7 +1,7 @@
 [versions]
 java                           = "26"
 kotlin                         = "2.3.0-Beta1"
-kotlin-ksp                     = "2.2.20-2.0.4"
+kotlin-ksp                     = "2.2.21-RC-2.0.4"
 kotlin-jvmtarget               = "24"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.3"
@@ -38,7 +38,7 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3"
-kotlin-wrappers                = "2025.10.3"
+kotlin-wrappers                = "2025.10.4"
 kotlin-redacted                = "1.15.0"
 kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
@@ -87,7 +87,6 @@ ajalt-colormath                = "3.6.1"
 jline                          = "3.30.6"
 classgraph                     = "4.8.181"
 cache4k                        = "0.14.0"
-intellij-coverage              = "1.0.766"
 intellij-markdown              = "0.7.3"
 jgit                           = "7.4.0.202509020913-r"
 jte                            = "3.2.1"
@@ -220,6 +219,7 @@ detekt-compose-rules           = "0.4.27"
 compose-hotreload              = "1.0.0-rc01"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.5.0"
+compose-fluent                 = "0.1.0"
 kottie                         = "2.1.0"
 mosaic                         = "0.18.0"
 filekit-dialogs                = "0.12.0"
@@ -245,12 +245,11 @@ shadow                         = "9.2.2"
 spotless                       = "8.0.0"
 semver-plugin                  = "0.9.0"
 gratatouille                   = "0.1.2"
-vercraft                       = "0.6.0"
 kmpmt                          = "0.1.1"
 tasktree                       = "4.0.1"
 sigstore                       = "2.0.0-rc1"
 reproducible-builds            = "1.0"
-autonomousapps-depanalysis     = "3.0.4"
+autonomousapps-depanalysis     = "3.1.0"
 autonomousapps-bestpractices   = "0.10"
 graalvm-nativeimage            = "0.11.1"
 github-depgraph                = "0.1.0"
@@ -645,6 +644,8 @@ detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detek
 compose-kottie                       = { module = "io.github.ismai117:kottie"                                               , version.ref = "kottie" }
 evas-compose                         = { module = "io.sellmair:evas-compose"                                                , version.ref = "evas" }
 filekit-dialogs-compose              = { module = "io.github.vinceglb:filekit-dialogs-compose"                              , version.ref = "filekit-dialogs" }
+compose-fluent                       = { module = "io.github.compose-fluent:fluent"                                         , version.ref = "compose-fluent" }
+compose-fluent-icons                 = { module = "io.github.compose-fluent:fluent-icons-extended"                          , version.ref = "compose-fluent" }
 
 kobweb-api                           = { module = "com.varabyte.kobweb:kobweb-api"                                          , version.ref = "kobweb" }
 kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core "                                        , version.ref = "kobweb" }
@@ -802,7 +803,6 @@ spring-depmgmt                       = { id = "io.spring.dependency-management" 
 mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }
 poko                                 = { id = "dev.drewhamilton.poko"                                          , version.ref = "poko" }
 animalsniffer                        = { id = "ru.vyarus.animalsniffer"                                        , version.ref = "animalsniffer"}
-build-vercraft                       = { id = "com.akuleshov7.vercraft.plugin-gradle"                          , version.ref = "vercraft" }
 kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugin"                             , version.ref = "kmbed" }
 badass-jlink                         = { id = "org.beryx.jlink"                                                , version.ref = "badass-jlink" }
 badass-runtime                       = { id = "org.beryx.runtime"                                              , version.ref = "badass-runtime" }
@@ -821,7 +821,6 @@ wire                                 = { id = "com.squareup.wire"               
 gmazzo-buildconfig                   = { id = "com.github.gmazzo.buildconfig"                                  , version.ref = "gmazzo-buildconfig"}
 mokkery                              = { id = "dev.mokkery"                                                    , version.ref = "mokkery"}
 modulegraph                          = { id = "dev.iurysouza.modulegraph"                                      , version.ref = "modulegraph"}
-intellij-coverage                    = { id = "org.jetbrains.intellij.deps.coverage"                           , version.ref = "intellij-coverage" }
 github-changelog                     = { id = "org.hildan.github.changelog"                                    , version.ref = "github-changelog" }
 includegit                           = { id = "me.champeau.gradle.includegit"                                  , version.ref = "includegit-plugin" }
 reproducible-builds                  = { id = "org.gradlex.reproducible-builds"                                , version.ref = "reproducible-builds" }
