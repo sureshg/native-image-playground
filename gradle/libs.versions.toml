@@ -1,12 +1,12 @@
 [versions]
 java                           = "26"
 kotlin                         = "2.3.0-Beta1"
-kotlin-ksp                     = "2.2.21-RC-2.0.4"
+kotlin-ksp                     = "2.3.0"
 kotlin-jvmtarget               = "24"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.3"
 kotlin-lang-version            = "2.3"
-gradle                         = "9.2.0-rc-1"
+gradle                         = "9.2.0-rc-2"
 java-vendor                    = "GraalVM Community"
 java-jvmargs                   = "--enable-preview"
 java-addmodules                = "jdk.incubator.vector"
@@ -20,9 +20,9 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.16.0"
-kotlinx-kover                  = "0.9.2"
-kotlin-dokka                   = "2.1.0-Beta"
+bc-plugins                     = "2.17.0"
+kotlinx-kover                  = "0.9.3"
+kotlin-dokka                   = "2.1.0"
 kotlinx-io                     = "0.8.0"
 kotlinx-atomicfu               = "0.30.0-beta"
 kotlinx-coroutines             = "1.10.2"
@@ -38,47 +38,47 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3.2"
-kotlin-wrappers                = "2025.10.7"
+kotlin-wrappers                = "2025.10.11"
 kotlin-redacted                = "1.15.0"
 kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "1.0.0-Beta3"
 kotlinx-kandy                  = "0.9.0-dev-86"
 kotlin-statistics              = "0.4.0-RC1"
-gradle-kotlin-dsl              = "6.4.0"
-exoquery-plugin                = "2.2.20-1.7.1.PL"
-exoquery-sql                   = "1.7.1.PL"
+gradle-kotlin-dsl              = "6.4.1"
+exoquery-plugin                = "2.2.20-1.7.2.PL"
+exoquery-sql                   = "1.7.2.PL"
 exposed                        = "1.0.0-rc-2"
 postgresql                     = "42.7.8"
 embedded-postgres              = "2.1.1"
 embedded-postgres-bom          = "17.6.0"
 evas                           = "1.3.0"
 kopy                           = "0.19.0+2.2.20"
-poko                           = "0.20.0"
+poko                           = "0.20.1"
 mappie                         = "2.2.20-1.6.0"
 akkurate                       = "0.11.0"
-kaml                           = "0.98.0"
-snakeyaml-engine-kmp           = "3.2.1"
+kaml                           = "0.99.0"
+snakeyaml-engine-kmp           = "4.0.1"
 konsist                        = "0.17.3"
 decoroutinator                 = "2.5.7"
 spring-boot                    = "4.0.0-M3"
 spring-depmgmt                 = "1.1.7"
 ktor                           = "3.3.1"
-swagger-codegen                = "3.0.74"
+swagger-codegen                = "3.0.75"
 ktor-cohort                    = "2.8.0"
 java-http                      = "1.2.0"
 fusionauth-jwt                 = "5.3.3"
-otel                           = "1.54.1"
-otel-alpha                     = "1.54.1-alpha"
-otel-instr                     = "2.20.1"
-otel-instr-alpha               = "2.20.1-alpha"
+otel                           = "1.55.0"
+otel-alpha                     = "1.55.0-alpha"
+otel-instr                     = "2.21.0"
+otel-instr-alpha               = "2.21.0-alpha"
 otel-semconv                   = "1.37.0"
-otel-contrib                   = "1.50.0-alpha"
-otel-kotlin                    = "0.6.0"
-jackson                        = "3.0.0"
+otel-contrib                   = "1.51.0-alpha"
+otel-kotlin                    = "0.7.0"
+jackson                        = "3.0.1"
 bc                             = "1.82"
-okio                           = "3.16.1"
-ayza                           = "10.0.0"
+okio                           = "3.16.2"
+ayza                           = "10.0.1"
 ksp-auto-service               = "1.2.0"
 sweetspi                       = "0.1.3"
 zip-prefixer                   = "0.3.1"
@@ -92,32 +92,32 @@ intellij-markdown              = "0.7.3"
 jgit                           = "7.4.0.202509020913-r"
 jte                            = "3.2.1"
 sshj                           = "0.40.0"
-jsch                           = "2.27.3"
+jsch                           = "2.27.4"
 pty4j                          = "0.13.11"
-oshi                           = "6.9.0"
+oshi                           = "6.9.1"
 junit                          = "6.0.0"
 koin                           = "4.1.2-Beta1"
-koin-annotations               = "2.2.0"
+koin-annotations               = "2.3.0"
 metro                          = "0.4.0"
-kotest                         = "6.0.3"
+kotest                         = "6.0.4"
 mockk                          = "1.14.6"
 mokkery                        = "3.0.0-Beta2"
 wiremock                       = "4.0.0-beta.15"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.2.1"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.19"
+logback                        = "1.5.20"
 logback-tyler                  = "1.0.2"
 log4j                          = "3.0.0-beta3"
 jmh                            = "1.37"
 mrjar                          = "0.1.1"
-ktfmt                          = "0.58"
-google-javaformat              = "1.29.0"
-palantir-javaformat            = "2.77.0"
+ktfmt                          = "0.59"
+google-javaformat              = "1.30.0"
+palantir-javaformat            = "2.81.0"
 google-auto-value              = "1.11.0"
 google-auto-service            = "1.1.1"
-google-tink                    = "1.18.0"
-graalvm                        = "25.0.0"
+google-tink                    = "1.19.0"
+graalvm                        = "25.0.1"
 jspecify                       = "1.0.0"
 rsocket                        = "0.20.0"
 jctools                        = "4.0.5"
@@ -129,7 +129,6 @@ kotlin-diff                    = "1.1.0"
 kotlin-retry                   = "2.0.2"
 kotlinx-jsonpath               = "3.0.2"
 kotlin-cryptography            = "0.5.0"
-json-sugar                     = "0.7.2"
 json-schema-validator          = "0.5.2"
 pwall-json-schema              = "0.57"
 schema-kenerator               = "2.4.0"
@@ -149,7 +148,7 @@ webjars-xterm                  = "5.3.0"
 arrow-suspendapp               = "2.2.0-beta.3"
 hikariCP                       = "7.0.2"
 h2                             = "2.4.240"
-micrometer                     = "1.16.0-M3"
+micrometer                     = "1.16.0-RC1"
 swagger-ui                     = "5.17.14"
 hoplite                        = "3.0.0.RC1"
 config4k                       = "0.7.0"
@@ -161,13 +160,13 @@ expiringmap                    = "0.5.11"
 otp                            = "2.1.0"
 password4j                     = "1.8.4"
 apache-commons-imaging         = "1.0.0-alpha6"
-testcontainers                 = "1.21.3"
+testcontainers                 = "2.0.1"
 sourceBuddy                    = "2.5.3"
 tcp-javanioproxy               = "1.6"
 kubernetes-client              = "24.0.0"
 reflect-typeparamresolver      = "1.0.3"
 reflect-typetools              = "0.6.3"
-async-profiler                 = "4.1"
+async-profiler                 = "4.2"
 ap-loader-all                  = "4.1-10"
 openjdk-jmc                    = "9.1.1"
 airlift-aircompressor          = "2.0.2"
@@ -183,16 +182,16 @@ twelvemonkeys                  = "3.12.0"
 okapibarcode                   = "0.5.2"
 chasm                          = "1.2.0"
 chasm-plugin                   = "2.0.0-1.2.0"
-cel                            = "0.11.0"
-kfswatch                       = "1.3.1"
+cel                            = "0.11.1"
+kfswatch                       = "1.4.0"
 kmp-process                    = "0.4.0"
 kmbed                          = "1.8.4"
 langchain4j                    = "1.7.1"
 langchain4j-jlama              = "1.7.1-beta14"
 langchain4j-kotlin             = "0.3.0"
 jlama                          = "0.8.4"
-mcp-kotlin                     = "0.7.2"
-koog                           = "0.5.0"
+mcp-kotlin                     = "0.7.3"
+koog                           = "0.5.1"
 mcp4k                          = "0.4.5"
 dflib                          = "2.0.0-M4"
 ldaptive                       = "2.4.2"
@@ -207,22 +206,24 @@ bluesky-ozone                  = "0.3.3"
 cidre                          = "0.3.0"
 voices                         = "0.0.7"
 onnx                           = "1.23.1"
+angus-mail                     = "2.1.0-M1"
+simplemail                     = "8.12.6"
 helidon                        = "4.3.1"
 
 # Compose
-jetbrains-compose              = "1.10.0-alpha02"
-jetbrains-compose-viewmodel    = "2.10.0-alpha02"
-jetbrains-compose-nav          = "2.9.0"
-jetbrains-compose-adaptive     = "1.2.0-alpha07"
+jetbrains-compose              = "1.10.0-alpha03"
+jetbrains-compose-viewmodel    = "2.10.0-alpha03"
+jetbrains-compose-nav          = "2.9.1"
+jetbrains-compose-adaptive     = "1.2.0-beta01"
 jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.23.3"
-detekt                         = "1.23.8"
+detekt                         = "2.0.0-alpha.1"
 detekt-compose-rules           = "0.4.27"
 compose-hotreload              = "1.0.0-rc02"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.5.0"
 compose-fluent                 = "0.1.0"
-kottie                         = "2.1.0"
+kottie                         = "2.2.0"
 mosaic                         = "0.18.0"
 filekit-dialogs                = "0.12.0"
 
@@ -238,7 +239,7 @@ swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/them
 benmanes                       = "0.53.0"
 caupain                        = "1.6.1"
 foojay-resolver                = "1.0.0"
-gradle-develocity              = "4.2.1"
+gradle-develocity              = "4.2.2"
 nmcp                           = "1.2.0"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.34.0"
@@ -249,18 +250,17 @@ semver-plugin                  = "0.9.0"
 gratatouille                   = "0.1.2"
 kmpmt                          = "0.1.1"
 tasktree                       = "4.0.1"
-sigstore                       = "2.0.0-rc1"
-reproducible-builds            = "1.0"
-autonomousapps-depanalysis     = "3.1.0"
+sigstore                       = "2.0.0-rc2"
+reproducible-builds            = "1.1"
+autonomousapps-depanalysis     = "3.2.0"
 autonomousapps-bestpractices   = "0.10"
-graalvm-nativeimage            = "0.11.1"
+graalvm-nativeimage            = "0.11.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
-wire-plugin                    = "5.4.0"
 buildkonfig                    = "0.17.1"
 gmazzo-buildconfig             = "5.7.0"
 cyclonedx-plugin               = "1.10.0"
-modulegraph                    = "0.12.1"
+modulegraph                    = "0.13.0"
 exposed-plugin                 = "0.2.1"
 jib-plugin                     = "3.4.5"
 jib-nativeimage-extn           = "0.1.0"
@@ -379,6 +379,7 @@ ktor-client-okhttp                   = { module = "io.ktor:ktor-client-okhttp"  
 ktor-client-jetty                    = { module = "io.ktor:ktor-client-jetty"                                       , version.ref = "ktor"}
 ktor-client-serialization            = { module = "io.ktor:ktor-client-serialization"                               , version.ref = "ktor"}
 ktor-client-websockets               = { module = "io.ktor:ktor-client-websockets"                                  , version.ref = "ktor"}
+ktor-client-webrtc                   = { module = "io.ktor:ktor-client-webrtc"                                      , version.ref = "ktor"}
 ktor-client-content-negotiation      = { module = "io.ktor:ktor-client-content-negotiation"                         , version.ref = "ktor"}
 ktor-client-auth                     = { module = "io.ktor:ktor-client-auth"                                        , version.ref = "ktor"}
 ktor-client-logging                  = { module = "io.ktor:ktor-client-logging"                                     , version.ref = "ktor"}
@@ -405,7 +406,7 @@ akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ks
 
 okio-bom                             = { module = "com.squareup.okio:okio-bom"                                 , version.ref = "okio"}
 okio                                 = { module = "com.squareup.okio:okio"                                     , version.ref = "okio"}
-okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                       , version.ref = "okio"}
+okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                      , version.ref = "okio"}
 arrow-suspendapp                     = { module = "io.arrow-kt:suspendapp"                                     , version.ref = "arrow-suspendapp" }
 arrow-suspendapp-ktor                = { module = "io.arrow-kt:suspendapp-ktor"                                , version.ref = "arrow-suspendapp" }
 kmp-appdirs                          = { module = "ca.gosyer:kotlin-multiplatform-appdirs"                     , version.ref = "kmp-appdirs"}
@@ -434,7 +435,6 @@ rsocket-ktor-tcp                     = { module = "io.rsocket.kotlin:rsocket-tra
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
 trie-kmp                             = { module = "com.eygraber:trie-kmp"                                      , version.ref = "trie-kmp"}
 kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
-json-sugar                           = { module = "com.eygraber:json-sugar"                                    , version.ref = "json-sugar"}
 json-schema-validator                = { module = "io.github.optimumcode:json-schema-validator"                , version.ref = "json-schema-validator"}
 json-schema-kenerator                = { module = "io.github.smiley4:schema-kenerator-jsonschema"              , version.ref = "schema-kenerator"}
 pwall-json-schema                    = { module = "net.pwall.json:json-kotlin-schema"                          , version.ref = "pwall-json-schema"}
@@ -575,12 +575,12 @@ multiplatform-settings-serialization = { module = "com.russhwolf:multiplatform-s
 
 apache-commons-imaging               = { module = "org.apache.commons:commons-imaging"                         , version.ref = "apache-commons-imaging" }
 testcontainers-bom                   = { module = "org.testcontainers:testcontainers-bom"                      , version.ref = "testcontainers"}
-testcontainers-core                  = { module = "org.testcontainers:testcontainers" }
-testcontainers-postgresql            = { module = "org.testcontainers:postgresql" }
-testcontainers-cassandra             = { module = "org.testcontainers:cassandra" }
-testcontainers-k3s                   = { module = "org.testcontainers:k3s" }
-testcontainers-clickhouse            = { module = "org.testcontainers:clickhouse" }
-testcontainers-junit5                = { module = "org.testcontainers:junit-jupiter" }
+testcontainers-core                  = { module = "org.testcontainers:testcontainers"                          , version.ref = "testcontainers"}
+testcontainers-postgresql            = { module = "org.testcontainers:testcontainers-postgresql"               , version.ref = "testcontainers"}
+testcontainers-cassandra             = { module = "org.testcontainers:testcontainers-cassandra"                , version.ref = "testcontainers"}
+testcontainers-k3s                   = { module = "org.testcontainers:testcontainers-k3s"                      , version.ref = "testcontainers"}
+testcontainers-clickhouse            = { module = "org.testcontainers:testcontainers-clickhouse"               , version.ref = "testcontainers"}
+testcontainers-junit5                = { module = "org.testcontainers:testcontainers-junit-jupiter"            , version.ref = "testcontainers"}
 kubernetes-client                    = { module = "io.kubernetes:client-java"                                  , version.ref = "kubernetes-client"}
 
 tcp-javanioproxy                     = { module = "com.github.terma:javaniotcpproxy"                           , version.ref = "tcp-javanioproxy"}
@@ -617,6 +617,7 @@ otel-sdk-extn                        = { module = "io.opentelemetry:opentelemetr
 otel-semconv                         = { module = "io.opentelemetry.semconv:opentelemetry-semconv"                                          , version.ref = "otel-semconv"}
 otel-contrib-noop                    = { module = "io.opentelemetry.contrib:opentelemetry-noop-api"                                         , version.ref = "otel-contrib"}
 otel-contrib-samplers                = { module = "io.opentelemetry.contrib:opentelemetry-samplers"                                         , version.ref = "otel-contrib"}
+otel-contrib-cel-sampler             = { module = "io.opentelemetry.contrib:opentelemetry-cel-sampler"                                      , version.ref = "otel-contrib"}
 otel-contrib-jfrevents               = { module = "io.opentelemetry.contrib:opentelemetry-jfr-events"                                       , version.ref = "otel-contrib"}
 
 otel-instr-bom                       = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom"                      , version.ref = "otel-instr"}
@@ -710,6 +711,9 @@ ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"
 
 # Misc
 ldaptive                             = { module = "org.ldaptive:ldaptive"                                                   , version.ref = "ldaptive" }
+angus-mail                           = { module = "org.eclipse.angus:jakarta.mail"                                          , version.ref = "angus-mail" }
+simplemail                           = { module = "org.simplejavamail:simple-java-mail"                                     , version.ref = "simplemail" }
+simplemail-outlook                   = { module = "org.simplejavamail:outlook-module"                                       , version.ref = "simplemail" }
 
 # Maven Plugin
 maven-plugin-api                     = { module = "org.apache.maven:maven-plugin-api"                                       , version.ref = "maven-plugin-api" }
@@ -753,6 +757,7 @@ otel-agent-extn                      = ["otel-instr-api",
 
 [plugins]
 kotlin-multiplatform                 = { id = "org.jetbrains.kotlin.multiplatform"                             , version.ref = "kotlin"}
+kotlin-jvm                           = { id = "org.jetbrains.kotlin.jvm"                                       , version.ref = "kotlin"}
 kotlinx-serialization                = { id = "org.jetbrains.kotlin.plugin.serialization"                      , version.ref = "kotlin"}
 kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power-assert"                       , version.ref = "kotlin"}
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}
@@ -792,7 +797,7 @@ jib                                  = { id = "com.google.cloud.tools.jib"      
 sigstore                             = { id = "dev.sigstore.sign"                                              , version.ref = "sigstore" }
 sigstore-base                        = { id = "dev.sigstore.sign-base"                                         , version.ref = "sigstore" }
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
-detekt                               = { id = "io.github.detekt.gradle.compiler-plugin"                        , version.ref = "detekt"}
+detekt                               = { id = "dev.detekt"                                                     , version.ref = "detekt"}
 nmcp-project                         = { id = "com.gradleup.nmcp"                                              , version.ref = "nmcp"}
 nmcp-aggregation                     = { id = "com.gradleup.nmcp.aggregation"                                  , version.ref = "nmcp"}
 vanniktech-publish                   = { id = "com.vanniktech.maven.publish"                                   , version.ref = "vanniktech-publish" }
@@ -820,7 +825,6 @@ foojay-resolver                      = { id = "org.gradle.toolchains.foojay-reso
 gratatouille                         = { id = "com.gradleup.gratatouille"                                      , version.ref = "gratatouille" }
 cyclonedx                            = { id = "org.cyclonedx.cyclonedx"                                        , version.ref = "cyclonedx-plugin" }
 github-depgraph                      = { id = "org.gradle.github-dependency-graph"                             , version.ref = "github-depgraph"}
-wire                                 = { id = "com.squareup.wire"                                              , version.ref = "wire-plugin"}
 gmazzo-buildconfig                   = { id = "com.github.gmazzo.buildconfig"                                  , version.ref = "gmazzo-buildconfig"}
 mokkery                              = { id = "dev.mokkery"                                                    , version.ref = "mokkery"}
 modulegraph                          = { id = "dev.iurysouza.modulegraph"                                      , version.ref = "modulegraph"}
