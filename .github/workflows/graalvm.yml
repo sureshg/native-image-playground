@@ -45,7 +45,7 @@ jobs:
           ubuntu-latest,    # Linux X64
           ubuntu-24.04-arm, # Linux Arm64
           macos-latest,     # macOS Arm64
-          macos-13,         # macOS Intel
+          macos-15-intel,   # macOS Intel
           windows-latest,   # Windows X64
           windows-11-arm    # Windows Arm64
         ]
@@ -59,7 +59,7 @@ jobs:
           # Exclude musl builds for these platforms
           - os: macos-latest
             build-type: musl
-          - os: macos-13
+          - os: macos-15-intel
             build-type: musl
           - os: windows-latest
             build-type: musl
