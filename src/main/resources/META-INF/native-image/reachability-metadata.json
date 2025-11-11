@@ -120,30 +120,6 @@
       ]
     },
     {
-      "type": "dev.suresh.model.JVersion",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "dev.suresh.model.KtVersion",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "dev.suresh.service.JavaPlugin"
-    },
-    {
-      "type": "dev.suresh.service.KotlinPlugin"
-    },
-    {
       "type": "double[]"
     },
     {
@@ -619,18 +595,6 @@
     },
     {
       "type": "java.lang.Throwable"
-    },
-    {
-      "type": "java.lang.VersionProps",
-      "jniAccessible": true,
-      "methods": [
-        {
-          "name": "print",
-          "parameterTypes": [
-            "boolean"
-          ]
-        }
-      ]
     },
     {
       "type": "java.lang.Void",
@@ -1388,9 +1352,6 @@
       "glob": "META-INF/services/io.helidon.common.mapper.spi.MapperProvider"
     },
     {
-      "glob": "META-INF/services/io.helidon.common.media.type.spi.MediaTypeDetector"
-    },
-    {
       "glob": "META-INF/services/io.helidon.common.resumable.ResumableSupport"
     },
     {
@@ -1448,22 +1409,13 @@
       "glob": "META-INF/services/java.time.zone.ZoneRulesProvider"
     },
     {
-      "glob": "META-INF/services/java.util.concurrent.Callable"
-    },
-    {
       "glob": "META-INF/services/javax.management.remote.JMXConnectorServerProvider"
     },
     {
       "glob": "META-INF/services/org.slf4j.spi.SLF4JServiceProvider"
     },
     {
-      "glob": "io/helidon/common/media/type/default-media-types.properties"
-    },
-    {
       "glob": "message.txt"
-    },
-    {
-      "glob": "static"
     },
     {
       "module": "java.base",

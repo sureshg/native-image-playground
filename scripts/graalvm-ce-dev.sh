@@ -3,7 +3,7 @@
 # set -u won't work for sdkman
 set -e
 
-jdk_version=${1:-26}
+jdk_version=${1:-25}
 extn="tar.gz"
 
 # Find OS type
@@ -45,7 +45,7 @@ graalvm_base_url="https://github.com/graalvm/graalvm-ce-dev-builds/releases"
 graalvm_release=$(curl -Ls -o /dev/null -w %{url_effective} "${graalvm_base_url}/latest")
 graalvm_tag="${graalvm_release##*/}"
 
-openjdk_file="graalvm-community-java${jdk_version}-$os-$arch-dev.${extn}"
+openjdk_file="graalvm-community-dev-$os-$arch.${extn}"
 download_url="${graalvm_base_url}/download/${graalvm_tag}/${openjdk_file}"
 
 # Download the GraalVM
