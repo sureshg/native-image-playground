@@ -369,7 +369,12 @@
       "type": "io.ktor.client.engine.cio.Endpoint"
     },
     {
-      "type": "io.ktor.network.selector.InterestSuspensionsMap"
+      "type": "io.ktor.network.selector.InterestSuspensionsMap",
+      "fields": [
+        {
+          "name": "readHandlerReference"
+        }
+      ]
     },
     {
       "type": "io.ktor.network.selector.LockFreeMPSCQueue"
