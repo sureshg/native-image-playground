@@ -216,7 +216,7 @@ simplemail                     = "8.12.6"
 javelit                        = "0.80.0"
 jwalker                        = "1.1.0"
 hashsmith                      = "0.1.8"
-tui4j                          = "0.3.0"
+tui4j                          = "0.3.1"
 helidon                        = "4.3.3"
 
 # Compose
