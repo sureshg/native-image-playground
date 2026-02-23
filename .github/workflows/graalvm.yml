@@ -51,7 +51,7 @@ jobs:
         build-type: [ libc, musl ]
         include:
           - build-type: musl
-            buildArgs: '-Pmusl'
+            buildArgs: '-Pmusl=true'
           - build-type: libc
             buildArgs: ''
         exclude:
