@@ -222,7 +222,7 @@ tamboui                        = "0.1.0"
 helidon                        = "4.3.4"
 
 # Compose
-compose                        = "1.11.0-alpha02"
+compose                        = "1.11.0-alpha03"
 compose-material3              = "1.11.0-alpha02"
 compose-viewmodel              = "2.10.0-alpha08"
 compose-nav                    = "2.9.2"
