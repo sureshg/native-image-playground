@@ -13,18 +13,6 @@ import io.helidon.webserver.http.HttpRouting
 import io.helidon.webserver.http.ServerRequest
 import io.helidon.webserver.http.ServerResponse
 import io.helidon.webserver.staticcontent.*
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.websocket.*
-import io.ktor.utils.io.core.*
-import io.rsocket.kotlin.RSocket
-import io.rsocket.kotlin.core.WellKnownMimeType
-import io.rsocket.kotlin.keepalive.KeepAlive
-import io.rsocket.kotlin.ktor.client.RSocketSupport
-import io.rsocket.kotlin.ktor.client.rSocket
-import io.rsocket.kotlin.payload.PayloadMimeType
-import io.rsocket.kotlin.payload.buildPayload
-import io.rsocket.kotlin.payload.data
 import java.io.File
 import java.lang.System.Logger.Level.INFO
 import java.lang.management.ManagementFactory
@@ -55,12 +43,7 @@ import kotlin.io.path.Path
 import kotlin.io.use
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.system.exitProcess
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.runBlocking
 import org.graalvm.nativeimage.ImageInfo
 
 val logger = System.getLogger("Main")
@@ -95,29 +78,6 @@ fun main(args: Array<String>) {
   // start} ms).")
 }
 
-val rsClient by lazy {
-  HttpClient(CIO) {
-    install(WebSockets) // rsocket requires websockets plugin installed
-    install(RSocketSupport) {
-      // configure rSocket connector (all values have defaults)
-      connector {
-        maxFragmentSize = 1024
-        connectionConfig {
-          keepAlive = KeepAlive(interval = 30.seconds, maxLifetime = 2.minutes)
-          // payload for setup frame
-          setupPayload { buildPayload { data("""{ "data": "setup" }""") } }
-          // mime types
-          payloadMimeType =
-              PayloadMimeType(
-                  data = WellKnownMimeType.ApplicationJson,
-                  metadata = WellKnownMimeType.MessageRSocketCompositeMetadata,
-              )
-        }
-      }
-    }
-  }
-}
-
 private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
 
 val SERVER_HEADER = HeaderValues.createCached(HeaderNames.SERVER, "Nima")
@@ -132,7 +92,6 @@ fun routes(rules: HttpRouting.Builder) {
       }
       .any("/", ::root)
       .get("/shutdown", ::shutdown)
-      .get("/rsocket", ::rSocket)
       .get("/reflect/{type}", ::reflect)
       .get("/resources", ::resources)
       .get("/uds", ::unixDomainSockets)
@@ -353,25 +312,6 @@ fun resources(req: ServerRequest, res: ServerResponse) {
           ?: "Resource not found!".encodeToByteArray()
   res.send(resources)
 }
-
-fun rSocket(req: ServerRequest, res: ServerResponse) =
-    runBlocking(vtDispatcher) {
-      println("Starting new rSocket connection!")
-      val rSocket: RSocket = rsClient.rSocket("wss://demo.rsocket.io/rsocket")
-      val stream = rSocket.requestStream(buildPayload { data("""{ "data": "Kotlin rSocket!" }""") })
-      res.header(HeaderValues.CONTENT_TYPE_EVENT_STREAM)
-      res.header(HeaderValues.CACHE_NO_CACHE)
-      // Chunked transfer encoding will be set if the response length is zero.
-      // res.header(Header.TRANSFER_ENCODING,"chunked")
-      // Streaming binary response - res.header(Header.CONTENT_TYPE,"application/octet-stream")
-      res.outputStream().buffered().use { bos ->
-        stream.take(10).flowOn(vtDispatcher).collect { payload ->
-          bos.write(payload.data.readBytes())
-          bos.write("\n".encodeToByteArray())
-          bos.flush()
-        }
-      }
-    }
 
 val udsServer by
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {

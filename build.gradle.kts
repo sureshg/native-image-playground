@@ -61,7 +61,6 @@ dependencies {
   implementation(libs.ajalt.mordant)
   implementation(libs.ajalt.colormath)
   implementation(libs.ktor.client.cio)
-  implementation(libs.rsocket.ktor.client)
   runtimeOnly(libs.slf4j.nop)
 
   "graalCompileOnly"(libs.graal.sdk)
