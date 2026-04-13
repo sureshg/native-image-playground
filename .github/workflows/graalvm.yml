@@ -129,7 +129,7 @@ jobs:
           path: release-artifacts
 
       - name: ✨Github Release (version = ${{ needs.native-build.outputs.version }})
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body: ${{ steps.github_release.outputs.changelog }}
           files: |
