@@ -120,6 +120,21 @@
       ]
     },
     {
+      "type": "dev.suresh.model.KtVersion",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "dev.suresh.service.JavaPlugin"
+    },
+    {
+      "type": "dev.suresh.service.KotlinPlugin"
+    },
+    {
       "type": "double[]"
     },
     {
@@ -144,6 +159,9 @@
     },
     {
       "type": "io.helidon.common.concurrency.limits.FixedLimitProvider"
+    },
+    {
+      "type": "io.helidon.common.concurrency.limits.ThroughputLimitProvider"
     },
     {
       "type": "io.helidon.common.config.ConfigFactory__ServiceDescriptor",
@@ -225,6 +243,9 @@
       "type": "io.helidon.config.spi.ConfigParser"
     },
     {
+      "type": "io.helidon.config.spi.ConfigSourceProvider"
+    },
+    {
       "type": "io.helidon.http.Headers__ServiceDescriptor",
       "fields": [
         {
@@ -242,6 +263,22 @@
     },
     {
       "type": "io.helidon.http.ServerRequestHeaders__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.metrics.api.MeterRegistryFactory__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
+      "type": "io.helidon.metrics.api.MetricsFactoryFactory__ServiceDescriptor",
       "fields": [
         {
           "name": "INSTANCE"
@@ -324,6 +361,14 @@
       "type": "io.helidon.webserver.cors.CorsFeatureProvider"
     },
     {
+      "type": "io.helidon.webserver.cors.CorsFeature__ServiceDescriptor",
+      "fields": [
+        {
+          "name": "INSTANCE"
+        }
+      ]
+    },
+    {
       "type": "io.helidon.webserver.http.HttpEntryPointsImpl__ServiceDescriptor",
       "fields": [
         {
@@ -352,6 +397,9 @@
     },
     {
       "type": "io.helidon.webserver.http1.Http1ProtocolConfigProvider"
+    },
+    {
+      "type": "io.helidon.webserver.spi.ServerFeatureProvider"
     },
     {
       "type": "io.helidon.webserver.staticcontent.StaticContentFeatureProvider"
@@ -1318,6 +1366,9 @@
       "glob": "META-INF/helidon/io.helidon.http/service-registry.json"
     },
     {
+      "glob": "META-INF/helidon/io.helidon.metrics.api/service-registry.json"
+    },
+    {
       "glob": "META-INF/helidon/io.helidon.service.registry/feature-registry.json"
     },
     {
@@ -1327,6 +1378,9 @@
       "glob": "META-INF/helidon/io.helidon.webserver.cors/feature-registry.json"
     },
     {
+      "glob": "META-INF/helidon/io.helidon.webserver.cors/service-registry.json"
+    },
+    {
       "glob": "META-INF/helidon/io.helidon.webserver.staticcontent/feature-registry.json"
     },
     {
@@ -1334,6 +1388,9 @@
     },
     {
       "glob": "META-INF/helidon/io.helidon.webserver/service-registry.json"
+    },
+    {
+      "glob": "META-INF/helidon/io.helidon.webserver/service.loader"
     },
     {
       "glob": "META-INF/helidon/manifest"
@@ -1370,6 +1427,9 @@
     },
     {
       "glob": "META-INF/services/io.helidon.config.spi.ConfigParser"
+    },
+    {
+      "glob": "META-INF/services/io.helidon.config.spi.ConfigSourceProvider"
     },
     {
       "glob": "META-INF/services/io.helidon.http.encoding.spi.ContentEncodingProvider"
@@ -1412,6 +1472,9 @@
     },
     {
       "glob": "META-INF/services/java.time.zone.ZoneRulesProvider"
+    },
+    {
+      "glob": "META-INF/services/java.util.concurrent.Callable"
     },
     {
       "glob": "META-INF/services/javax.management.remote.JMXConnectorServerProvider"
