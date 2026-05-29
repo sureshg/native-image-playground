@@ -22,9 +22,10 @@ jre/
 # Kotlin
 **/.kotlin
 
-# Gradle release
-cx.json
-
-# Misc
-nohup.out
-/.fleet/settings.json
+# AI Agents & Tools
+.junie/
+.claude/
+CLAUDE.local.md
+.codex/
+.cursor/
+.env

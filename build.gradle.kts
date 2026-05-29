@@ -32,14 +32,14 @@ application {
  *
  * [Configure-Custom-SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
-val graal by sourceSets.registering {
+val graal = sourceSets.register("graal") {
   compileClasspath += sourceSets.main.get().output
   runtimeClasspath += sourceSets.main.get().output
 }
 
 configurations {
-  val graalImplementation by existing
-  val graalRuntimeOnly by existing
+  val graalImplementation = named("graalImplementation")
+  val graalRuntimeOnly = named("graalRuntimeOnly")
 
   // graalImplementation extendsFrom main source set implementation
   graalImplementation.extendsFrom(implementation)
