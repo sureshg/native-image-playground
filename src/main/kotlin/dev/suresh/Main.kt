@@ -185,7 +185,7 @@ fun summary(args: List<String>) = buildString {
   appendLine("✧✧✧ Charsets ✧✧✧")
   val cs = Charset.availableCharsets()
   if (debug) {
-    cs.forEach { (name, charset) -> appendLine("$name: $charset") }
+    cs.forEach { appendLine("${it.key}: ${it.value}") }
   } else {
     appendLine("Found ${cs.size} charsets.")
   }
@@ -224,7 +224,7 @@ fun summary(args: List<String>) = buildString {
 
   appendLine("✧✧✧ Env Variables ✧✧✧")
   val env = System.getenv()
-  env.forEach { (k: String, v: String) -> appendLine("$k : $v") }
+  env.forEach { [k, v] -> appendLine("$k : $v") }
 
   appendLine("✧✧✧ System Properties ✧✧✧")
   val props = System.getProperties()
