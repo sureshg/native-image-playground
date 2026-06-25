@@ -237,21 +237,20 @@ fun summary(args: List<String>) = buildString {
   appendLine("✧✧✧ File Separator = ${fmt.formatHex(File.separator.encodeToByteArray())}")
 
   appendLine("✧✧✧ Additional info in exception ✧✧✧")
-  val ex =
-      runCatching {
-            Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
-            Socket().use { s ->
-              s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
-              s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
-              s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
-              // Disable the Nagle algorithm as using it would hurt latency.
-              s.setOption(StandardSocketOptions.TCP_NODELAY, true)
-              // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
-              s.soTimeout = 100
-              s.connect(InetSocketAddress("localhost", 12345), 100)
-            }
-          }
-          .exceptionOrNull()
+  val ex = runCatching {
+    Security.setProperty("jdk.includeInExceptions", "hostInfo,jar")
+    Socket().use { s ->
+      s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
+      s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
+      s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
+      // Disable the Nagle algorithm as using it would hurt latency.
+      s.setOption(StandardSocketOptions.TCP_NODELAY, true)
+      // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
+      s.soTimeout = 100
+      s.connect(InetSocketAddress("localhost", 12345), 100)
+    }
+  }
+      .exceptionOrNull()
   appendLine(ex?.message)
   // Host info is not available on native-image
   if (ImageInfo.isExecutable().not()) {
