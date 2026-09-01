@@ -221,7 +221,7 @@ javelit                        = "0.89.0"
 jwalker                        = "1.1.0"
 hashsmith                      = "0.2.0"
 tamboui                        = "0.4.0"
-helidon                        = "4.5.3"
+helidon                        = "4.5.4"
 
 # Compose
 compose                        = "1.11.1"
