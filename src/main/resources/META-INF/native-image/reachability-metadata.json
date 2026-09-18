@@ -4,9 +4,6 @@
       "type": "android.os.Build"
     },
     {
-      "type": "android.os.Build$VERSION"
-    },
-    {
       "type": "boolean[]"
     },
     {
@@ -14,24 +11,6 @@
     },
     {
       "type": "char[]"
-    },
-    {
-      "type": "com.sun.crypto.provider.GaloisCounterMode$AESGCM",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "com.sun.crypto.provider.HmacCore$HmacSHA256",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
     },
     {
       "type": "com.sun.management.GarbageCollectorMXBean"
@@ -90,10 +69,10 @@
       ]
     },
     {
-      "type": "com.sun.management.internal.DiagnosticCommandInfo[]"
+      "type": "com.sun.management.internal.GarbageCollectorExtImpl"
     },
     {
-      "type": "com.sun.management.internal.GarbageCollectorExtImpl"
+      "type": "com.sun.management.internal.HotSpotAOTCacheImpl"
     },
     {
       "type": "com.sun.management.internal.HotSpotDiagnostic"
@@ -116,6 +95,15 @@
           "parameterTypes": [
             "java.lang.String[]"
           ]
+        }
+      ]
+    },
+    {
+      "type": "dev.suresh.model.JVersion",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
         }
       ]
     },
@@ -144,285 +132,15 @@
       "type": "int[]"
     },
     {
-      "type": "io.helidon.common.LazyValueImpl",
+      "type": "io.ktor.http.cio.HttpParserKt$parseRequest$1",
       "fields": [
         {
-          "name": "loaded"
-        },
-        {
-          "name": "theLock"
+          "name": "label"
         }
       ]
     },
     {
-      "type": "io.helidon.common.concurrency.limits.AimdLimitProvider"
-    },
-    {
-      "type": "io.helidon.common.concurrency.limits.FixedLimitProvider"
-    },
-    {
-      "type": "io.helidon.common.concurrency.limits.ThroughputLimitProvider"
-    },
-    {
-      "type": "io.helidon.common.config.ConfigFactory__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.common.mapper.DefaultMapperProvider__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.common.mapper.DefaultResolverService__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.common.mapper.MappersFactory__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.common.mapper.MappersImpl__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.common.mapper.spi.MapperProvider"
-    },
-    {
-      "type": "io.helidon.config.ConfigProvider__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.config.ConfigurationValueFactory__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.config.EnumMapperProvider"
-    },
-    {
-      "type": "io.helidon.config.MetaConfigFactory__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.config.PropertiesConfigParser"
-    },
-    {
-      "type": "io.helidon.config.spi.ConfigFilter"
-    },
-    {
-      "type": "io.helidon.config.spi.ConfigParser"
-    },
-    {
-      "type": "io.helidon.config.spi.ConfigSourceProvider"
-    },
-    {
-      "type": "io.helidon.http.Headers__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.http.HttpPrologue__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.http.ServerRequestHeaders__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.metrics.api.MeterRegistryFactory__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.metrics.api.MetricsFactoryFactory__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.service.registry.EventManagerImpl__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.service.registry.InterceptionMetadata__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.service.registry.PerRequestScopeHandler__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.service.registry.Scopes__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.service.registry.ServiceRegistry__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.LoomServer__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.RequestScopeFeatureProvider__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.WebServerService__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.WebServerStarterService__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.cors.CorsFeatureProvider"
-    },
-    {
-      "type": "io.helidon.webserver.cors.CorsFeature__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.http.HttpEntryPointsImpl__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.http.ServerRequest__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.http.ServerResponse__ServiceDescriptor",
-      "fields": [
-        {
-          "name": "INSTANCE"
-        }
-      ]
-    },
-    {
-      "type": "io.helidon.webserver.http1.Http1ConnectionProvider"
-    },
-    {
-      "type": "io.helidon.webserver.http1.Http1ProtocolConfigProvider"
-    },
-    {
-      "type": "io.helidon.webserver.spi.ServerFeatureProvider"
-    },
-    {
-      "type": "io.helidon.webserver.staticcontent.StaticContentFeatureProvider"
-    },
-    {
-      "type": "io.ktor.client.HttpClient"
-    },
-    {
-      "type": "io.ktor.client.call.HttpClientCall"
-    },
-    {
-      "type": "io.ktor.client.engine.HttpClientEngineBase"
-    },
-    {
-      "type": "io.ktor.client.engine.cio.Endpoint"
-    },
-    {
-      "type": "io.ktor.network.selector.InterestSuspensionsMap",
-      "fields": [
-        {
-          "name": "readHandlerReference"
-        }
-      ]
+      "type": "io.ktor.network.selector.InterestSuspensionsMap"
     },
     {
       "type": "io.ktor.network.selector.LockFreeMPSCQueue"
@@ -437,67 +155,172 @@
       "type": "io.ktor.network.selector.SelectableBase"
     },
     {
+      "type": "io.ktor.network.sockets.CIOReaderKt$attachForReadingDirectImpl$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.network.sockets.CIOWriterKt$attachForWritingDirectImpl$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.network.sockets.ServerSocketImpl$acceptSuspend$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
       "type": "io.ktor.network.sockets.SocketBase"
+    },
+    {
+      "type": "io.ktor.server.cio.CIOApplicationEngine$initServerJob$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.CIOApplicationEngine$stop$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.CIOApplicationEngine$stopSuspend$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.CIOApplicationEngine$stopSuspend$2",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.CIOApplicationEngine$stopSuspend$result$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.backend.HttpServerKt$httpServer$acceptJob$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.backend.ServerPipelineKt$pipelineWriterLoop$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.backend.ServerPipelineKt$pipelineWriterLoop$child$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.backend.ServerPipelineKt$startServerConnectionPipeline$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.cio.backend.ServerPipelineKt$startServerPipelineWriter$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
     },
     {
       "type": "io.ktor.util.collections.CopyOnWriteHashMap"
     },
     {
+      "type": "io.ktor.util.internal.LockFreeLinkedListNode"
+    },
+    {
       "type": "io.ktor.utils.io.ByteChannel"
+    },
+    {
+      "type": "io.ktor.utils.io.ByteChannel$awaitContent$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.utils.io.ByteReadChannelOperationsKt$copyTo$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.utils.io.ByteReadChannelOperationsKt$internalReadLineTo$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.utils.io.ByteReadChannelOperationsKt$reader$job$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.utils.io.ByteWriteChannelOperationsKt$writer$job$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
     },
     {
       "type": "io.ktor.utils.io.pool.DefaultPool"
     },
     {
-      "type": "io.ktor.websocket.DefaultWebSocketSessionImpl"
-    },
-    {
-      "type": "io.rsocket.kotlin.connection.KeepAliveHandler"
-    },
-    {
-      "type": "io.rsocket.kotlin.connection.SequentialConnection$launchRequest$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.rsocket.kotlin.connection.StreamIdGenerator"
-    },
-    {
-      "type": "io.rsocket.kotlin.internal.PayloadChannel$nextRequestN$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.rsocket.kotlin.internal.PayloadFlow"
-    },
-    {
-      "type": "io.rsocket.kotlin.operation.RequesterRequestStreamOperation$execute$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
+      "type": "java.io.IOException"
     },
     {
       "type": "java.lang.Boolean",
-      "jniAccessible": true,
       "fields": [
         {
           "name": "TYPE"
-        }
-      ],
-      "methods": [
-        {
-          "name": "getBoolean",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
         }
       ]
     },
@@ -540,6 +363,9 @@
       ]
     },
     {
+      "type": "java.lang.ClassValue"
+    },
+    {
       "type": "java.lang.Deprecated"
     },
     {
@@ -560,9 +386,6 @@
           "name": "TYPE"
         }
       ]
-    },
-    {
-      "type": "java.lang.IllegalStateException"
     },
     {
       "type": "java.lang.Integer",
@@ -591,9 +414,6 @@
     },
     {
       "type": "java.lang.Object"
-    },
-    {
-      "type": "java.lang.RuntimeException"
     },
     {
       "type": "java.lang.Short",
@@ -706,6 +526,15 @@
       "type": "java.net.StandardSocketOptions"
     },
     {
+      "type": "java.nio.channels.ClosedChannelException",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "java.rmi.Remote"
     },
     {
@@ -726,18 +555,6 @@
       "type": "java.security.KeyStoreSpi"
     },
     {
-      "type": "java.security.interfaces.ECPrivateKey"
-    },
-    {
-      "type": "java.security.interfaces.ECPublicKey"
-    },
-    {
-      "type": "java.security.interfaces.RSAPrivateKey"
-    },
-    {
-      "type": "java.security.interfaces.RSAPublicKey"
-    },
-    {
       "type": "java.util.Arrays",
       "jniAccessible": true,
       "methods": [
@@ -751,17 +568,6 @@
     },
     {
       "type": "java.util.Date"
-    },
-    {
-      "type": "java.util.concurrent.CancellationException",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
-        }
-      ]
     },
     {
       "type": "java.util.concurrent.ScheduledThreadPoolExecutor"
@@ -818,6 +624,9 @@
       "type": "jdk.internal.misc.Unsafe"
     },
     {
+      "type": "jdk.management.HotSpotAOTCacheMXBean"
+    },
+    {
       "type": "jdk.management.VirtualThreadSchedulerMXBean"
     },
     {
@@ -845,7 +654,24 @@
       "type": "kotlin.coroutines.jvm.internal.BaseContinuationImpl"
     },
     {
-      "type": "kotlin.reflect.jvm.internal.ReflectionFactoryImpl"
+      "type": "kotlin.jvm.internal.DefaultConstructorMarker"
+    },
+    {
+      "type": "kotlin.reflect.jvm.internal.ReflectionFactoryImpl",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "kotlinx.coroutines.AwaitKt$joinAll$3",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
     },
     {
       "type": "kotlinx.coroutines.CancellableContinuationImpl"
@@ -855,6 +681,9 @@
     },
     {
       "type": "kotlinx.coroutines.CompletedExceptionally"
+    },
+    {
+      "type": "kotlinx.coroutines.DispatchedCoroutine"
     },
     {
       "type": "kotlinx.coroutines.EventLoopImplBase"
@@ -867,6 +696,14 @@
     },
     {
       "type": "kotlinx.coroutines.JobSupport$Finishing"
+    },
+    {
+      "type": "kotlinx.coroutines.TimeoutKt$withTimeoutOrNull$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
     },
     {
       "type": "kotlinx.coroutines.channels.BufferedChannel"
@@ -924,19 +761,49 @@
       "type": "kotlinx.coroutines.scheduling.WorkQueue"
     },
     {
-      "type": "kotlinx.coroutines.selects.SelectImplementation"
-    },
-    {
-      "type": "kotlinx.coroutines.sync.SemaphoreAndMutexImpl"
-    },
-    {
-      "type": "kotlinx.io.RefCountingCopyTracker"
-    },
-    {
       "type": "long[]"
     },
     {
-      "type": "org.slf4j.nop.NOPServiceProvider"
+      "type": "org.fusesource.jansi.internal.CLibrary",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "HAVE_ISATTY"
+        },
+        {
+          "name": "HAVE_TTYNAME"
+        },
+        {
+          "name": "TCSADRAIN"
+        },
+        {
+          "name": "TCSAFLUSH"
+        },
+        {
+          "name": "TCSANOW"
+        },
+        {
+          "name": "TIOCGETA"
+        },
+        {
+          "name": "TIOCGETD"
+        },
+        {
+          "name": "TIOCGWINSZ"
+        },
+        {
+          "name": "TIOCSETA"
+        },
+        {
+          "name": "TIOCSETD"
+        },
+        {
+          "name": "TIOCSWINSZ"
+        }
+      ]
+    },
+    {
+      "type": "org.slf4j.simple.SimpleServiceProvider"
     },
     {
       "type": "short[]"
@@ -999,32 +866,11 @@
       "type": "sun.management.RuntimeImpl"
     },
     {
-      "type": "sun.management.VMManagementImpl",
-      "jniAccessible": true,
-      "fields": [
+      "type": "sun.net.www.protocol.jar.Handler",
+      "methods": [
         {
-          "name": "compTimeMonitoringSupport"
-        },
-        {
-          "name": "currentThreadCpuTimeSupport"
-        },
-        {
-          "name": "objectMonitorUsageSupport"
-        },
-        {
-          "name": "otherThreadCpuTimeSupport"
-        },
-        {
-          "name": "remoteDiagnosticCommandsSupport"
-        },
-        {
-          "name": "synchronizerUsageSupport"
-        },
-        {
-          "name": "threadAllocatedMemorySupport"
-        },
-        {
-          "name": "threadContentionMonitoringSupport"
+          "name": "<init>",
+          "parameterTypes": []
         }
       ]
     },
@@ -1098,17 +944,6 @@
       ]
     },
     {
-      "type": "sun.security.provider.NativePRNG$NonBlocking",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.security.SecureRandomParameters"
-          ]
-        }
-      ]
-    },
-    {
       "type": "sun.security.provider.SHA",
       "methods": [
         {
@@ -1127,15 +962,6 @@
       ]
     },
     {
-      "type": "sun.security.provider.SecureRandom",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
       "type": "sun.security.provider.X509Factory",
       "methods": [
         {
@@ -1145,25 +971,7 @@
       ]
     },
     {
-      "type": "sun.security.provider.certpath.PKIXCertPathValidator",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
       "type": "sun.security.rsa.RSAKeyFactory$Legacy",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "sun.security.rsa.RSASignature$SHA256withRSA",
       "methods": [
         {
           "name": "<init>",
@@ -1289,18 +1097,6 @@
       ]
     },
     {
-      "type": "sun.security.x509.SubjectAlternativeNameExtension",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.Boolean",
-            "java.lang.Object"
-          ]
-        }
-      ]
-    },
-    {
       "type": "sun.security.x509.SubjectKeyIdentifierExtension",
       "methods": [
         {
@@ -1327,142 +1123,10 @@
   ],
   "resources": [
     {
-      "glob": "META-INF/MANIFEST.MF"
-    },
-    {
-      "glob": "META-INF/helidon/config-metadata.json"
-    },
-    {
-      "glob": "META-INF/helidon/feature-metadata.properties"
-    },
-    {
-      "glob": "META-INF/helidon/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.common.config/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.common.mapper/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.common.mapper/service.loader"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.config/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.config/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.config/service.loader"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.http.encoding/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.http.media/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.http/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.metrics.api/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.service.registry/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.service.registry/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.webserver.cors/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.webserver.cors/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.webserver.staticcontent/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.webserver/feature-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.webserver/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/io.helidon.webserver/service.loader"
-    },
-    {
-      "glob": "META-INF/helidon/manifest"
-    },
-    {
-      "glob": "META-INF/helidon/media-types.properties"
-    },
-    {
-      "glob": "META-INF/helidon/serial-config.properties"
-    },
-    {
-      "glob": "META-INF/helidon/service-registry.json"
-    },
-    {
-      "glob": "META-INF/helidon/service.loader"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.common.concurrency.limits.spi.LimitProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.common.mapper.spi.MapperProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.common.resumable.ResumableSupport"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.common.tls.spi.TlsManagerProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.config.spi.ConfigFilter"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.config.spi.ConfigMapperProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.config.spi.ConfigParser"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.config.spi.ConfigSourceProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.http.encoding.spi.ContentEncodingProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.http.media.spi.MediaSupportProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.logging.common.spi.LoggingProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.webserver.http.spi.SinkProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.webserver.http1.spi.Http1UpgradeProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.webserver.spi.ProtocolConfigProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.webserver.spi.ServerConnectionSelectorProvider"
-    },
-    {
-      "glob": "META-INF/services/io.helidon.webserver.spi.ServerFeatureProvider"
-    },
-    {
       "glob": "META-INF/services/java.lang.Runnable"
     },
     {
       "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
-    },
-    {
-      "glob": "META-INF/services/java.net.spi.URLStreamHandlerProvider"
     },
     {
       "glob": "META-INF/services/java.nio.channels.spi.SelectorProvider"
@@ -1486,16 +1150,20 @@
       "glob": "message.txt"
     },
     {
+      "glob": "org/fusesource/jansi/internal/native/Mac/arm64/libjansi.jnilib"
+    },
+    {
+      "glob": "org/fusesource/jansi/jansi.properties"
+    },
+    {
+      "glob": "simplelogger.properties"
+    },
+    {
+      "glob": "static/favicon.ico"
+    },
+    {
       "module": "java.base",
       "glob": "java/util/currency.data"
-    },
-    {
-      "module": "java.base",
-      "glob": "jdk/internal/icu/impl/data/icudt76b/nfc.nrm"
-    },
-    {
-      "module": "java.base",
-      "glob": "jdk/internal/icu/impl/data/icudt76b/nfkc.nrm"
     },
     {
       "module": "java.logging",

@@ -4,17 +4,24 @@ import com.sun.management.OperatingSystemMXBean
 import dev.suresh.config.BuildEnv
 import dev.suresh.model.Creds
 import dev.suresh.model.Secret
-import io.helidon.http.HeaderNames
-import io.helidon.http.HeaderValues
-import io.helidon.http.NotFoundException
-import io.helidon.http.Status
-import io.helidon.webserver.WebServer
-import io.helidon.webserver.http.HttpRouting
-import io.helidon.webserver.http.ServerRequest
-import io.helidon.webserver.http.ServerResponse
-import io.helidon.webserver.staticcontent.*
+import io.ktor.server.application.ServerReady
+import io.ktor.server.application.install
+import io.ktor.server.application.log
+import io.ktor.server.cio.CIO
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.http.content.staticResources
+import io.ktor.server.plugins.calllogging.CallLogging
+import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.request.httpMethod
+import io.ktor.server.request.path
+import io.ktor.server.request.requirePathParameter
+import io.ktor.server.response.respondBytes
+import io.ktor.server.response.respondRedirect
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
 import java.io.File
-import java.lang.System.Logger.Level.INFO
 import java.lang.management.ManagementFactory
 import java.net.InetAddress
 import java.net.InetSocketAddress
@@ -44,84 +51,107 @@ import kotlin.io.use
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.system.exitProcess
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.withContext
 import org.graalvm.nativeimage.ImageInfo
 
-val logger = System.getLogger("Main")
 val vtDispatcher by lazy { Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher() }
 val REQ_URI = ScopedValue.newInstance<String>()
 
-lateinit var cmdArgs: List<String>
-lateinit var webServer: WebServer
-
 fun main(args: Array<String>) {
-  val start = System.currentTimeMillis()
-  val type = if (ImageInfo.isExecutable()) "Native Image" else "JVM App"
-  logger.log(INFO) {
-    """
+  val serverStart = System.currentTimeMillis()
+  val processStart =
+      ProcessHandle.current().info().startInstant().getOrDefault(Instant.now()).toEpochMilli()
+  val commandArgs = args.toList()
+
+  println(
+      """
     | Build info,
-    | $type version : ${BuildEnv.BUILD_NUMBER}
+    | version       : ${BuildEnv.BUILD_NUMBER}
     | Commit Hash   : ${BuildEnv.COMMIT_HASH}
     | Built on      : ${BuildEnv.TIME_STAMP}
     """
-        .trimMargin()
-  }
+          .trimMargin()
+  )
   Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
-  cmdArgs = args.toList()
-  webServer = WebServer.builder().port(9080).routing(::routes).build().start()
+  embeddedServer(CIO, port = 9080) {
+        monitor.subscribe(ServerReady) {
+          val ready = System.currentTimeMillis()
+          val type = if (ImageInfo.isExecutable()) "Native Image" else "JVM App"
+          val startup = serverStart - processStart
+          val server = ready - serverStart
 
-  val vmTime =
-      ProcessHandle.current().info().startInstant().getOrDefault(Instant.now()).toEpochMilli()
-  val currTime = System.currentTimeMillis()
-  // val vmTime = ManagementFactory.getRuntimeMXBean().startTime
-  // println("Started in ${currTime - vmTime} ms ($type: ${start - vmTime} ms, Server: ${currTime -
-  // start} ms).")
-}
+          log.info(
+              "$type ready in ${startup + server} ms = $startup ms (process start ➟ main) + $server ms (main ➟ server ready)"
+          )
+        }
 
-private fun String.newInstance() = Class.forName(this).getConstructor().newInstance()
+        install(CallLogging) {
+          format { call -> "${call.request.httpMethod.value}: ${call.request.path()}" }
+        }
 
-val SERVER_HEADER = HeaderValues.createCached(HeaderNames.SERVER, "Nima")
-val UI_REDIRECT = HeaderValues.createCached(HeaderNames.LOCATION, "/")
+        install(StatusPages) {
+          exception<Throwable> { call, cause ->
+            println("ERROR: ${call.request.path()} - ${cause.message}")
+            call.respondText("", status = InternalServerError)
+          }
+        }
 
-fun routes(rules: HttpRouting.Builder) {
-  rules
-      .addFilter { chain, req, res ->
-        println("${req.prologue().method()}: ${req.prologue().uriPath().path()}")
-        res.header(SERVER_HEADER)
-        chain.proceed()
+        routing {
+          route("/") {
+            handle {
+              val report =
+                  withContext(vtDispatcher) {
+                    ScopedValue.where(REQ_URI, call.request.path()).call<_, Throwable> {
+                      summary(commandArgs)
+                    }
+                  }
+              call.respondText(report)
+            }
+          }
+
+          get("/shutdown") { exitProcess(0) }
+
+          get("/reflect/{type}") {
+            ServiceLoader.load(Callable::class.java).forEach {
+              println("ServiceLoader Plugin: ${it.call()}")
+            }
+            println("Redacted: ${Secret("abc")}, ${Creds("user", "pass")}")
+
+            val className =
+                when (call.requirePathParameter("type").trim()) {
+                  "java" -> "dev.suresh.model.JVersion"
+                  "kotlin" -> "dev.suresh.model.KtVersion"
+                  else -> null
+                }
+            val data =
+                className?.let { Class.forName(it).getConstructor().newInstance().toString() }
+                    ?: "NativeImage Playground!"
+            call.respondText(data)
+          }
+
+          get("/resources") {
+            URLClassLoader.newInstance(
+                    arrayOf(URI("file://${System.getProperty("user.dir")}/plugins.jar").toURL())
+                )
+                .use { loader ->
+                  val plugins = ServiceLoader.load(Runnable::class.java, loader).toList()
+                  println("Found ${plugins.size} Runnable plugins!")
+                }
+            val resources =
+                Secret::class.java.getResourceAsStream("/message.txt")?.readBytes()
+                    ?: "Resource not found!".encodeToByteArray()
+            call.respondBytes(resources)
+          }
+
+          get("/uds") { call.respondText("wip!") }
+
+          route("/ui") { handle { call.respondRedirect("/", permanent = true) } }
+
+          staticResources("/img", "static")
+        }
       }
-      .any("/", ::root)
-      .get("/shutdown", ::shutdown)
-      .get("/reflect/{type}", ::reflect)
-      .get("/resources", ::resources)
-      .get("/uds", ::unixDomainSockets)
-      .any("/ui", ::redirect)
-      .register("/img", StaticContentFeature.createService(ClasspathHandlerConfig.create("static")))
-      .error(Throwable::class.java, ::error)
-}
-
-fun root(req: ServerRequest, res: ServerResponse) {
-  ScopedValue.where(REQ_URI, req.path().path()).run { res.send(summary(cmdArgs)) }
-}
-
-fun error(req: ServerRequest, res: ServerResponse, ex: Throwable) {
-  println("ERROR: ${req.path().path()} - ${ex.message}")
-  when (ex) {
-    is NotFoundException -> res.status(Status.NOT_FOUND_404)
-    else -> res.status(Status.INTERNAL_SERVER_ERROR_500)
-  }
-  res.send()
-}
-
-fun shutdown(req: ServerRequest, res: ServerResponse) {
-  webServer.stop()
-  exitProcess(0)
-}
-
-fun redirect(req: ServerRequest, res: ServerResponse) {
-  res.status(Status.MOVED_PERMANENTLY_301)
-  res.headers().set(UI_REDIRECT)
-  res.send()
+      .start(wait = true)
 }
 
 /** Get the system summary report */
@@ -280,38 +310,6 @@ fun summary(args: List<String>) = buildString {
   )
 }
 
-/** Test reflection and [ServiceLoader] plugins. */
-fun reflect(req: ServerRequest, res: ServerResponse) {
-  val plugins = ServiceLoader.load(Callable::class.java)
-  plugins.forEach { println("ServiceLoader Plugin: ${it.call()}") }
-
-  println("Redacted: ${Secret("abc")}, ${Creds("user", "pass")}")
-  val type = req.path().pathParameters()["type"].trim()
-  val data =
-      when (type) {
-        "java" -> "dev.suresh.model.JVersion".newInstance()
-        "kotlin" -> "dev.suresh.model.KtVersion".newInstance()
-        else -> "NativeImage Playground!"
-      }.toString()
-  res.send(data)
-}
-
-/** Embed resources in binary. */
-fun resources(req: ServerRequest, res: ServerResponse) {
-  // Load plugins from the current directory
-  val loader =
-      URLClassLoader.newInstance(
-          arrayOf(URI("file://${System.getProperty("user.dir")}/plugins.jar").toURL()),
-      )
-  val svcLoader = ServiceLoader.load(java.lang.Runnable::class.java, loader)
-  println("Found ${svcLoader.toList().size} Runnable plugins!")
-
-  val resources =
-      Secret::class.java.getResourceAsStream("/message.txt")?.readBytes()
-          ?: "Resource not found!".encodeToByteArray()
-  res.send(resources)
-}
-
 val udsServer by
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
       val addr =
@@ -336,10 +334,6 @@ val udsServer by
         }
       }
     }
-
-fun unixDomainSockets(req: ServerRequest, res: ServerResponse) {
-  res.send("wip!")
-}
 
 private val Int.fmt
   get() = "%-5d".format(this)

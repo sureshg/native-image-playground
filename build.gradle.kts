@@ -53,15 +53,14 @@ configurations {
 
 dependencies {
   implementation(platform(libs.ktor.bom))
-  implementation(platform(libs.helidon.bom))
-  implementation(libs.helidon.webserver)
-  implementation(libs.helidon.static)
-  implementation(libs.helidon.service)
+  implementation(libs.ktor.server.cio)
+  implementation(libs.ktor.server.call.logging)
+  implementation(libs.ktor.server.status.pages)
   implementation(libs.ajalt.clikt)
   implementation(libs.ajalt.mordant)
   implementation(libs.ajalt.colormath)
   implementation(libs.ktor.client.cio)
-  runtimeOnly(libs.slf4j.nop)
+  runtimeOnly(libs.slf4j.simple)
 
   "graalCompileOnly"(libs.graal.sdk)
   "graalImplementation"(libs.classgraph)
