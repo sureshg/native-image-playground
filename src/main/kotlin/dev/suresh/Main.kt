@@ -70,7 +70,7 @@ fun main(args: Array<String>) {
     | Commit Hash   : ${BuildEnv.COMMIT_HASH}
     | Built on      : ${BuildEnv.TIME_STAMP}
     """
-          .trimMargin()
+          .trimMargin(),
   )
   Runtime.getRuntime().addShutdownHook(Thread { println("Shutting down...") })
 
@@ -82,7 +82,7 @@ fun main(args: Array<String>) {
           val server = ready - serverStart
 
           log.info(
-              "$type ready in ${startup + server} ms = $startup ms (process start ➟ main) + $server ms (main ➟ server ready)"
+              "$type ready in ${startup + server} ms = $startup ms (process start ➟ main) + $server ms (main ➟ server ready)",
           )
         }
 
@@ -132,7 +132,7 @@ fun main(args: Array<String>) {
 
           get("/resources") {
             URLClassLoader.newInstance(
-                    arrayOf(URI("file://${System.getProperty("user.dir")}/plugins.jar").toURL())
+                    arrayOf(URI("file://${System.getProperty("user.dir")}/plugins.jar").toURL()),
                 )
                 .use { loader ->
                   val plugins = ServiceLoader.load(Runnable::class.java, loader).toList()
@@ -174,7 +174,7 @@ fun summary(args: List<String>) = buildString {
   appendLine("✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}")
   appendLine("✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}")
   appendLine(
-      "✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}"
+      "✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}",
   )
   appendLine("✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB")
   appendLine("✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB")
@@ -314,7 +314,7 @@ val udsServer by
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
       val addr =
           UnixDomainSocketAddress.of(
-              Path(System.getProperty("java.io.tmpdir")).resolve("native-image-server.socket")
+              Path(System.getProperty("java.io.tmpdir")).resolve("native-image-server.socket"),
           )
 
       ServerSocketChannel.open(StandardProtocolFamily.UNIX).use {
