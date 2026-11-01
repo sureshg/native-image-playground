@@ -224,7 +224,7 @@ tamboui                        = "0.6.0"
 
 # Compose
 compose                        = "1.12.2"
-compose-material3              = "1.13.0-alpha02"
+compose-material3              = "1.13.0-beta01"
 compose-viewmodel              = "2.11.0"
 compose-nav                    = "2.9.2"
 compose-nav3                   = "1.1.2"
